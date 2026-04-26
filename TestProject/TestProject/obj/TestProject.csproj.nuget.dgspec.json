@@ -32,7 +32,11 @@
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\DITI\\Diploma_app\\TestProject\\Core\\Core.csproj": {
+                "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -50,6 +54,16 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Microsoft.Extensions.AI.OpenAI": {
+              "target": "Package",
+              "version": "[10.5.0, )"
+            },
+            "PdfPig": {
+              "target": "Package",
+              "version": "[0.1.14, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

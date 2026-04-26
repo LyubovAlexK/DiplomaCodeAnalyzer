@@ -1,0 +1,12 @@
+D:\DITI\Diploma_app\TestProject\Git\bin\Debug\net8.0-windows\Git.deps.json
+D:\DITI\Diploma_app\TestProject\Git\bin\Debug\net8.0-windows\Git.dll
+D:\DITI\Diploma_app\TestProject\Git\bin\Debug\net8.0-windows\Git.pdb
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.GeneratedMSBuildEditorConfig.editorconfig
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.AssemblyInfoInputs.cache
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.AssemblyInfo.cs
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.csproj.CoreCompileInputs.cache
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.sourcelink.json
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.dll
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\refint\Git.dll
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.pdb
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\ref\Git.dll
