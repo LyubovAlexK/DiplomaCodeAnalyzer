@@ -1,0 +1,175 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "AI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/AI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AI.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "Analyzers/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Analyzers.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Analyzers.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "Git/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Git.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Git.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      }
+    }
+  },
+  "libraries": {
+    "AI/1.0.0": {
+      "type": "project",
+      "path": "../AI/AI.csproj",
+      "msbuildProject": "../AI/AI.csproj"
+    },
+    "Analyzers/1.0.0": {
+      "type": "project",
+      "path": "../Analyzers/Analyzers.csproj",
+      "msbuildProject": "../Analyzers/Analyzers.csproj"
+    },
+    "Core/1.0.0": {
+      "type": "project",
+      "path": "../Core/Core.csproj",
+      "msbuildProject": "../Core/Core.csproj"
+    },
+    "Git/1.0.0": {
+      "type": "project",
+      "path": "../Git/Git.csproj",
+      "msbuildProject": "../Git/Git.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "AI >= 1.0.0",
+      "Analyzers >= 1.0.0",
+      "Core >= 1.0.0",
+      "Git >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Люба\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\TestProject.csproj",
+      "projectName": "TestProject",
+      "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\TestProject.csproj",
+      "packagesPath": "C:\\Users\\Люба\\.nuget\\packages\\",
+      "outputPath": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Люба\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "projectReferences": {
+            "D:\\DITI\\Diploma_app\\TestProject\\AI\\AI.csproj": {
+              "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\AI\\AI.csproj"
+            },
+            "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Analyzers.csproj": {
+              "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Analyzers.csproj"
+            },
+            "D:\\DITI\\Diploma_app\\TestProject\\Core\\Core.csproj": {
+              "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Core.csproj"
+            },
+            "D:\\DITI\\Diploma_app\\TestProject\\Git\\Git.csproj": {
+              "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\Git\\Git.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
