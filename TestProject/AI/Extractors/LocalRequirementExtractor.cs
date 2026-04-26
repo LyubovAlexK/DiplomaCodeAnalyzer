@@ -82,8 +82,7 @@ namespace AI.Extractors
                 {
                     Title = System.IO.Path.GetFileNameWithoutExtension(pdfPath),
                     ExtractionType = "Local",
-                    Requirements = requirements,
-                    ExtractedAt = DateTime.UtcNow
+                    Requirements = requirements
                 };
 
                 return Task.FromResult(specification);

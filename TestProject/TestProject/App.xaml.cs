@@ -1,10 +1,14 @@
 ﻿using AI.Extractors;
-using System.Configuration;
-using System.Data;
+using AI.Services;
+using Core.Data;
+using Core.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.IO;
 using System.Text;
+using System.Net.Http;
+using System.Text.Json;
 using System.Windows;
-using UglyToad.PdfPig;
 
 namespace TestProject
 {
@@ -26,32 +30,38 @@ namespace TestProject
                 return;
             }
 
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;")
+                .Options;
+
+            using var db = new AppDbContext(options);
+            var service = new SpecificationService(db);
+
+            // ЛОКАЛЬНЫЙ анализатор (без интернета)
             var factory = new ExtractorFactory();
             var extractor = factory.Create(isOnline: false);
 
             try
             {
                 var specification = await extractor.ExtractAsync(pdfPath);
+                int specId = await service.SaveAsync(specification);
+                var loaded = await service.LoadAsync(specId);
 
-                var sb = new StringBuilder();
-                sb.AppendLine("Всего требований: " + specification.Requirements.Count);
-                sb.AppendLine("Functional: " + specification.Requirements.Count(r => r.RequirementType == "Functional"));
-                sb.AppendLine("Architectural: " + specification.Requirements.Count(r => r.RequirementType == "Architectural"));
-                sb.AppendLine("Metric: " + specification.Requirements.Count(r => r.RequirementType == "Metric"));
-                sb.AppendLine();
+                string result = $"✅ ЛОКАЛЬНЫЙ АНАЛИЗ\n" +
+                    $"SpecificationId: {specId}\n" +
+                    $"ExtractionType: {loaded?.ExtractionType}\n" +
+                    $"Требований: {loaded?.Requirements.Count ?? 0}\n\n";
 
-                foreach (var req in specification.Requirements)
+                foreach (var req in loaded?.Requirements ?? new())
                 {
-                    string desc = string.IsNullOrWhiteSpace(req.Description) ? "ОПИСАНИЕ ПУСТО" : req.Description;
-                    sb.AppendLine($"[{req.RequirementType}] Title='{req.Title}' Desc='{desc}'");
-                    sb.AppendLine();
+                    result += $"[{req.RequirementType}] {req.Title}\n";
                 }
 
-                Console.WriteLine("Диагностика требований"+sb.ToString());
+                Console.WriteLine("Локальный анализатор"+result);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка: " + ex.Message);
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
 
             Shutdown();
