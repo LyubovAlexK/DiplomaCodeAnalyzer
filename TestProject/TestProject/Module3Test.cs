@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TestProject
 {
-    class Program
+    class Modul3Test
     {
         static async Task Main(string[] args)
         {

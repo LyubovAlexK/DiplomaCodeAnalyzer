@@ -1,3 +1,8 @@
+D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.csproj.AssemblyReference.cache
+D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\App.g.cs
+D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject_MarkupCompile.cache
+D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject_MarkupCompile.lref
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\TestProject.exe
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\TestProject.deps.json
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\TestProject.runtimeconfig.json
@@ -37,11 +42,6 @@ D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\AI.pdb
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Analyzers.pdb
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Core.pdb
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Git.pdb
-D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.csproj.AssemblyReference.cache
-D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\MainWindow.g.cs
-D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\App.g.cs
-D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject_MarkupCompile.cache
-D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject_MarkupCompile.lref
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\MainWindow.baml
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.g.resources
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.GeneratedMSBuildEditorConfig.editorconfig

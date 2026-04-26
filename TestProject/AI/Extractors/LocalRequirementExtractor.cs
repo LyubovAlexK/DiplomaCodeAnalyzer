@@ -25,66 +25,68 @@ namespace AI.Extractors
             }
 
             //Разбиваем текст на строки и убираем пустые значения
-            var lines = text.Split('\n')
-                .Select(line => line.Trim())
-                .Where(line => !string.IsNullOrWhiteSpace(line))
+            var sentences = text.Split(new[] { ". ", ".\n", ".\r" }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim())
+                .Where(s => s.Length > 15)
                 .ToList();
 
             //Извлекаем требования
             var requirements = new List<Requirement>();
             int funcCount = 1, archCount = 1, metricCount = 1;
 
-            foreach (var line in lines)
+            if (text.Contains("Критерии оценки"))
             {
-                if (line.Length < 10) continue;
+                var criteriaBlock = text.Split("Критерии оценки")[1];
+                var criteriaLines = criteriaBlock.Split(new[] { "\n", "•", "", "●", "○" }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => s.Trim())
+                    .Where(s => s.Length > 5);
 
-                if (TryExtractFunctional(line, out var funcReq))
+                foreach (var line in criteriaLines)
+                {
+                    requirements.Add(new Requirement
+                    {
+                        RequirementType = "Metric",
+                        Category = "Критерии оценки",
+                        Title = $"METR-{metricCount:D2}: {line[..Math.Min(line.Length, 100)]}",
+                        Description = line,
+                        Severity = "Major"
+                    });
+                    metricCount++;
+                }
+            }
+
+            foreach (var sentence in sentences)
+            {
+                string fullSentence = sentence + ".";
+
+                if (fullSentence.Contains("Критерии оценки"))
+                    continue;
+
+                if (TryExtractFunctional(fullSentence, out var funcReq))
                 {
                     funcReq.RequirementType = "Functional";
                     funcReq.Title = $"FUNC-{funcCount:D2}: {funcReq.Title}";
                     requirements.Add(funcReq);
                     funcCount++;
                 }
-                else if (TryExtractArchitectural(line, out var archReq))
+                else if (TryExtractArchitectural(fullSentence, out var archReq))
                 {
                     archReq.RequirementType = "Architectural";
-                    archReq.Title = $"FUNC-{archCount:D2}: {archReq.Title}";
+                    archReq.Title = $"ARCH-{archCount:D2}: {archReq.Title}";
                     requirements.Add(archReq);
                     archCount++;
                 }
-                else if (TryExtractMetric(line, out var metricReq))
-                {
-                    metricReq.RequirementType = "Metric";
-                    metricReq.Title = $"FUNC-{metricCount:D2}: {metricReq.Title}";
-                    requirements.Add(metricReq);
-                    metricCount++;
-                }
             }
+                //Формируем результат
+                var specification = new ProjectSpecification
+                {
+                    Title = System.IO.Path.GetFileNameWithoutExtension(pdfPath),
+                    ExtractionType = "Local",
+                    Requirements = requirements,
+                    ExtractedAt = DateTime.UtcNow
+                };
 
-            //При отстутствии требований, добавляем общие
-            if (requirements.Count == 0)
-            {
-                foreach (var line in lines.Where(l => l.Length > 15).Take(20))
-                {
-                    requirements.Add(new Requirement
-                    {
-                        RequirementType = "Functional",
-                        Category = "Общее",
-                        Title = line.Length > 100 ? line[..100] : line,
-                        Description = line,
-                        Severity = "Major"
-                    });
-                }
-            }
-            //Формируем результат
-            var specification = new ProjectSpecification
-            {
-                Title = System.IO.Path.GetFileNameWithoutExtension(pdfPath),
-                ExtractionType = "Local",
-                Requirements = requirements,
-                ExtractedAt = DateTime.UtcNow
-            };
-            return Task.FromResult(specification);
+                return Task.FromResult(specification);
         }
 
         //метод, разделяющий строку на метрики
@@ -95,20 +97,18 @@ namespace AI.Extractors
             var patterns = new[]
             {
                 @"качество\s+кода",
+                @"правильность\s+архитектурных",
                 @"стабильность\s+работы",
                 @"корректное\s+поведение",
                 @"удобство\s+работы",
-                @"не\s+должна\s+превышать",
-                @"не\s+более\s+\d+",
-                @"цикломатическая\s+сложность",
-                @"количество\s+строк"
+                @"полнота\s+выполнения"
             };
             foreach (var pattern in patterns)
             {
                 if (Regex.IsMatch(line, pattern, RegexOptions.IgnoreCase))
                 {
-                    //извление числа (порога)
                     var threshold = ExtractThreshold(line);
+
                     requirement = new Requirement
                     {
                         Category = "Качество кода",
@@ -145,8 +145,6 @@ namespace AI.Extractors
         //метод, разделяющий строку на архитектурные требования
         private bool TryExtractArchitectural(string line, out Requirement requirement)
         {
-            requirement = new Requirement();
-
             var patterns = new[]
             {
                 @"запрещено",
@@ -165,13 +163,14 @@ namespace AI.Extractors
                     requirement = new Requirement
                     {
                         Category = "Архитектурное ограничение",
-                        Title = line.Length > 120 ? line[..120] : line,
+                        Title = line.Length > 100 ? line[..100] : line,
                         Description = line,
                         Severity = "Major"
                     };
+                    return true;
                 }
-                return true;
             }
+            requirement = new Requirement();
             return false;
         }
 
@@ -192,25 +191,31 @@ namespace AI.Extractors
         //метод, разделяющий строку на фунциональные требования
         private bool TryExtractFunctional(string line, out  Requirement requirement)
         {
-            requirement = new Requirement();
-
             var patterns = new[]
             {
-                @"страница\s+должна",
+                @"страница.*предоставляет",
+                @"страница.*должна",
                 @"должна\s+отображать",
-                @"должен\s+отображать",
-                @"пользователь.*должен",
-                @"система\s+должна",
+                @"должен\s+быть",
+                @"должна\s+присутствовать",
+                @"позволяет\s+выбрать",
+                @"добавить\s+её",
+                @"содержит\s+следующие\s+поля",
                 @"приложение\s+должно",
                 @"реализовать\s+функционал",
-                @"функционал\s+добавления",
-                @"предоставляет\s+пользователю",
-                @"поля:",
-                @"поле\s+«",
+                @"список\s+стран\s+фиксированный",
                 @"кнопка\s+редактирования",
+                @"изменить\s+отображения",
+                @"решение\s+должно\s+быть\s+предоставлено",
+                @"язык\s+разработки",
+                @"можно\s+использовать",
+                @"для\s+бекэнда",
+                @"состоять\s+из\s+двух\s+страниц",
+                @"переключатель\s+между\s+ними",
+                @"имя.*фамилия.*пол.*дата",
+                @"название\s+команды",
                 @"выбрать\s+одну\s+из",
-                @"добавить\s+её",
-                @"не\s+переходя\s+на\s+другую"
+                @"SignalR"
             };
             foreach (var pattern in patterns)
             {
@@ -219,14 +224,15 @@ namespace AI.Extractors
                     requirement = new Requirement
                     {
                         Category = "Функциональное поведение",
-                        Title = line.Length > 120 ? line[..120] : line,
+                        Title = line.Length > 100 ? line[..100] : line,
                         Description = line,
                         Severity = DetermineSeverity(line),
                         AcceptanceCriteria = SerializeToList(line)
                     };
+                    return true;
                 }
-                return true;
             }
+            requirement = new Requirement();
             return false;
         }
 
