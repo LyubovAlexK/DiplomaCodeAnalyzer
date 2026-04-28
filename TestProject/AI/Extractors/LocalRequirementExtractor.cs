@@ -1,14 +1,15 @@
-﻿using UglyToad.PdfPig;
-using Core.Models;
+﻿using Core.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
-using System.Text.RegularExpressions;
 using System.Windows.Shapes;
-using System.IO;
+using UglyToad.PdfPig;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AI.Extractors
 {
@@ -43,12 +44,13 @@ namespace AI.Extractors
 
                 foreach (var line in criteriaLines)
                 {
+                    var normalizedLine = NormalizeText(line);
                     requirements.Add(new Requirement
                     {
                         RequirementType = "Metric",
                         Category = "Критерии оценки",
-                        Title = $"METR-{metricCount:D2}: {line[..Math.Min(line.Length, 100)]}",
-                        Description = line,
+                        Title = $"METR-{metricCount:D2}: {normalizedLine[..Math.Min(normalizedLine.Length, 100)]}",
+                        Description = normalizedLine,
                         Severity = "Major"
                     });
                     metricCount++;
@@ -57,7 +59,7 @@ namespace AI.Extractors
 
             foreach (var sentence in sentences)
             {
-                string fullSentence = sentence + ".";
+                string fullSentence = NormalizeText(sentence + ".");
 
                 if (fullSentence.Contains("Критерии оценки"))
                     continue;
@@ -144,16 +146,18 @@ namespace AI.Extractors
         //метод, разделяющий строку на архитектурные требования
         private bool TryExtractArchitectural(string line, out Requirement requirement)
         {
+            string compact = line.Replace(" ", "").Replace("\n", "").Replace("\r", "").Replace("\t", "");
+
             var patterns = new[]
             {
                 @"запрещено",
-                @"не\s+должен.*содержать",
-                @"не\s+должна.*зависеть",
-                @"архитектурных\s+решений",
-                @"правильность\s+архитектурных",
-                @"разделение\s+на\s+слои",
-                @"не\s+должен.*обращаться",
-                @"слой\s+не\s+должен"
+                @"недолженсодержать",
+                @"недолжназависеть",
+                @"архитектурныхрешений",
+                @"правильностьархитектурных",
+                @"разделениенаслои",
+                @"недолженобращаться",
+                @"слойнедолжен"
             };
             foreach (var pattern in patterns)
             {
@@ -174,46 +178,88 @@ namespace AI.Extractors
         }
 
         //метод, извлекающий весь текст из pdf
-        private string ExtractTextFromPdf(string pdfPath)
+        private string ExtractTextFromPdf(string path)
         {
-            using var document = PdfDocument.Open(pdfPath);
+            using var document = PdfDocument.Open(path);
+            var rawText = string.Join("\n", document.GetPages().Select(p => p.Text));
+            return NormalizeText(rawText);
+        }
 
-            var pages = document.GetPages();
+        private string NormalizeText(string text)
+        {
 
-            var pageTexts = pages.Select(page => page.Text);
+            if (string.IsNullOrWhiteSpace(text))
+                return text;
 
-            string result = string.Join("\n", pageTexts);
+            // 1. Пробел после строчной перед заглавной: "системы<SoccerStat>" → "системы <SoccerStat>"
+            text = Regex.Replace(text, @"([а-яёa-z])([A-ZА-ЯЁ<])", "$1 $2");
 
-            return result;
+            // 2. Пробел после точки/двоеточия/вопроса + заглавная или строчная
+            text = Regex.Replace(text, @"([.:?!;])([А-ЯЁA-Zа-яёa-z])", "$1 $2");
+
+            // 3. Пробел после цифры перед буквой: "2025г." → "2025 г."
+            text = Regex.Replace(text, @"(\d)([А-ЯЁA-Zа-яёa-z])", "$1 $2");
+
+            // 4. Пробел после буквы перед цифрой: "из20" → "из 20"
+            text = Regex.Replace(text, @"([а-яёa-z])(\d)", "$1 $2", RegexOptions.IgnoreCase);
+
+            // 5. Пробел после запятой
+            text = Regex.Replace(text, @",(\S)", ", $1");
+
+            // 6. Пробел после скобок
+            text = Regex.Replace(text, @"\)(\S)", ") $1");
+            text = Regex.Replace(text, @"(\S)\(", "$1 (");
+
+            // 7. Пробел после точки с запятой
+            text = Regex.Replace(text, @";(\S)", "; $1");
+
+            // 8. Убираем лишние пробелы
+            text = Regex.Replace(text, @"\s+", " ").Trim();
+
+            return text;
         }
 
         //метод, разделяющий строку на фунциональные требования
         private bool TryExtractFunctional(string line, out  Requirement requirement)
         {
+            string compact = line.Replace(" ", "").Replace("\n", "").Replace("\r", "").Replace("\t", "");
+
             var patterns = new[]
             {
-                @"страница.*предоставляет",
-                @"страница.*должна",
-                @"должна\s+отображать",
-                @"должен\s+быть",
-                @"должна\s+присутствовать",
-                @"позволяет\s+выбрать",
-                @"добавить\s+её",
-                @"содержит\s+следующие\s+поля",
-                @"приложение\s+должно",
-                @"реализовать\s+функционал",
-                @"список\s+стран\s+фиксированный",
-                @"кнопка\s+редактирования",
-                @"изменить\s+отображения",
-                @"решение\s+должно\s+быть\s+предоставлено",
-                @"язык\s+разработки",
-                @"можно\s+использовать",
-                @"для\s+бекэнда",
-                @"состоять\s+из\s+двух\s+страниц",
-                @"переключатель\s+между\s+ними",
-                @"имя.*фамилия.*пол.*дата",
-                @"название\s+команды",
-                @"выбрать\s+одну\s+из",
+                // Без пробелов!
+                @"системадолжнаобеспечивать",
+                @"просмотрсписка",
+                @"системапредназначена",
+                @"основныефункции",
+                @"требованиякклиентской",
+                @"требованиякграфическому",
+                @"требованиякинтеграции",
+                @"требованиякгеографии",
+                @"требованиякпользователям",
+                @"описаниеинтерфейса",
+                @"должныкорректноотображаться",
+                @"поддержкапортретной",
+                @"гарантированаработа",
+                @"учетвременныхзон",
+                @"русскийинтерфейс",
+                @"фильтрподате",
+                @"текстовыйпоиск",
+                @"навигационнаяцепочка",
+                @"пагинация",
+                @"требованияксдаче",
+                @"ключикапи",
+                // Старые паттерны тоже переводим в безпробельный формат
+                @"страницапредоставляет",
+                @"страницадолжна",
+                @"должнаотображать",
+                @"долженбыть",
+                @"должнаприсутствовать",
+                @"позволяетвыбрать",
+                @"содержитследующиевполя",
+                @"приложениедолжно",
+                @"реализоватьфункционал",
+                @"кнопкаредактирования",
+                @"решениедолжнобытьпредоставлено",
                 @"SignalR"
             };
             foreach (var pattern in patterns)

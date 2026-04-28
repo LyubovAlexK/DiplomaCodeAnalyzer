@@ -8,21 +8,21 @@ namespace AI.Extractors
 {
     public class ExtractorFactory
     {
-        private readonly string? _deepSeekApiKey;
+        private readonly string? _apiKey;
 
-        public ExtractorFactory(string? deepSeekApiKey = null)
+        public ExtractorFactory(string? apiKey = null)
         {
-            _deepSeekApiKey = deepSeekApiKey;
+            _apiKey = apiKey;
         }
 
         public IRequirementExtractor Create(bool isOnline)
         {
             if (isOnline)
             {
-                if (string.IsNullOrWhiteSpace(_deepSeekApiKey))
-                    throw new InvalidOperationException("API-ключ DeepSeek не указан.");
+                if (string.IsNullOrWhiteSpace(_apiKey))
+                    throw new InvalidOperationException("API-ключ не указан.");
 
-                return new DeepSeekRequirementExtractor(_deepSeekApiKey);
+                return new GigaChatExtractor(_apiKey);
             }
 
             return new LocalRequirementExtractor();
