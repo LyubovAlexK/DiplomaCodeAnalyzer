@@ -1752,7 +1752,8 @@
         "dependencies": {
           "DocumentFormat.OpenXml": "3.5.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
-          "Newtonsoft.Json": "8.0.1"
+          "Newtonsoft.Json": "8.0.1",
+          "PdfPig": "0.1.14"
         },
         "compile": {
           "bin/placeholder/Core.dll": {}

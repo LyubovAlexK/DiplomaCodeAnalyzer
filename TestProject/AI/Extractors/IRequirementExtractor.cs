@@ -10,6 +10,6 @@ namespace AI.Extractors
 {
     public interface IRequirementExtractor
     {
-        Task<ProjectSpecification> ExtractAsync(string pdfPath);
+        Task<ProjectSpecification> ExtractAsync(string filePath, int specificationId = 0);
     }
 }

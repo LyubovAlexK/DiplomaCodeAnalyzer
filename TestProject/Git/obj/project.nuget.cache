@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WTX/Yde0R44=",
+  "dgSpecHash": "0N8RNs0nGfc=",
   "success": true,
   "projectFilePath": "D:\\DITI\\Diploma_app\\TestProject\\Git\\Git.csproj",
   "expectedPackageFiles": [
@@ -49,6 +49,7 @@
     "C:\\Users\\Люба\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\newtonsoft.json\\8.0.1\\newtonsoft.json.8.0.1.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\pdfpig\\0.1.14\\pdfpig.0.1.14.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.composition\\6.0.0\\system.composition.6.0.0.nupkg.sha512",

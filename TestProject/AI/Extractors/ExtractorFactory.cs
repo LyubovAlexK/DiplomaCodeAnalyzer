@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace AI.Extractors
 {
     public class ExtractorFactory
     {
+        private readonly DictionaryService? _dict;
         private readonly string? _apiKey;
 
-        public ExtractorFactory(string? apiKey = null)
+        public ExtractorFactory(DictionaryService? dict = null, string? apiKey = null)
         {
+            _dict = dict;
             _apiKey = apiKey;
         }
 
@@ -21,11 +24,15 @@ namespace AI.Extractors
             {
                 if (string.IsNullOrWhiteSpace(_apiKey))
                     throw new InvalidOperationException("API-ключ не указан.");
-
-                return new GigaChatExtractor(_apiKey);
+                if (_dict == null)
+                    throw new InvalidOperationException("DictionaryService не указан.");
+                return new GigaChatExtractor(_apiKey, _dict);
             }
 
-            return new LocalRequirementExtractor();
+            if (_dict == null)
+                throw new InvalidOperationException("DictionaryService не указан.");
+
+            return new LocalRequirementExtractor(_dict);
         }
     }
 }

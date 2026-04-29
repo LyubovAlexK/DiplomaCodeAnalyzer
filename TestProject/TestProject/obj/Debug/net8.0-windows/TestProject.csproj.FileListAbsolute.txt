@@ -5,6 +5,8 @@ D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\TestProject
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\TestProject.pdb
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Azure.Core.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Azure.Identity.dll
+D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.dll
+D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.Framework.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Humanizer.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Microsoft.CodeAnalysis.dll
@@ -59,6 +61,7 @@ D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.Comp
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.Composition.TypedParts.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.Diagnostics.DiagnosticSource.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.IO.Packaging.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.Memory.Data.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.Net.ServerSentEvents.dll
@@ -151,3 +154,5 @@ D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\refint\Test
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.pdb
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.genruntimeconfig.cache
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\ref\TestProject.dll
+D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\AODL.dll
+D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\ICSharpCode.SharpZipLib.dll

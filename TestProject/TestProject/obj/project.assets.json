@@ -1773,7 +1773,8 @@
         "dependencies": {
           "DocumentFormat.OpenXml": "3.5.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
-          "Newtonsoft.Json": "8.0.1"
+          "Newtonsoft.Json": "8.0.1",
+          "PdfPig": "0.1.14"
         },
         "compile": {
           "bin/placeholder/Analyzers.dll": {}
@@ -1791,7 +1792,8 @@
         "dependencies": {
           "DocumentFormat.OpenXml": "3.5.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
-          "Newtonsoft.Json": "8.0.1"
+          "Newtonsoft.Json": "8.0.1",
+          "PdfPig": "0.1.14"
         },
         "compile": {
           "bin/placeholder/Core.dll": {}
@@ -1809,7 +1811,8 @@
         "dependencies": {
           "DocumentFormat.OpenXml": "3.5.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
-          "Newtonsoft.Json": "8.0.1"
+          "Newtonsoft.Json": "8.0.1",
+          "PdfPig": "0.1.14"
         },
         "compile": {
           "bin/placeholder/Git.dll": {}
@@ -4832,7 +4835,8 @@
       "Microsoft.EntityFrameworkCore >= 8.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0",
-      "Newtonsoft.Json >= 8.0.1"
+      "Newtonsoft.Json >= 8.0.1",
+      "PdfPig >= 0.1.14"
     ]
   },
   "packageFolders": {
@@ -4920,6 +4924,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[8.0.1, )"
+          },
+          "PdfPig": {
+            "target": "Package",
+            "version": "[0.1.14, )"
           }
         },
         "imports": [

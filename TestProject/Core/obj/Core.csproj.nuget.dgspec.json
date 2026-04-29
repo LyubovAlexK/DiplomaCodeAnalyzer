@@ -68,6 +68,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[8.0.1, )"
+            },
+            "PdfPig": {
+              "target": "Package",
+              "version": "[0.1.14, )"
             }
           },
           "imports": [
