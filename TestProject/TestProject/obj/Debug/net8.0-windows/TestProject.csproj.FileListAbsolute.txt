@@ -154,5 +154,5 @@ D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\refint\Test
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.pdb
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.genruntimeconfig.cache
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\ref\TestProject.dll
-D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\AODL.dll
-D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\ICSharpCode.SharpZipLib.dll
+D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.Collections.Immutable.dll
+D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\System.Reflection.Metadata.dll

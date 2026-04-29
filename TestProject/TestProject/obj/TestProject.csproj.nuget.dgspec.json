@@ -133,7 +133,11 @@
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\DITI\\Diploma_app\\TestProject\\Core\\Core.csproj": {
+                "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -155,6 +159,10 @@
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[3.5.1, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[5.3.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",

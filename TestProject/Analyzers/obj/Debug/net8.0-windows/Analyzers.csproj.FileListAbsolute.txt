@@ -13,3 +13,6 @@ D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\refint\Analyz
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.pdb
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.genruntimeconfig.cache
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\ref\Analyzers.dll
+D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Core.dll
+D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Core.pdb
+D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.csproj.Up2Date
