@@ -133,6 +133,36 @@ namespace TestProject
                 }
             }
 
+            // Проверка на пустой проект
+            Console.WriteLine("=== ПРОВЕРКА НА ПУСТОЙ ПРОЕКТ ===\n");
+            var validator = new ProjectValidator();
+            var emptyResult = validator.CheckIfEmpty(projectPath);
+
+            Console.WriteLine($"Пустой проект: {(emptyResult.IsEmpty ? "⚠️ ДА" : "✅ НЕТ")}");
+            Console.WriteLine($"Уровень срабатывания: {emptyResult.FailLevel}");
+            Console.WriteLine($"Причина: {emptyResult.Reason}");
+            Console.WriteLine($"Файлов: {emptyResult.TotalFiles}");
+            Console.WriteLine($"Классов: {emptyResult.TotalClasses} (пользовательских: {emptyResult.UserClasses})");
+            Console.WriteLine($"Методов: {emptyResult.TotalMethods} (значимых: {emptyResult.MeaningfulMethods})");
+            Console.WriteLine($"Совпадений с шаблонами: {emptyResult.TemplateMatches}");
+            Console.WriteLine($"Уверенность: {emptyResult.Confidence:P0}\n");
+
+            // Проверка компиляции
+            Console.WriteLine("=== ПРОВЕРКА КОМПИЛЯЦИИ ===\n");
+            var compResult = validator.CheckCompilation(projectPath);
+
+            Console.WriteLine($"Компилируется: {(compResult.CanCompile ? "ДА" : "НЕТ")}");
+            Console.WriteLine($"Ошибок: {compResult.ErrorCount}, Предупреждений: {compResult.WarningCount}");
+
+            if (compResult.Errors.Count > 0)
+            {
+                Console.WriteLine($"\nПервые 10 ошибок:");
+                foreach (var err in compResult.Errors.Take(10))
+                {
+                    Console.WriteLine($" {err}");
+                }
+            }
+
             Console.WriteLine("\nНажмите любую клавишу для выхода...");
             Console.ReadKey();
             Shutdown();

@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{407E2A56-4062-4F89-843E-46297FCD8878}|TestProject\\TestProject.csproj|solutionrelative:testproject\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\projectvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\projectvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\roslynsyntaxanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\roslynsyntaxanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -38,7 +42,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\App.xaml",
               "RelativeDocumentMoniker": "TestProject\\App.xaml",
@@ -46,8 +50,7 @@
               "RelativeToolTip": "TestProject\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-04-26T20:03:09.773Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -57,7 +60,7 @@
               "RelativeDocumentMoniker": "TestProject\\App.xaml.cs",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\App.xaml.cs",
               "RelativeToolTip": "TestProject\\App.xaml.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAswA4AAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAowIcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-26T20:03:17.594Z",
               "IsPinned": true,
@@ -65,7 +68,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "TestProject.csproj",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\TestProject.csproj",
               "RelativeDocumentMoniker": "TestProject\\TestProject.csproj",
@@ -74,8 +77,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-04-26T20:03:01.334Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -84,6 +86,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ProjectValidator.cs",
+              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ProjectValidator.cs",
+              "RelativeDocumentMoniker": "Analyzers\\Services\\ProjectValidator.cs",
+              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ProjectValidator.cs",
+              "RelativeToolTip": "Analyzers\\Services\\ProjectValidator.cs",
+              "ViewState": "AgIAAIUBAAAAAAAAAAASwJUBAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T13:36:04.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "RoslynSyntaxAnalyzer.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\RoslynSyntaxAnalyzer.cs",
               "RelativeDocumentMoniker": "Analyzers\\Services\\RoslynSyntaxAnalyzer.cs",
@@ -91,25 +106,23 @@
               "RelativeToolTip": "Analyzers\\Services\\RoslynSyntaxAnalyzer.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAswC8AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T11:49:58.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-29T11:49:58.049Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Analyzers",
+              "DocumentIndex": 3,
+              "Title": "Analyzers.csproj",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Analyzers.csproj",
               "RelativeDocumentMoniker": "Analyzers\\Analyzers.csproj",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Analyzers.csproj",
               "RelativeToolTip": "Analyzers\\Analyzers.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-29T11:49:07.231Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-29T11:49:07.231Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MethodMetrics.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\MethodMetrics.cs",
               "RelativeDocumentMoniker": "Core\\Models\\MethodMetrics.cs",
@@ -117,8 +130,7 @@
               "RelativeToolTip": "Core\\Models\\MethodMetrics.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T11:47:50.146Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-29T11:47:50.146Z"
             }
           ]
         }
