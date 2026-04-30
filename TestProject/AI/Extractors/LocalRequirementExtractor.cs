@@ -1,16 +1,8 @@
-﻿using Core.Models;
+﻿using Catalyst;
+using Mosaik.Core;
+using Core.Models;
 using Core.Services;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using UglyToad.PdfPig;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace AI.Extractors
 {
@@ -22,6 +14,11 @@ namespace AI.Extractors
         {
             _dict = dict;
         }
+
+        private static Pipeline? _pipeline;
+        private static readonly object _lock = new();
+        private static bool _catalystInitialized = false;
+
         public async Task<ProjectSpecification> ExtractAsync(string filePath, int specificationId)
         {
             // 1. Извлекаем текст через конвертер
@@ -29,23 +26,26 @@ namespace AI.Extractors
             if (string.IsNullOrWhiteSpace(text))
                 throw new InvalidOperationException("Не удалось извлечь текст из документа.");
 
-            // 2. Разбиваем слипшийся текст
-            var separators = await _dict.GetSeparatorsAsync();
-            text = SplitWordsDynamic(text, separators);
+            // 2. Разбиваем слипшийся текст через Catalyst
+            try
+            {
+                text = SegmentWithCatalyst(text);
+                Console.WriteLine("Catalyst: текст восстановлен");  
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Catalyst недоступен: {ex.Message}");
+                // Если Catalyst не сработал — оставляем текст как есть
+            }
 
-            // 3. Загружаем маркеры требований из БД
-            var allMarkers = await _dict.GetMarkersAsync(specificationId);
-
-
-            int testedSentences = 0;
-            int matchedSentences = 0;
-
-            // 4. Разбиваем на предложения
+            // 3. Разбиваем на предложения (простая эвристика)
             var sentences = text.Split(new[] { ". ", ".\n", ".\r" }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
                 .Where(s => s.Length > 15)
                 .ToList();
 
+            // 4. Загружаем маркеры требований из БД
+            var allMarkers = await _dict.GetMarkersAsync(specificationId);
 
             // ДИАГНОСТИКА
             Console.WriteLine($"Всего предложений: {sentences.Count}");
@@ -54,7 +54,8 @@ namespace AI.Extractors
             // 5. Извлекаем требования, используя маркеры из БД
             var requirements = new List<Requirement>();
             var counters = new Dictionary<string, int> { { "Functional", 1 }, { "Architectural", 1 }, { "Metric", 1 } };
-            
+            int testedSentences = 0, matchedSentences = 0;
+
             foreach (var sentence in sentences)
             {
                 string fullSentence = sentence + ".";
@@ -92,6 +93,7 @@ namespace AI.Extractors
                     });
                 }
             }
+
             Console.WriteLine($"Проверено предложений: {testedSentences}");
             Console.WriteLine($"Найдено совпадений: {matchedSentences}");
 
@@ -120,8 +122,6 @@ namespace AI.Extractors
             return null;
         }
 
-        //Порог для метрик
-
         private decimal? ExtractThreshold(string line)
         {
             var match = Regex.Match(line, @"\d+");
@@ -130,18 +130,35 @@ namespace AI.Extractors
             return null;
         }
 
-        //Разбивка текста
-
-        private string SplitWordsDynamic(string text, List<string> words)
+        private string SegmentWithCatalyst(string text)
         {
-            foreach (var word in words.OrderByDescending(w => w.Length))
+            if (!_catalystInitialized)
             {
-                text = Regex.Replace(text,
-                    $"(?<=[а-яёa-z)»,.]){Regex.Escape(word)}(?=[а-яёa-z(«,.])",
-                    $" {word} ",
-                    RegexOptions.IgnoreCase);
+                lock (_lock)
+                {
+                    if (!_catalystInitialized)
+                    {
+                        Catalyst.Models.Russian.Register();
+                        Storage.Current = new DiskStorage("catalyst-models");
+                        _pipeline = Pipeline.ForAsync(Mosaik.Core.Language.Russian).GetAwaiter().GetResult();
+                        _catalystInitialized = true;
+                    }
+                }
             }
-            return Regex.Replace(text, @"\s+", " ").Trim();
+
+            var doc = new Document(text, Mosaik.Core.Language.Russian);
+            _pipeline!.ProcessSingle(doc);
+
+            var words = new List<string>();
+            foreach (var span in doc.Spans)
+            {
+                foreach (var token in span.Tokens)
+                {
+                    words.Add(token.Value);
+                }
+            }
+
+            return string.Join(" ", words);
         }
     }
 }

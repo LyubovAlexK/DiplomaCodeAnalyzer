@@ -28,26 +28,73 @@ namespace TestProject
             AllocConsole(); //Для анализатора
             base.OnStartup(e);
 
-            //Тестирование анализатора
+            //Загрузка словаря
+            /*
+            string pdfPath = @"..\..\..\..\TechBuild\testTask.docx";
 
+            if (!File.Exists(pdfPath))
+            {
+                Console.WriteLine("Файл не найден");
+                Shutdown();
+                return;
+            }
+
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;")
+                .Options;
+
+            using var db = new AppDbContext(options);
+            var dictService = new DictionaryService(db);
+            var factory = new ExtractorFactory(dict: dictService);
+            var extractor = factory.Create(isOnline: false);
+
+            try
+            {
+                var specification = await extractor.ExtractAsync(pdfPath, specificationId: 4);
+
+                Console.WriteLine($"Требований: {specification.Requirements.Count}\n");
+
+                foreach (var req in specification.Requirements)
+                {
+                    Console.WriteLine($"[{req.RequirementType}] {req.Severity} | {req.Title}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+
+            Console.WriteLine("\nНажмите любую клавишу...");
+            Console.ReadKey();
+            Shutdown();
+            */
+
+
+            //Тестирование анализатора
+            /*
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║     ТЕСТ ROSLYN АНАЛИЗАТОРА         ║");
             Console.WriteLine("╚══════════════════════════════════════╝\n");
 
             if (!Directory.Exists(projectPath))
             {
-                Console.WriteLine($"❌ Папка не найдена: {projectPath}");
+                Console.WriteLine($"Папка не найдена: {projectPath}");
                 Console.ReadKey();
                 Shutdown();
                 return;
             }
 
+            var loader = new DictionaryLoader(db);
+            string dictPath = @"..\..\..\..\russian-words.txt";
+            int count = await loader.LoadFromFileAsync(dictPath, minLength: 3);
+            Console.WriteLine($"Загружено слов: {count}");
+
             var analyzer = new RoslynSyntaxAnalyzer();
 
-            Console.WriteLine("⏳ Анализируем проект...\n");
+            Console.WriteLine("Анализируем проект...\n");
             var result = await analyzer.AnalyzeProjectAsync(projectPath);
 
-            Console.WriteLine($"✅ Проанализировано методов: {result.TotalMethods}\n");
+            Console.WriteLine($"Проанализировано методов: {result.TotalMethods}\n");
 
             // Сводка
             Console.WriteLine("═══════════════════════════════════════");
@@ -138,7 +185,7 @@ namespace TestProject
             var validator = new ProjectValidator();
             var emptyResult = validator.CheckIfEmpty(projectPath);
 
-            Console.WriteLine($"Пустой проект: {(emptyResult.IsEmpty ? "⚠️ ДА" : "✅ НЕТ")}");
+            Console.WriteLine($"Пустой проект: {(emptyResult.IsEmpty ? "ДА" : "НЕТ")}");
             Console.WriteLine($"Уровень срабатывания: {emptyResult.FailLevel}");
             Console.WriteLine($"Причина: {emptyResult.Reason}");
             Console.WriteLine($"Файлов: {emptyResult.TotalFiles}");
@@ -173,98 +220,97 @@ namespace TestProject
             if (total == 0) return "";
             int width = (int)((double)count / total * 20);
             return new string('█', width) + $" {count}";
-        }
-
-
-        //Тест для локалки
-        /* 
-        string pdfPath = @"..\..\..\..\TechBuild\testTask.pdf";
-
-        if (!File.Exists(pdfPath))
-        {
-            Console.WriteLine("Файл не найден");
-            Shutdown();
-            return;
-        }
-
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;")
-            .Options;
-
-        using var db = new AppDbContext(options);
-        var dictService = new DictionaryService(db);
-        var factory = new ExtractorFactory(dict: dictService);
-        var extractor = factory.Create(isOnline: false);
-
-        try
-        {
-            // 10 и AI, и локалка
-            var specification = await extractor.ExtractAsync(pdfPath, specificationId: 10);
-
-            Console.WriteLine($"ЛОКАЛЬНЫЙ АНАЛИЗ: {specification.Requirements.Count} требований\n");
-
-            foreach (var req in specification.Requirements)
-            {
-                Console.WriteLine($"[{req.RequirementType}] {req.Severity} | {req.Title}");
-                if (req.MetricName != null)
-                    Console.WriteLine($"   Metric: {req.MetricName} (порог: {req.Threshold?.ToString() ?? "нет"})");
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Ошибка: {ex.Message}");
-        }
-
-        Console.WriteLine("\nНажмите любую клавишу...");
-        Console.ReadKey();
-        Shutdown();
+        //}
         */
 
-        //Тест для AI
-        /*
-        string filePath = @"..\..\..\..\TechBuild\csharp.odt";
+            //Тест для локалки
+            /*
+            string pdfPath = @"..\..\..\..\TechBuild\testTask.pdf";
 
-        if (!File.Exists(filePath))
-        {
-            Console.WriteLine("Файл не найден: " + filePath);
-            Shutdown();
-            return;
-        }
-
-        string apiKey = "MDE5ZGQ0NmEtYzcxYi03ZDY2LThhYTAtNDZmOTZhMTY5ZGFiOjc5ZmFlMzU0LWY1YmItNGY1My1hMGZlLTAyOWJmZThlMjAwYg==";
-
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;")
-            .Options;
-
-        using var db = new AppDbContext(options);
-        var dictService = new DictionaryService(db);
-        var factory = new ExtractorFactory(dict: dictService, apiKey: apiKey);
-        var extractor = factory.Create(isOnline: true);
-
-        try
-        {
-            Console.WriteLine("=== GIGACHAT AI АНАЛИЗ ===\n");
-            Console.WriteLine($"Файл: {filePath}\n");
-
-            var specification = await extractor.ExtractAsync(filePath);
-
-            Console.WriteLine($"\n=== РЕЗУЛЬТАТ: {specification.Requirements.Count} требований ===\n");
-
-            foreach (var req in specification.Requirements)
+            if (!File.Exists(pdfPath))
             {
-                Console.WriteLine($"[{req.RequirementType}] {req.Severity} | {req.Title}");
+                Console.WriteLine("Файл не найден");
+                Shutdown();
+                return;
             }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"\nОшибка: {ex.Message}");
-        }
 
-        Console.WriteLine("\nНажмите любую клавишу...");
-        Console.ReadKey();
-        Shutdown();
-        */
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;")
+                .Options;
+
+            using var db = new AppDbContext(options);
+            var dictService = new DictionaryService(db);
+            var factory = new ExtractorFactory(dict: dictService);
+            var extractor = factory.Create(isOnline: false);
+
+            try
+            {
+                // 10 и AI, и локалка
+                var specification = await extractor.ExtractAsync(pdfPath, specificationId: 10);
+
+                Console.WriteLine($"ЛОКАЛЬНЫЙ АНАЛИЗ: {specification.Requirements.Count} требований\n");
+
+                foreach (var req in specification.Requirements)
+                {
+                    Console.WriteLine($"[{req.RequirementType}] {req.Severity} | {req.Title}");
+                    if (req.MetricName != null)
+                        Console.WriteLine($"   Metric: {req.MetricName} (порог: {req.Threshold?.ToString() ?? "нет"})");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+
+            Console.WriteLine("\nНажмите любую клавишу...");
+            Console.ReadKey();
+            Shutdown();
+            */
+            //Тест для AI
+
+            string filePath = @"..\..\..\..\TechBuild\csharp.docx";
+
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Файл не найден: " + filePath);
+                Shutdown();
+                return;
+            }
+
+            string apiKey = "MDE5ZGQ0NmEtYzcxYi03ZDY2LThhYTAtNDZmOTZhMTY5ZGFiOjFhN2UxZGMyLTY0ODktNDE4Ni1hZmI4LTA1NzExMDQ0OTk4OA==";
+
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;")
+                .Options;
+
+            using var db = new AppDbContext(options);
+            var dictService = new DictionaryService(db);
+            var factory = new ExtractorFactory(dict: dictService, apiKey: apiKey);
+            var extractor = factory.Create(isOnline: true);
+
+            try
+            {
+                Console.WriteLine("=== GIGACHAT AI АНАЛИЗ ===\n");
+                Console.WriteLine($"Файл: {filePath}\n");
+
+                var specification = await extractor.ExtractAsync(filePath);
+
+                Console.WriteLine($"\n=== РЕЗУЛЬТАТ: {specification.Requirements.Count} требований ===\n");
+
+                foreach (var req in specification.Requirements)
+                {
+                    Console.WriteLine($"[{req.RequirementType}] {req.Severity} | {req.Title}");
+                    Console.WriteLine($"[{req.Description}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nОшибка: {ex.Message}");
+            }
+
+            Console.WriteLine("\nНажмите любую клавишу...");
+            Console.ReadKey();
+            Shutdown();
+        }
     }
 }
-    

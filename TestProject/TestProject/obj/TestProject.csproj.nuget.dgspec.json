@@ -55,6 +55,14 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Catalyst": {
+              "target": "Package",
+              "version": "[26.3.60, )"
+            },
+            "Catalyst.Models.Russian": {
+              "target": "Package",
+              "version": "[1.0.30952, )"
+            },
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[3.5.1, )"
@@ -75,11 +83,19 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[13.0.3, )"
             },
             "PdfPig": {
               "target": "Package",
               "version": "[0.1.14, )"
+            },
+            "PragmaticSegmenterNet": {
+              "target": "Package",
+              "version": "[1.0.5, )"
+            },
+            "SymSpell": {
+              "target": "Package",
+              "version": "[6.7.3, )"
             }
           },
           "imports": [
@@ -176,7 +192,7 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[13.0.3, )"
             },
             "PdfPig": {
               "target": "Package",
@@ -269,7 +285,7 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[13.0.3, )"
             },
             "PdfPig": {
               "target": "Package",
@@ -362,7 +378,7 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[13.0.3, )"
             },
             "PdfPig": {
               "target": "Package",
@@ -452,6 +468,14 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Catalyst": {
+              "target": "Package",
+              "version": "[26.3.60, )"
+            },
+            "Catalyst.Models.Russian": {
+              "target": "Package",
+              "version": "[1.0.30952, )"
+            },
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[3.5.1, )"
@@ -472,7 +496,7 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[13.0.3, )"
             },
             "PdfPig": {
               "target": "Package",

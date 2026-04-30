@@ -3,6 +3,7 @@ using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,15 +35,6 @@ namespace Core.Services
                 query = query.Where(m => m.RequirementType == type);
 
             return await query.ToListAsync();
-        }
-
-        public async Task<List<string>> GetSeparatorsAsync()
-        {
-            return await _db.SeparatorWords
-                .Where(w => w.IsActive)
-                .Select(w => w.Word)
-                .OrderByDescending(w => w.Length)
-                .ToListAsync();
         }
     }
 }

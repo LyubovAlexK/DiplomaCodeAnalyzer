@@ -1,12 +1,14 @@
-﻿using UglyToad.PdfPig;
-using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using UglyToad.PdfPig;
 
 namespace Core.Services
 {
@@ -22,7 +24,8 @@ namespace Core.Services
                 ".pdf" => ExtractFromPdf(filePath),
                 ".docx" => ExtractFromDocx(filePath),
                 ".txt" => ExtractFromTxt(filePath),
-                _ => throw new NotSupportedException($"Формат {ext} не поддерживается. Используйте PDF, DOCX или TXT.")
+                ".odt" => ExtractFromOdt(filePath),
+                _ => throw new NotSupportedException($"Формат {ext} не поддерживается. Используйте PDF, DOCX, ODT или TXT.")
             };
         }
 
@@ -103,6 +106,27 @@ namespace Core.Services
         private static string ExtractFromTxt(string path)
         {
             return File.ReadAllText(path).Trim();
+        }
+
+        //Извлекает текст из ODT.
+        private static string ExtractFromOdt(string path)
+        {
+            using var archive = ZipFile.OpenRead(path);
+            var contentEntry = archive.GetEntry("content.xml")
+                ?? throw new InvalidOperationException("Файл ODT повреждён: отсутствует content.xml");
+
+            using var stream = contentEntry.Open();
+            var doc = XDocument.Load(stream);
+
+            // Пространство имён ODF
+            XNamespace ns = "urn:oasis:names:tc:opendocument:xmlns:office:1.0";
+            XNamespace textNs = "urn:oasis:names:tc:opendocument:xmlns:text:1.0";
+
+            var paragraphs = doc.Descendants(textNs + "p")
+                .Select(p => p.Value)
+                .Where(v => !string.IsNullOrWhiteSpace(v));
+
+            return string.Join("\n", paragraphs);
         }
     }
 }

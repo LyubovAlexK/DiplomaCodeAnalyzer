@@ -75,7 +75,7 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[13.0.3, )"
             },
             "PdfPig": {
               "target": "Package",
@@ -168,7 +168,7 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[13.0.3, )"
             },
             "PdfPig": {
               "target": "Package",

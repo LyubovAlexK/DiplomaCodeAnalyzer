@@ -43,13 +43,6 @@ namespace Core.Data
                 entity.Property(e => e.DefaultSeverity).HasMaxLength(20).HasDefaultValue("Major");
             });
 
-            modelBuilder.Entity<SeparatorWord>(entity =>
-            {
-                entity.ToTable("SeparatorWords");
-                entity.HasKey(e => e.WordId);
-                entity.Property(e => e.Word).IsRequired().HasMaxLength(100);
-            });
-
             modelBuilder.Entity<PromptTemplate>(entity =>
             {
                 entity.ToTable("PromptTemplates");
