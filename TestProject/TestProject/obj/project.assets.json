@@ -1380,6 +1380,37 @@
           }
         }
       },
+      "Mono.Cecil/0.11.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.dll": {
+            "related": ".Mdb.pdb;.pdb;.Pdb.pdb;.Rocks.pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.dll": {
+            "related": ".Mdb.pdb;.pdb;.Pdb.pdb;.Rocks.pdb"
+          }
+        }
+      },
       "Mono.TextTemplating/2.2.1": {
         "type": "package",
         "dependencies": {
@@ -1406,6 +1437,22 @@
         },
         "runtime": {
           "lib/net8.0/Mosaik.Core.dll": {}
+        }
+      },
+      "NetArchTest.Rules/1.3.2": {
+        "type": "package",
+        "dependencies": {
+          "Mono.Cecil": "0.11.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/NetArchTest.Rules.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/NetArchTest.Rules.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Newtonsoft.Json/13.0.3": {
@@ -1695,7 +1742,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "System.Collections.Immutable/9.0.0": {
+      "System.Collections.Immutable/10.0.7": {
         "type": "package",
         "compile": {
           "lib/net8.0/System.Collections.Immutable.dll": {
@@ -2020,10 +2067,10 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "System.Reflection.Metadata/9.0.0": {
+      "System.Reflection.Metadata/10.0.7": {
         "type": "package",
         "dependencies": {
-          "System.Collections.Immutable": "9.0.0"
+          "System.Collections.Immutable": "10.0.7"
         },
         "compile": {
           "lib/net8.0/System.Reflection.Metadata.dll": {
@@ -2032,6 +2079,26 @@
         },
         "runtime": {
           "lib/net8.0/System.Reflection.Metadata.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "System.Reflection.MetadataLoadContext/10.0.7": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections.Immutable": "10.0.7",
+          "System.Reflection.Metadata": "10.0.7"
+        },
+        "compile": {
+          "lib/net8.0/System.Reflection.MetadataLoadContext.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.Reflection.MetadataLoadContext.dll": {
             "related": ".xml"
           }
         },
@@ -2376,8 +2443,10 @@
           "DocumentFormat.OpenXml": "3.5.1",
           "Microsoft.CodeAnalysis.CSharp": "5.3.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
+          "NetArchTest.Rules": "1.3.2",
           "Newtonsoft.Json": "13.0.3",
-          "PdfPig": "0.1.14"
+          "PdfPig": "0.1.14",
+          "System.Reflection.MetadataLoadContext": "10.0.7"
         },
         "compile": {
           "bin/placeholder/Analyzers.dll": {}
@@ -4271,6 +4340,33 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Mono.Cecil/0.11.3": {
+      "sha512": "DNYE+io5XfEE8+E+5padThTPHJARJHbz1mhbhMPNrrWGKVKKqj/KEeLvbawAmbIcT73NuxLV7itHZaYCZcVWGg==",
+      "type": "package",
+      "path": "mono.cecil/0.11.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Mono.Cecil.Mdb.dll",
+        "lib/net40/Mono.Cecil.Mdb.pdb",
+        "lib/net40/Mono.Cecil.Pdb.dll",
+        "lib/net40/Mono.Cecil.Pdb.pdb",
+        "lib/net40/Mono.Cecil.Rocks.dll",
+        "lib/net40/Mono.Cecil.Rocks.pdb",
+        "lib/net40/Mono.Cecil.dll",
+        "lib/net40/Mono.Cecil.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Mdb.dll",
+        "lib/netstandard2.0/Mono.Cecil.Mdb.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Pdb.dll",
+        "lib/netstandard2.0/Mono.Cecil.Pdb.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Rocks.dll",
+        "lib/netstandard2.0/Mono.Cecil.Rocks.pdb",
+        "lib/netstandard2.0/Mono.Cecil.dll",
+        "lib/netstandard2.0/Mono.Cecil.pdb",
+        "mono.cecil.0.11.3.nupkg.sha512",
+        "mono.cecil.nuspec"
+      ]
+    },
     "Mono.TextTemplating/2.2.1": {
       "sha512": "KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "type": "package",
@@ -4301,6 +4397,20 @@
         "lib/netstandard2.1/Mosaik.Core.dll",
         "mosaik.core.25.10.62118.nupkg.sha512",
         "mosaik.core.nuspec"
+      ]
+    },
+    "NetArchTest.Rules/1.3.2": {
+      "sha512": "puPyNXkwJq8/UwXhHV8NrzNzkQl4IxEbcP+3PU0xLRiOedsVpaSdpwHhvOZfI0VwTcRvawCNxYQcSRbD4RUg4w==",
+      "type": "package",
+      "path": "netarchtest.rules/1.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bm-nuget-icon.png",
+        "lib/netstandard2.0/NetArchTest.Rules.dll",
+        "lib/netstandard2.0/NetArchTest.Rules.xml",
+        "netarchtest.rules.1.3.2.nupkg.sha512",
+        "netarchtest.rules.nuspec"
       ]
     },
     "Newtonsoft.Json/13.0.3": {
@@ -4736,21 +4846,22 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Collections.Immutable/9.0.0": {
-      "sha512": "QhkXUl2gNrQtvPmtBTQHb0YsUrDiDQ2QS09YbtTTiSjGcf7NBqtYbrG/BE06zcBPCKEwQGzIv13IVdXNOSub2w==",
+    "System.Collections.Immutable/10.0.7": {
+      "sha512": "0Ti4Jv1ga3eurH5HaCVsPybcBl+08YfzM9smqAJzHvqV494xK+0pSbytGrMTWhph+zsyKIaoGNiR5u3by5bj+A==",
       "type": "package",
-      "path": "system.collections.immutable/9.0.0",
+      "path": "system.collections.immutable/10.0.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "LICENSE.TXT",
         "PACKAGE.md",
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/System.Collections.Immutable.targets",
         "buildTransitive/net462/_._",
         "buildTransitive/net8.0/_._",
         "buildTransitive/netcoreapp2.0/System.Collections.Immutable.targets",
+        "lib/net10.0/System.Collections.Immutable.dll",
+        "lib/net10.0/System.Collections.Immutable.xml",
         "lib/net462/System.Collections.Immutable.dll",
         "lib/net462/System.Collections.Immutable.xml",
         "lib/net8.0/System.Collections.Immutable.dll",
@@ -4759,7 +4870,7 @@
         "lib/net9.0/System.Collections.Immutable.xml",
         "lib/netstandard2.0/System.Collections.Immutable.dll",
         "lib/netstandard2.0/System.Collections.Immutable.xml",
-        "system.collections.immutable.9.0.0.nupkg.sha512",
+        "system.collections.immutable.10.0.7.nupkg.sha512",
         "system.collections.immutable.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -5300,21 +5411,22 @@
         "version.txt"
       ]
     },
-    "System.Reflection.Metadata/9.0.0": {
-      "sha512": "ANiqLu3DxW9kol/hMmTWbt3414t9ftdIuiIU7j80okq2YzAueo120M442xk1kDJWtmZTqWQn7wHDvMRipVOEOQ==",
+    "System.Reflection.Metadata/10.0.7": {
+      "sha512": "FEBU/i3gHeleqayWrbWieI5MlepDBTcjAxMzjGbK7FwGtlpxGSU1Lt11W1/o4ExdqsNtboiVhT5s4kNtH3eqvw==",
       "type": "package",
-      "path": "system.reflection.metadata/9.0.0",
+      "path": "system.reflection.metadata/10.0.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "LICENSE.TXT",
         "PACKAGE.md",
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/System.Reflection.Metadata.targets",
         "buildTransitive/net462/_._",
         "buildTransitive/net8.0/_._",
         "buildTransitive/netcoreapp2.0/System.Reflection.Metadata.targets",
+        "lib/net10.0/System.Reflection.Metadata.dll",
+        "lib/net10.0/System.Reflection.Metadata.xml",
         "lib/net462/System.Reflection.Metadata.dll",
         "lib/net462/System.Reflection.Metadata.xml",
         "lib/net8.0/System.Reflection.Metadata.dll",
@@ -5323,8 +5435,37 @@
         "lib/net9.0/System.Reflection.Metadata.xml",
         "lib/netstandard2.0/System.Reflection.Metadata.dll",
         "lib/netstandard2.0/System.Reflection.Metadata.xml",
-        "system.reflection.metadata.9.0.0.nupkg.sha512",
+        "system.reflection.metadata.10.0.7.nupkg.sha512",
         "system.reflection.metadata.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Reflection.MetadataLoadContext/10.0.7": {
+      "sha512": "XDkKntYPUaANhLVdo7AHbrJ+QbUAY5u/T7lG5rHSx5kLxeHceoc3JcIMVAc/vZT+3rbwFYlrdnikxdi6G+2nvA==",
+      "type": "package",
+      "path": "system.reflection.metadataloadcontext/10.0.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Reflection.MetadataLoadContext.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Reflection.MetadataLoadContext.targets",
+        "lib/net10.0/System.Reflection.MetadataLoadContext.dll",
+        "lib/net10.0/System.Reflection.MetadataLoadContext.xml",
+        "lib/net462/System.Reflection.MetadataLoadContext.dll",
+        "lib/net462/System.Reflection.MetadataLoadContext.xml",
+        "lib/net8.0/System.Reflection.MetadataLoadContext.dll",
+        "lib/net8.0/System.Reflection.MetadataLoadContext.xml",
+        "lib/net9.0/System.Reflection.MetadataLoadContext.dll",
+        "lib/net9.0/System.Reflection.MetadataLoadContext.xml",
+        "lib/netstandard2.0/System.Reflection.MetadataLoadContext.dll",
+        "lib/netstandard2.0/System.Reflection.MetadataLoadContext.xml",
+        "system.reflection.metadataloadcontext.10.0.7.nupkg.sha512",
+        "system.reflection.metadataloadcontext.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -6113,7 +6254,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0",
       "Newtonsoft.Json >= 13.0.3",
-      "PdfPig >= 0.1.14"
+      "PdfPig >= 0.1.14",
+      "System.Reflection.MetadataLoadContext >= 10.0.7"
     ]
   },
   "packageFolders": {
@@ -6213,6 +6355,10 @@
           "PdfPig": {
             "target": "Package",
             "version": "[0.1.14, )"
+          },
+          "System.Reflection.MetadataLoadContext": {
+            "target": "Package",
+            "version": "[10.0.7, )"
           }
         },
         "imports": [

@@ -13,8 +13,10 @@
           "Microsoft.CodeAnalysis.CSharp": "5.3.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.0",
+          "NetArchTest.Rules": "1.3.2",
           "Newtonsoft.Json": "13.0.3",
-          "PdfPig": "0.1.14"
+          "PdfPig": "0.1.14",
+          "System.Reflection.MetadataLoadContext": "10.0.7"
         },
         "runtime": {
           "Analyzers.dll": {}
@@ -96,8 +98,8 @@
       "Microsoft.CodeAnalysis.Common/5.3.0": {
         "dependencies": {
           "Microsoft.CodeAnalysis.Analyzers": "5.3.0-2.25625.1",
-          "System.Collections.Immutable": "9.0.0",
-          "System.Reflection.Metadata": "9.0.0"
+          "System.Collections.Immutable": "10.0.7",
+          "System.Reflection.Metadata": "10.0.7"
         },
         "runtime": {
           "lib/net8.0/Microsoft.CodeAnalysis.dll": {
@@ -151,8 +153,8 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.Analyzers": "5.3.0-2.25625.1",
           "Microsoft.CodeAnalysis.Common": "5.3.0",
-          "System.Collections.Immutable": "9.0.0",
-          "System.Reflection.Metadata": "9.0.0"
+          "System.Collections.Immutable": "10.0.7",
+          "System.Reflection.Metadata": "10.0.7"
         },
         "runtime": {
           "lib/net8.0/Microsoft.CodeAnalysis.CSharp.dll": {
@@ -658,6 +660,26 @@
         }
       },
       "Microsoft.Win32.SystemEvents/6.0.0": {},
+      "Mono.Cecil/0.11.3": {
+        "runtime": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {
+            "assemblyVersion": "0.11.3.0",
+            "fileVersion": "0.11.3.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {
+            "assemblyVersion": "0.11.3.0",
+            "fileVersion": "0.11.3.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {
+            "assemblyVersion": "0.11.3.0",
+            "fileVersion": "0.11.3.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.dll": {
+            "assemblyVersion": "0.11.3.0",
+            "fileVersion": "0.11.3.0"
+          }
+        }
+      },
       "Mono.TextTemplating/2.2.1": {
         "dependencies": {
           "System.CodeDom": "4.4.0"
@@ -666,6 +688,17 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.1.1"
+          }
+        }
+      },
+      "NetArchTest.Rules/1.3.2": {
+        "dependencies": {
+          "Mono.Cecil": "0.11.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NetArchTest.Rules.dll": {
+            "assemblyVersion": "1.3.1.0",
+            "fileVersion": "1.3.1.0"
           }
         }
       },
@@ -710,11 +743,11 @@
         }
       },
       "System.CodeDom/4.4.0": {},
-      "System.Collections.Immutable/9.0.0": {
+      "System.Collections.Immutable/10.0.7": {
         "runtime": {
           "lib/net8.0/System.Collections.Immutable.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.726.21808"
           }
         }
       },
@@ -837,14 +870,26 @@
         }
       },
       "System.Numerics.Vectors/4.5.0": {},
-      "System.Reflection.Metadata/9.0.0": {
+      "System.Reflection.Metadata/10.0.7": {
         "dependencies": {
-          "System.Collections.Immutable": "9.0.0"
+          "System.Collections.Immutable": "10.0.7"
         },
         "runtime": {
           "lib/net8.0/System.Reflection.Metadata.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.726.21808"
+          }
+        }
+      },
+      "System.Reflection.MetadataLoadContext/10.0.7": {
+        "dependencies": {
+          "System.Collections.Immutable": "10.0.7",
+          "System.Reflection.Metadata": "10.0.7"
+        },
+        "runtime": {
+          "lib/net8.0/System.Reflection.MetadataLoadContext.dll": {
+            "assemblyVersion": "10.0.0.7",
+            "fileVersion": "10.0.726.21808"
           }
         }
       },
@@ -1236,12 +1281,26 @@
       "path": "microsoft.win32.systemevents/6.0.0",
       "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
     },
+    "Mono.Cecil/0.11.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DNYE+io5XfEE8+E+5padThTPHJARJHbz1mhbhMPNrrWGKVKKqj/KEeLvbawAmbIcT73NuxLV7itHZaYCZcVWGg==",
+      "path": "mono.cecil/0.11.3",
+      "hashPath": "mono.cecil.0.11.3.nupkg.sha512"
+    },
     "Mono.TextTemplating/2.2.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
+    },
+    "NetArchTest.Rules/1.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-puPyNXkwJq8/UwXhHV8NrzNzkQl4IxEbcP+3PU0xLRiOedsVpaSdpwHhvOZfI0VwTcRvawCNxYQcSRbD4RUg4w==",
+      "path": "netarchtest.rules/1.3.2",
+      "hashPath": "netarchtest.rules.1.3.2.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",
@@ -1264,12 +1323,12 @@
       "path": "system.codedom/4.4.0",
       "hashPath": "system.codedom.4.4.0.nupkg.sha512"
     },
-    "System.Collections.Immutable/9.0.0": {
+    "System.Collections.Immutable/10.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QhkXUl2gNrQtvPmtBTQHb0YsUrDiDQ2QS09YbtTTiSjGcf7NBqtYbrG/BE06zcBPCKEwQGzIv13IVdXNOSub2w==",
-      "path": "system.collections.immutable/9.0.0",
-      "hashPath": "system.collections.immutable.9.0.0.nupkg.sha512"
+      "sha512": "sha512-0Ti4Jv1ga3eurH5HaCVsPybcBl+08YfzM9smqAJzHvqV494xK+0pSbytGrMTWhph+zsyKIaoGNiR5u3by5bj+A==",
+      "path": "system.collections.immutable/10.0.7",
+      "hashPath": "system.collections.immutable.10.0.7.nupkg.sha512"
     },
     "System.Composition/6.0.0": {
       "type": "package",
@@ -1383,12 +1442,19 @@
       "path": "system.numerics.vectors/4.5.0",
       "hashPath": "system.numerics.vectors.4.5.0.nupkg.sha512"
     },
-    "System.Reflection.Metadata/9.0.0": {
+    "System.Reflection.Metadata/10.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ANiqLu3DxW9kol/hMmTWbt3414t9ftdIuiIU7j80okq2YzAueo120M442xk1kDJWtmZTqWQn7wHDvMRipVOEOQ==",
-      "path": "system.reflection.metadata/9.0.0",
-      "hashPath": "system.reflection.metadata.9.0.0.nupkg.sha512"
+      "sha512": "sha512-FEBU/i3gHeleqayWrbWieI5MlepDBTcjAxMzjGbK7FwGtlpxGSU1Lt11W1/o4ExdqsNtboiVhT5s4kNtH3eqvw==",
+      "path": "system.reflection.metadata/10.0.7",
+      "hashPath": "system.reflection.metadata.10.0.7.nupkg.sha512"
+    },
+    "System.Reflection.MetadataLoadContext/10.0.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XDkKntYPUaANhLVdo7AHbrJ+QbUAY5u/T7lG5rHSx5kLxeHceoc3JcIMVAc/vZT+3rbwFYlrdnikxdi6G+2nvA==",
+      "path": "system.reflection.metadataloadcontext/10.0.7",
+      "hashPath": "system.reflection.metadataloadcontext.10.0.7.nupkg.sha512"
     },
     "System.Runtime/4.3.0": {
       "type": "package",

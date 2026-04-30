@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\DITI\\Diploma_app\\TestProject\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\architectureanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\architectureanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\roslynresultservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\roslynresultservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{407E2A56-4062-4F89-843E-46297FCD8878}|TestProject\\TestProject.csproj|d:\\diti\\diploma_app\\testproject\\testproject\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{407E2A56-4062-4F89-843E-46297FCD8878}|TestProject\\TestProject.csproj|solutionrelative:testproject\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,40 +19,12 @@
       "RelativeMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|solutionrelative:core\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\roslynresultservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\roslynresultservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|d:\\diti\\diploma_app\\testproject\\core\\models\\sessionanalysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|solutionrelative:core\\models\\sessionanalysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|d:\\diti\\diploma_app\\testproject\\core\\models\\auditverdict.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|solutionrelative:core\\models\\auditverdict.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\projectvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\projectvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\roslynsyntaxanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\roslynsyntaxanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A670A538-2419-49B4-9212-4884B78A2F79}|AI\\AI.csproj|d:\\diti\\diploma_app\\testproject\\ai\\extractors\\localrequirementextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A670A538-2419-49B4-9212-4884B78A2F79}|AI\\AI.csproj|solutionrelative:ai\\extractors\\localrequirementextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|d:\\diti\\diploma_app\\testproject\\core\\services\\documentconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|solutionrelative:core\\services\\documentconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{407E2A56-4062-4F89-843E-46297FCD8878}|TestProject\\TestProject.csproj|d:\\diti\\diploma_app\\testproject\\testproject\\testproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{407E2A56-4062-4F89-843E-46297FCD8878}|TestProject\\TestProject.csproj|solutionrelative:testproject\\testproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|d:\\diti\\diploma_app\\testproject\\core\\models\\methodmetrics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|solutionrelative:core\\models\\methodmetrics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{407E2A56-4062-4F89-843E-46297FCD8878}|TestProject\\TestProject.csproj|d:\\diti\\diploma_app\\testproject\\testproject\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -58,11 +38,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 6,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\App.xaml",
               "RelativeDocumentMoniker": "TestProject\\App.xaml",
@@ -74,13 +54,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\App.xaml.cs",
               "RelativeDocumentMoniker": "TestProject\\App.xaml.cs",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\App.xaml.cs",
               "RelativeToolTip": "TestProject\\App.xaml.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAwwBQAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAASwFMAAACPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-26T20:03:17.594Z",
               "IsPinned": true,
@@ -88,7 +68,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "TestProject.csproj",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\TestProject.csproj",
               "RelativeDocumentMoniker": "TestProject\\TestProject.csproj",
@@ -97,38 +77,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-04-26T20:03:01.334Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SessionAnalysis.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\SessionAnalysis.cs",
-              "RelativeDocumentMoniker": "Core\\Models\\SessionAnalysis.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\SessionAnalysis.cs",
-              "RelativeToolTip": "Core\\Models\\SessionAnalysis.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA1wBMAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T16:42:54.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RoslynResultService.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\RoslynResultService.cs",
-              "RelativeDocumentMoniker": "Analyzers\\Services\\RoslynResultService.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\RoslynResultService.cs",
-              "RelativeToolTip": "Analyzers\\Services\\RoslynResultService.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAUwFwAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T16:08:04.249Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -138,86 +91,49 @@
               "RelativeDocumentMoniker": "Core\\Models\\AuditVerdict.cs",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\AuditVerdict.cs",
               "RelativeToolTip": "Core\\Models\\AuditVerdict.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAIwBkAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T16:02:51.146Z",
+              "WhenOpened": "2026-04-30T19:09:34.745Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "RoslynResultService.cs",
+              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\RoslynResultService.cs",
+              "RelativeDocumentMoniker": "Analyzers\\Services\\RoslynResultService.cs",
+              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\RoslynResultService.cs",
+              "RelativeToolTip": "Analyzers\\Services\\RoslynResultService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAiwD4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T18:58:39.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ArchitectureAnalyzer.cs",
+              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ArchitectureAnalyzer.cs",
+              "RelativeDocumentMoniker": "Analyzers\\Services\\ArchitectureAnalyzer.cs",
+              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ArchitectureAnalyzer.cs",
+              "RelativeToolTip": "Analyzers\\Services\\ArchitectureAnalyzer.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAiwH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T17:05:46.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Core\\Data\\AppDbContext.cs",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Data\\AppDbContext.cs",
               "RelativeToolTip": "Core\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAiwDsAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAAUwEcAAABwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T14:39:10.999Z",
+              "WhenOpened": "2026-04-30T17:02:30.946Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DocumentConverter.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Services\\DocumentConverter.cs",
-              "RelativeDocumentMoniker": "Core\\Services\\DocumentConverter.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Services\\DocumentConverter.cs",
-              "RelativeToolTip": "Core\\Services\\DocumentConverter.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T13:48:04.941Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "LocalRequirementExtractor.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\AI\\Extractors\\LocalRequirementExtractor.cs",
-              "RelativeDocumentMoniker": "AI\\Extractors\\LocalRequirementExtractor.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\AI\\Extractors\\LocalRequirementExtractor.cs",
-              "RelativeToolTip": "AI\\Extractors\\LocalRequirementExtractor.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAowBUAAABcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T10:52:53.671Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProjectValidator.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ProjectValidator.cs",
-              "RelativeDocumentMoniker": "Analyzers\\Services\\ProjectValidator.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ProjectValidator.cs",
-              "RelativeToolTip": "Analyzers\\Services\\ProjectValidator.cs",
-              "ViewState": "AgIAACMBAAAAAAAAAAAcwDsBAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T13:36:04.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "RoslynSyntaxAnalyzer.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\RoslynSyntaxAnalyzer.cs",
-              "RelativeDocumentMoniker": "Analyzers\\Services\\RoslynSyntaxAnalyzer.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\RoslynSyntaxAnalyzer.cs",
-              "RelativeToolTip": "Analyzers\\Services\\RoslynSyntaxAnalyzer.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAowBgAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T11:49:58.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MethodMetrics.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\MethodMetrics.cs",
-              "RelativeDocumentMoniker": "Core\\Models\\MethodMetrics.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\MethodMetrics.cs",
-              "RelativeToolTip": "Core\\Models\\MethodMetrics.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T11:47:50.146Z"
             }
           ]
         }

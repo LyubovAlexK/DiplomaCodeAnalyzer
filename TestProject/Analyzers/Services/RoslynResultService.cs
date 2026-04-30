@@ -21,55 +21,53 @@ namespace Analyzers.Services
         //Сохраняем результаты Roysln-анализа в AuditVerdicts
         public async Task SaveResultsAsync(int sessionId, CodeAnalysisResult result)
         {
-            var verdicts = new List<AuditVerdict>();
-
             foreach (var method in result.Methods)
             {
+                AuditVerdict? verdict = null;
+
                 if (method.CyclomaticComplexity > 10)
                 {
-                    verdicts.Add(new AuditVerdict
+                    verdict = new AuditVerdict
                     {
                         SessionId = sessionId,
-                        RequirementId = 0,
+                        RequirementId = null,
                         IsPassed = false,
                         Reason = $"Цикломатическая сложность: {method.CyclomaticComplexity} (порог: 10). Метод: {method.ClassName}.{method.MethodName}",
                         CodeLocation = $"{method.FilePath}:{method.ClassName}.{method.MethodName}",
-                        AiModel = "Roysln",
+                        AiModel = "Roslyn",
                         Confidence = null
-                    });
+                    };
                 }
-
-                if (method.ExecutableLines > 20)
+                else if (method.ExecutableLines > 20)
                 {
-                    verdicts.Add(new AuditVerdict
+                    verdict = new AuditVerdict
                     {
                         SessionId = sessionId,
-                        RequirementId = 0,
+                        RequirementId = null,
                         IsPassed = false,
                         Reason = $"Исполняемых строк: {method.ExecutableLines} (порог: 20). Метод: {method.ClassName}.{method.MethodName}",
                         CodeLocation = $"{method.FilePath}:{method.ClassName}.{method.MethodName}",
-                        AiModel = "Roysln",
+                        AiModel = "Roslyn",
                         Confidence = null
-                    });
+                    };
                 }
-
-                if (method.NestingDepth > 4)
+                else if (method.NestingDepth > 4)
                 {
-                    verdicts.Add(new AuditVerdict
+                    verdict = new AuditVerdict
                     {
                         SessionId = sessionId,
-                        RequirementId = 0,
+                        RequirementId = null,
                         IsPassed = false,
-                        Reason = $"Глубина вложений: {method.ExecutableLines} (порог: 4). Метод: {method.ClassName}.{method.MethodName}",
+                        Reason = $"Глубина вложенности: {method.NestingDepth} (порог: 4). Метод: {method.ClassName}.{method.MethodName}",
                         CodeLocation = $"{method.FilePath}:{method.ClassName}.{method.MethodName}",
-                        AiModel = "Roysln",
+                        AiModel = "Roslyn",
                         Confidence = null
-                    });
+                    };
                 }
 
-                if (verdicts.Any())
+                if (verdict != null)
                 {
-                    _db.AuditVerdicts.AddRange(verdicts);
+                    _db.AuditVerdicts.Add(verdict);
                     await _db.SaveChangesAsync();
                 }
             }
@@ -89,7 +87,7 @@ namespace Analyzers.Services
                 IsArchived = false
             };
 
-            _db.SessionAnalyses.Add(session);
+            _db.SessionAnalysis.Add(session);
             await _db.SaveChangesAsync();
             return session.SessionId;
         }
@@ -97,7 +95,7 @@ namespace Analyzers.Services
         //Обновляем статус сессии
         public async Task UpdateSessionAsync(int sessionId, CodeAnalysisResult result)
         {
-            var session = await _db.SessionAnalyses.FindAsync(sessionId);
+            var session = await _db.SessionAnalysis.FindAsync(sessionId);
             if (session != null)
             {
                 session.EndTime = DateTime.Now;

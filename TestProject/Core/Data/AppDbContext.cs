@@ -17,7 +17,9 @@ namespace Core.Data
 
         public DbSet<AuditVerdict> AuditVerdicts { get; set; }
 
-        public DbSet<SessionAnalysis> SessionAnalyses { get; set; }
+        public DbSet<SessionAnalysis> SessionAnalysis { get; set; }
+
+        public DbSet<ArchRule> ArchRules { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -59,14 +61,15 @@ namespace Core.Data
             {
                 entity.ToTable("AuditVerdicts");
                 entity.HasKey(e => e.VerdictId);
+                entity.Property(e => e.VerdictId).ValueGeneratedOnAdd();
                 entity.Property(e => e.SessionId).IsRequired();
-                entity.Property(e => e.RequirementId).IsRequired();
+                entity.Property(e => e.RequirementId).IsRequired(false);
                 entity.Property(e => e.IsPassed).IsRequired();
                 entity.Property(e => e.Reason).HasColumnType("nvarchar(max)");
                 entity.Property(e => e.Confidence).HasColumnType("decimal(3,2)");
                 entity.Property(e => e.CodeLocation).HasMaxLength(300);
                 entity.Property(e => e.AiModel).HasMaxLength(50);
-                entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETDATE()");
+                entity.Property(e => e.CreatedAt).ValueGeneratedOnAddOrUpdate().HasDefaultValueSql("GETDATE()");
             });
 
             modelBuilder.Entity<SessionAnalysis>(entity =>
@@ -84,6 +87,19 @@ namespace Core.Data
                 entity.Property(e => e.IsAiAvailable).HasDefaultValue(false);
                 entity.Property(e => e.IsArchived).HasDefaultValue(false);
                 entity.Property(e => e.ArchivedDate).IsRequired(false);
+            });
+
+            modelBuilder.Entity<ArchRule>(entity =>
+            {
+                entity.ToTable("ArchRules");
+                entity.HasKey(e => e.RuleId);
+                entity.Property(e => e.RuleId).ValueGeneratedOnAdd();
+                entity.Property(e => e.ProjectId).IsRequired();
+                entity.Property(e => e.RuleName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.RuleJson).IsRequired().HasColumnType("nvarchar(max)");
+                entity.Property(e => e.CreatedBy).IsRequired();
+                entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETDATE()");
+                entity.Property(e => e.IsActive).HasDefaultValue(true);
             });
         }
     }

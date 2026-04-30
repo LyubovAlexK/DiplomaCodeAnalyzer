@@ -22,7 +22,7 @@ namespace TestProject
     {
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
-        private string projectPath = @"D:\DITI\CsharpProjectTest\BlanckTest";
+        private string projectPath = @"D:\DITI\CsharpProjectTest\EventManagmentApp";
         protected override async void OnStartup(StartupEventArgs e)
         {
             AllocConsole(); //Для анализатора
@@ -69,7 +69,6 @@ namespace TestProject
             Shutdown();
             */
 
-
             //Тестирование анализатора
 
             if (!Directory.Exists(projectPath))
@@ -82,8 +81,7 @@ namespace TestProject
             }
 
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;")
-                .Options;
+                .UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;").Options;
 
             using var db = new AppDbContext(options);
 
@@ -150,10 +148,41 @@ namespace TestProject
             {
                 Console.WriteLine($"  [{v.AiModel}] {(v.IsPassed ? "OK" : "НАРУШЕНИЕ")} | {v.Reason?[..Math.Min(80, v.Reason.Length)]}");
             }
+            // 4. NetArchTest
+            Console.WriteLine("=== NETARCHTEST АНАЛИЗ ===");
 
+
+            var archAnalyzer = new ArchitectureAnalyzer();
+            var rules = archAnalyzer.LoadRules(db, projectId: 1);
+
+            if (!rules.Any())
+            {
+                Console.WriteLine("Нет активных правил в БД. Добавьте правила в ArchRules.");
+            }
+            else
+            {
+                // Путь к .dll проекта стажёра
+                string dllPath = @"D:\DITI\CsharpProjectTest\EventManagmentApp\EventManagmentApp\bin\Debug\net8.0-windows\EventManagmentApp.dll";
+
+                if (File.Exists(dllPath))
+                {
+                    var archViolations = archAnalyzer.Analyze(dllPath, rules);
+
+                    foreach (var v in archViolations)
+                    {
+                        Console.WriteLine($"  [{(v.IsPassed ? "OK" : "НАРУШЕНИЕ")}] {v.RuleName}: {v.Message}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Сборка не найдена: {dllPath}");
+                    Console.WriteLine("Скомпилируйте проект стажёра перед проверкой.");
+                }
+            }
             Console.WriteLine("\nНажмите любую клавишу...");
             Console.ReadKey();
             Shutdown();
+
 
             //Тест для AI
             /*
