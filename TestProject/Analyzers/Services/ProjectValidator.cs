@@ -296,97 +296,6 @@ namespace Analyzers.Services
 
             return false;
         }
-
-        private bool IsEmptyMethod(MethodDeclarationSyntax method)
-        {
-            if (method.Body == null && method.ExpressionBody == null)
-                return true;
-
-            if (method.Body != null)
-            {
-                var statements = method.Body.Statements;
-                return statements.Count == 0;
-            }
-
-            return false;
-        }
-
-        private bool IsNotImplementedMethod(MethodDeclarationSyntax method)
-        {
-            if (method.Body != null)
-            {
-                var statements = method.Body.Statements;
-                if (statements.Count == 1)
-                {
-                    var statement = statements[0].ToString();
-                    return statement.Contains("throw new NotImplementedException()");
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Проверяет, компилируется ли проект.
-        /// Возвращает список ошибок компиляции.
-        /// </summary>
-        public CompilationResult CheckCompilation(string projectPath)
-        {
-            var excludeFolders = new[] { "bin", "obj", "node_modules", ".git", "packages" };
-            var csFiles = Directory.GetFiles(projectPath, "*.cs", SearchOption.AllDirectories)
-                .Where(f => !excludeFolders.Any(ex => f.Contains($"\\{ex}\\") || f.Contains($"/{ex}/")))
-                .ToArray();
-
-            if (csFiles.Length == 0)
-            {
-                return new CompilationResult
-                {
-                    CanCompile = false,
-                    ErrorCount = 1,
-                    Errors = new List<string> { "Нет файлов для компиляции." }
-                };
-            }
-
-            var syntaxTrees = new List<SyntaxTree>();
-            foreach (var file in csFiles)
-            {
-                try
-                {
-                    var sourceCode = File.ReadAllText(file);
-                    syntaxTrees.Add(CSharpSyntaxTree.ParseText(sourceCode));
-                }
-                catch { }
-            }
-
-            // Создаём компиляцию с базовыми ссылками
-            var references = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => !a.IsDynamic && !string.IsNullOrWhiteSpace(a.Location))
-                .Select(a => MetadataReference.CreateFromFile(a.Location))
-                .ToList();
-
-            var compilation = CSharpCompilation.Create(
-                "ProjectCheck",
-                syntaxTrees,
-                references,
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-
-            var diagnostics = compilation.GetDiagnostics()
-                .Where(d => d.Severity == DiagnosticSeverity.Error)
-                .ToList();
-
-            var errors = diagnostics.Select(d =>
-            {
-                var location = d.Location.GetLineSpan();
-                return $"[{location.Path?.Split('\\').Last() ?? "?"}:{location.StartLinePosition.Line + 1}] {d.GetMessage()}";
-            }).ToList();
-
-            return new CompilationResult
-            {
-                CanCompile = errors.Count == 0,
-                ErrorCount = errors.Count,
-                WarningCount = compilation.GetDiagnostics().Count(d => d.Severity == DiagnosticSeverity.Warning),
-                Errors = errors
-            };
-        }
     }
 
     /// <summary>
@@ -404,17 +313,6 @@ namespace Analyzers.Services
         public int TotalFiles { get; set; }
         public int FailLevel { get; set; }
         public double Confidence { get; set; }
-    }
-
-    /// <summary>
-    /// Результат проверки компиляции.
-    /// </summary>
-    public class CompilationResult
-    {
-        public bool CanCompile { get; set; }
-        public int ErrorCount { get; set; }
-        public int WarningCount { get; set; }
-        public List<string> Errors { get; set; } = new();
     }
 }
 

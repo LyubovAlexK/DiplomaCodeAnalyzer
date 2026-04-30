@@ -28,7 +28,7 @@ namespace TestProject
             AllocConsole(); //Для анализатора
             base.OnStartup(e);
 
-            //Загрузка словаря
+            //Тестирование локалки ТЗ
             /*
             string pdfPath = @"..\..\..\..\TechBuild\testTask.docx";
 
@@ -71,165 +71,12 @@ namespace TestProject
 
 
             //Тестирование анализатора
-            /*
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║     ТЕСТ ROSLYN АНАЛИЗАТОРА         ║");
-            Console.WriteLine("╚══════════════════════════════════════╝\n");
 
             if (!Directory.Exists(projectPath))
             {
                 Console.WriteLine($"Папка не найдена: {projectPath}");
+                Console.WriteLine("Создайте тестовый C# проект или укажите другой путь.");
                 Console.ReadKey();
-                Shutdown();
-                return;
-            }
-
-            var loader = new DictionaryLoader(db);
-            string dictPath = @"..\..\..\..\russian-words.txt";
-            int count = await loader.LoadFromFileAsync(dictPath, minLength: 3);
-            Console.WriteLine($"Загружено слов: {count}");
-
-            var analyzer = new RoslynSyntaxAnalyzer();
-
-            Console.WriteLine("Анализируем проект...\n");
-            var result = await analyzer.AnalyzeProjectAsync(projectPath);
-
-            Console.WriteLine($"Проанализировано методов: {result.TotalMethods}\n");
-
-            // Сводка
-            Console.WriteLine("═══════════════════════════════════════");
-            Console.WriteLine("           СВОДКА МЕТРИК              ");
-            Console.WriteLine("═══════════════════════════════════════");
-            Console.WriteLine($"  Всего методов:               {result.TotalMethods,5}");
-            Console.WriteLine($"  Средняя цикломатическая:     {result.AvgCyclomaticComplexity,5:F1}  (норма < 10)");
-            Console.WriteLine($"  Средняя когнитивная:         {result.AvgCognitiveComplexity,5:F1}  (норма < 15)");
-            Console.WriteLine($"  Среднее строк (ELOC):        {result.AvgExecutableLines,5:F1}  (норма < 20)");
-            Console.WriteLine($"  Методов > 10 (CC):           {result.MethodsExceedingComplexity,5} !");
-            Console.WriteLine($"  Методов > 20 (ELOC):         {result.MethodsExceedingLines,5}  !");
-            Console.WriteLine("═══════════════════════════════════════\n");
-
-            if (result.Methods.Count > 0)
-            {
-                // Топ-5 по цикломатической сложности
-                Console.WriteLine("=== ТОП-5 ПО ЦИКЛОМАТИЧЕСКОЙ СЛОЖНОСТИ ===\n");
-                Console.WriteLine($"{"CC",4} {"Когн",4} {"ELOC",4} {"Влож",4} {"Комм%",5}  Метод");
-                Console.WriteLine(new string('─', 75));
-
-                foreach (var m in result.Methods
-                    .OrderByDescending(m => m.CyclomaticComplexity)
-                    .Take(5))
-                {
-                    Console.WriteLine($"{m.CyclomaticComplexity,3}  " +
-                        $"{m.CognitiveComplexity,3}  " +
-                        $"{m.ExecutableLines,3}  " +
-                        $"{m.NestingDepth,3}  " +
-                        $"{m.CommentDensity,4:F0}  " +
-                        $"  {m.ClassName}.{m.MethodName}()");
-                }
-
-                // Топ-5 по когнитивной сложности
-                Console.WriteLine($"\n=== ТОП-5 ПО КОГНИТИВНОЙ СЛОЖНОСТИ ===\n");
-                Console.WriteLine($"{"CC",4} {"Когн",4} {"ELOC",4} {"Влож",4} {"Комм%",5}  Метод");
-                Console.WriteLine(new string('─', 75));
-
-                foreach (var m in result.Methods
-                    .OrderByDescending(m => m.CognitiveComplexity)
-                    .Take(5))
-                {
-                    Console.WriteLine($"{m.CyclomaticComplexity,3}  " +
-                        $"{m.CognitiveComplexity,3}  " +
-                        $"{m.ExecutableLines,3}  " +
-                        $"{m.NestingDepth,3}  " +
-                        $"{m.CommentDensity,4:F0}  " +
-                        $"  {m.ClassName}.{m.MethodName}()");
-                }
-
-                // Распределение цикломатической сложности
-                Console.WriteLine($"\n=== РАСПРЕДЕЛЕНИЕ ЦИКЛОМАТИЧЕСКОЙ СЛОЖНОСТИ ===");
-                Console.WriteLine($"{" 1-5  (отлично):  "}{Bar(result.Methods.Count(m => m.CyclomaticComplexity <= 5), result.TotalMethods)}");
-                Console.WriteLine($"{" 6-10 (норма):    "}{Bar(result.Methods.Count(m => m.CyclomaticComplexity > 5 && m.CyclomaticComplexity <= 10), result.TotalMethods)}");
-                Console.WriteLine($"{"11-20 (сложно):  "}{Bar(result.Methods.Count(m => m.CyclomaticComplexity > 10 && m.CyclomaticComplexity <= 20), result.TotalMethods)}");
-                Console.WriteLine($"{"21+  (критично): "}{Bar(result.Methods.Count(m => m.CyclomaticComplexity > 20), result.TotalMethods)}");
-
-                // Распределение когнитивной сложности
-                Console.WriteLine($"\n=== РАСПРЕДЕЛЕНИЕ КОГНИТИВНОЙ СЛОЖНОСТИ ===");
-                Console.WriteLine($"{" 1-10  (отлично): "}{Bar(result.Methods.Count(m => m.CognitiveComplexity <= 10), result.TotalMethods)}");
-                Console.WriteLine($"{"11-15 (норма):   "}{Bar(result.Methods.Count(m => m.CognitiveComplexity > 10 && m.CognitiveComplexity <= 15), result.TotalMethods)}");
-                Console.WriteLine($"{"16-25 (сложно): "}{Bar(result.Methods.Count(m => m.CognitiveComplexity > 15 && m.CognitiveComplexity <= 25), result.TotalMethods)}");
-                Console.WriteLine($"{"26+  (критично):"}{Bar(result.Methods.Count(m => m.CognitiveComplexity > 25), result.TotalMethods)}");
-
-                // Список всех методов
-                Console.WriteLine($"\n=== ВСЕ МЕТОДЫ ({result.TotalMethods} шт.) ===\n");
-                Console.WriteLine($"{"CC",4} {"Когн",4} {"ELOC",4} {"Влож",4} {"Комм%",5}  Метод");
-                Console.WriteLine(new string('─', 75));
-
-                foreach (var m in result.Methods.OrderBy(m => m.ClassName).ThenBy(m => m.MethodName))
-                {
-                    string flags = "";
-                    if (m.CyclomaticComplexity > 10) flags += "CC ";
-                    if (m.CognitiveComplexity > 15) flags += "Когн ";
-                    if (m.ExecutableLines > 20) flags += "ELOC ";
-
-                    Console.WriteLine($"{m.CyclomaticComplexity,3}  " +
-                        $"{m.CognitiveComplexity,3}  " +
-                        $"{m.ExecutableLines,3}  " +
-                        $"{m.NestingDepth,3}  " +
-                        $"{m.CommentDensity,4:F0}  " +
-                        $"  {m.ClassName}.{m.MethodName}()" +
-                        (flags.Length > 0 ? $"  [{flags.Trim()}]" : ""));
-                }
-            }
-
-            // Проверка на пустой проект
-            Console.WriteLine("=== ПРОВЕРКА НА ПУСТОЙ ПРОЕКТ ===\n");
-            var validator = new ProjectValidator();
-            var emptyResult = validator.CheckIfEmpty(projectPath);
-
-            Console.WriteLine($"Пустой проект: {(emptyResult.IsEmpty ? "ДА" : "НЕТ")}");
-            Console.WriteLine($"Уровень срабатывания: {emptyResult.FailLevel}");
-            Console.WriteLine($"Причина: {emptyResult.Reason}");
-            Console.WriteLine($"Файлов: {emptyResult.TotalFiles}");
-            Console.WriteLine($"Классов: {emptyResult.TotalClasses} (пользовательских: {emptyResult.UserClasses})");
-            Console.WriteLine($"Методов: {emptyResult.TotalMethods} (значимых: {emptyResult.MeaningfulMethods})");
-            Console.WriteLine($"Совпадений с шаблонами: {emptyResult.TemplateMatches}");
-            Console.WriteLine($"Уверенность: {emptyResult.Confidence:P0}\n");
-
-            // Проверка компиляции
-            Console.WriteLine("=== ПРОВЕРКА КОМПИЛЯЦИИ ===\n");
-            var compResult = validator.CheckCompilation(projectPath);
-
-            Console.WriteLine($"Компилируется: {(compResult.CanCompile ? "ДА" : "НЕТ")}");
-            Console.WriteLine($"Ошибок: {compResult.ErrorCount}, Предупреждений: {compResult.WarningCount}");
-
-            if (compResult.Errors.Count > 0)
-            {
-                Console.WriteLine($"\nПервые 10 ошибок:");
-                foreach (var err in compResult.Errors.Take(10))
-                {
-                    Console.WriteLine($" {err}");
-                }
-            }
-
-            Console.WriteLine("\nНажмите любую клавишу для выхода...");
-            Console.ReadKey();
-            Shutdown();
-        }
-
-        private static string Bar(int count, int total)
-        {
-            if (total == 0) return "";
-            int width = (int)((double)count / total * 20);
-            return new string('█', width) + $" {count}";
-        //}
-        */
-
-            //Тест для локалки
-            /*
-            string pdfPath = @"..\..\..\..\TechBuild\testTask.pdf";
-
-            if (!File.Exists(pdfPath))
-            {
-                Console.WriteLine("Файл не найден");
                 Shutdown();
                 return;
             }
@@ -239,35 +86,77 @@ namespace TestProject
                 .Options;
 
             using var db = new AppDbContext(options);
-            var dictService = new DictionaryService(db);
-            var factory = new ExtractorFactory(dict: dictService);
-            var extractor = factory.Create(isOnline: false);
 
-            try
+            // 1. Проверка проекта на пустоту
+            var validator = new ProjectValidator();
+            var emptyCheck = validator.CheckIfEmpty(projectPath);
+
+            Console.WriteLine("=== ПРОВЕРКА ПРОЕКТА ===");
+            Console.WriteLine($"Проект пустой: {emptyCheck.IsEmpty}");
+            Console.WriteLine($"Причина: {emptyCheck.Reason}");
+            Console.WriteLine($"Уверенность: {emptyCheck.Confidence}");
+            Console.WriteLine($"Классов: {emptyCheck.TotalClasses}");
+            Console.WriteLine($"Методов: {emptyCheck.TotalMethods}");
+            Console.WriteLine($"Осмысленных методов: {emptyCheck.MeaningfulMethods}");
+            Console.WriteLine();
+
+            if (emptyCheck.IsEmpty)
             {
-                // 10 и AI, и локалка
-                var specification = await extractor.ExtractAsync(pdfPath, specificationId: 10);
-
-                Console.WriteLine($"ЛОКАЛЬНЫЙ АНАЛИЗ: {specification.Requirements.Count} требований\n");
-
-                foreach (var req in specification.Requirements)
-                {
-                    Console.WriteLine($"[{req.RequirementType}] {req.Severity} | {req.Title}");
-                    if (req.MetricName != null)
-                        Console.WriteLine($"   Metric: {req.MetricName} (порог: {req.Threshold?.ToString() ?? "нет"})");
-                }
+                Console.WriteLine("Проект пустой — анализ не требуется.");
+                Console.ReadKey();
+                Shutdown();
+                return;
             }
-            catch (Exception ex)
+
+            // 2. Анализ Roslyn
+            var roslynAnalyzer = new RoslynSyntaxAnalyzer();
+            var result = await roslynAnalyzer.AnalyzeProjectAsync(projectPath);
+
+            Console.WriteLine("=== ROSLYN АНАЛИЗ ===");
+            Console.WriteLine($"Всего методов: {result.TotalMethods}");
+            Console.WriteLine($"Средняя цикломатическая сложность: {result.AvgCyclomaticComplexity:F2}");
+            Console.WriteLine($"Средняя когнитивная сложность: {result.AvgCognitiveComplexity:F2}");
+            Console.WriteLine($"Среднее исполняемых строк: {result.AvgExecutableLines:F2}");
+            Console.WriteLine($"Методов с превышением сложности (>10): {result.MethodsExceedingComplexity}");
+            Console.WriteLine($"Методов с превышением строк (>20): {result.MethodsExceedingLines}");
+            Console.WriteLine();
+
+            // 3. Сохраняем в БД
+            var roslynService = new RoslynResultService(db);
+
+            // Создаём сессию (заглушка: TraineeId=1, ProjectId=1, SpecificationId=4)
+            int sessionId = await roslynService.CreateSessionAsync(
+                traineeId: 1,
+                projectId: 1,
+                specificationId: 4,
+                isAiAvailable: false);
+
+            // Сохраняем нарушения
+            await roslynService.SaveResultsAsync(sessionId, result);
+
+            // Обновляем сессию
+            await roslynService.UpdateSessionAsync(sessionId, result);
+
+            Console.WriteLine($"=== СОХРАНЕНО В БД ===");
+            Console.WriteLine($"SessionId: {sessionId}");
+
+            // Проверяем, что сохранилось
+            var savedVerdicts = await db.AuditVerdicts
+                .Where(v => v.SessionId == sessionId)
+                .ToListAsync();
+
+            Console.WriteLine($"Вердиктов сохранено: {savedVerdicts.Count}");
+            foreach (var v in savedVerdicts)
             {
-                Console.WriteLine($"Ошибка: {ex.Message}");
+                Console.WriteLine($"  [{v.AiModel}] {(v.IsPassed ? "OK" : "НАРУШЕНИЕ")} | {v.Reason?[..Math.Min(80, v.Reason.Length)]}");
             }
 
             Console.WriteLine("\nНажмите любую клавишу...");
             Console.ReadKey();
             Shutdown();
-            */
-            //Тест для AI
 
+            //Тест для AI
+            /*
             string filePath = @"..\..\..\..\TechBuild\csharp.docx";
 
             if (!File.Exists(filePath))
@@ -311,6 +200,7 @@ namespace TestProject
             Console.WriteLine("\nНажмите любую клавишу...");
             Console.ReadKey();
             Shutdown();
+            */
         }
     }
 }
