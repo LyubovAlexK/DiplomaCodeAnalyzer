@@ -22,7 +22,7 @@ namespace TestProject
     {
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
-        private string projectPath = @"D:\DITI\CsharpProjectTest\EventManagmentApp";
+        private string projectPath = @"D:\DITI\CsharpProjectTest\FakeProject";
         protected override async void OnStartup(StartupEventArgs e)
         {
             AllocConsole(); //Для анализатора
@@ -162,7 +162,7 @@ namespace TestProject
             else
             {
                 // Путь к .dll проекта стажёра
-                string dllPath = @"D:\DITI\CsharpProjectTest\EventManagmentApp\EventManagmentApp\bin\Debug\net8.0-windows\EventManagmentApp.dll";
+                string dllPath = @"D:\DITI\CsharpProjectTest\FakeProject\FakeProject\bin\Debug\net8.0\FakeProject.dll";
 
                 if (File.Exists(dllPath))
                 {
@@ -178,6 +178,11 @@ namespace TestProject
                     Console.WriteLine($"Сборка не найдена: {dllPath}");
                     Console.WriteLine("Скомпилируйте проект стажёра перед проверкой.");
                 }
+                // Сохраняем нарушения NetArchTest в БД
+                var netArchViolations = archAnalyzer.Analyze(dllPath, rules);
+                await roslynService.SaveNetArchResultsAsync(sessionId, netArchViolations);
+
+                Console.WriteLine($"NetArchTest: сохранено {netArchViolations.Count(v => !v.IsPassed)} нарушений");
             }
             Console.WriteLine("\nНажмите любую клавишу...");
             Console.ReadKey();

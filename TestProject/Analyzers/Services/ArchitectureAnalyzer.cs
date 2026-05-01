@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Reflection;
-using System.Runtime.Loader;
 using Core.Models;
 
 namespace Analyzers.Services;
@@ -35,9 +34,21 @@ public class ArchitectureAnalyzer
 
         try
         {
-            // Загружаем только для чтения метаданных
-            var assembly = Assembly.ReflectionOnlyLoadFrom(dllPath);
-            var types = assembly.GetTypes();
+            var assembly = Assembly.LoadFrom(dllPath);
+            Type[] types;
+
+            try
+            {
+                types = assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                types = ex.Types.Where(t => t != null).ToArray()!;
+            }
+
+            Console.WriteLine($"Загружено типов: {types.Length}");
+            foreach (var t in types)
+                Console.WriteLine($"  {t.Namespace}.{t.Name}");
 
             foreach (var rule in rules)
             {
@@ -74,35 +85,6 @@ public class ArchitectureAnalyzer
                 }
             }
         }
-        catch (ReflectionTypeLoadException ex)
-        {
-            // Пробуем загрузить типы, которые загрузились
-            var types = ex.Types.Where(t => t != null).ToArray()!;
-
-            foreach (var rule in rules)
-            {
-                if (rule.RuleJson.Contains("namespace"))
-                {
-                    var parts = rule.RuleJson.Split(';');
-                    var sourceNs = parts[0].Replace("namespace:", "").Trim();
-                    var forbiddenNs = parts.Length > 1 ? parts[1].Replace("forbidden:", "").Trim() : null;
-
-                    var sourceTypes = types
-                        .Where(t => t.Namespace?.StartsWith(sourceNs) == true)
-                        .ToList();
-
-                    if (forbiddenNs != null && sourceTypes.Any())
-                    {
-                        violations.Add(new ArchViolation
-                        {
-                            RuleName = rule.RuleName,
-                            Message = $"Проверено {sourceTypes.Count} типов в {sourceNs}",
-                            IsPassed = true
-                        });
-                    }
-                }
-            }
-        }
         catch (Exception ex)
         {
             violations.Add(new ArchViolation
@@ -126,7 +108,6 @@ public class ArchitectureAnalyzer
         return violations;
     }
 
-    //Загружаем активные правила для проекта
     public List<ArchRule> LoadRules(Core.Data.AppDbContext db, int projectId)
     {
         return db.ArchRules
@@ -134,42 +115,29 @@ public class ArchitectureAnalyzer
             .ToList();
     }
 
-    //Получаем все типы, на которые ссылается данный тип (поля, свойства, методы).
     private static IEnumerable<Type> GetReferencedTypes(Type type)
+    {
+        var referencedTypes = new HashSet<Type>();
+
+        foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+            referencedTypes.Add(field.FieldType);
+
+        foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+            referencedTypes.Add(prop.PropertyType);
+
+        foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
         {
-            var referencedTypes = new HashSet<Type>();
-
-            // Поля
-            foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
-            {
-                referencedTypes.Add(field.FieldType);
-            }
-
-            // Свойства
-            foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
-            {
-                referencedTypes.Add(prop.PropertyType);
-            }
-
-            // Параметры методов
-            foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
-            {
-                referencedTypes.Add(method.ReturnType);
-                foreach (var param in method.GetParameters())
-                {
-                    referencedTypes.Add(param.ParameterType);
-                }
-            }
-
-            // Базовый тип
-            if (type.BaseType != null && type.BaseType != typeof(object))
-            {
-                referencedTypes.Add(type.BaseType);
-            }
-
-            return referencedTypes;
+            referencedTypes.Add(method.ReturnType);
+            foreach (var param in method.GetParameters())
+                referencedTypes.Add(param.ParameterType);
         }
+
+        if (type.BaseType != null && type.BaseType != typeof(object))
+            referencedTypes.Add(type.BaseType);
+
+        return referencedTypes;
     }
+}
 
 public class ArchViolation
 {
@@ -177,5 +145,3 @@ public class ArchViolation
     public string Message { get; set; } = string.Empty;
     public bool IsPassed { get; set; }
 }
-    
-

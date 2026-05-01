@@ -103,5 +103,24 @@ namespace Analyzers.Services
                 await _db.SaveChangesAsync();
             }
         }
+
+        //Сохраняем результаты в AuditVerdict
+        public async Task SaveNetArchResultsAsync(int sessionId, List<ArchViolation> violations)
+        {
+            foreach (var v in violations.Where(v => !v.IsPassed))
+            {
+                var verdict = new AuditVerdict
+                {
+                    SessionId = sessionId,
+                    RequirementId = null,
+                    IsPassed = false,
+                    Reason = $"[{v.RuleName}] {v.Message}",
+                    AiModel = "NetArchTest",
+                    Confidence = null
+                };
+                _db.AuditVerdicts.Add(verdict);
+                await _db.SaveChangesAsync();
+            }
+        }
     }
 }

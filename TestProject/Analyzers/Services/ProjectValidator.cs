@@ -87,7 +87,10 @@ namespace Analyzers.Services
                         templateMatches++;
 
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Ошибка в файле {file}: {ex.Message}");
+                }
             }
 
             // ===== Принятие решения =====
@@ -202,7 +205,7 @@ namespace Analyzers.Services
                 if (statements.Count == 1)
                 {
                     var text = statements[0].ToString();
-                    if (text.Contains("InitializeComponent()") && method.Identifier.Text == method.Identifier.Text)
+                    if (text.Contains("InitializeComponent()"))
                     {
                         // Проверяем, есть ли другие методы в классе с логикой
                         var parentClass = method.Ancestors().OfType<ClassDeclarationSyntax>().FirstOrDefault();
@@ -216,6 +219,28 @@ namespace Analyzers.Services
                         return false; // Только конструктор с InitializeComponent
                     }
                     if (text.Contains("base.") && statements[0] is ExpressionStatementSyntax)
+                        return false;
+                }
+
+                //Методы с одим простым оператором - не значимые
+                if (statements.Count == 1)
+                {
+                    var text = statements[0].ToString();
+
+                    //Проверка на throw new NotImplementedException
+                    if (text.Contains("throw new NotImplementedException"))
+                        return false;
+
+                    //Проверка на пустой return
+                    if (text.Trim()== "return;")
+                        return false;
+
+                    //Проверка на инкремент/декремент в одну строку без использования результата
+                    if (text.Trim().EndsWith("++;") || text.Trim().EndsWith("--;"))
+                        return false;
+
+                    //Проверка на присваивание без использования
+                    if (text.Contains("=") && !text.Contains("+=") && !text.Contains("-="))
                         return false;
                 }
 
