@@ -28,6 +28,12 @@ public class GigaChatExtractor : IRequirementExtractor
         _scope = scope;
     }
 
+    public async Task<string> GetAccessTokenAsync()
+    {
+        await EnsureTokenAsync();
+        return _accessToken!;
+    }
+
     public async Task<ProjectSpecification> ExtractAsync(string filePath, int specificationId = 0)
     {
         string text = TextExtractor.ExtractText(filePath);

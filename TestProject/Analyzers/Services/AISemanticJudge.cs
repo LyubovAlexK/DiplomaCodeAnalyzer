@@ -1,7 +1,7 @@
-﻿using Core.Data;
+﻿using Azure.Core;
+using Core.Data;
 using Core.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +17,14 @@ namespace Analyzers.Services
     public class AISemanticJudge
     {
         private readonly AppDbContext _db;
-        private readonly string _authKey;
-        private string? _accessToken;
-        private DateTime _tokenExpiresAt =  DateTime.MinValue;
+        private readonly string _accessToken;
 
-        private const string OAuthUrl = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth";
         private const string ApiUrl = "https://gigachat.devices.sberbank.ru/api/v1";
 
-        public AISemanticJudge(AppDbContext db, string  authKey)
+        public AISemanticJudge(AppDbContext db, string accessToken)
         {
             _db = db;
-            _authKey = authKey;
+            _accessToken = accessToken;
         }
 
         //Проверка всех функциональных требований в рамках сессии
@@ -109,7 +106,6 @@ namespace Analyzers.Services
 
         private async Task<(bool IsPassed, string Reason, decimal Confidence)> SendToGigaChat(string systemPrompt, string userPrompt)
         {
-            await EnsureTokenAsync();
 
             var handler = new HttpClientHandler
             {
@@ -149,31 +145,6 @@ namespace Analyzers.Services
                 verdict.GetProperty("Reason").GetString() ?? "",
                 verdict.GetProperty("Confidence").GetDecimal()
             );
-        }
-
-        private async Task EnsureTokenAsync()
-        {
-            if (!string.IsNullOrEmpty(_accessToken) && DateTime.Now < _tokenExpiresAt)
-                return;
-
-            var handler = new HttpClientHandler
-            {
-                ServerCertificateCustomValidationCallback = (_, _, _, _) => true,
-                SslProtocols = System.Security.Authentication.SslProtocols.Tls12
-            };
-
-            using var client = new HttpClient(handler);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _authKey);
-
-            var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("scope", "GIGACHAT_API_PERS") });
-            var response = await client.PostAsync(OAuthUrl, content);
-            var body = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"Ошибка токена: {response.StatusCode}");
-
-            _accessToken = JsonDocument.Parse(body).RootElement.GetProperty("access_token").GetString();
-            _tokenExpiresAt = DateTime.Now.AddMinutes(25);
         }
     }
 }
