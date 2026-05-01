@@ -22,7 +22,7 @@ namespace TestProject
     {
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
-        private string projectPath = @"D:\DITI\CsharpProjectTest\FakeProject";
+        private string projectPath = @"D:\DITI\CsharpProjectTest\EventManagmentApp";
         protected override async void OnStartup(StartupEventArgs e)
         {
             AllocConsole(); //Для анализатора
@@ -162,7 +162,7 @@ namespace TestProject
             else
             {
                 // Путь к .dll проекта стажёра
-                string dllPath = @"D:\DITI\CsharpProjectTest\FakeProject\FakeProject\bin\Debug\net8.0\FakeProject.dll";
+                string dllPath = @"D:\DITI\CsharpProjectTest\EventManagmentApp\EventManagmentApp\bin\Debug\net8.0-windows\EventManagmentApp.dll";
 
                 if (File.Exists(dllPath))
                 {
@@ -184,6 +184,33 @@ namespace TestProject
 
                 Console.WriteLine($"NetArchTest: сохранено {netArchViolations.Count(v => !v.IsPassed)} нарушений");
             }
+
+            // 5. AI Judge
+            Console.WriteLine("=== AI JUDGE ===");
+
+            string apiKey = "MDE5ZGQ0NmEtYzcxYi03ZDY2LThhYTAtNDZmOTZhMTY5ZGFiOjFhN2UxZGMyLTY0ODktNDE4Ni1hZmI4LTA1NzExMDQ0OTk4OA==";
+
+            var aiJudge = new AISemanticJudge(db, apiKey);
+
+            // Собираем код стажёра для проверки
+            var allCode = string.Join("\n", Directory.GetFiles(projectPath, "*.cs", SearchOption.AllDirectories)
+                .Where(f => !f.Contains("\\bin\\") && !f.Contains("\\obj\\"))
+                .Select(f => File.ReadAllText(f)));
+
+            Console.WriteLine($"Отправляем {allCode.Length} символов кода в GigaChat...");
+            await aiJudge.JudgeAsync(sessionId, specificationId: 4, allCode);
+
+            // Проверяем AI-вердикты
+            var aiVerdicts = await db.AuditVerdicts
+                .Where(v => v.SessionId == sessionId && v.AiModel == "GigaChat")
+                .ToListAsync();
+
+            Console.WriteLine($"AI вердиктов: {aiVerdicts.Count}");
+            foreach (var v in aiVerdicts)
+            {
+                Console.WriteLine($"  [{(v.IsPassed ? "OK" : "НАРУШЕНИЕ")}] {v.Reason?[..Math.Min(100, v.Reason?.Length ?? 0)]}");
+            }
+
             Console.WriteLine("\nНажмите любую клавишу...");
             Console.ReadKey();
             Shutdown();

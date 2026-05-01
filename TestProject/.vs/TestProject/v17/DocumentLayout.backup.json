@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\DITI\\Diploma_app\\TestProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\projectvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\projectvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{407E2A56-4062-4F89-843E-46297FCD8878}|TestProject\\TestProject.csproj|d:\\diti\\diploma_app\\testproject\\testproject\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{407E2A56-4062-4F89-843E-46297FCD8878}|TestProject\\TestProject.csproj|solutionrelative:testproject\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\aisemanticjudge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\aisemanticjudge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\projectvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\projectvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\architectureanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,11 +46,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\App.xaml",
               "RelativeDocumentMoniker": "TestProject\\App.xaml",
@@ -58,13 +62,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\App.xaml.cs",
               "RelativeDocumentMoniker": "TestProject\\App.xaml.cs",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\App.xaml.cs",
               "RelativeToolTip": "TestProject\\App.xaml.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAUwKAAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAiwBgAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-26T20:03:17.594Z",
               "IsPinned": true,
@@ -72,7 +76,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "TestProject.csproj",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\TestProject.csproj",
               "RelativeDocumentMoniker": "TestProject\\TestProject.csproj",
@@ -89,20 +93,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "AISemanticJudge.cs",
+              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\AISemanticJudge.cs",
+              "RelativeDocumentMoniker": "Analyzers\\Services\\AISemanticJudge.cs",
+              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\AISemanticJudge.cs",
+              "RelativeToolTip": "Analyzers\\Services\\AISemanticJudge.cs",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAiwK8AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T17:43:20.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ProjectValidator.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ProjectValidator.cs",
               "RelativeDocumentMoniker": "Analyzers\\Services\\ProjectValidator.cs",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ProjectValidator.cs",
               "RelativeToolTip": "Analyzers\\Services\\ProjectValidator.cs",
-              "ViewState": "AgIAAEgBAAAAAAAAAAA9wFcBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEkBAAAAAAAAAAAowFcBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-01T15:52:18.483Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "AuditVerdict.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\AuditVerdict.cs",
               "RelativeDocumentMoniker": "Core\\Models\\AuditVerdict.cs",
@@ -114,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "RoslynResultService.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\RoslynResultService.cs",
               "RelativeDocumentMoniker": "Analyzers\\Services\\RoslynResultService.cs",
@@ -122,12 +139,11 @@
               "RelativeToolTip": "Analyzers\\Services\\RoslynResultService.cs",
               "ViewState": "AgIAAHAAAAAAAAAAAAAcwHoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T18:58:39.952Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-30T18:58:39.952Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ArchitectureAnalyzer.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\ArchitectureAnalyzer.cs",
               "RelativeDocumentMoniker": "Analyzers\\Services\\ArchitectureAnalyzer.cs",
@@ -135,12 +151,11 @@
               "RelativeToolTip": "Analyzers\\Services\\ArchitectureAnalyzer.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAAgwDIAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T17:05:46.421Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-30T17:05:46.421Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Core\\Data\\AppDbContext.cs",
