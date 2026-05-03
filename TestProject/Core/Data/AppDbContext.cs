@@ -21,6 +21,10 @@ namespace Core.Data
 
         public DbSet<ArchRule> ArchRules { get; set; }
 
+        public DbSet<ReferenceProject> ReferenceProjects { get; set; }
+
+        public DbSet<ReferenceRule> ReferenceRules { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -100,6 +104,38 @@ namespace Core.Data
                 entity.Property(e => e.CreatedBy).IsRequired();
                 entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETDATE()");
                 entity.Property(e => e.IsActive).HasDefaultValue(true);
+            });
+
+            modelBuilder.Entity<ReferenceProject>(entity =>
+            {
+                entity.ToTable("ReferenceProjects");
+                entity.HasKey(e => e.ReferenceId);
+                entity.Property(e => e.ReferenceId).ValueGeneratedOnAdd();
+                entity.Property(e => e.SpecificationId).IsRequired();
+                entity.Property(e => e.ProjectPath).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.ExtractedJson).HasColumnType("nvarchar(max)");
+                entity.Property(e => e.TotalClasses).IsRequired(false);
+                entity.Property(e => e.TotalMethods).IsRequired(false);
+                entity.Property(e => e.AvgCyclomaticComplexity).HasColumnType("decimal(5,2)");
+                entity.Property(e => e.AvgCognitiveComplexity).HasColumnType("decimal(5,2)");
+                entity.Property(e => e.AvgExecutableLines).HasColumnType("decimal(5,2)");
+                entity.Property(e => e.MethodsExceedingComplexity).IsRequired(false);
+                entity.Property(e => e.MethodsExceedingLines).IsRequired(false);
+                entity.Property(e => e.AnalyzedAt).HasDefaultValueSql("GETDATE()");
+                entity.Property(e => e.IsActive).HasDefaultValue(true);
+            });
+
+            modelBuilder.Entity<ReferenceRule>(entity =>
+            {
+                entity.ToTable("ReferenceRules");
+                entity.HasKey(e => e.RuleId);
+                entity.Property(e => e.RuleId).ValueGeneratedOnAdd();
+                entity.Property(e => e.ReferenceId).IsRequired().ValueGeneratedNever();
+                entity.Property(e => e.MetricName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.IsEnabled).HasDefaultValue(true);
+                entity.Property(e => e.ThresholdType).HasMaxLength(20).HasDefaultValue("Range");
+                entity.Property(e => e.ThresholdValue).HasColumnType("decimal(10,2)").IsRequired(false);
+                entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETDATE()");
             });
         }
     }

@@ -97,7 +97,7 @@ public partial class App : Application
         {
             Console.WriteLine($"  [{req.RequirementType}] {req.Severity} | {req.Title}");
         }
-
+        
         // =========================================
         // ЭТАП 2: АНАЛИЗ КОДА (МОДУЛИ 4-5-6)
         // =========================================
@@ -143,6 +143,21 @@ public partial class App : Application
         Console.WriteLine($"Превышений строк: {roslynResult.MethodsExceedingLines}");
         await roslynService.SaveResultsAsync(sessionId, roslynResult);
         Console.WriteLine("Сохранено в БД.\n");
+
+        // =========================================
+        // ЭТАП 1.5: ЗАГРУЗКА ЭТАЛОННОГО ПРОЕКТА
+        // =========================================
+        Console.WriteLine("--- ЭТАЛОННЫЙ ПРОЕКТ ---");
+
+        string referencePath = @"D:\DITI\CsharpProjectTest\MovieDatabase\IFN664 Assignment"; // путь к эталону
+        var referenceService = new ReferenceService(db);
+
+        // Анализируем эталон
+        var referenceResult = await roslynAnalyzer.AnalyzeProjectAsync(referencePath);
+        int referenceId = await referenceService.SaveReferenceAsync(specificationId, referencePath, referenceResult);
+        Console.WriteLine($"Эталон сохранён. ReferenceId: {referenceId}");
+        Console.WriteLine($"  Методов: {referenceResult.TotalMethods}");
+        Console.WriteLine($"  Средняя сложность: {referenceResult.AvgCyclomaticComplexity:F1}\n");
 
         // --- NetArchTest ---
         Console.WriteLine("--- NETARCHTEST ---");
@@ -190,6 +205,19 @@ public partial class App : Application
 
         // Обновляем сессию
         await roslynService.UpdateSessionAsync(sessionId, roslynResult);
+
+        // --- Сравнение с эталоном ---
+        Console.WriteLine("--- СРАВНЕНИЕ С ЭТАЛОНОМ ---");
+        var comparisonResult = await referenceService.CompareWithReference(referenceId, roslynResult);
+        if (comparisonResult.Any())
+        {
+            foreach (var v in comparisonResult)
+                Console.WriteLine($"{v}");
+        }
+        else
+        {
+            Console.WriteLine("Все показатели в пределах эталонных.");
+        }
 
         // =========================================
         // ИТОГИ

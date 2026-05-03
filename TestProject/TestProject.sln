@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Git", "Git\Git.csproj", "{0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbirSoftCodeAnalyzer", "SimbirSoftCodeAnalyzer\SimbirSoftCodeAnalyzer.csproj", "{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
