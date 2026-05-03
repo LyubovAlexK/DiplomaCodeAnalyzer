@@ -7,7 +7,6 @@ D:\DITI\Diploma_app\TestProject\Core\obj\Debug\net8.0-windows\Core.GeneratedMSBu
 D:\DITI\Diploma_app\TestProject\Core\obj\Debug\net8.0-windows\Core.AssemblyInfoInputs.cache
 D:\DITI\Diploma_app\TestProject\Core\obj\Debug\net8.0-windows\Core.AssemblyInfo.cs
 D:\DITI\Diploma_app\TestProject\Core\obj\Debug\net8.0-windows\Core.csproj.CoreCompileInputs.cache
-D:\DITI\Diploma_app\TestProject\Core\obj\Debug\net8.0-windows\Core.sourcelink.json
 D:\DITI\Diploma_app\TestProject\Core\obj\Debug\net8.0-windows\Core.dll
 D:\DITI\Diploma_app\TestProject\Core\obj\Debug\net8.0-windows\refint\Core.dll
 D:\DITI\Diploma_app\TestProject\Core\obj\Debug\net8.0-windows\Core.pdb

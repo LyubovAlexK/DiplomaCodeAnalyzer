@@ -1,0 +1,147 @@
+﻿<Window x:Class="SimbirSoftCodeAnalyzer.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SimbirSoftCodeAnalyzer.Views"
+        Title="SimbirSoft Code Analyzer"
+        MinHeight="700" MinWidth="1000"
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <MediaElement x:Name="BackgroundVideo"
+              Source="Resources/Images/login-background.mp4"
+              LoadedBehavior="Manual"
+              UnloadedBehavior="Stop"
+              Stretch="Fill"
+              IsMuted="True"
+              IsHitTestVisible="False"
+              Focusable="False"
+              ScrubbingEnabled="True"
+              Loaded="BackgroundVideo_Loaded"
+              MediaEnded="BackgroundVideo_MediaEnded">
+            <MediaElement.LayoutTransform>
+                <RotateTransform Angle="90"/>
+            </MediaElement.LayoutTransform>
+        </MediaElement>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
+                <Image Source="/Resources/Images/logo-simbirsoft.png"
+                       Width="80"
+                       Height="80"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,12"/>  
+                <TextBlock Text="SimbirSoft"
+                           Style="{StaticResource H2Text}"
+                           Foreground="{DynamicResource DarkTextBrush}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="Анализатор кода"
+                           Style="{StaticResource H2Text}"
+                           Foreground="{DynamicResource DarkTextBrush}"
+                           HorizontalAlignment="Center"/>   
+            </StackPanel>
+            <Border
+                    CornerRadius="16"
+                    Width="420"
+                    Padding="40">
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity="0.9"/>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" ShadowDepth="4" Opacity="0.12" Color="Black"/>
+                </Border.Effect>
+
+                <StackPanel>
+                    <TextBlock Text="Добро пожаловать"
+                               FontSize="28"
+                               FontFamily="Inter"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource DarkTextBrush}"
+                               Margin="0,0,0,5"/>
+                    <TextBlock Text="Войдите в систему, чтобы продолжить"
+                               FontSize="14"
+                               FontFamily="Inter"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               Margin="0,0,0,30"/>
+                    <TextBlock Text="Логин"
+                               FontSize="13"
+                               FontFamily="Inter"
+                               FontWeight="Medium"
+                               Foreground="{DynamicResource DarkTextBrush}"
+                               Margin="0,0,0,6"/>
+                    <Border Background="#F6F8F9"
+                            CornerRadius="10"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            Padding="14,10"
+                            Margin="0,0,0,20">
+                        <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="15"
+                                 FontFamily="Inter"
+                                 Foreground="{DynamicResource DarkTextBrush}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="Пароль"
+                               FontSize="13"
+                               FontFamily="Inter"
+                               FontWeight="Medium"
+                               Foreground="{DynamicResource DarkTextBrush}"
+                               Margin="0,0,0,6"/>
+                    <Border Background="#F6F8F9"
+                            CornerRadius="10"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            Padding="14,10"
+                            Margin="0,0,0,12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <PasswordBox x:Name="PasswordBox"
+                                         FontSize="15"
+                                         FontFamily="Inter"
+                                         Foreground="{DynamicResource DarkTextBrush}"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         VerticalAlignment="Center"
+                                         PasswordChanged="PasswordBox_PasswordChanged"/>
+                            <TextBox x:Name="PasswordTextBox"
+                                     FontSize="15"
+                                     FontFamily="Inter"
+                                     Foreground="{DynamicResource DarkTextBrush}"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="1"
+                                       x:Name="EyeIcon"
+                                       Text="👁"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       Cursor="Hand"
+                                       Opacity="0.4"
+                                       MouseLeftButtonDown="EyeIcon_MouseLeftButtonDown"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Text="{Binding ErrorMessage}"
+                               FontSize="13"
+                               FontFamily="Inter"
+                               Foreground="{DynamicResource DangerBrush}"
+                               Margin="0,0,0,15"
+                               Visibility="{Binding IsErrorVisible}"/>
+                    <Button Content="Войти"
+                            Style="{StaticResource PrimaryButton}"
+                            Command="{Binding LoginCommand}"
+                            IsEnabled="{Binding IsButtonEnabled}"
+                            HorizontalAlignment="Stretch"
+                            Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

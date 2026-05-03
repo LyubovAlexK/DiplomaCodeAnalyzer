@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="SimbirSoftCodeAnalyzer.Views.Pages.Admin.AdminHomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="Transparent">
+        <TextBlock Text="Главная — Администратор"
+                   Style="{StaticResource H1Text}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

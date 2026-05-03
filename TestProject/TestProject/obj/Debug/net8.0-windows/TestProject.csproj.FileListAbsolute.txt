@@ -5,6 +5,7 @@ D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\TestProject
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\TestProject.pdb
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Azure.Core.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Azure.Identity.dll
+D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\BCrypt.Net-Next.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Catalyst.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\Catalyst.Models.Russian.dll
 D:\DITI\Diploma_app\TestProject\TestProject\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.dll
@@ -200,7 +201,6 @@ D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.AssemblyInfoInputs.cache
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.AssemblyInfo.cs
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.csproj.CoreCompileInputs.cache
-D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.sourcelink.json
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProj.121896E9.Up2Date
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\TestProject.dll
 D:\DITI\Diploma_app\TestProject\TestProject\obj\Debug\net8.0-windows\refint\TestProject.dll
