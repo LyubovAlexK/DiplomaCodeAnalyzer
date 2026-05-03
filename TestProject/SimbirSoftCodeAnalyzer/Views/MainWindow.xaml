@@ -6,19 +6,7 @@
         Title="SimbirSoft Code Analyzer"
         MinHeight="700" MinWidth="1100"
         Height="750" Width="1200"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        ResizeMode="CanResize"
-        AllowsTransparency="True"
-        Background="Transparent">
-
-    <WindowChrome.WindowChrome>
-        <WindowChrome GlassFrameThickness="-1"
-                      CornerRadius="0"
-                      CaptionHeight="40"
-                      ResizeBorderThickness="5"
-                      UseAeroCaptionButtons="False"/>
-    </WindowChrome.WindowChrome>
+        WindowStartupLocation="CenterScreen">
 
     <Border Background="{DynamicResource GlobalBackgroundBrush}">
         <Grid>
@@ -29,7 +17,9 @@
 
             <!-- ===== БОКОВОЕ МЕНЮ ===== -->
             <Border Grid.Column="0" 
-                    Background="{DynamicResource SidebarBackgroundBrush}">
+        Background="White"
+        BorderBrush="#E8ECF0"
+        BorderThickness="0,0,1,0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -37,92 +27,107 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Заголовок -->
-                    <StackPanel Grid.Row="0" Margin="20,30,20,20">
-                        <TextBlock Text="SCA"
-                                   FontSize="28"
-                                   FontFamily="Inter"
-                                   FontWeight="Bold"
-                                   Foreground="White"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock Text="Code Analyzer"
-                                   FontSize="12"
-                                   FontFamily="Inter"
-                                   Foreground="#B3B3B3"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,4,0,0"/>
+                    <!-- Логотип -->
+                    <StackPanel Grid.Row="0" Margin="24,30,24,24">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Image Source="/Resources/Images/logo-simbirsoft.png"
+                                    Width="40"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,0,12"/>
+                            <TextBlock Text="Анализатор кода"
+                                       FontSize="20"
+                                       FontFamily="Inter"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource DarkTextBrush}"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,0,0"/>
+                        </StackPanel>
                     </StackPanel>
 
                     <!-- Пункты меню -->
-                    <StackPanel Grid.Row="1" Margin="10,0">
+                    <StackPanel Grid.Row="1" Margin="0,8,0,0">
+
                         <!-- Главная -->
                         <Button x:Name="BtnHome"
-                                Style="{StaticResource SidebarActiveButton}"
                                 Content="🏠  Главная"
                                 Click="MenuButton_Click"
-                                Tag="Home"/>
+                                Tag="Home"
+                                Foreground="{DynamicResource DarkTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"/>
 
                         <!-- Админ: Пользователи -->
                         <Button x:Name="BtnUsers"
-                                Style="{StaticResource SidebarButton}"
                                 Content="👥  Пользователи"
                                 Click="MenuButton_Click"
                                 Tag="Users"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"
                                 Visibility="Collapsed"/>
 
                         <!-- Админ: Системные ресурсы -->
                         <Button x:Name="BtnSystemResources"
-                                Style="{StaticResource SidebarButton}"
                                 Content="⚙  Системные ресурсы"
                                 Click="MenuButton_Click"
                                 Tag="SystemResources"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"
                                 Visibility="Collapsed"/>
 
-                        <!-- Наставник: Управление проверками -->
+                        <!-- Наставник: Проверки -->
                         <Button x:Name="BtnCheckManagement"
-                                Style="{StaticResource SidebarButton}"
                                 Content="📋  Проверки"
                                 Click="MenuButton_Click"
                                 Tag="CheckManagement"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"
                                 Visibility="Collapsed"/>
 
                         <!-- Наставник: Результаты -->
                         <Button x:Name="BtnResults"
-                                Style="{StaticResource SidebarButton}"
                                 Content="📊  Результаты"
                                 Click="MenuButton_Click"
                                 Tag="Results"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"
                                 Visibility="Collapsed"/>
 
                         <!-- Стажёр: Мой код -->
                         <Button x:Name="BtnMyCode"
-                                Style="{StaticResource SidebarButton}"
                                 Content="💻  Мой код"
                                 Click="MenuButton_Click"
                                 Tag="MyCode"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"
                                 Visibility="Collapsed"/>
 
                         <!-- Стажёр: Мои результаты -->
                         <Button x:Name="BtnMyResults"
-                                Style="{StaticResource SidebarButton}"
                                 Content="📈  Мои результаты"
                                 Click="MenuButton_Click"
                                 Tag="MyResults"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"
                                 Visibility="Collapsed"/>
 
                         <!-- Настройки -->
                         <Button x:Name="BtnSettings"
-                                Style="{StaticResource SidebarButton}"
                                 Content="🔧  Настройки"
                                 Click="MenuButton_Click"
-                                Tag="Settings"/>
+                                Tag="Settings"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"/>
                     </StackPanel>
 
-                    <!-- Нижняя часть: выход -->
-                    <StackPanel Grid.Row="2" Margin="10,0,10,20">
-                        <Button Style="{StaticResource SidebarButton}"
-                                Content="🚪  Выход"
-                                Click="ExitButton_Click"/>
+                    <!-- Нижний блок -->
+                    <StackPanel Grid.Row="2" Margin="0,0,0,24">
+                        <Border Height="1" 
+                                Background="#E8ECF0" 
+                                Margin="16,0,16,12"/>
+                        <Button Content="🚪  Выход"
+                                Click="ExitButton_Click"
+                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Style="{StaticResource SidebarItemButton}"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -143,26 +148,6 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="SimbirSoft Code Analyzer"
-                                   VerticalAlignment="Center"
-                                   Margin="15,0"
-                                   Foreground="{DynamicResource DarkTextBrush}"
-                                   FontSize="14"
-                                   FontFamily="Inter"/>
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <Button Content="─"
-                                    Foreground="{DynamicResource DarkTextBrush}"
-                                    Style="{StaticResource WindowControlButtonStyle}"
-                                    Click="MinimizeButton_Click"/>
-                            <Button Content="□"
-                                    Foreground="{DynamicResource DarkTextBrush}"
-                                    Style="{StaticResource WindowControlButtonStyle}"
-                                    Click="MaximizeButton_Click"/>
-                            <Button Content="×"
-                                    Foreground="{DynamicResource DarkTextBrush}"
-                                    Style="{StaticResource WindowControlButtonStyle}"
-                                    Click="CloseButton_Click"/>
-                        </StackPanel>
                     </Grid>
                 </Border>
 

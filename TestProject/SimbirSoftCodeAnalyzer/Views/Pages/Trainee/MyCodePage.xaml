@@ -2,11 +2,116 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SimbirSoftCodeAnalyzer.Views.Pages.Trainee"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Margin="20" Background="Transparent">
+        <StackPanel VerticalAlignment="Center" MaxWidth="600">
+
+            <!-- Заголовок -->
+            <TextBlock Text="💻 Мой код"
+                       Style="{StaticResource H1Text}"
+                       Margin="0,0,0,10"/>
+            <TextBlock Text="Загрузите проект и запустите автоматическую проверку"
+                       Style="{StaticResource H4Text}"
+                       Margin="0,0,0,30"/>
+
+            <!-- Выбор проекта -->
+            <TextBlock Text="Проект"
+                       FontSize="14"
+                       FontFamily="Inter"
+                       FontWeight="Medium"
+                       Foreground="{DynamicResource DarkTextBrush}"
+                       Margin="0,0,0,5"/>
+            <ComboBox x:Name="ProjectComboBox"
+                      Style="{StaticResource CustomComboBox}"
+                      Margin="0,0,0,20"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="Загрузить новый проект..."/>
+            </ComboBox>
+
+            <!-- Путь к папке -->
+            <TextBlock Text="Путь к проекту"
+                       FontSize="14"
+                       FontFamily="Inter"
+                       FontWeight="Medium"
+                       Foreground="{DynamicResource DarkTextBrush}"
+                       Margin="0,0,0,5"/>
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="PathTextBox"
+                         Text="Папка не выбрана"
+                         IsReadOnly="True"
+                         Background="#F6F8F9"
+                         FontSize="14"
+                         FontFamily="Inter"
+                         Foreground="{DynamicResource DarkTextBrush}"
+                         BorderBrush="{DynamicResource BorderBrush}"
+                         BorderThickness="1"
+                         Padding="12,10"
+                         VerticalAlignment="Center"/>
+                <Button Grid.Column="1"
+                        Content="📁 Обзор"
+                        Style="{StaticResource OutlineButton}"
+                        Click="BrowseButton_Click"
+                        Margin="10,0,0,0"
+                        Padding="15,8"/>
+            </Grid>
+
+            <!-- Прогресс -->
+            <Border x:Name="ProgressPanel" Visibility="Collapsed" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock x:Name="StatusText"
+                               Text="Подготовка..."
+                               FontSize="14"
+                               FontFamily="Inter"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               Margin="0,0,0,8"/>
+                    <ProgressBar x:Name="AnalysisProgress"
+                                 Style="{StaticResource ModernProgressBar}"
+                                 Value="0"
+                                 Height="8"/>
+                    <TextBlock x:Name="StageText"
+                               Text=""
+                               FontSize="12"
+                               FontFamily="Inter"
+                               Foreground="{DynamicResource PrimaryBrush}"
+                               Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Кнопка запуска -->
+            <Button x:Name="RunButton"
+                    Content="🚀 Запустить проверку"
+                    Style="{StaticResource PrimaryButton}"
+                    Click="RunButton_Click"
+                    HorizontalAlignment="Left"
+                    Padding="25,12"
+                    Margin="0,0,0,10"/>
+
+            <!-- Результат -->
+            <Border x:Name="ResultPanel"
+                    Style="{StaticResource CardBorder}"
+                    Visibility="Collapsed"
+                    Margin="0,10,0,0">
+                <StackPanel>
+                    <TextBlock x:Name="ResultTitle"
+                               FontSize="18"
+                               FontFamily="Inter"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource DarkTextBrush}"
+                               Margin="0,0,0,10"/>
+                    <TextBlock x:Name="ResultText"
+                               FontSize="14"
+                               FontFamily="Inter"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
     </Grid>
 </UserControl>

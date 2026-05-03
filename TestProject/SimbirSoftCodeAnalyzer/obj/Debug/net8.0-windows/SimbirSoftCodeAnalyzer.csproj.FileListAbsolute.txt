@@ -234,3 +234,9 @@ D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\SimbirSoftCodeAnalyzer.genruntimeconfig.cache
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\ref\SimbirSoftCodeAnalyzer.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\Resources\Images\login-background1.mp4
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\SimbirSoftCodeAnalyzer.sourcelink.json
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.dll
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Json.dll
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using AdminHomePage = SimbirSoftCodeAnalyzer.Views.Pages.Admin.AdminHomePage;
 
 namespace SimbirSoftCodeAnalyzer.Views
@@ -98,17 +99,23 @@ namespace SimbirSoftCodeAnalyzer.Views
         }
 
         private void SetActiveButton(string tag)
-        {
-            var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnCheckManagement, BtnResults, BtnMyCode, BtnMyResults, BtnSettings };
+{
+    var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnCheckManagement, BtnResults, BtnMyCode, BtnMyResults, BtnSettings };
 
-            foreach (var btn in allButtons)
-            {
-                if (btn.Tag?.ToString() == tag)
-                    btn.Style = (Style)FindResource("SidebarActiveButton");
-                else
-                    btn.Style = (Style)FindResource("SidebarButton");
-            }
+    foreach (var btn in allButtons)
+    {
+        if (btn.Tag?.ToString() == tag)
+        {
+            btn.Style = (Style)FindResource("SidebarActiveItemButton");
+            btn.Foreground = Brushes.White;
         }
+        else
+        {
+            btn.Style = (Style)FindResource("SidebarItemButton");
+            btn.Foreground = (Brush)FindResource("SecondaryTextBrush");
+        }
+    }
+}
 
         // Управление окном
         private void Header_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -5,6 +5,7 @@ using Core.Data;
 using Core.Models;
 using Core.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimbirSoftCodeAnalyzer.Views;
 using System.Windows;

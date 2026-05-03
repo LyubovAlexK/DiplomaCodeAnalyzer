@@ -1,28 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Core.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimbirSoftCodeAnalyzer.Views.Pages.Admin
 {
-    /// <summary>
-    /// Логика взаимодействия для UsersPage.xaml
-    /// </summary>
     public partial class UsersPage : UserControl
     {
         public UsersPage()
         {
             InitializeComponent();
+            Loaded += (s, e) => LoadUsers();
+        }
+
+        private async void LoadUsers()
+        {
+            try
+            {
+                var db = App.GetService<AppDbContext>();
+                var users = await db.Users
+                    .Where(u => u.IsActive == true)
+                    .OrderBy(u => u.RoleId)
+                    .ToListAsync();
+
+                UsersGrid.ItemsSource = users;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка: {ex.Message}");
+            }
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoadUsers();
         }
     }
 }

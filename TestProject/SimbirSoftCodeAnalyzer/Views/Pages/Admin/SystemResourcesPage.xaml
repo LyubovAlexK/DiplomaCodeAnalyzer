@@ -2,11 +2,93 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SimbirSoftCodeAnalyzer.Views.Pages.Admin"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Margin="20" Background="Transparent">
+        <StackPanel>
+            <TextBlock Text="⚙ Системные ресурсы"
+                       Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
+
+            <!-- Загрузка ТЗ -->
+            <Border Style="{StaticResource CardBorder}" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock Text="📄 Загрузка технического задания"
+                               Style="{StaticResource H2Text}" Margin="0,0,0,10"/>
+
+                    <Grid Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TzPathTextBox"
+                                 Text="Файл не выбран"
+                                 IsReadOnly="True"
+                                 Background="#F6F8F9"
+                                 FontSize="14" FontFamily="Inter"
+                                 Padding="12,10"
+                                 BorderBrush="{DynamicResource BorderBrush}"
+                                 BorderThickness="1"/>
+                        <Button Grid.Column="1" Content="📁 Выбрать ТЗ"
+                                Style="{StaticResource OutlineButton}"
+                                Click="BrowseTzButton_Click"
+                                Margin="10,0,0,0"/>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <TextBlock Text="Метод анализа:" VerticalAlignment="Center" Margin="0,0,10,0"
+                                   FontSize="14" FontFamily="Inter"/>
+                        <ComboBox x:Name="MethodComboBox"
+                                  Style="{StaticResource CustomComboBox}"
+                                  Width="200">
+                            <ComboBoxItem Content="🔍 Локальный (Catalyst)" Tag="local" IsSelected="True"/>
+                            <ComboBoxItem Content="🤖 GigaChat AI" Tag="ai"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <Button x:Name="AnalyzeButton"
+                            Content="🚀 Анализировать ТЗ"
+                            Style="{StaticResource PrimaryButton}"
+                            Click="AnalyzeButton_Click"
+                            HorizontalAlignment="Left"/>
+
+                    <ProgressBar x:Name="TzProgressBar"
+                                 Style="{StaticResource ModernProgressBar}"
+                                 IsIndeterminate="True"
+                                 Visibility="Collapsed"
+                                 Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Результаты анализа -->
+            <Border x:Name="ResultCard" 
+                    Style="{StaticResource CardBorder}"
+                    Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock x:Name="ResultTitle"
+                               Style="{StaticResource H2Text}" Margin="0,0,0,5"/>
+                    <TextBlock x:Name="ResultType"
+                               FontSize="14" FontFamily="Inter"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               Margin="0,0,0,10"/>
+                    <TextBlock x:Name="ResultCount"
+                               FontSize="16" FontFamily="Inter" FontWeight="Bold"
+                               Foreground="{DynamicResource PrimaryBrush}"
+                               Margin="0,0,0,10"/>
+
+                    <Border Style="{StaticResource DataGridCardBorder}">
+                        <ScrollViewer MaxHeight="300"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
+                            <DataGrid x:Name="RequirementsGrid"
+                                      Style="{StaticResource CustomDataGridStyle}"
+                                      AutoGenerateColumns="True"
+                                      IsReadOnly="True"/>
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
     </Grid>
 </UserControl>
