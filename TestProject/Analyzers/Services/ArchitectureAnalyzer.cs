@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using Core.Models;
+using static Core.Models.TempModels;
 
 namespace Analyzers.Services;
 
@@ -137,11 +138,4 @@ public class ArchitectureAnalyzer
 
         return referencedTypes;
     }
-}
-
-public class ArchViolation
-{
-    public string RuleName { get; set; } = string.Empty;
-    public string Message { get; set; } = string.Empty;
-    public bool IsPassed { get; set; }
 }

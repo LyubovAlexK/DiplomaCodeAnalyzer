@@ -55,6 +55,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Catalyst": {
               "target": "Package",
               "version": "[26.3.60, )"
@@ -172,6 +176,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[3.5.1, )"
@@ -277,6 +285,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[3.5.1, )"
@@ -370,6 +382,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[3.5.1, )"
@@ -476,6 +492,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Catalyst": {
               "target": "Package",
               "version": "[26.3.60, )"

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Core.Models.TempModels;
 
 namespace Analyzers.Services
 {
@@ -321,23 +322,6 @@ namespace Analyzers.Services
 
             return false;
         }
-    }
-
-    /// <summary>
-    /// Результат проверки на пустой проект.
-    /// </summary>
-    public class EmptyProjectResult
-    {
-        public bool IsEmpty { get; set; }
-        public string Reason { get; set; } = string.Empty;
-        public int TotalMethods { get; set; }
-        public int TotalClasses { get; set; }
-        public int UserClasses { get; set; }
-        public int MeaningfulMethods { get; set; }
-        public int TemplateMatches { get; set; }
-        public int TotalFiles { get; set; }
-        public int FailLevel { get; set; }
-        public double Confidence { get; set; }
     }
 }
 

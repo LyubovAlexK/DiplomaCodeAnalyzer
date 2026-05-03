@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GARZZZfcsCQ=",
+  "dgSpecHash": "d/OovMWOo7g=",
   "success": true,
   "projectFilePath": "D:\\DITI\\Diploma_app\\TestProject\\AI\\AI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Люба\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\bcrypt.net-next\\4.1.0\\bcrypt.net-next.4.1.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\catalyst\\26.3.60\\catalyst.26.3.60.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\catalyst.models.russian\\1.0.30952\\catalyst.models.russian.1.0.30952.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\documentformat.openxml\\3.5.1\\documentformat.openxml.3.5.1.nupkg.sha512",
