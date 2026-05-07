@@ -114,11 +114,8 @@
                         </Button>
 
                         <!-- Мой код -->
-                        <Button x:Name="BtnMyCode"
-                                Click="MenuButton_Click"
-                                Tag="MyCode"
-                                Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed">
+                        <Button x:Name="BtnMyCode" Click="MenuButton_Click" Tag="MyCode"
+        Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Style="{StaticResource MenuIconStyle}">
                                     <Rectangle.OpacityMask>
@@ -130,11 +127,8 @@
                         </Button>
 
                         <!-- Мои результаты -->
-                        <Button x:Name="BtnMyResults"
-                                Click="MenuButton_Click"
-                                Tag="MyResults"
-                                Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed">
+                        <Button x:Name="BtnMyResults" Click="MenuButton_Click" Tag="MyResults"
+        Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Style="{StaticResource MenuIconStyle}">
                                     <Rectangle.OpacityMask>
@@ -145,19 +139,16 @@
                             </StackPanel>
                         </Button>
 
-                        <!-- Результаты -->
-                        <Button x:Name="BtnResults"
-                                Click="MenuButton_Click"
-                                Tag="Results"
-                                Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed">
+                        <!-- История -->
+                        <Button x:Name="BtnHistory" Click="MenuButton_Click" Tag="History"
+        Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Style="{StaticResource MenuIconStyle}">
                                     <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/clock_89391.png"/>
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
-                                <TextBlock Text="Результаты" VerticalAlignment="Center"/>
+                                <TextBlock Text="История" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 

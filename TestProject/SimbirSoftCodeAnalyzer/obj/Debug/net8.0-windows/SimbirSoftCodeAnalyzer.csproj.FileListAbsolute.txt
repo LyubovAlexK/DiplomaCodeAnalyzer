@@ -235,6 +235,7 @@ D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Mentor\MentorHomePage.g.cs
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Mentor\ResultsLearningPage.g.cs
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\SettingsPage.g.cs
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Trainee\HistoryPage.g.cs
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Trainee\MyCodePage.g.cs
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Trainee\MyResultsPage.g.cs
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Trainee\TraineeHomePage.g.cs
@@ -249,6 +250,7 @@ D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Mentor\CheckManagementPage.baml
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Mentor\ResultsLearningPage.baml
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\SettingsPage.baml
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\Views\Pages\Trainee\HistoryPage.baml
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\SimbirSoftCodeAnalyzer.g.resources
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\SimbirSoftCodeAnalyzer.GeneratedMSBuildEditorConfig.editorconfig
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\obj\Debug\net8.0-windows\SimbirSoftCodeAnalyzer.AssemblyInfoInputs.cache

@@ -26,6 +26,9 @@
     <Compile Update="Views\Pages\SettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\Trainee\HistoryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\Trainee\MyCodePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
