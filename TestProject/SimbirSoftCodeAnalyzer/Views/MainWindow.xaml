@@ -3,23 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SimbirSoftCodeAnalyzer.Views"
         xmlns:pages="clr-namespace:SimbirSoftCodeAnalyzer.Views.Pages"
-        Title="SimbirSoft Code Analyzer"
+        Title="SimbirSoft Анализатор кода"
         MinHeight="700" MinWidth="1100"
         Height="750" Width="1200"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="CanResize"
+        Icon="/Resources/Images/logo-simbirsoft.png">
 
     <Border Background="{DynamicResource GlobalBackgroundBrush}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="280"/>
+                <ColumnDefinition x:Name="SidebarColumn" Width="280"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- ===== БОКОВОЕ МЕНЮ ===== -->
-            <Border Grid.Column="0" 
-        Background="White"
-        BorderBrush="#E8ECF0"
-        BorderThickness="0,0,1,0">
+            <Border x:Name="SidebarPanel"
+                    Grid.Column="0" 
+                    Background="White"
+                    BorderBrush="#E8ECF0"
+                    BorderThickness="0,0,1,0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -28,15 +32,13 @@
                     </Grid.RowDefinitions>
 
                     <!-- Логотип -->
-                    <StackPanel Grid.Row="0" Margin="24,30,24,24">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <StackPanel Grid.Row="0" Margin="20,25,20,10">
+                        <StackPanel x:Name="LogoPanel" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Image Source="/Resources/Images/logo-simbirsoft.png"
-                                    Width="40"
-                                    Height="40"
-                                    HorizontalAlignment="Center"
-                                    Margin="0,0,0,12"/>
+                                   Width="40" Height="40"
+                                   HorizontalAlignment="Center"/>
                             <TextBlock Text="Анализатор кода"
-                                       FontSize="20"
+                                       FontSize="18"
                                        FontFamily="Inter"
                                        FontWeight="Bold"
                                        Foreground="{DynamicResource DarkTextBrush}"
@@ -46,113 +48,218 @@
                     </StackPanel>
 
                     <!-- Пункты меню -->
-                    <StackPanel Grid.Row="1" Margin="0,8,0,0">
+                    <StackPanel x:Name="MenuPanel" Grid.Row="1" Margin="12,0">
 
-                        <!-- Главная -->
+                        <!-- Dashboard -->
                         <Button x:Name="BtnHome"
-                                Content="🏠  Главная"
                                 Click="MenuButton_Click"
                                 Tag="Home"
-                                Foreground="{DynamicResource DarkTextBrush}"
-                                Style="{StaticResource SidebarItemButton}"/>
+                                Style="{StaticResource SidebarActiveItemButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/home_89292.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Dashboard" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
 
-                        <!-- Админ: Пользователи -->
+                        <!-- Пользователи -->
                         <Button x:Name="BtnUsers"
-                                Content="👥  Пользователи"
                                 Click="MenuButton_Click"
                                 Tag="Users"
-                                Foreground="{DynamicResource SecondaryTextBrush}"
                                 Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed"/>
+                                Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/user_89269.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Пользователи" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
 
-                        <!-- Админ: Системные ресурсы -->
-                        <Button x:Name="BtnSystemResources"
-                                Content="⚙  Системные ресурсы"
-                                Click="MenuButton_Click"
-                                Tag="SystemResources"
-                                Foreground="{DynamicResource SecondaryTextBrush}"
-                                Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed"/>
-
-                        <!-- Наставник: Проверки -->
+                        <!-- Проверки -->
                         <Button x:Name="BtnCheckManagement"
-                                Content="📋  Проверки"
                                 Click="MenuButton_Click"
                                 Tag="CheckManagement"
-                                Foreground="{DynamicResource SecondaryTextBrush}"
                                 Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed"/>
+                                Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/clipboard_89387.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Проверки" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
 
-                        <!-- Наставник: Результаты -->
-                        <Button x:Name="BtnResults"
-                                Content="📊  Результаты"
+                        <!-- Технические задания -->
+                        <Button x:Name="BtnSystemResources"
                                 Click="MenuButton_Click"
-                                Tag="Results"
-                                Foreground="{DynamicResource SecondaryTextBrush}"
+                                Tag="SystemResources"
                                 Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed"/>
+                                Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/file_89266.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Технические задания" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
 
-                        <!-- Стажёр: Мой код -->
+                        <!-- Мой код -->
                         <Button x:Name="BtnMyCode"
-                                Content="💻  Мой код"
                                 Click="MenuButton_Click"
                                 Tag="MyCode"
-                                Foreground="{DynamicResource SecondaryTextBrush}"
                                 Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed"/>
+                                Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/computer_89404.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Мой код" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
 
-                        <!-- Стажёр: Мои результаты -->
+                        <!-- Мои результаты -->
                         <Button x:Name="BtnMyResults"
-                                Content="📈  Мои результаты"
                                 Click="MenuButton_Click"
                                 Tag="MyResults"
-                                Foreground="{DynamicResource SecondaryTextBrush}"
                                 Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed"/>
+                                Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Мои результаты" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Результаты -->
+                        <Button x:Name="BtnResults"
+                                Click="MenuButton_Click"
+                                Tag="Results"
+                                Style="{StaticResource SidebarItemButton}"
+                                Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Результаты" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
 
                         <!-- Настройки -->
                         <Button x:Name="BtnSettings"
-                                Content="🔧  Настройки"
                                 Click="MenuButton_Click"
                                 Tag="Settings"
-                                Foreground="{DynamicResource SecondaryTextBrush}"
-                                Style="{StaticResource SidebarItemButton}"/>
+                                Style="{StaticResource SidebarItemButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/settings_89381.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Настройки" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
 
                     <!-- Нижний блок -->
-                    <StackPanel Grid.Row="2" Margin="0,0,0,24">
-                        <Border Height="1" 
-                                Background="#E8ECF0" 
-                                Margin="16,0,16,12"/>
-                        <Button Content="🚪  Выход"
-                                Click="ExitButton_Click"
-                                Foreground="{DynamicResource SecondaryTextBrush}"
-                                Style="{StaticResource SidebarItemButton}"/>
+                    <StackPanel x:Name="BottomPanel" Grid.Row="2" Margin="12,0,12,24">
+                        <Border Height="1" Background="#E8ECF0" Margin="0,0,0,12"/>
+
+                        <!-- Свернуть (как пункт меню) -->
+                        <Button x:Name="CollapseMenuButton"
+            Click="CollapseSidebar_Click"
+            Style="{StaticResource SidebarItemButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/back_89271.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Свернуть" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Выход -->
+                        <Button Click="ExitButton_Click"
+            Style="{StaticResource SidebarItemButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/signin_89278.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Выход" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
+
+                    <!-- Кнопка-капелька (видна только в свёрнутом режиме) -->
+                    <Button x:Name="ExpandPillButton"
+                            Grid.Row="2"
+                            Click="ExpandSidebar_Click"
+                            Width="44" Height="44"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,0,-14,70"
+                            Visibility="Collapsed"
+                            Background="White"
+                            BorderThickness="0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid Width="44" Height="44">
+                                    <!-- Белый фон -->
+                                    <Border x:Name="border"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="10"
+                                        Width="44" Height="44"/>
+   
+                                    <!-- Обводка — только правая половина (полукруг) -->
+                                    <Path Data="M 22,0 L 34,0 A 10,10 0 0,1 44,10 L 44,34 A 10,10 0 0,1 34,44 L 22,44"
+                                          Stroke="#E8ECF0"
+                                          StrokeThickness="1"
+                                          Fill="Transparent"/>
+
+                                    <!-- Иконка -->
+                                    <Rectangle Width="20" Height="20" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="{DynamicResource SecondaryTextColor}"/>
+                                        </Rectangle.Fill>
+                                        <Rectangle.OpacityMask>
+                                            <ImageBrush ImageSource="/Resources/Images/icons/next_89378.png"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </Grid>
             </Border>
 
             <!-- ===== ОБЛАСТЬ КОНТЕНТА ===== -->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Шапка с заголовком и кнопками -->
-                <Border Grid.Row="0"
-                        Background="{DynamicResource HeaderBackgroundBrush}"
-                        MouseLeftButtonDown="Header_MouseLeftButtonDown">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </Border>
-
-                <!-- Контент (здесь загружаются панели) -->
-                <ContentControl Grid.Row="1" 
+                <ContentControl Grid.Row="0" 
                                 x:Name="ContentArea"
                                 Margin="0"/>
             </Grid>

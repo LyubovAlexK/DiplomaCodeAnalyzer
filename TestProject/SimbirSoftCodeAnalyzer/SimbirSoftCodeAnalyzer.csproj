@@ -9,6 +9,158 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\icons\add1_89334.png" />
+    <None Remove="Resources\Images\icons\adduser_89280.png" />
+    <None Remove="Resources\Images\icons\add_89274.png" />
+    <None Remove="Resources\Images\icons\anchor_89316.png" />
+    <None Remove="Resources\Images\icons\back1_89375.png" />
+    <None Remove="Resources\Images\icons\back2_89358.png" />
+    <None Remove="Resources\Images\icons\back3_89282.png" />
+    <None Remove="Resources\Images\icons\back4_89388.png" />
+    <None Remove="Resources\Images\icons\back5_89382.png" />
+    <None Remove="Resources\Images\icons\back6_89396.png" />
+    <None Remove="Resources\Images\icons\back7_89370.png" />
+    <None Remove="Resources\Images\icons\back8_89346.png" />
+    <None Remove="Resources\Images\icons\back_89271.png" />
+    <None Remove="Resources\Images\icons\battery_89288.png" />
+    <None Remove="Resources\Images\icons\bell_89305.png" />
+    <None Remove="Resources\Images\icons\box_89408.png" />
+    <None Remove="Resources\Images\icons\brightness1_89353.png" />
+    <None Remove="Resources\Images\icons\brightness_89411.png" />
+    <None Remove="Resources\Images\icons\browser1_89348.png" />
+    <None Remove="Resources\Images\icons\browser_89380.png" />
+    <None Remove="Resources\Images\icons\cancel1_89385.png" />
+    <None Remove="Resources\Images\icons\cancel_89309.png" />
+    <None Remove="Resources\Images\icons\checked_89335.png" />
+    <None Remove="Resources\Images\icons\clipboard_89387.png" />
+    <None Remove="Resources\Images\icons\clock_89391.png" />
+    <None Remove="Resources\Images\icons\cloud_89333.png" />
+    <None Remove="Resources\Images\icons\coffeecup_89403.png" />
+    <None Remove="Resources\Images\icons\computer_89404.png" />
+    <None Remove="Resources\Images\icons\downarrow1_89397.png" />
+    <None Remove="Resources\Images\icons\downarrow2_89392.png" />
+    <None Remove="Resources\Images\icons\downarrow3_89354.png" />
+    <None Remove="Resources\Images\icons\downarrow4_89328.png" />
+    <None Remove="Resources\Images\icons\downarrow_89336.png" />
+    <None Remove="Resources\Images\icons\download1_89341.png" />
+    <None Remove="Resources\Images\icons\download2_89327.png" />
+    <None Remove="Resources\Images\icons\download_89393.png" />
+    <None Remove="Resources\Images\icons\envelope_89296.png" />
+    <None Remove="Resources\Images\icons\exclamation1_89293.png" />
+    <None Remove="Resources\Images\icons\exclamation_89371.png" />
+    <None Remove="Resources\Images\icons\eye_89413.png" />
+    <None Remove="Resources\Images\icons\fastforward1_89315.png" />
+    <None Remove="Resources\Images\icons\fastforward_89374.png" />
+    <None Remove="Resources\Images\icons\file_89266.png" />
+    <None Remove="Resources\Images\icons\flag_89285.png" />
+    <None Remove="Resources\Images\icons\folder_89347.png" />
+    <None Remove="Resources\Images\icons\forbidden_89359.png" />
+    <None Remove="Resources\Images\icons\full_89322.png" />
+    <None Remove="Resources\Images\icons\heart_89277.png" />
+    <None Remove="Resources\Images\icons\help_89303.png" />
+    <None Remove="Resources\Images\icons\home_89292.png" />
+    <None Remove="Resources\Images\icons\info_89304.png" />
+    <None Remove="Resources\Images\icons\key1_89390.png" />
+    <None Remove="Resources\Images\icons\key_89373.png" />
+    <None Remove="Resources\Images\icons\lightbulb_89331.png" />
+    <None Remove="Resources\Images\icons\list_89394.png" />
+    <None Remove="Resources\Images\icons\loading_89372.png" />
+    <None Remove="Resources\Images\icons\locate_89310.png" />
+    <None Remove="Resources\Images\icons\medal_89312.png" />
+    <None Remove="Resources\Images\icons\menu1_89281.png" />
+    <None Remove="Resources\Images\icons\menu_89301.png" />
+    <None Remove="Resources\Images\icons\microphone_89311.png" />
+    <None Remove="Resources\Images\icons\minus1_89272.png" />
+    <None Remove="Resources\Images\icons\minus_89386.png" />
+    <None Remove="Resources\Images\icons\moon_89402.png" />
+    <None Remove="Resources\Images\icons\more_89291.png" />
+    <None Remove="Resources\Images\icons\move_89294.png" />
+    <None Remove="Resources\Images\icons\musicalnote1_89363.png" />
+    <None Remove="Resources\Images\icons\musicalnote_89406.png" />
+    <None Remove="Resources\Images\icons\mute_89405.png" />
+    <None Remove="Resources\Images\icons\next1_89342.png" />
+    <None Remove="Resources\Images\icons\next2_89284.png" />
+    <None Remove="Resources\Images\icons\next3_89376.png" />
+    <None Remove="Resources\Images\icons\next4_89356.png" />
+    <None Remove="Resources\Images\icons\next5_89355.png" />
+    <None Remove="Resources\Images\icons\next6_89384.png" />
+    <None Remove="Resources\Images\icons\next7_89412.png" />
+    <None Remove="Resources\Images\icons\next_89378.png" />
+    <None Remove="Resources\Images\icons\orientation_89377.png" />
+    <None Remove="Resources\Images\icons\paintbrush_89379.png" />
+    <None Remove="Resources\Images\icons\pause1_89300.png" />
+    <None Remove="Resources\Images\icons\pause_89314.png" />
+    <None Remove="Resources\Images\icons\phonecall_89286.png" />
+    <None Remove="Resources\Images\icons\photocamera1_89339.png" />
+    <None Remove="Resources\Images\icons\photocamera_89324.png" />
+    <None Remove="Resources\Images\icons\placeholder_89270.png" />
+    <None Remove="Resources\Images\icons\playbutton1_89330.png" />
+    <None Remove="Resources\Images\icons\playbutton_89369.png" />
+    <None Remove="Resources\Images\icons\play_89299.png" />
+    <None Remove="Resources\Images\icons\question1_89417.png" />
+    <None Remove="Resources\Images\icons\question2_89367.png" />
+    <None Remove="Resources\Images\icons\question3_89398.png" />
+    <None Remove="Resources\Images\icons\question_89289.png" />
+    <None Remove="Resources\Images\icons\record1_89407.png" />
+    <None Remove="Resources\Images\icons\record_89352.png" />
+    <None Remove="Resources\Images\icons\refresh1_89364.png" />
+    <None Remove="Resources\Images\icons\refresh_89350.png" />
+    <None Remove="Resources\Images\icons\removeuser_89401.png" />
+    <None Remove="Resources\Images\icons\rewind1_89298.png" />
+    <None Remove="Resources\Images\icons\rewind_89267.png" />
+    <None Remove="Resources\Images\icons\rocketship_89389.png" />
+    <None Remove="Resources\Images\icons\screen_89344.png" />
+    <None Remove="Resources\Images\icons\search1_89287.png" />
+    <None Remove="Resources\Images\icons\search_89415.png" />
+    <None Remove="Resources\Images\icons\security_89410.png" />
+    <None Remove="Resources\Images\icons\settings_89381.png" />
+    <None Remove="Resources\Images\icons\share1_89323.png" />
+    <None Remove="Resources\Images\icons\share_89275.png" />
+    <None Remove="Resources\Images\icons\shoppingcart1_89337.png" />
+    <None Remove="Resources\Images\icons\shoppingcart_89360.png" />
+    <None Remove="Resources\Images\icons\signin1_89283.png" />
+    <None Remove="Resources\Images\icons\signin_89278.png" />
+    <None Remove="Resources\Images\icons\smartphone_89302.png" />
+    <None Remove="Resources\Images\icons\speechbubble1_89361.png" />
+    <None Remove="Resources\Images\icons\speechbubble2_89383.png" />
+    <None Remove="Resources\Images\icons\speechbubble_89349.png" />
+    <None Remove="Resources\Images\icons\star_89317.png" />
+    <None Remove="Resources\Images\icons\stats_89319.png" />
+    <None Remove="Resources\Images\icons\stop1_89307.png" />
+    <None Remove="Resources\Images\icons\stop_89357.png" />
+    <None Remove="Resources\Images\icons\suitcase_89340.png" />
+    <None Remove="Resources\Images\icons\sync1_89313.png" />
+    <None Remove="Resources\Images\icons\sync_89395.png" />
+    <None Remove="Resources\Images\icons\tablet_89295.png" />
+    <None Remove="Resources\Images\icons\tags_89332.png" />
+    <None Remove="Resources\Images\icons\tape_89362.png" />
+    <None Remove="Resources\Images\icons\target_89416.png" />
+    <None Remove="Resources\Images\icons\testtube1_89318.png" />
+    <None Remove="Resources\Images\icons\testtube_89409.png" />
+    <None Remove="Resources\Images\icons\textlines_89351.png" />
+    <None Remove="Resources\Images\icons\thunder_89400.png" />
+    <None Remove="Resources\Images\icons\trash_89366.png" />
+    <None Remove="Resources\Images\icons\unlocked_89306.png" />
+    <None Remove="Resources\Images\icons\uparrow1_89321.png" />
+    <None Remove="Resources\Images\icons\uparrow2_89326.png" />
+    <None Remove="Resources\Images\icons\uparrow3_89414.png" />
+    <None Remove="Resources\Images\icons\uparrow_89308.png" />
+    <None Remove="Resources\Images\icons\upload1_89365.png" />
+    <None Remove="Resources\Images\icons\upload2_89320.png" />
+    <None Remove="Resources\Images\icons\upload_89268.png" />
+    <None Remove="Resources\Images\icons\user1_89279.png" />
+    <None Remove="Resources\Images\icons\users_89368.png" />
+    <None Remove="Resources\Images\icons\user_89269.png" />
+    <None Remove="Resources\Images\icons\videocamera_89329.png" />
+    <None Remove="Resources\Images\icons\volume_89276.png" />
+    <None Remove="Resources\Images\icons\warning1_89325.png" />
+    <None Remove="Resources\Images\icons\warning_89399.png" />
+    <None Remove="Resources\Images\icons\wifi1_89338.png" />
+    <None Remove="Resources\Images\icons\wifi_89273.png" />
+    <None Remove="Resources\Images\icons\wineglass1_89343.png" />
+    <None Remove="Resources\Images\icons\wineglass_89290.png" />
+    <None Remove="Resources\Images\icons\zoomin_89297.png" />
+    <None Remove="Resources\Images\icons\zoomout_89345.png" />
     <None Remove="Resources\Images\logo-simbirsoft.png" />
   </ItemGroup>
 
@@ -43,6 +195,462 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\icons\add1_89334.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\adduser_89280.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\add_89274.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\anchor_89316.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back1_89375.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back2_89358.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back3_89282.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back4_89388.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back5_89382.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back6_89396.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back7_89370.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back8_89346.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\back_89271.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\battery_89288.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\bell_89305.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\box_89408.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\brightness1_89353.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\brightness_89411.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\browser1_89348.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\browser_89380.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\cancel1_89385.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\cancel_89309.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\checked_89335.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\clipboard_89387.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\clock_89391.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\cloud_89333.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\coffeecup_89403.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\computer_89404.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\downarrow1_89397.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\downarrow2_89392.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\downarrow3_89354.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\downarrow4_89328.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\downarrow_89336.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\download1_89341.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\download2_89327.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\download_89393.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\envelope_89296.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\exclamation1_89293.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\exclamation_89371.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\eye_89413.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\fastforward1_89315.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\fastforward_89374.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\file_89266.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\flag_89285.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\folder_89347.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\forbidden_89359.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\full_89322.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\heart_89277.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\help_89303.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\home_89292.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\info_89304.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\key1_89390.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\key_89373.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\lightbulb_89331.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\list_89394.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\loading_89372.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\locate_89310.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\medal_89312.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\menu1_89281.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\menu_89301.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\microphone_89311.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\minus1_89272.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\minus_89386.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\moon_89402.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\more_89291.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\move_89294.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\musicalnote1_89363.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\musicalnote_89406.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\mute_89405.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\next1_89342.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\next2_89284.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\next3_89376.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\next4_89356.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\next5_89355.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\next6_89384.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\next7_89412.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\next_89378.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\orientation_89377.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\paintbrush_89379.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\pause1_89300.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\pause_89314.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\phonecall_89286.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\photocamera1_89339.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\photocamera_89324.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\placeholder_89270.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\playbutton1_89330.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\playbutton_89369.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\play_89299.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\question1_89417.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\question2_89367.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\question3_89398.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\question_89289.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\record1_89407.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\record_89352.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\refresh1_89364.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\refresh_89350.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\removeuser_89401.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\rewind1_89298.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\rewind_89267.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\rocketship_89389.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\screen_89344.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\search1_89287.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\search_89415.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\security_89410.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\settings_89381.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\share1_89323.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\share_89275.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\shoppingcart1_89337.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\shoppingcart_89360.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\signin1_89283.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\signin_89278.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\smartphone_89302.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\speechbubble1_89361.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\speechbubble2_89383.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\speechbubble_89349.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\star_89317.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\stats_89319.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\stop1_89307.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\stop_89357.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\suitcase_89340.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\sync1_89313.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\sync_89395.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\tablet_89295.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\tags_89332.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\tape_89362.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\target_89416.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\testtube1_89318.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\testtube_89409.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\textlines_89351.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\thunder_89400.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\trash_89366.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\unlocked_89306.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\uparrow1_89321.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\uparrow2_89326.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\uparrow3_89414.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\uparrow_89308.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\upload1_89365.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\upload2_89320.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\upload_89268.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\user1_89279.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\users_89368.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\user_89269.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\videocamera_89329.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\volume_89276.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\warning1_89325.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\warning_89399.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\wifi1_89338.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\wifi_89273.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\wineglass1_89343.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\wineglass_89290.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\zoomin_89297.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\icons\zoomout_89345.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\logo-simbirsoft.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

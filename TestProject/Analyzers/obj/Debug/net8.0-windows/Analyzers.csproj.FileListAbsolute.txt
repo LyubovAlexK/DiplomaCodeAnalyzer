@@ -9,6 +9,7 @@ D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.Gen
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.AssemblyInfoInputs.cache
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.AssemblyInfo.cs
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.csproj.CoreCompileInputs.cache
+D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.sourcelink.json
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.csproj.Up2Date
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\Analyzers.dll
 D:\DITI\Diploma_app\TestProject\Analyzers\obj\Debug\net8.0-windows\refint\Analyzers.dll

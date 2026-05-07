@@ -1,19 +1,220 @@
 ﻿<UserControl x:Class="SimbirSoftCodeAnalyzer.Views.Pages.Mentor.MentorHomePage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid Background="Transparent">
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="👨‍🏫"
-                       FontSize="48"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,10"/>
-            <TextBlock Text="Панель наставника"
-                       Style="{StaticResource H1Text}"
-                       HorizontalAlignment="Center"/>
-            <TextBlock Text="Управление проверками и просмотр результатов"
-                       Style="{StaticResource H4Text}"
-                       HorizontalAlignment="Center"
-                       Margin="0,5,0,0"/>
-        </StackPanel>
-    </Grid>
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900"
+             Background="Transparent">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <TextBlock Grid.Row="0" Text="Главное меню"
+                       Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
+
+            <!-- Ярус 1: Карточки метрик -->
+            <Grid Grid.Row="1" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Стажёров -->
+                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Margin="0,0,8,0">
+                    <StackPanel>
+                        <TextBlock Text="👥" FontSize="24" Margin="0,0,0,8"/>
+                        <TextBlock Text="12" Style="{StaticResource H1Text}" Foreground="{DynamicResource DarkTextBrush}"/>
+                        <TextBlock Text="стажёров" Style="{StaticResource H4Text}"/>
+                        <TextBlock Text="активно" FontSize="12" Foreground="{DynamicResource SuccessBrush}" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Активных проектов -->
+                <Border Grid.Column="1" Style="{StaticResource CardBorder}" Margin="4,0,4,0">
+                    <StackPanel>
+                        <TextBlock Text="📁" FontSize="24" Margin="0,0,0,8"/>
+                        <TextBlock Text="8" Style="{StaticResource H1Text}" Foreground="{DynamicResource DarkTextBrush}"/>
+                        <TextBlock Text="активных проектов" Style="{StaticResource H4Text}"/>
+                        <TextBlock Text="из 12" FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Средний процент -->
+                <Border Grid.Column="2" Style="{StaticResource CardBorder}" Margin="4,0,4,0">
+                    <StackPanel>
+                        <TextBlock Text="📈" FontSize="24" Margin="0,0,0,8"/>
+                        <TextBlock Text="72.3%" Style="{StaticResource H1Text}" Foreground="{DynamicResource PrimaryBrush}"/>
+                        <TextBlock Text="средний процент" Style="{StaticResource H4Text}"/>
+                        <TextBlock Text="по ТЗ" FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Завершено -->
+                <Border Grid.Column="3" Style="{StaticResource CardBorder}" Margin="8,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="✅" FontSize="24" Margin="0,0,0,8"/>
+                        <TextBlock Text="4" Style="{StaticResource H1Text}" Foreground="{DynamicResource DarkTextBrush}"/>
+                        <TextBlock Text="завершено" Style="{StaticResource H4Text}"/>
+                        <TextBlock Text="проектов" FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Ярус 2: График прогресса -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,0,0,20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="📊 Прогресс стажёров" Style="{StaticResource H2Text}" VerticalAlignment="Center"/>
+                        <Button Content="Месяц ▼" Style="{StaticResource GhostButton}" HorizontalAlignment="Right"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="0,10,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="12" Height="12" Background="{DynamicResource PrimaryBrush}" CornerRadius="2" Margin="0,0,6,0"/>
+                            <TextBlock Text="% по ТЗ" FontSize="12" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,15,0"/>
+                            <Border Width="12" Height="12" Background="{DynamicResource SuccessBrush}" CornerRadius="2" Margin="0,0,6,0"/>
+                            <TextBlock Text="% по эталону" FontSize="12" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Заглушка графика — полигон -->
+                    <Border Grid.Row="2" Background="#F9FAFB" CornerRadius="8" Margin="0,10,0,0">
+                        <Canvas>
+                            <!-- Линия ТЗ (синяя) -->
+                            <Polyline Points="20,150 120,120 220,100 320,80 420,70 520,50 620,60 720,40"
+                                      Stroke="{DynamicResource PrimaryBrush}" StrokeThickness="2.5"
+                                      Fill="Transparent"/>
+                            <!-- Линия эталона (зелёная) -->
+                            <Polyline Points="20,140 120,110 220,90 320,85 420,60 520,40 620,35 720,25"
+                                      Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5"
+                                      Fill="Transparent"/>
+                        </Canvas>
+                    </Border>
+
+                    <Grid Grid.Row="3" Margin="0,5,0,0">
+                        <TextBlock Text="Пн" FontSize="10" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        <TextBlock Text="Ср" FontSize="10" Foreground="{DynamicResource SecondaryTextBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Пт" FontSize="10" Foreground="{DynamicResource SecondaryTextBrush}" HorizontalAlignment="Right"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- Ярус 3: Таблица стажёров -->
+            <Border Grid.Row="3" Style="{StaticResource CardBorder}" Margin="0,0,0,20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="👥 Мои стажёры" Style="{StaticResource H2Text}"/>
+                        <Button Content="Все ▼" Style="{StaticResource GhostButton}" HorizontalAlignment="Right"/>
+                    </Grid>
+
+                    <!-- Заглушка таблицы -->
+                    <Border Grid.Row="2" Style="{StaticResource DataGridCardBorder}" Margin="0,10,0,0">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <DataGrid x:Name="TraineesGrid"
+                                      Style="{StaticResource CustomDataGridStyle}"
+                                      AutoGenerateColumns="False"
+                                      IsReadOnly="True"
+                                      SelectionMode="Single"
+                                      RowHeight="44">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Имя" Width="150" Binding="{Binding FullName}"/>
+                                    <DataGridTextColumn Header="Проект" Width="150" Binding="{Binding ProjectTitle}"/>
+                                    <DataGridTextColumn Header="Попытки" Width="80" Binding="{Binding Attempts}"/>
+                                    <DataGridTextColumn Header="% ТЗ" Width="80" Binding="{Binding TzPercent}"/>
+                                    <DataGridTextColumn Header="% Эталон" Width="80" Binding="{Binding ReferencePercent}"/>
+                                    <DataGridTemplateColumn Header="Статус" Width="80">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Border CornerRadius="8" Padding="6,3"
+                                                        Background="{Binding StatusColor}">
+                                                    <TextBlock Text="{Binding StatusText}"
+                                                               FontSize="12" FontWeight="SemiBold"
+                                                               Foreground="White"
+                                                               HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Ярус 4: Последние нарушения + Топ -->
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Последние нарушения -->
+                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Margin="0,0,8,0">
+                    <StackPanel>
+                        <TextBlock Text="🔔 Последние нарушения" Style="{StaticResource H2Text}" Margin="0,0,0,10"/>
+
+                        <Border Background="{DynamicResource DangerBgBrush}" CornerRadius="8" Padding="10,8" Margin="0,0,0,6">
+                            <TextBlock Text="🔴 Иванов — сложность метода 47" FontSize="13" Foreground="{DynamicResource DangerBrush}"/>
+                        </Border>
+                        <Border Background="{DynamicResource DangerBgBrush}" CornerRadius="8" Padding="10,8" Margin="0,0,0,6">
+                            <TextBlock Text="🔴 Сидоров — нарушение UI→DAL" FontSize="13" Foreground="{DynamicResource DangerBrush}"/>
+                        </Border>
+                        <Border Background="{DynamicResource WarningBgBrush}" CornerRadius="8" Padding="10,8">
+                            <TextBlock Text="🟡 Петров — методов больше 68" FontSize="13" Foreground="{DynamicResource WarningBrush}"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Лучшие стажёры -->
+                <Border Grid.Column="1" Style="{StaticResource CardBorder}" Margin="8,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="🏆 Лучшие стажёры" Style="{StaticResource H2Text}" Margin="0,0,0,10"/>
+
+                        <Border Background="{DynamicResource InfoBgBrush}" CornerRadius="8" Padding="10,8" Margin="0,0,0,6">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🥇" FontSize="18" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <TextBlock Text="Петров — 95%" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="{DynamicResource InfoBgBrush}" CornerRadius="8" Padding="10,8" Margin="0,0,0,6">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🥈" FontSize="18" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <TextBlock Text="Иванов — 82%" FontSize="13" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="{DynamicResource InfoBgBrush}" CornerRadius="8" Padding="10,8">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🥉" FontSize="18" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <TextBlock Text="Ахметов — 76%" FontSize="13" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

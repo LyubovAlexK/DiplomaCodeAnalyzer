@@ -2,10 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SimbirSoftCodeAnalyzer.Views"
-        Title="SimbirSoft Code Analyzer"
+        Title="SimbirSoft Анализатор кода"
         MinHeight="700" MinWidth="1000"
         Height="700" Width="1000"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Icon="/Resources/Images/logo-simbirsoft.png">
 
     <Grid>
         <MediaElement x:Name="BackgroundVideo"

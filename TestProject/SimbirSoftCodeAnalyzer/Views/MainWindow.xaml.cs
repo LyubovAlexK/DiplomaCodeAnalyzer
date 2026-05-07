@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using AdminHomePage = SimbirSoftCodeAnalyzer.Views.Pages.Admin.AdminHomePage;
 
 namespace SimbirSoftCodeAnalyzer.Views
@@ -19,7 +21,7 @@ namespace SimbirSoftCodeAnalyzer.Views
             InitializeComponent();
             Loaded += MainWindow_Loaded;
         }
-
+        private bool _isSidebarCollapsed = false;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             SetupMenuForRole();
@@ -30,7 +32,6 @@ namespace SimbirSoftCodeAnalyzer.Views
         {
             var roleId = App.CurrentUser?.RoleId;
 
-            // Скрываем всё
             BtnUsers.Visibility = Visibility.Collapsed;
             BtnSystemResources.Visibility = Visibility.Collapsed;
             BtnCheckManagement.Visibility = Visibility.Collapsed;
@@ -41,18 +42,44 @@ namespace SimbirSoftCodeAnalyzer.Views
             switch (roleId)
             {
                 case 1: // Админ
+                    BtnHome.Content = "Главное меню";
                     BtnUsers.Visibility = Visibility.Visible;
                     BtnSystemResources.Visibility = Visibility.Visible;
+                    BtnSystemResources.Content = "Системные ресурсы";
                     break;
                 case 2: // Наставник
+                    BtnHome.Content = "Главное меню";
                     BtnCheckManagement.Visibility = Visibility.Visible;
+                    BtnSystemResources.Visibility = Visibility.Visible;
+                    BtnSystemResources.Content = "📝 Технические задания";
                     BtnResults.Visibility = Visibility.Visible;
                     break;
                 case 3: // Стажёр
+                    BtnHome.Content = "Главное меню";
                     BtnMyCode.Visibility = Visibility.Visible;
                     BtnMyResults.Visibility = Visibility.Visible;
                     break;
             }
+        }
+
+        private void CollapseSidebar_Click(object sender, RoutedEventArgs e)
+        {
+            _isSidebarCollapsed = true;
+            SidebarColumn.Width = new GridLength(60);
+            MenuPanel.Visibility = Visibility.Collapsed;
+            LogoPanel.Visibility = Visibility.Collapsed;
+            BottomPanel.Visibility = Visibility.Collapsed;
+            ExpandPillButton.Visibility = Visibility.Visible;
+        }
+
+        private void ExpandSidebar_Click(object sender, RoutedEventArgs e)
+        {
+            _isSidebarCollapsed = false;
+            SidebarColumn.Width = new GridLength(280);
+            MenuPanel.Visibility = Visibility.Visible;
+            LogoPanel.Visibility = Visibility.Visible;
+            BottomPanel.Visibility = Visibility.Visible;
+            ExpandPillButton.Visibility = Visibility.Collapsed;
         }
 
         private void ShowHomePage()
@@ -99,23 +126,44 @@ namespace SimbirSoftCodeAnalyzer.Views
         }
 
         private void SetActiveButton(string tag)
-{
-    var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnCheckManagement, BtnResults, BtnMyCode, BtnMyResults, BtnSettings };
+        {
+            var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnCheckManagement, BtnResults, BtnMyCode, BtnMyResults, BtnSettings };
 
-    foreach (var btn in allButtons)
-    {
-        if (btn.Tag?.ToString() == tag)
-        {
-            btn.Style = (Style)FindResource("SidebarActiveItemButton");
-            btn.Foreground = Brushes.White;
+            foreach (var btn in allButtons)
+            {
+                if (btn.Tag?.ToString() == tag)
+                {
+                    btn.Style = (Style)FindResource("SidebarActiveItemButton");
+                    btn.Foreground = Brushes.White;
+                    SetIconColor(btn, "#FFFFFF");
+                }
+                else
+                {
+                    btn.Style = (Style)FindResource("SidebarItemButton");
+                    btn.Foreground = (Brush)FindResource("SecondaryTextBrush");
+                    SetIconColor(btn, "#8B96A0");
+                }
+            }
         }
-        else
+
+        private void SetIconColor(Button button, string colorHex)
         {
-            btn.Style = (Style)FindResource("SidebarItemButton");
-            btn.Foreground = (Brush)FindResource("SecondaryTextBrush");
+            var color = (Color)ColorConverter.ConvertFromString(colorHex);
+            var brush = new SolidColorBrush(color);
+
+            // Ищем Rectangle внутри кнопки
+            if (button.Content is StackPanel panel)
+            {
+                foreach (var child in panel.Children)
+                {
+                    if (child is Rectangle rect)
+                    {
+                        rect.Fill = brush;
+                        break;
+                    }
+                }
+            }
         }
-    }
-}
 
         // Управление окном
         private void Header_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

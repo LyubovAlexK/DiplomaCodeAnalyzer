@@ -52,7 +52,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Admin {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;component/views/pages/admin/adminhomepage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;V1.0.0.0;component/views/pages/admin/adminhomepage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Views\Pages\Admin\AdminHomePage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

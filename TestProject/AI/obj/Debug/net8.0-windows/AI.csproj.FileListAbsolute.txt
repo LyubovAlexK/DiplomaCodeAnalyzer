@@ -9,6 +9,7 @@ D:\DITI\Diploma_app\TestProject\AI\obj\Debug\net8.0-windows\AI.GeneratedMSBuildE
 D:\DITI\Diploma_app\TestProject\AI\obj\Debug\net8.0-windows\AI.AssemblyInfoInputs.cache
 D:\DITI\Diploma_app\TestProject\AI\obj\Debug\net8.0-windows\AI.AssemblyInfo.cs
 D:\DITI\Diploma_app\TestProject\AI\obj\Debug\net8.0-windows\AI.csproj.CoreCompileInputs.cache
+D:\DITI\Diploma_app\TestProject\AI\obj\Debug\net8.0-windows\AI.sourcelink.json
 D:\DITI\Diploma_app\TestProject\AI\obj\Debug\net8.0-windows\AI.csproj.Up2Date
 D:\DITI\Diploma_app\TestProject\AI\obj\Debug\net8.0-windows\AI.dll
 D:\DITI\Diploma_app\TestProject\AI\obj\Debug\net8.0-windows\refint\AI.dll

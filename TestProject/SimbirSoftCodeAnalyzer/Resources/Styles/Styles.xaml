@@ -9,8 +9,8 @@
 
     <!-- Primary Accent -->
     <Color x:Key="PrimaryLightColor">#77C3FD</Color>
-    <Color x:Key="PrimaryColor">#6D7CFD</Color>
-    <Color x:Key="PrimaryDarkColor">#6375F0</Color>
+    <Color x:Key="PrimaryColor">#5e9cfa</Color>
+    <Color x:Key="PrimaryDarkColor">#6DABFB</Color>
 
     <!-- Accent / Secondary -->
     <Color x:Key="AccentLightColor">#B3AAF0</Color>
@@ -21,12 +21,16 @@
     <Color x:Key="SecondaryTextColor">#8B96A0</Color>
 
     <!-- Semantic / Status Colors -->
-    <Color x:Key="SuccessColor">#22C55E</Color>
-    <Color x:Key="SuccessBgColor">#DCFCE7</Color>
+    <Color x:Key="SuccessColor">#10B981</Color>
+    <Color x:Key="SuccessBgColor">#D1FAE5</Color>
     <Color x:Key="WarningColor">#F59E0B</Color>
     <Color x:Key="WarningBgColor">#FEF3C7</Color>
     <Color x:Key="DangerColor">#EF4444</Color>
     <Color x:Key="DangerBgColor">#FEE2E2</Color>
+    <Color x:Key="InfoColor">#3B82F6</Color>
+    <Color x:Key="InfoBgColor">#DBEAFE</Color>
+    <Color x:Key="NeutralColor">#9CA3AF</Color>
+    <Color x:Key="NeutralBgColor">#F3F4F6</Color>
 
     <!-- Surfaces & Borders -->
     <Color x:Key="GlobalBackgroundColor">#F4F6F8</Color>
@@ -55,12 +59,6 @@
     <SolidColorBrush x:Key="AccentPaleBrush" Color="{DynamicResource AccentPaleColor}"/>
     <SolidColorBrush x:Key="DarkTextBrush" Color="{DynamicResource DarkTextColor}"/>
     <SolidColorBrush x:Key="SecondaryTextBrush" Color="{DynamicResource SecondaryTextColor}"/>
-    <SolidColorBrush x:Key="SuccessBrush" Color="{DynamicResource SuccessColor}"/>
-    <SolidColorBrush x:Key="SuccessBgBrush" Color="{DynamicResource SuccessBgColor}"/>
-    <SolidColorBrush x:Key="WarningBrush" Color="{DynamicResource WarningColor}"/>
-    <SolidColorBrush x:Key="WarningBgBrush" Color="{DynamicResource WarningBgColor}"/>
-    <SolidColorBrush x:Key="DangerBrush" Color="{DynamicResource DangerColor}"/>
-    <SolidColorBrush x:Key="DangerBgBrush" Color="{DynamicResource DangerBgColor}"/>
     <SolidColorBrush x:Key="GlobalBackgroundBrush" Color="{DynamicResource GlobalBackgroundColor}"/>
     <SolidColorBrush x:Key="CardBackgroundBrush" Color="{DynamicResource CardBackgroundColor}"/>
     <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource BorderColor}"/>
@@ -71,6 +69,16 @@
     <SolidColorBrush x:Key="SidebarTextBrush" Color="{DynamicResource SidebarTextColor}"/>
     <SolidColorBrush x:Key="SidebarHoverBrush" Color="{DynamicResource SidebarHoverColor}"/>
     <SolidColorBrush x:Key="SidebarActiveBrush" Color="{DynamicResource SidebarActiveColor}"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="{DynamicResource SuccessColor}"/>
+    <SolidColorBrush x:Key="SuccessBgBrush" Color="{DynamicResource SuccessBgColor}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{DynamicResource WarningColor}"/>
+    <SolidColorBrush x:Key="WarningBgBrush" Color="{DynamicResource WarningBgColor}"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{DynamicResource DangerColor}"/>
+    <SolidColorBrush x:Key="DangerBgBrush" Color="{DynamicResource DangerBgColor}"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="{DynamicResource InfoColor}"/>
+    <SolidColorBrush x:Key="InfoBgBrush" Color="{DynamicResource InfoBgColor}"/>
+    <SolidColorBrush x:Key="NeutralBrush" Color="{DynamicResource NeutralColor}"/>
+    <SolidColorBrush x:Key="NeutralBgBrush" Color="{DynamicResource NeutralBgColor}"/>
 
     <!-- ========================================== -->
     <!--            РАЗМЕРЫ (SCALES)                -->
@@ -844,21 +852,22 @@
                         CornerRadius="10"
                         Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalAlignment="Center"
-                                      TextElement.Foreground="{TemplateBinding Foreground}"
-                                      TextElement.FontFamily="{TemplateBinding FontFamily}"
-                                      TextElement.FontSize="{TemplateBinding FontSize}"
-                                      TextElement.FontWeight="{TemplateBinding FontWeight}"/>
+                                      VerticalAlignment="Center"/>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#F5F7FA"/>
-                            <Setter Property="Foreground" Value="{DynamicResource DarkTextBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
+                    <!-- БЕЗ триггеров — нет эффекта при наведении -->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Стиль иконки меню с динамическим цветом -->
+    <Style x:Key="MenuIconStyle" TargetType="Rectangle">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="0,0,8,0"/>
+        <Setter Property="Fill" Value="{DynamicResource SecondaryTextBrush}"/>
+        <Setter Property="RadiusX" Value="0"/>
+        <Setter Property="RadiusY" Value="0"/>
     </Style>
 
     <!-- Активный пункт меню -->
@@ -866,6 +875,7 @@
         <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Tag" Value="Active"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="White"/>

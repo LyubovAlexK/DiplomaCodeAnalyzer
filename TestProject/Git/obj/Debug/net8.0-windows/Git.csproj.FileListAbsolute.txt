@@ -7,6 +7,7 @@ D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.GeneratedMSBuil
 D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.AssemblyInfoInputs.cache
 D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.AssemblyInfo.cs
 D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.csproj.CoreCompileInputs.cache
+D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.sourcelink.json
 D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.dll
 D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\refint\Git.dll
 D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.pdb

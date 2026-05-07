@@ -53,9 +53,7 @@ namespace Analyzers.Services
             return result;
         }
 
-        /// <summary>
-        /// Анализ одного метода — все метрики за один проход.
-        /// </summary>
+        //Анализ одного метода — все метрики за один проход
         private MethodMetrics AnalyzeMethodFast(MethodDeclarationSyntax method, string filePath)
         {
             var className = method.Ancestors().OfType<ClassDeclarationSyntax>().FirstOrDefault()?.Identifier.Text ?? "Unknown";
@@ -118,9 +116,8 @@ namespace Analyzers.Services
             };
         }
 
-        /// <summary>
-        /// Является ли узел точкой ветвления.
-        /// </summary>
+
+        //Является ли узел точкой ветвления
         private bool IsBranchPoint(SyntaxNode node)
         {
             return node is IfStatementSyntax ||
@@ -133,6 +130,62 @@ namespace Analyzers.Services
                    (node is BinaryExpressionSyntax binary &&
                        (binary.IsKind(SyntaxKind.LogicalAndExpression) ||
                         binary.IsKind(SyntaxKind.LogicalOrExpression)));
+        }
+
+        // Анализ эталонного проекта
+        public async Task<ReferenceStructure> AnalyzeProjectStructureAsync(string projectPath)
+        {
+            var structure = new ReferenceStructure();
+            var excludeFolders = new[] { "bin", "obj", "node_modules", ".git", "packages" };
+            var csFiles = Directory.GetFiles(projectPath, "*.cs", SearchOption.AllDirectories)
+                .Where(f => !excludeFolders.Any(ex => f.Contains($"\\{ex}\\") || f.Contains($"/{ex}/")))
+                .ToArray();
+
+            int totalMethods = 0;
+            double totalComplexity = 0;
+
+            foreach (var file in csFiles)
+            {
+                var sourceCode = await File.ReadAllTextAsync(file);
+                var tree = CSharpSyntaxTree.ParseText(sourceCode);
+                var root = await tree.GetRootAsync();
+
+                var classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
+                foreach (var @class in classes)
+                {
+                    //Защита от зависимости версий (слева null)
+                    var ns = @class.Ancestors().OfType<NamespaceDeclarationSyntax>().FirstOrDefault()?.Name.ToString()
+                        ?? @class.Ancestors().OfType<FileScopedNamespaceDeclarationSyntax>().FirstOrDefault()?.Name.ToString()
+                        ?? "Global";
+                    var refClass = new ReferenceClass
+                    {
+                        Namespace = ns,
+                        ClassName = @class.Identifier.Text
+                    };
+
+                    var methods = @class.DescendantNodes().OfType<MethodDeclarationSyntax>();
+                    foreach (var method in methods)
+                    {
+                        var metrics = AnalyzeMethodFast(method, file);
+                        refClass.Methods.Add(new ReferenceMethod
+                        { 
+                            MethodName = method.Identifier.Text,
+                            CyclomaticComplexity = metrics.CyclomaticComplexity,
+                            ExecutableLines = metrics.ExecutableLines
+                        });
+
+                        totalMethods++;
+                        totalComplexity += metrics.CyclomaticComplexity;
+                    }
+                    structure.Classes.Add(refClass);
+                }
+            }
+
+            structure.TotalClasses = structure.Classes.Count;
+            structure.TotalMethod = totalMethods;
+            structure.AvgCyclomaticComplexity = totalComplexity > 0 ? totalComplexity / totalMethods : 0;
+        
+            return structure;
         }
     }
 }
