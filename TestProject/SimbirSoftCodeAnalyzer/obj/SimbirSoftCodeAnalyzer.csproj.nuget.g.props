@@ -38,6 +38,7 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Pkgvswhere Condition=" '$(Pkgvswhere)' == '' ">C:\Users\Люба\.nuget\packages\vswhere\2.8.4</Pkgvswhere>
+    <PkgOxyPlot_Wpf Condition=" '$(PkgOxyPlot_Wpf)' == '' ">C:\Users\Люба\.nuget\packages\oxyplot.wpf\2.2.0</PkgOxyPlot_Wpf>
     <PkgNuGet_CommandLine Condition=" '$(PkgNuGet_CommandLine)' == '' ">C:\Users\Люба\.nuget\packages\nuget.commandline\5.11.5</PkgNuGet_CommandLine>
     <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\Люба\.nuget\packages\microsoft.codeanalysis.analyzers\5.3.0-2.25625.1</PkgMicrosoft_CodeAnalysis_Analyzers>
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\Люба\.nuget\packages\microsoft.entityframeworkcore.tools\8.0.0</PkgMicrosoft_EntityFrameworkCore_Tools>
