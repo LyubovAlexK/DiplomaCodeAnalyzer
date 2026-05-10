@@ -1,60 +1,68 @@
-﻿using System;
+﻿using Analyzers.Services;
+using Core.Data;
+using Core.Models;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Analyzers.Services;
-using Core.Data;
-using Core.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using Border = System.Windows.Controls.Border;
+using Color = System.Windows.Media.Color;
+using FontFamily = System.Windows.Media.FontFamily;
+using Paragraph = System.Windows.Documents.Paragraph;
+using Run = System.Windows.Documents.Run;
+using Style = System.Windows.Style;
 
 namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
 {
-    public partial class MyCodePage : System.Windows.Controls.UserControl
+    public partial class MyCodePage : UserControl
     {
         private string? _selectedPath;
+        private List<GraphNodeVisual> _nodes = new();
+        private List<GraphEdgeVisual> _edges = new();
+        private GraphNodeVisual? _selectedNode;
+        private bool _isDragging;
+        private Point _dragStart;
+        private double _dragOffsetX, _dragOffsetY;
+        private double _zoom = 1.0;
+        private const double NODE_SIZE = 14;
+        private const double SELECTED_SIZE = 20;
 
         public MyCodePage()
         {
             InitializeComponent();
-            LoadProjects();
+            Loaded += async (s, e) => await LoadProjectsAsync();
         }
 
-        private async void LoadProjects()
+        private async Task LoadProjectsAsync()
         {
             try
             {
                 var db = App.GetService<AppDbContext>();
-                var traineeId = App.CurrentUser?.UserId ?? 0;
+                var myId = App.CurrentUser?.UserId ?? 0;
                 var projects = await db.Projects
-                    .Where(p => p.TraineeId == traineeId && p.IsArchived != true)
+                    .Where(p => p.TraineeId == myId && p.IsArchived != true)
                     .ToListAsync();
-
-                ProjectComboBox.Items.Clear();
-                foreach (var project in projects)
-                {
-                    ProjectComboBox.Items.Add(new ComboBoxItem
-                    {
-                        Content = project.Title,
-                        Tag = project.ProjectId
-                    });
-                }
-                ProjectComboBox.Items.Add(new ComboBoxItem { Content = "Загрузить новый проект..." });
-                ProjectComboBox.SelectedIndex = 0;
+                ProjectCombo.Items.Clear();
+                foreach (var p in projects)
+                    ProjectCombo.Items.Add(new ComboBoxItem { Content = p.Title, Tag = p.ProjectId });
+                if (ProjectCombo.Items.Count > 0) ProjectCombo.SelectedIndex = 0;
             }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Ошибка загрузки проектов: {ex.Message}");
-            }
+            catch { }
         }
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new Microsoft.Win32.OpenFolderDialog
-            {
-                Title = "Выберите папку с проектом стажёра"
-            };
-
+            var dialog = new Microsoft.Win32.OpenFolderDialog { Title = "Выберите папку с проектом" };
             if (dialog.ShowDialog() == true)
             {
                 _selectedPath = dialog.FolderName;
@@ -66,104 +74,41 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
         {
             if (string.IsNullOrEmpty(_selectedPath))
             {
-                System.Windows.MessageBox.Show("Выберите папку с проектом", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Выберите папку с проектом");
                 return;
             }
-
-            RunButton.IsEnabled = false;
-            ProgressPanel.Visibility = Visibility.Visible;
-            ResultPanel.Visibility = Visibility.Collapsed;
-
-            try
-            {
-                await RunAnalysisAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                RunButton.IsEnabled = true;
-            }
+            HintText.Visibility = Visibility.Collapsed;
+            ProgressBorder.Visibility = Visibility.Visible;
+            try { await RunAnalysisAsync(); }
+            catch (Exception ex) { MessageBox.Show($"Ошибка: {ex.Message}"); }
+            finally { ProgressBorder.Visibility = Visibility.Collapsed; }
+            
         }
 
         private async Task RunAnalysisAsync()
         {
             var db = App.GetService<AppDbContext>();
-            var projectValidator = App.GetService<ProjectValidator>();
             var roslynAnalyzer = App.GetService<RoslynSyntaxAnalyzer>();
             var roslynResultService = App.GetService<RoslynResultService>();
+            var myId = App.CurrentUser?.UserId ?? 0;
 
-            var traineeId = App.CurrentUser?.UserId ?? 0;
-
-            // === Проверяем/создаём Specification ===
-            StageText.Text = "Подготовка...";
+            StageText.Text = "Анализ кода...";
             AnalysisProgress.Value = 0;
-
-            var spec = await db.Specifications.FirstOrDefaultAsync();
-            if (spec == null)
-            {
-                spec = new ProjectSpecification
-                {
-                    Title = "Тестовое ТЗ",
-                    CreatedBy = traineeId,
-                    IsActive = true,
-                    CreatedAt = DateTime.Now
-                };
-                db.Specifications.Add(spec);
-                await db.SaveChangesAsync();
-            }
-
-            // === Проверяем/создаём Project ===
-            var project = await db.Projects.FirstOrDefaultAsync(p => p.TraineeId == traineeId);
-            if (project == null)
-            {
-                project = new Project
-                {
-                    Title = "Тестовый проект",
-                    TraineeId = traineeId,
-                    SpecificationId = spec.SpecificationId,
-                    CreatedBy = traineeId,
-                    IsCompleted = false,
-                    IsArchived = false,
-                    CreatedAt = DateTime.Now
-                };
-                db.Projects.Add(project);
-                await db.SaveChangesAsync();
-            }
-
-            // Этап 1: Проверка на пустой проект (25%)
-            StageText.Text = "Проверка проекта...";
             await Task.Delay(300);
 
-            var emptyCheck = projectValidator.CheckIfEmpty(_selectedPath!);
-            AnalysisProgress.Value = 25;
-
-            if (emptyCheck.IsEmpty)
-            {
-                StatusText.Text = "Проект пустой";
-                ResultPanel.Visibility = Visibility.Visible;
-                ResultTitle.Text = "Ошибка";
-                ResultText.Text = emptyCheck.Reason;
-                return;
-            }
-
-            // Этап 2: Roslyn-анализ (50%)
-            StageText.Text = "Анализ кода (Roslyn)...";
-            await Task.Delay(200);
-            var roslynResult = await roslynAnalyzer.AnalyzeProjectAsync(_selectedPath!);
+            var result = await roslynAnalyzer.AnalyzeProjectAsync(_selectedPath!);
             AnalysisProgress.Value = 50;
 
-            // Этап 3: Сохранение (75%)
-            StageText.Text = "Сохранение результатов...";
-            await Task.Delay(200);
+            var selectedProject = ProjectCombo.SelectedItem as ComboBoxItem;
+            int projectId = (int)(selectedProject?.Tag ?? 1);
+            var project = await db.Projects.FindAsync(projectId);
+            int specId = project?.SpecificationId ?? 4;
 
             var session = new SessionAnalysis
             {
-                TraineeId = traineeId,
-                ProjectId = project.ProjectId,
-                SpecificationId = spec.SpecificationId,
+                TraineeId = myId,
+                ProjectId = projectId,
+                SpecificationId = specId,
                 StartTime = DateTime.Now,
                 Status = "InProgress",
                 IsAiAvailable = false,
@@ -171,31 +116,609 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             };
             db.SessionAnalysis.Add(session);
             await db.SaveChangesAsync();
-
-            await roslynResultService.SaveResultsAsync(session.SessionId, roslynResult);
-            AnalysisProgress.Value = 75;
-
-            // Этап 4: Завершение (100%)
-            StageText.Text = "Завершение...";
-            await Task.Delay(200);
-
-            session.EndTime = DateTime.Now;
-            session.Status = "Completed";
-            session.OverallMatchPercent = roslynResult.TotalMethods > 0
-                ? 100 - (decimal)roslynResult.MethodsExceedingComplexity / roslynResult.TotalMethods * 100
-                : 100;
+            await roslynResultService.SaveResultsAsync(session.SessionId, result);
+            session.EndTime = DateTime.Now; session.Status = "Completed";
+            session.OverallMatchPercent = result.TotalMethods > 0
+                ? 100 - (decimal)result.MethodsExceedingComplexity / result.TotalMethods * 100 : 100;
             await db.SaveChangesAsync();
-
             AnalysisProgress.Value = 100;
-            StatusText.Text = "Готово";
-
-            // Результат
-            ResultPanel.Visibility = Visibility.Visible;
-            ResultTitle.Text = "Проверка завершена";
-            ResultText.Text = $"Всего методов: {roslynResult.TotalMethods}\n" +
-                              $"Средняя сложность: {roslynResult.AvgCyclomaticComplexity:F1}\n" +
-                              $"Методов с превышением сложности: {roslynResult.MethodsExceedingComplexity}\n" +
-                              $"Исполняемых строк (сред.): {roslynResult.AvgExecutableLines:F1}";
+            await BuildGraphAsync(_selectedPath!);
+            // Показать панели графа и информации
+            GraphBorder.Visibility = Visibility.Visible;
+            InfoPanel.Visibility = Visibility.Visible;
+            HintText.Visibility = Visibility.Collapsed;
         }
+
+        private async Task BuildGraphAsync(string projectPath)
+        {
+            GraphCanvas.Children.Clear();
+            _nodes.Clear();
+            _edges.Clear();
+
+            var graphService = new GraphBuilderService();
+            var graph = await graphService.BuildGraphAsync(projectPath);
+
+            foreach (var node in graph.Nodes)
+            {
+                var visual = new GraphNodeVisual
+                {
+                    Id = node.Id,
+                    Name = node.Name,
+                    FullName = node.FullName,
+                    Kind = node.Kind,
+                    X = 350 + Random.Shared.Next(-200, 200),
+                    Y = 250 + Random.Shared.Next(-200, 200),
+                    HasViolation = node.HasViolations,
+                    FilePath = node.FilePath,
+                    LineNumber = node.LineNumber,
+                    MethodCount = node.MethodCount,
+                    Complexity = node.CyclomaticComplexity,
+                    Category = node.Category
+                };
+                _nodes.Add(visual);
+            }
+
+            LayoutNodes(graph);
+
+            foreach (var n in _nodes) DrawNode(n);
+
+            foreach (var edge in graph.Edges)
+            {
+                var s = _nodes.FirstOrDefault(n => n.Id == edge.SourceId);
+                var t = _nodes.FirstOrDefault(n => n.Id == edge.TargetId);
+                if (s != null && t != null)
+                {
+                    var ve = new GraphEdgeVisual { Source = s, Target = t, RelationType = edge.RelationType, IsViolation = edge.IsViolation };
+                    _edges.Add(ve);
+                    DrawEdge(ve);
+                }
+            }
+
+            FitCanvasToNodes();
+            ScrollToCenter();
+
+            // Обогащаем граф метриками из Roslyn
+            var roslynAnalyzer = App.GetService<RoslynSyntaxAnalyzer>();
+            var metricsResult = await roslynAnalyzer.AnalyzeProjectAsync(projectPath);
+
+            foreach (var method in metricsResult.Methods)
+            {
+                var node = _nodes.FirstOrDefault(n =>
+                    n.Name == method.ClassName ||
+                    n.FullName.EndsWith("." + method.ClassName) ||
+                    method.ClassName.EndsWith("." + n.Name));
+
+                if (node != null)
+                {
+                    node.Complexity = Math.Max(node.Complexity, method.CyclomaticComplexity);
+                    if (method.CyclomaticComplexity > 10)
+                        node.HasViolation = true;
+                }
+            }
+        }
+
+        private void FitCanvasToNodes()
+        {
+            if (_nodes.Count == 0) return;
+
+            double padding = 100;
+            double minX = double.MaxValue, minY = double.MaxValue;
+            double maxX = double.MinValue, maxY = double.MinValue;
+
+            foreach (var node in _nodes)
+            {
+                if (node.X < minX) minX = node.X;
+                if (node.Y < minY) minY = node.Y;
+                if (node.X > maxX) maxX = node.X;
+                if (node.Y > maxY) maxY = node.Y;
+            }
+
+            minX -= padding; minY -= padding; maxX += padding; maxY += padding;
+
+            double width = Math.Max(800, maxX - minX);
+            double height = Math.Max(600, maxY - minY);
+
+            GraphCanvas.Width = width;
+            GraphCanvas.Height = height;
+
+            double offsetX = minX < 0 ? -minX : 0;
+            double offsetY = minY < 0 ? -minY : 0;
+
+            if (offsetX > 0 || offsetY > 0)
+            {
+                foreach (var node in _nodes)
+                {
+                    node.X += offsetX;
+                    node.Y += offsetY;
+                    double size = node.IsSelected ? 20 : 14;
+                    if (node.DotVisual != null)
+                    {
+                        Canvas.SetLeft(node.DotVisual, node.X - size / 2);
+                        Canvas.SetTop(node.DotVisual, node.Y - size / 2);
+                    }
+                    if (node.LabelVisual != null)
+                    {
+                        Canvas.SetLeft(node.LabelVisual, node.X + size / 2 + 4);
+                        Canvas.SetTop(node.LabelVisual, node.Y - 8);
+                    }
+                }
+                foreach (var edge in _edges)
+                    if (edge.Visual != null) UpdateLinePosition(edge.Visual, edge);
+            }
+        }
+
+        private void ScrollToCenter()
+        {
+            var scrollViewer = GraphCanvas.Parent as ScrollViewer;
+            if (scrollViewer == null || _nodes.Count == 0) return;
+            GraphCanvas.UpdateLayout();
+            scrollViewer.UpdateLayout();
+            double centerX = (GraphCanvas.Width - scrollViewer.ViewportWidth) / 2;
+            double centerY = (GraphCanvas.Height - scrollViewer.ViewportHeight) / 2;
+            scrollViewer.ScrollToHorizontalOffset(Math.Max(0, centerX));
+            scrollViewer.ScrollToVerticalOffset(Math.Max(0, centerY));
+        }
+
+        private void LayoutNodes(ProjectGraph graph)
+        {
+            var nodeDict = _nodes.ToDictionary(n => n.Id);
+            for (int iter = 0; iter < 5; iter++)
+            {
+                for (int i = 0; i < _nodes.Count; i++)
+                {
+                    for (int j = i + 1; j < _nodes.Count; j++)
+                    {
+                        double dx = _nodes[i].X - _nodes[j].X;
+                        double dy = _nodes[i].Y - _nodes[j].Y;
+                        double dist = Math.Max(1, Math.Sqrt(dx * dx + dy * dy));
+                        double force = 5000 / (dist * dist);
+                        _nodes[i].X += force * dx / dist + (Random.Shared.NextDouble() - 0.5) * 2;
+                        _nodes[i].Y += force * dy / dist + (Random.Shared.NextDouble() - 0.5) * 2;
+                        _nodes[j].X -= force * dx / dist + (Random.Shared.NextDouble() - 0.5) * 2;
+                        _nodes[j].Y -= force * dy / dist + (Random.Shared.NextDouble() - 0.5) * 2;
+                    }
+                }
+                foreach (var edge in graph.Edges)
+                {
+                    if (nodeDict.TryGetValue(edge.SourceId, out var s) && nodeDict.TryGetValue(edge.TargetId, out var t))
+                    {
+                        double dx = t.X - s.X, dy = t.Y - s.Y;
+                        double dist = Math.Max(1, Math.Sqrt(dx * dx + dy * dy));
+                        double force = dist / 100;
+                        s.X += force * dx / dist; s.Y += force * dy / dist;
+                        t.X -= force * dx / dist; t.Y -= force * dy / dist;
+                    }
+                }
+            }
+        }
+
+        private void DrawNode(GraphNodeVisual node)
+        {
+            double size = node.IsSelected ? SELECTED_SIZE : NODE_SIZE;
+
+            Color normalColor = node.Category switch
+            {
+                "UI" => Color.FromRgb(139, 92, 246),
+                "Business" => Color.FromRgb(37, 99, 235),
+                "DataAccess" => Color.FromRgb(16, 185, 129),
+                "Data" => Color.FromRgb(245, 158, 11),
+                "Interface" => Color.FromRgb(6, 182, 212),
+                _ => Color.FromRgb(107, 114, 128)
+            };
+
+            Color color = node.IsSelected ? Color.FromRgb(245, 158, 11) :
+                          node.HasViolation ? Color.FromRgb(220, 38, 38) : normalColor;
+
+            Color glowColor = node.IsSelected ? Colors.Gold :
+                              node.HasViolation ? Colors.Red : normalColor;
+
+            var dot = new Ellipse
+            {
+                Width = size,
+                Height = size,
+                Fill = new SolidColorBrush(color),
+                Stroke = Brushes.White,
+                StrokeThickness = node.IsSelected ? 3 : 1.5,
+                Effect = new System.Windows.Media.Effects.DropShadowEffect
+                {
+                    BlurRadius = node.IsSelected ? 12 : 6,
+                    ShadowDepth = 0,
+                    Opacity = node.IsSelected ? 0.8 : 0.4,
+                    Color = glowColor
+                },
+                Tag = node,
+                Cursor = Cursors.Hand
+            };
+            dot.MouseLeftButtonDown += Node_MouseLeftButtonDown;
+            dot.MouseRightButtonDown += Node_MouseRightButtonDown;
+
+            var label = new TextBlock
+            {
+                Text = node.Name.Length > 12 ? node.Name[..12] + "…" : node.Name,
+                FontSize = node.IsSelected ? 11 : 9,
+                FontFamily = new FontFamily("Inter"),
+                FontWeight = node.IsSelected ? FontWeights.Bold : FontWeights.Normal,
+                Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#374151"))
+            };
+
+            Canvas.SetLeft(dot, node.X - size / 2);
+            Canvas.SetTop(dot, node.Y - size / 2);
+            Canvas.SetLeft(label, node.X + size / 2 + 4);
+            Canvas.SetTop(label, node.Y - 8);
+
+            GraphCanvas.Children.Add(dot);
+            GraphCanvas.Children.Add(label);
+
+            node.DotVisual = dot;
+            node.LabelVisual = label;
+        }
+
+        private void RedrawNode(GraphNodeVisual node)
+        {
+            if (node.DotVisual != null) GraphCanvas.Children.Remove(node.DotVisual);
+            if (node.LabelVisual != null) GraphCanvas.Children.Remove(node.LabelVisual);
+            DrawNode(node);
+        }
+
+        private void DrawEdge(GraphEdgeVisual edge)
+        {
+            var line = new Line
+            {
+                Stroke = edge.IsViolation
+                    ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("#DC2626"))
+                    : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#9CA3AF")),
+                StrokeThickness = edge.IsViolation ? 2 : 1,
+                StrokeDashArray = edge.IsViolation ? new DoubleCollection(new[] { 4.0, 3.0 }) : null
+            };
+            UpdateLinePosition(line, edge);
+            Canvas.SetZIndex(line, -1);
+            GraphCanvas.Children.Add(line);
+            edge.Visual = line;
+        }
+
+        private void UpdateLinePosition(Line line, GraphEdgeVisual edge)
+        {
+            line.X1 = edge.Source.X; line.Y1 = edge.Source.Y;
+            line.X2 = edge.Target.X; line.Y2 = edge.Target.Y;
+        }
+
+        private void UpdateAllEdges()
+        {
+            foreach (var edge in _edges)
+                if (edge.Visual != null) UpdateLinePosition(edge.Visual, edge);
+        }
+
+        private void SelectNode(GraphNodeVisual? node)
+        {
+            if (_selectedNode != null) { _selectedNode.IsSelected = false; RedrawNode(_selectedNode); }
+            _selectedNode = node;
+            if (_selectedNode != null) { _selectedNode.IsSelected = true; RedrawNode(_selectedNode); }
+
+            foreach (var n in _nodes)
+            {
+                if (n.DotVisual != null) n.DotVisual.Opacity = (_selectedNode == null || n == _selectedNode) ? 1.0 : 0.3;
+                if (n.LabelVisual != null) n.LabelVisual.Opacity = (_selectedNode == null || n == _selectedNode) ? 1.0 : 0.3;
+            }
+            foreach (var e in _edges)
+            {
+                if (e.Visual != null)
+                    e.Visual.Opacity = (_selectedNode == null) ? 1.0 : ((e.Source == _selectedNode || e.Target == _selectedNode) ? 1.0 : 0.15);
+            }
+            UpdateInfoPanel(node);
+        }
+
+        private void UpdateInfoPanel(GraphNodeVisual? node)
+        {
+            InfoContent.Children.Clear();
+            if (node == null)
+            {
+                PlaceholderText.Visibility = Visibility.Visible;    
+                InfoContent.Children.Add(new TextBlock
+                {
+                    Text = "Выберите класс на графе",
+                    FontSize = (double)FindResource("AppFontSizeH4"),
+                    FontFamily = new FontFamily("Inter"),
+                    Foreground = (Brush)FindResource("SecondaryTextBrush")
+                });
+                return;
+            }
+
+            PlaceholderText.Visibility = Visibility.Collapsed;
+
+            // Заголовок
+            InfoContent.Children.Add(new TextBlock
+            {
+                Text = node.Name,
+                FontSize = (double)FindResource("AppFontSizeH2"),
+                FontFamily = new FontFamily("Inter"),
+                FontWeight = FontWeights.Bold,
+                Foreground = (Brush)FindResource("PrimaryBrush"),
+                Margin = new Thickness(0, 0, 0, 12)
+            });
+
+            // Информация
+            AddInfoLine($"Тип: {node.Kind}");
+            AddInfoLine($"Категория: {GetCategoryName(node.Category)}");
+            AddInfoLine($"Методов: {node.MethodCount}");
+            AddInfoLine($"Сложность: {node.Complexity:F1} (цикломатическая)");
+            AddInfoLine($"Нарушений: {(node.HasViolation ? "Есть" : "Нет")}");
+
+            // Разделитель
+            InfoContent.Children.Add(new Border
+            {
+                Height = 1,
+                Background = (Brush)FindResource("BorderBrush"),
+                Margin = new Thickness(0, 10, 0, 12)
+            });
+
+            // Кнопка
+            var openButton = new Button
+            {
+                Content = "Открыть код",
+                Style = (Style)FindResource("OutlineButton"),
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Tag = node,
+                FontSize = (double)FindResource("AppFontSizeH4")
+            };
+            openButton.Click += OpenCodeWindow_Click;
+            InfoContent.Children.Add(openButton);
+        }
+        private string GetCategoryName(string category) => category switch
+        {
+            "UI" => "Интерфейс",
+            "Business" => "Бизнес-логика",
+            "DataAccess" => "Доступ к данным",
+            "Data" => "Модель данных",
+            "Interface" => "Интерфейс",
+            _ => "Прочее"
+        };
+
+        private void AddInfoLine(string text)
+        {
+            InfoContent.Children.Add(new TextBlock
+            {
+                Text = text,
+                FontSize = (double)FindResource("AppFontSizeH4"),
+                FontFamily = new FontFamily("Inter"),
+                Foreground = (Brush)FindResource("DarkTextBrush"),
+                Margin = new Thickness(0, 0, 0, 5)
+            });
+        }
+
+        private void OpenCodeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button btn || btn.Tag is not GraphNodeVisual node ||
+                string.IsNullOrEmpty(node.FilePath) || !File.Exists(node.FilePath)) return;
+
+            var codeWindow = new Window
+            {
+                Title = $"Код класса: {node.Name}",
+                Width = 800,
+                Height = 600,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Owner = Window.GetWindow(this),
+                Background = Brushes.White
+            };
+
+            var grid = new Grid();
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+            var titleBlock = new TextBlock
+            {
+                Text = node.Name,
+                FontSize = (double)FindResource("AppFontSizeH1"),
+                FontFamily = new FontFamily("Inter"),
+                FontWeight = FontWeights.Bold,
+                Foreground = (Brush)FindResource("PrimaryBrush"),
+                Margin = new Thickness(24, 20, 24, 0)
+            };
+            Grid.SetRow(titleBlock, 0); grid.Children.Add(titleBlock);
+
+            var infoStack = new StackPanel { Margin = new Thickness(24, 8, 24, 0) };
+            infoStack.Children.Add(CreateInfoText($"Тип: {node.Kind}"));
+            infoStack.Children.Add(CreateInfoText($"Категория: {GetCategoryName(node.Category)}"));
+            infoStack.Children.Add(CreateInfoText($"Методов: {node.MethodCount}"));
+            infoStack.Children.Add(CreateInfoText($"Сложность: {node.Complexity:F1} (цикломатическая)"));
+            infoStack.Children.Add(CreateInfoText($"Нарушений: {(node.HasViolation ? "Есть" : "Нет")}"));
+            Grid.SetRow(infoStack, 1); grid.Children.Add(infoStack);
+
+            var line = new Border
+            {
+                Height = 1,
+                Background = (Brush)FindResource("BorderBrush"),
+                Margin = new Thickness(24, 12, 24, 8)
+            };
+            Grid.SetRow(line, 2); grid.Children.Add(line);
+
+            // Код с выделением жирным
+            var code = File.ReadAllText(node.FilePath);
+            var codeBox = new RichTextBox
+            {
+                FontFamily = new FontFamily("Courier New"),
+                FontSize = (double)FindResource("AppFontSizeH4"),
+                IsReadOnly = true,
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                Background = Brushes.White,
+                Foreground = (Brush)FindResource("DarkTextBrush"),
+                BorderThickness = new Thickness(0),
+                Margin = new Thickness(24, 0, 24, 20)
+            };
+
+            // Выделяем имя класса жирным
+            var doc = new FlowDocument();
+            var para = new Paragraph();
+            var lines = code.Split('\n');
+            foreach (var codeLine in lines)
+            {
+                if (codeLine.Contains("class " + node.Name))
+                {
+                    int idx = codeLine.IndexOf("class " + node.Name);
+                    if (idx >= 0)
+                    {
+                        para.Inlines.Add(new Run(codeLine[..idx]) { FontFamily = new FontFamily("Courier New") });
+                        para.Inlines.Add(new Run(codeLine[idx..(idx + 6 + node.Name.Length)]) { FontWeight = FontWeights.Bold, FontFamily = new FontFamily("Courier New") });
+                        para.Inlines.Add(new Run(codeLine[(idx + 6 + node.Name.Length)..] + "\n") { FontFamily = new FontFamily("Courier New") });
+                    }
+                    else
+                    {
+                        para.Inlines.Add(new Run(codeLine + "\n") { FontFamily = new FontFamily("Courier New") });
+                    }
+                }
+                else
+                {
+                    para.Inlines.Add(new Run(codeLine + "\n") { FontFamily = new FontFamily("Courier New") });
+                }
+            }
+            doc.Blocks.Add(para);
+            codeBox.Document = doc;
+
+            Grid.SetRow(codeBox, 3); grid.Children.Add(codeBox);
+            codeWindow.Content = grid;
+            codeWindow.Show();
+        }
+
+        private TextBlock CreateInfoText(string text)
+        {
+            return new TextBlock
+            {
+                Text = text,
+                FontSize = (double)FindResource("AppFontSizeH4"),
+                FontFamily = new FontFamily("Inter"),
+                Foreground = (Brush)FindResource("DarkTextBrush"),
+                Margin = new Thickness(0, 0, 0, 4)
+            };
+        }
+
+        private void Node_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Ellipse dot && dot.Tag is GraphNodeVisual node)
+            {
+                SelectNode(node);
+                _isDragging = true;
+                var pos = e.GetPosition(GraphCanvas);
+                _dragStart = pos;
+                _dragOffsetX = node.X - pos.X;
+                _dragOffsetY = node.Y - pos.Y;
+                e.Handled = true;
+            }
+        }
+
+        private void Node_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SelectNode(null);
+        }
+
+        private void GraphCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                var mousePos = e.GetPosition(GraphCanvas);
+                double oldZoom = _zoom;
+                _zoom += e.Delta > 0 ? 0.1 : -0.1;
+                _zoom = Math.Max(0.3, Math.Min(3.0, _zoom));
+                var scrollViewer = GraphCanvas.Parent as ScrollViewer;
+                if (scrollViewer != null)
+                {
+                    double scaleFactor = _zoom / oldZoom;
+                    double newOffsetX = mousePos.X * scaleFactor - mousePos.X + scrollViewer.HorizontalOffset;
+                    double newOffsetY = mousePos.Y * scaleFactor - mousePos.Y + scrollViewer.VerticalOffset;
+                    GraphCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
+                    GraphCanvas.UpdateLayout();
+                    scrollViewer.ScrollToHorizontalOffset(Math.Max(0, Math.Min(newOffsetX, scrollViewer.ScrollableWidth)));
+                    scrollViewer.ScrollToVerticalOffset(Math.Max(0, Math.Min(newOffsetY, scrollViewer.ScrollableHeight)));
+                }
+                else GraphCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
+                e.Handled = true;
+            }
+        }
+
+        private void GraphCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var pos = e.GetPosition(GraphCanvas);
+            var hitElement = GraphCanvas.InputHitTest(pos) as DependencyObject;
+            bool clickedOnNode = false;
+            while (hitElement != null)
+            {
+                if (hitElement is Ellipse ell && ell.Tag is GraphNodeVisual) { clickedOnNode = true; break; }
+                hitElement = VisualTreeHelper.GetParent(hitElement);
+            }
+            if (!clickedOnNode) SelectNode(null);
+        }
+
+        private void GraphCanvas_MouseMoveHandler(object sender, MouseEventArgs e)
+        {
+            if (_isDragging && _selectedNode != null)
+            {
+                var pos = e.GetPosition(GraphCanvas);
+                _selectedNode.X = pos.X + _dragOffsetX;
+                _selectedNode.Y = pos.Y + _dragOffsetY;
+                Canvas.SetLeft(_selectedNode.DotVisual!, _selectedNode.X - SELECTED_SIZE / 2);
+                Canvas.SetTop(_selectedNode.DotVisual!, _selectedNode.Y - SELECTED_SIZE / 2);
+                Canvas.SetLeft(_selectedNode.LabelVisual!, _selectedNode.X + SELECTED_SIZE / 2 + 4);
+                Canvas.SetTop(_selectedNode.LabelVisual!, _selectedNode.Y - 8);
+                UpdateAllEdges();
+            }
+        }
+
+        private void GraphCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            _isDragging = false;
+        }
+
+        private void ZoomIn_Click(object sender, RoutedEventArgs e)
+        {
+            _zoom = Math.Min(3.0, _zoom + 0.2);
+            GraphCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
+        }
+
+        private void ZoomOut_Click(object sender, RoutedEventArgs e)
+        {
+            _zoom = Math.Max(0.3, _zoom - 0.2);
+            GraphCanvas.LayoutTransform = new ScaleTransform(_zoom, _zoom);
+        }
+
+        private void ZoomReset_Click(object sender, RoutedEventArgs e)
+        {
+            _zoom = 1.0;
+            GraphCanvas.LayoutTransform = new ScaleTransform(1.0, 1.0);
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            HelpPopup.IsOpen = !HelpPopup.IsOpen;
+            HelpPopup.PlacementTarget = HelpButton;
+        }
+    }
+
+    public class GraphNodeVisual
+    {
+        public string Id { get; set; } = "";
+        public string Name { get; set; } = "";
+        public string FullName { get; set; } = "";
+        public string Kind { get; set; } = "";
+        public double X { get; set; }
+        public double Y { get; set; }
+        public bool HasViolation { get; set; }
+        public string FilePath { get; set; } = "";
+        public int LineNumber { get; set; }
+        public int MethodCount { get; set; }
+        public double Complexity { get; set; }
+        public bool IsSelected { get; set; }
+        public Ellipse? DotVisual { get; set; }
+        public TextBlock? LabelVisual { get; set; }
+        public string Category { get; set; } = "Other";
+    }
+
+    public class GraphEdgeVisual
+    {
+        public GraphNodeVisual Source { get; set; } = null!;
+        public GraphNodeVisual Target { get; set; } = null!;
+        public string RelationType { get; set; } = "";
+        public bool IsViolation { get; set; }
+        public Line? Visual { get; set; }
     }
 }

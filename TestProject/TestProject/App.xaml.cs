@@ -218,6 +218,31 @@ public partial class App : Application
         {
             Console.WriteLine("Все показатели в пределах эталонных.");
         }
+        // --- Граф зависимостей ---
+        Console.WriteLine("--- ГРАФ ЗАВИСИМОСТЕЙ ---");
+        var graphService = new GraphBuilderService();
+        var graph = await graphService.BuildGraphAsync(projectPath);
+        Console.WriteLine($"Узлов: {graph.Nodes.Count}");
+        Console.WriteLine($"Рёбер: {graph.Edges.Count}");
+        Console.WriteLine($"Циклов: {graph.CyclicDependencies.Count}");
+        foreach (var cycle in graph.CyclicDependencies)
+            Console.WriteLine($"  ⚠️ {cycle}");
+
+        // Сохраняем циклы как нарушения
+        foreach (var cycle in graph.CyclicDependencies)
+        {
+            db.AuditVerdicts.Add(new AuditVerdict
+            {
+                SessionId = sessionId,
+                RequirementId = null,
+                IsPassed = false,
+                Reason = $"Циклическая зависимость: {cycle}",
+                AiModel = "GraphAnalysis",
+                Confidence = 0.95m
+            });
+        }
+        await db.SaveChangesAsync();
+        Console.WriteLine($"Граф: сохранено {graph.CyclicDependencies.Count} циклов в БД.\n");
 
         // =========================================
         // ИТОГИ

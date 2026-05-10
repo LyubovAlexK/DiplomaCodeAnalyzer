@@ -4,114 +4,211 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="20" Background="Transparent">
-        <StackPanel VerticalAlignment="Center" MaxWidth="600">
+             d:DesignHeight="650" d:DesignWidth="950"
+             Background="Transparent">
+    <Grid Margin="24" Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <!-- Заголовок -->
-            <TextBlock Text="💻 Мой код"
-                       Style="{StaticResource H1Text}"
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Мой код"
+                   Style="{StaticResource H1Text}" Margin="0,0,0,15"/>
+
+        <!-- Панель управления -->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource CardBorder}" Margin="0,0,0,15" Padding="16">
+            <StackPanel>
+                <TextBlock x:Name="HintText"
+                   Text="Выберите проект и папку с кодом, затем нажмите «Запустить проверку»"
+                   FontSize="13" FontFamily="Inter"
+                   Foreground="{DynamicResource SecondaryTextBrush}"
+                   Margin="0,0,0,12"
+                   TextWrapping="Wrap"/>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Проект:" VerticalAlignment="Center"
+                               FontSize="14" FontFamily="Inter"
+                               Foreground="{DynamicResource DarkTextBrush}" Width="80"/>
+                    <ComboBox Grid.Column="1" x:Name="ProjectCombo"
+                              Style="{StaticResource CustomComboBox}"/>
+                    <Button Grid.Column="2" Content="Запустить проверку"
+                            Style="{StaticResource PrimaryButton}"
+                            Click="RunButton_Click" Padding="20,10" Margin="15,0,0,0"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Путь:" VerticalAlignment="Center"
+                               FontSize="14" FontFamily="Inter"
+                               Foreground="{DynamicResource DarkTextBrush}" Width="80"/>
+                    <TextBox Grid.Column="1" x:Name="PathTextBox"
+                             Text="Папка не выбрана" IsReadOnly="True"
+                             FontSize="14" FontFamily="Inter"
+                             Background="#F6F8F9" Padding="12,10"
+                             BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"/>
+                    <Button Grid.Column="2" Content="Обзор"
+                            Style="{StaticResource OutlineButton}"
+                            Click="BrowseButton_Click" Margin="15,0,0,0" Padding="15,8"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Граф-карта -->
+        <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource CardBorder}" Margin="0,0,8,0" Visibility="Collapsed" Padding="16" x:Name="GraphBorder">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Заголовок + кнопки -->
+                    <RowDefinition Height="*"/>
+                    <!-- Граф -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Подсказки -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Легенда -->
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок + кнопки зума -->
+                <Grid Grid.Row="0" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Граф зависимостей"
+               Style="{StaticResource H2Text}"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Content="+" Width="28" Height="28"
+                Style="{StaticResource IconButtonStyle}" FontSize="16"
+                Click="ZoomIn_Click" Margin="0,0,2,0"/>
+                        <Button Content="−" Width="28" Height="28"
+                Style="{StaticResource IconButtonStyle}" FontSize="16"
+                Click="ZoomOut_Click" Margin="0,0,2,0"/>
+                        <Button Content="⟲" Width="28" Height="28"
+                Style="{StaticResource IconButtonStyle}" FontSize="14"
+                Click="ZoomReset_Click" Margin="0,0,2,0"/>
+                        <!-- Кнопка-помощник -->
+                        <Button x:Name="HelpButton" Content="?" Width="28" Height="28"
+                Style="{StaticResource IconButtonStyle}" FontSize="14"
+                Click="HelpButton_Click"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Всплывающая панель с подсказками -->
+                <Popup x:Name="HelpPopup" 
+       Placement="Bottom"
+       StaysOpen="False"
+       AllowsTransparency="True">
+                    <Border Background="White" 
+            CornerRadius="10" 
+            Padding="16"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="12" ShadowDepth="3" Opacity="0.15" Color="Black"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="Управление графом" FontSize="14" FontFamily="Inter" 
+                       FontWeight="Bold" Foreground="{DynamicResource DarkTextBrush}" 
                        Margin="0,0,0,10"/>
-            <TextBlock Text="Загрузите проект и запустите автоматическую проверку"
-                       Style="{StaticResource H4Text}"
-                       Margin="0,0,0,30"/>
+                            <TextBlock Text="ЛКМ по узлу — выделить класс" FontSize="12" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="ЛКМ по пустому — снять выделение" FontSize="12" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="ПКМ — переместить узел" FontSize="12" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="Ctrl + колёсико — масштаб" FontSize="12" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="Колёсико — скролл" FontSize="12" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="+ / − / ⟲ — кнопки зума" FontSize="12" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </Border>
+                </Popup>
 
-            <!-- Выбор проекта -->
-            <TextBlock Text="Проект"
-                       FontSize="14"
-                       FontFamily="Inter"
-                       FontWeight="Medium"
-                       Foreground="{DynamicResource DarkTextBrush}"
-                       Margin="0,0,0,5"/>
-            <ComboBox x:Name="ProjectComboBox"
-                      Style="{StaticResource CustomComboBox}"
-                      Margin="0,0,0,20"
-                      SelectedIndex="0">
-                <ComboBoxItem Content="Загрузить новый проект..."/>
-            </ComboBox>
+                <!-- Область графа со скроллом -->
+                <ScrollViewer Grid.Row="1" 
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="#F8F9FA"
+                      PreviewMouseWheel="GraphCanvas_MouseWheel"
+                      PreviewMouseLeftButtonDown="GraphCanvas_MouseLeftButtonDown">
+                    <Canvas x:Name="GraphCanvas"
+                    MouseMove="GraphCanvas_MouseMoveHandler"
+                    MouseLeftButtonUp="GraphCanvas_MouseLeftButtonUp"/>
+                </ScrollViewer>
 
-            <!-- Путь к папке -->
-            <TextBlock Text="Путь к проекту"
-                       FontSize="14"
-                       FontFamily="Inter"
-                       FontWeight="Medium"
-                       Foreground="{DynamicResource DarkTextBrush}"
-                       Margin="0,0,0,5"/>
-            <Grid Margin="0,0,0,20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBox x:Name="PathTextBox"
-                         Text="Папка не выбрана"
-                         IsReadOnly="True"
-                         Background="#F6F8F9"
-                         FontSize="14"
-                         FontFamily="Inter"
-                         Foreground="{DynamicResource DarkTextBrush}"
-                         BorderBrush="{DynamicResource BorderBrush}"
-                         BorderThickness="1"
-                         Padding="12,10"
-                         VerticalAlignment="Center"/>
-                <Button Grid.Column="1"
-                        Content="📁 Обзор"
-                        Style="{StaticResource OutlineButton}"
-                        Click="BrowseButton_Click"
-                        Margin="10,0,0,0"
-                        Padding="15,8"/>
+                <!-- Легенда -->
+                <StackPanel Grid.Row="3" Orientation="Horizontal"
+            HorizontalAlignment="Center" Margin="0,12,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                        <Ellipse Width="10" Height="10" Fill="#8B5CF6" Margin="0,0,5,0"/>
+                        <TextBlock Text="UI" Style="{StaticResource H4Text}"
+                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                        <Ellipse Width="10" Height="10" Fill="#2563EB" Margin="0,0,5,0"/>
+                        <TextBlock Text="Бизнес" Style="{StaticResource H4Text}"
+                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                        <Ellipse Width="10" Height="10" Fill="#10B981" Margin="0,0,5,0"/>
+                        <TextBlock Text="Данные" Style="{StaticResource H4Text}"
+                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                        <Ellipse Width="10" Height="10" Fill="#F59E0B" Margin="0,0,5,0"/>
+                        <TextBlock Text="Модели" Style="{StaticResource H4Text}"
+                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                        <Line X1="0" Y1="5" X2="16" Y2="5" Stroke="#9CA3AF" StrokeThickness="1" Margin="0,0,5,0"/>
+                        <TextBlock Text="Связь" Style="{StaticResource H4Text}"
+                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="10" Height="10" Fill="#DC2626" Margin="0,0,5,0"/>
+                        <TextBlock Text="Нарушение" Style="{StaticResource H4Text}"
+                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
+        </Border>
 
-            <!-- Прогресс -->
-            <Border x:Name="ProgressPanel" Visibility="Collapsed" Margin="0,0,0,20">
+        <!-- Правая панель -->
+        <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource CardBorder}" Margin="8,0,0,0" x:Name="InfoPanel" Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel>
-                    <TextBlock x:Name="StatusText"
-                               Text="Подготовка..."
-                               FontSize="14"
-                               FontFamily="Inter"
-                               Foreground="{DynamicResource SecondaryTextBrush}"
-                               Margin="0,0,0,8"/>
-                    <ProgressBar x:Name="AnalysisProgress"
-                                 Style="{StaticResource ModernProgressBar}"
-                                 Value="0"
-                                 Height="8"/>
-                    <TextBlock x:Name="StageText"
-                               Text=""
-                               FontSize="12"
-                               FontFamily="Inter"
-                               Foreground="{DynamicResource PrimaryBrush}"
-                               Margin="0,5,0,0"/>
+                    <TextBlock Text="Информация" Style="{StaticResource H2Text}" Margin="0,0,0,15"/>
+                    <TextBlock  x:Name="PlaceholderText" Text="Нажмите на класс, чтобы начать..." Style="{StaticResource H4Text}" Margin="0,0,0,15" TextWrapping="Wrap"/>
+                    <StackPanel x:Name="InfoContent"/>
                 </StackPanel>
-            </Border>
+            </ScrollViewer>
+        </Border>
 
-            <!-- Кнопка запуска -->
-            <Button x:Name="RunButton"
-                    Content="🚀 Запустить проверку"
-                    Style="{StaticResource PrimaryButton}"
-                    Click="RunButton_Click"
-                    HorizontalAlignment="Left"
-                    Padding="25,12"
-                    Margin="0,0,0,10"/>
-
-            <!-- Результат -->
-            <Border x:Name="ResultPanel"
-                    Style="{StaticResource CardBorder}"
-                    Visibility="Collapsed"
-                    Margin="0,10,0,0">
-                <StackPanel>
-                    <TextBlock x:Name="ResultTitle"
-                               FontSize="18"
-                               FontFamily="Inter"
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource DarkTextBrush}"
-                               Margin="0,0,0,10"/>
-                    <TextBlock x:Name="ResultText"
-                               FontSize="14"
-                               FontFamily="Inter"
-                               Foreground="{DynamicResource SecondaryTextBrush}"
-                               TextWrapping="Wrap"/>
-                </StackPanel>
-            </Border>
-
-        </StackPanel>
+        <!-- Прогресс -->
+        <Border Grid.Row="3" Grid.ColumnSpan="2" x:Name="ProgressBorder"
+                Style="{StaticResource CardBorder}" Margin="0,15,0,0" Visibility="Collapsed" Padding="16">
+            <StackPanel>
+                <TextBlock x:Name="StageText" Text="Подготовка..."
+                           FontSize="13" FontFamily="Inter"
+                           Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,5"/>
+                <ProgressBar x:Name="AnalysisProgress"
+                             Style="{StaticResource ModernProgressBar}" Value="0" Height="6"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

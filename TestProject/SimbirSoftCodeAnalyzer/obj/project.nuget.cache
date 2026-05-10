@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "o3m6zNnJqio=",
+  "dgSpecHash": "YFVmLT4kKDE=",
   "success": true,
   "projectFilePath": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\Люба\\.nuget\\packages\\catalyst.models.russian\\1.0.30952\\catalyst.models.russian.1.0.30952.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\documentformat.openxml\\3.5.1\\documentformat.openxml.3.5.1.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\documentformat.openxml.framework\\3.5.1\\documentformat.openxml.framework.3.5.1.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\graphx\\3.0.0\\graphx.3.0.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\harfbuzzsharp\\8.3.1.1\\harfbuzzsharp.8.3.1.1.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\harfbuzzsharp.nativeassets.macos\\8.3.1.1\\harfbuzzsharp.nativeassets.macos.8.3.1.1.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\harfbuzzsharp.nativeassets.win32\\8.3.1.1\\harfbuzzsharp.nativeassets.win32.8.3.1.1.nupkg.sha512",
@@ -22,12 +23,12 @@
     "C:\\Users\\Люба\\.nuget\\packages\\messagepack\\3.1.4\\messagepack.3.1.4.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\messagepack.annotations\\3.1.4\\messagepack.annotations.3.1.4.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\messagepackanalyzer\\3.1.4\\messagepackanalyzer.3.1.4.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\5.3.0-2.25625.1\\microsoft.codeanalysis.analyzers.5.3.0-2.25625.1.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\microsoft.codeanalysis.common\\5.3.0\\microsoft.codeanalysis.common.5.3.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\microsoft.codeanalysis.csharp\\5.3.0\\microsoft.codeanalysis.csharp.5.3.0.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\microsoft.codeanalysis.csharp.workspaces\\4.5.0\\microsoft.codeanalysis.csharp.workspaces.4.5.0.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\microsoft.codeanalysis.workspaces.common\\4.5.0\\microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\microsoft.codeanalysis.csharp.workspaces\\5.3.0\\microsoft.codeanalysis.csharp.workspaces.5.3.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\microsoft.codeanalysis.workspaces.common\\5.3.0\\microsoft.codeanalysis.workspaces.common.5.3.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.1.0\\microsoft.data.sqlclient.sni.runtime.5.1.0.nupkg.sha512",
@@ -103,6 +104,7 @@
     "C:\\Users\\Люба\\.nuget\\packages\\oxyplot.wpf.shared\\2.2.0\\oxyplot.wpf.shared.2.2.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\pdfpig\\0.1.14\\pdfpig.0.1.14.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\pragmaticsegmenternet\\1.0.5\\pragmaticsegmenternet.1.0.5.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\quickgraphcore\\1.0.0\\quickgraphcore.1.0.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\skiasharp\\3.119.0\\skiasharp.3.119.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\skiasharp.harfbuzz\\3.119.0\\skiasharp.harfbuzz.3.119.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\skiasharp.nativeassets.macos\\3.119.0\\skiasharp.nativeassets.macos.3.119.0.nupkg.sha512",
@@ -113,12 +115,12 @@
     "C:\\Users\\Люба\\.nuget\\packages\\system.clientmodel\\1.10.0\\system.clientmodel.1.10.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.collections.immutable\\10.0.7\\system.collections.immutable.10.0.7.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\system.composition\\6.0.0\\system.composition.6.0.0.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.attributedmodel\\6.0.0\\system.composition.attributedmodel.6.0.0.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.convention\\6.0.0\\system.composition.convention.6.0.0.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.hosting\\6.0.0\\system.composition.hosting.6.0.0.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.runtime\\6.0.0\\system.composition.runtime.6.0.0.nupkg.sha512",
-    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.typedparts\\6.0.0\\system.composition.typedparts.6.0.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\system.composition\\9.0.0\\system.composition.9.0.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.attributedmodel\\9.0.0\\system.composition.attributedmodel.9.0.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.convention\\9.0.0\\system.composition.convention.9.0.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.hosting\\9.0.0\\system.composition.hosting.9.0.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.runtime\\9.0.0\\system.composition.runtime.9.0.0.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.1\\system.configuration.configurationmanager.6.0.1.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.diagnostics.diagnosticsource\\10.0.3\\system.diagnostics.diagnosticsource.10.0.3.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
@@ -153,42 +155,6 @@
     "C:\\Users\\Люба\\.nuget\\packages\\vswhere\\2.8.4\\vswhere.2.8.4.nupkg.sha512"
   ],
   "logs": [
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "message": "Версия обнаруженного пакета нарушает ограничение зависимости: Microsoft.CodeAnalysis.CSharp.Workspaces 4.5.0 требуется Microsoft.CodeAnalysis.Common (= 4.5.0), но в результате разрешения получена версия Microsoft.CodeAnalysis.Common 5.3.0.",
-      "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj",
-      "libraryId": "Microsoft.CodeAnalysis.Common",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "message": "Версия обнаруженного пакета нарушает ограничение зависимости: Microsoft.CodeAnalysis.CSharp.Workspaces 4.5.0 требуется Microsoft.CodeAnalysis.CSharp (= 4.5.0), но в результате разрешения получена версия Microsoft.CodeAnalysis.CSharp 5.3.0.",
-      "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj",
-      "libraryId": "Microsoft.CodeAnalysis.CSharp",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "message": "Версия обнаруженного пакета нарушает ограничение зависимости: Microsoft.CodeAnalysis.Workspaces.Common 4.5.0 требуется Microsoft.CodeAnalysis.Common (= 4.5.0), но в результате разрешения получена версия Microsoft.CodeAnalysis.Common 5.3.0.",
-      "projectPath": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj",
-      "libraryId": "Microsoft.CodeAnalysis.Common",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    },
     {
       "code": "NU1701",
       "level": "Warning",

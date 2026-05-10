@@ -12,6 +12,9 @@ D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\Catalyst.Models.Russian.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.Framework.dll
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\GraphX.Core.Controls.dll
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\GraphX.Standard.Common.dll
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\GraphX.Standard.Logic.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\HarfBuzzSharp.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\HtmlAgilityPack.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\Humanizer.dll
@@ -105,6 +108,7 @@ D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\UglyToad.PdfPig.Tokens.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\UglyToad.PdfPig.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\PragmaticSegmenterNet.dll
+D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\QuickGraph.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\SkiaSharp.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\SkiaSharp.HarfBuzz.dll
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\bin\Debug\net8.0-windows\SkiaSharp.Views.Desktop.Common.dll

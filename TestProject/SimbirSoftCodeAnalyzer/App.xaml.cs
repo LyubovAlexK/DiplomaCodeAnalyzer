@@ -22,7 +22,7 @@ namespace SimbirSoftCodeAnalyzer
         {
 
             base.OnStartup(e);
-
+            
             var services = new ServiceCollection();
             ConfigureServices(services);
             _serviceProvider = services.BuildServiceProvider();
