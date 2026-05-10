@@ -16,7 +16,7 @@
             </Grid.RowDefinitions>
 
             <!-- Заголовок -->
-            <TextBlock Grid.Row="0" Text="Мой дашборд"
+            <TextBlock Grid.Row="0" Text="Главное меню"
                        Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
 
             <!-- Ярус 1: Карточки KPI -->
@@ -51,7 +51,7 @@
                                        Foreground="{DynamicResource DarkTextBrush}"/>
                         </StackPanel>
                         <TextBlock Grid.Row="2" Text="Моих проектов"
-                                   FontSize="13" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                                   Style="{StaticResource H3Text}" Foreground="{DynamicResource SecondaryTextBrush}"/>
                     </Grid>
                 </Border>
 
@@ -78,7 +78,7 @@
                                        Foreground="{DynamicResource DarkTextBrush}"/>
                         </StackPanel>
                         <TextBlock Grid.Row="2" Text="Всего попыток"
-                                   FontSize="13" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                                   Style="{StaticResource H3Text}" Foreground="{DynamicResource SecondaryTextBrush}"/>
                     </Grid>
                 </Border>
 
@@ -105,7 +105,7 @@
                                        Foreground="{DynamicResource DarkTextBrush}"/>
                         </StackPanel>
                         <TextBlock Grid.Row="2" Text="Лучший результат"
-                                   FontSize="13" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                                   Style="{StaticResource H3Text}" Foreground="{DynamicResource SecondaryTextBrush}"/>
                     </Grid>
                 </Border>
 
@@ -132,7 +132,7 @@
                                        Foreground="{DynamicResource DarkTextBrush}"/>
                         </StackPanel>
                         <TextBlock Grid.Row="2" Text="Сдано"
-                                   FontSize="13" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
+                                   Style="{StaticResource H3Text}" Foreground="{DynamicResource SecondaryTextBrush}"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -158,63 +158,81 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="220"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Мой прогресс" Style="{StaticResource H2Text}"/>
                             <TextBlock Grid.Column="1" x:Name="BestResultLabel"
                        Text="" FontSize="13" FontFamily="Inter"
                        Foreground="{DynamicResource PrimaryBrush}" FontWeight="SemiBold"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <ComboBox Grid.Column="2" x:Name="ProjectChartCombo"
+                      Style="{StaticResource CustomComboBox}" Width="180"
+                      SelectionChanged="ProjectChartCombo_SelectionChanged"/>
                         </Grid>
                         <TextBlock Grid.Row="1" Text="% соответствия по попыткам"
                    FontSize="13" FontFamily="Inter"
-                   Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,10"/>
+                   Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,8"/>
                         <Canvas Grid.Row="2" x:Name="ProgressCanvas"
-                Background="Transparent" ClipToBounds="True"/>
+                Background="Transparent" ClipToBounds="True"
+                MouseMove="ProgressCanvas_MouseMove"
+                MouseLeave="ProgressCanvas_MouseLeave"/>
+                        <!-- Tooltip для столбца -->
+                        <Border Grid.Row="2" x:Name="BarTooltip"
+                Background="#1E293B" CornerRadius="6" Padding="10,6"
+                Visibility="Collapsed" HorizontalAlignment="Left"
+                VerticalAlignment="Top" IsHitTestVisible="False">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="BarTooltipAttempt" FontSize="12" FontFamily="Inter"
+                           Foreground="#94A3B8"/>
+                                <TextBlock x:Name="BarTooltipValue" FontSize="12" FontFamily="Inter"
+                           FontWeight="Bold" Foreground="White" Margin="8,0,0,0"/>
+                            </StackPanel>
+                        </Border>
                     </Grid>
                 </Border>
 
-                <!-- Последняя сессия -->
-                <!-- Результаты последней проверки (Gauge) -->
-                <!-- Результаты последней проверки (Gauge) -->
+                <!-- Последняя проверка -->
                 <Border Grid.Column="1" Style="{StaticResource CardBorder}" Margin="8,0,0,0">
                     <StackPanel>
                         <!-- Заголовок -->
                         <TextBlock Text="Последняя проверка" 
                    Style="{StaticResource H2Text}" 
                    TextWrapping="Wrap"
-                   Margin="0,0,0,15"/>
+                   Margin="0,0,0,10"/>
 
-                        <!-- Полукольцевая диаграмма -->
-                        <Grid x:Name="GaugeGrid" 
-      Width="200" Height="140"
-      HorizontalAlignment="Center">
-                            <Canvas x:Name="GaugeCanvas" 
-            Width="200" Height="110"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"/>
-                            <TextBlock x:Name="GaugePercentText"
-               FontSize="24" FontFamily="Inter" FontWeight="Bold"
-               Foreground="{DynamicResource DarkTextBrush}"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Bottom"
-               Margin="0,0,0,5"/>
-                        </Grid>
+                        <!-- Круглая диаграмма -->
+                        <Canvas x:Name="GaugeCanvas" 
+                Width="120" Height="120"
+                HorizontalAlignment="Center"/>
+
+                        <!-- Процент -->
+                        <TextBlock x:Name="GaugePercentText"
+                   FontSize="24" FontFamily="Inter" FontWeight="Bold"
+                   Foreground="{DynamicResource DarkTextBrush}"
+                   HorizontalAlignment="Center"
+                   Margin="0,8,0,0"/>
+
+                        <TextBlock Text="Соответствие"
+                   Style="{StaticResource H4Text}"
+                   Foreground="{DynamicResource SecondaryTextBrush}"
+                   HorizontalAlignment="Center"
+                   Margin="0,2,0,12"/>
 
                         <!-- Легенда -->
-                        <StackPanel x:Name="LegendPanel2" Margin="0,15,0,15"/>
+                        <StackPanel x:Name="LegendPanel2" Margin="0,0,0,12"/>
 
                         <!-- Кнопка -->
                         <Button Content="Смотреть детали"
-                Style="{StaticResource PrimaryButton}"
+                Style="{StaticResource OutlineButton}"
                 HorizontalAlignment="Stretch"
-                Padding="15,10"
-                FontSize="14"
+                Padding="12,8"
+                FontSize="{DynamicResource AppFontSizeH4}"
                 Click="ViewDetails_Click"/>
                     </StackPanel>
                 </Border>

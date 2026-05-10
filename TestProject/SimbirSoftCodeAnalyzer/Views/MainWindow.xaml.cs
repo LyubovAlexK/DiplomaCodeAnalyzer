@@ -127,7 +127,7 @@ namespace SimbirSoftCodeAnalyzer.Views
             }
         }
 
-        private void SetActiveButton(string tag)
+        public void SetActiveButton(string tag)
         {
             var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnCheckManagement, BtnHistory, BtnMyCode, BtnMyResults, BtnSettings };
 
