@@ -16,11 +16,19 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
             Color.FromRgb(37, 99, 235), Color.FromRgb(16, 185, 129), Color.FromRgb(239, 68, 68),
             Color.FromRgb(245, 158, 11), Color.FromRgb(139, 92, 246), Color.FromRgb(6, 182, 212)
         };
-
+        private dynamic? _traineeSessions;
         public MentorHomePage()
         {
             InitializeComponent();
             Loaded += async (s, e) => await LoadDataAsync();
+
+            SizeChanged += (s, e) =>
+            {
+                if (_traineeSessions != null)
+                {
+                    DrawMultiChart(_traineeSessions);
+                }
+            };
         }
 
         private async System.Threading.Tasks.Task LoadDataAsync()
@@ -38,78 +46,60 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                     Sessions = allSessions.Where(s => s.TraineeId == t.UserId).OrderBy(s => s.StartTime).ToList()
                 }).ToList();
 
-                // Последние сессии
-                var lastSessions = traineeSessions
-                    .Select(ts => ts.Sessions.LastOrDefault())
-                    .Where(s => s != null)
-                    .ToList();
+                _traineeSessions = traineeSessions;
+
+                var lastSessions = new List<Core.Models.SessionAnalysis?>();
+                foreach (var ts in traineeSessions)
+                    lastSessions.Add(ts.Sessions.LastOrDefault());
+                var best = traineeSessions
+                    .Select(ts => new { Name = ts.Trainee.FullName, Max = ts.Sessions.Any() ? ts.Sessions.Max(s => s.OverallMatchPercent ?? 0) : 0, Count = ts.Sessions.Count })
+                    .OrderByDescending(x => x.Max).FirstOrDefault();
+                var worst = traineeSessions
+                    .Select(ts => new { Name = ts.Trainee.FullName, Max = ts.Sessions.Any() ? ts.Sessions.Max(s => s.OverallMatchPercent ?? 0) : 0 })
+                    .OrderBy(x => x.Max).FirstOrDefault();
+
+                BestWorstText.Text = $"Лучший: {best?.Name} ({best?.Max:F0}%, {best?.Count} попыток)\n" +
+                    $"Худший: {worst?.Name} ({worst?.Max:F0}%)\n" +
+                    $"Среднее по группе: {lastSessions.Where(s => s != null).Average(s => s!.OverallMatchPercent ?? 0):F0}%";
 
                 // KPI
                 TotalTraineesText.Text = trainees.Count.ToString();
-                PassedText.Text = lastSessions.Count(s => s!.Status == "Completed").ToString();
-                InProgressText.Text = lastSessions.Count(s => s!.Status == "InProgress").ToString();
-                AvgMatchText.Text = lastSessions.Any()
-                    ? $"{lastSessions.Average(s => s!.OverallMatchPercent ?? 0):F1}%"
+                PassedText.Text = lastSessions.Count(s => s != null && s.Status == "Completed").ToString();
+                InProgressText.Text = lastSessions.Count(s => s == null || s.Status == "InProgress").ToString();
+                AvgMatchText.Text = lastSessions.Any(s => s != null)
+                    ? $"{lastSessions.Where(s => s != null).Average(s => s!.OverallMatchPercent ?? 0):F0}%"
                     : "—";
 
-                // Таблица
-                var tableData = traineeSessions.Select(ts =>
+                // Таблица стажёров
+                var tableData = trainees.Select(t =>
                 {
-                    var last = ts.Sessions.LastOrDefault();
-                    var prev = ts.Sessions.Count >= 2 ? ts.Sessions[^2] : null;
-                    double lastPct = last?.OverallMatchPercent != null ? (double)last.OverallMatchPercent.Value : 0;
-                    double prevPct = prev?.OverallMatchPercent != null ? (double)prev.OverallMatchPercent.Value : lastPct;
-                    string trendText = prevPct == 0 ? "—" :
-                        lastPct > prevPct ? $"↑{(lastPct - prevPct):F0}%" :
-                        lastPct < prevPct ? $"↓{(prevPct - lastPct):F0}%" : "→0%";
-                    Brush trendColor = lastPct > prevPct ? (Brush)FindResource("SuccessBrush") :
-                        lastPct < prevPct ? (Brush)FindResource("DangerBrush") :
-                        (Brush)FindResource("SecondaryTextBrush");
+                    var sessions = allSessions.Where(s => s.TraineeId == t.UserId).OrderBy(s => s.StartTime).ToList();
+                    var last = sessions.LastOrDefault();
+                    var proj = projects.FirstOrDefault(p => p.TraineeId == t.UserId);
+                    double pct = (double)(last?.OverallMatchPercent ?? 0);
 
-                    string statusDb = last?.Status ?? "—";
-                    string status = statusDb switch
-                    {
-                        "Completed" => "Завершён",
-                        "InProgress" => "В процессе",
-                        "Failed" => "Ошибка",
-                        _ => "—"
-                    };
-                    string statusBg = statusDb switch
-                    {
-                        "Completed" => "#D1FAE5",
-                        "InProgress" => "#FEF3C7",
-                        _ => "#F3F4F6"
-                    };
-                    string statusFg = statusDb switch
-                    {
-                        "Completed" => "#10B981",
-                        "InProgress" => "#F59E0B",
-                        _ => "#6B7280"
-                    };
+                    string statusText = last == null ? "Нет попыток" : pct >= 80 ? "Готов" : pct >= 50 ? "Доработка" : "Не готов";
+                    string statusBg = last == null ? "#F3F4F6" : pct >= 80 ? "#D1FAE5" : pct >= 50 ? "#FEF3C7" : "#FEE2E2";
+                    string statusFg = last == null ? "#6B7280" : pct >= 80 ? "#10B981" : pct >= 50 ? "#D97706" : "#EF4444";
 
                     return new
                     {
-                        TraineeName = ts.Trainee.FullName,
-                        ProjectTitle = projects.FirstOrDefault(p => p.TraineeId == ts.Trainee.UserId)?.Title ?? "—",
-                        Attempts = ts.Sessions.Count,
-                        LastPercent = last != null ? $"{last.OverallMatchPercent:F1}%" : "—",
-                        Trend = trendText,
-                        TrendColor = trendColor,
-                        Status = status,
+                        TraineeName = t.FullName,
+                        ProjectTitle = proj?.Title ?? "—",
+                        Attempts = sessions.Count,
+                        LastPercent = last != null ? $"{last.OverallMatchPercent:F0}%" : "—",
+                        StatusText = statusText,
                         StatusBg = statusBg,
                         StatusFg = statusFg
                     };
                 }).ToList();
                 TraineesGrid.ItemsSource = tableData;
 
-                // График
+                // График с подписями последних значений
                 DrawMultiChart(traineeSessions);
 
-                // Кольцевая диаграмма
+                // Кольцевая диаграмма с легендой
                 DrawDonutChart(lastSessions!);
-
-                // Топ-5
-                DrawTopTrainees(tableData.Cast<object>().ToList());
             }
             catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Ошибка: {ex.Message}"); }
         }
@@ -119,9 +109,9 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
             MentorChartCanvas.Children.Clear();
             LegendPanel.Children.Clear();
 
-            double canvasW = MentorChartCanvas.ActualWidth > 0 ? MentorChartCanvas.ActualWidth : 400;
-            double canvasH = 250;
-            double pad = 40, chartW = canvasW - pad * 2, chartH = canvasH - pad - 20;
+            double canvasW = MentorChartCanvas.ActualWidth > 0 ? MentorChartCanvas.ActualWidth : 500;
+            double canvasH = 280;
+            double pad = 45, chartW = canvasW - pad * 2, chartH = canvasH - pad - 20;
 
             // Сетка
             for (int i = 0; i <= 4; i++)
@@ -137,6 +127,15 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                     StrokeThickness = 0.5,
                     StrokeDashArray = new DoubleCollection(new[] { 4.0, 4.0 })
                 });
+                var lbl = new TextBlock
+                {
+                    Text = $"{100 - i * 25}%",
+                    FontSize = (double)FindResource("AppFontSizeH4"),
+                    FontFamily = new FontFamily("Inter"),
+                    Foreground = (Brush)FindResource("SecondaryTextBrush")
+                };
+                Canvas.SetLeft(lbl, 5); Canvas.SetTop(lbl, y - 10);
+                MentorChartCanvas.Children.Add(lbl);
             }
 
             int colorIdx = 0;
@@ -171,175 +170,151 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                         fig.Segments.Add(new BezierSegment(cp1, cp2, pts[i + 1], true));
                     }
                     geom.Figures.Add(fig);
-                    MentorChartCanvas.Children.Add(new System.Windows.Shapes.Path { Data = geom, Stroke = brush, StrokeThickness = 2, Fill = Brushes.Transparent });
+                    MentorChartCanvas.Children.Add(new System.Windows.Shapes.Path
+                    { Data = geom, Stroke = brush, StrokeThickness = 2, Fill = Brushes.Transparent });
                 }
 
+                // Точки
                 foreach (var pt in pts)
                 {
-                    var dot = new Ellipse { Width = 6, Height = 6, Fill = Brushes.White, Stroke = brush, StrokeThickness = 2 };
-                    Canvas.SetLeft(dot, pt.X - 3); Canvas.SetTop(dot, pt.Y - 3);
+                    var dot = new Ellipse { Width = 5, Height = 5, Fill = brush, Stroke = Brushes.White, StrokeThickness = 1 };
+                    Canvas.SetLeft(dot, pt.X - 2.5); Canvas.SetTop(dot, pt.Y - 2.5);
                     MentorChartCanvas.Children.Add(dot);
+                }
+
+                // Подпись последнего значения
+                if (pts.Any())
+                {
+                    var lastPt = pts.Last();
+                    var lastPct = sessions.Last().OverallMatchPercent ?? 0;
+                    string shortName = name.Length > 12 ? name[..12] + "…" : name;
+                    var valLabel = new TextBlock
+                    {
+                        Text = $"{shortName}",
+                        FontSize = (double)FindResource("AppFontSizeH4"),
+                        FontFamily = new FontFamily("Inter"),
+                        FontWeight = FontWeights.SemiBold,
+                        Foreground = (Brush)FindResource("DarkTextBrush")
+                    };
+                    Canvas.SetLeft(valLabel, Math.Min(lastPt.X + 5, canvasW - 120));
+                    Canvas.SetTop(valLabel, lastPt.Y + 2);
+                    MentorChartCanvas.Children.Add(valLabel);
                 }
 
                 // Легенда
                 var item = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(8, 0, 8, 0) };
                 item.Children.Add(new Rectangle { Width = 10, Height = 10, Fill = brush, RadiusX = 2, RadiusY = 2, Margin = new Thickness(0, 0, 4, 0) });
-                item.Children.Add(new TextBlock { Text = name, FontSize = 10, FontFamily = new FontFamily("Inter"), Foreground = (Brush)FindResource("DarkTextBrush") });
+                item.Children.Add(new TextBlock
+                {
+                    Text = name,
+                    FontSize = (double)FindResource("AppFontSizeH4"),
+                    FontFamily = new FontFamily("Inter"),
+                    Foreground = (Brush)FindResource("DarkTextBrush")
+                });
                 LegendPanel.Children.Add(item);
                 colorIdx++;
             }
         }
 
-        private void DrawDonutChart(List<Core.Models.SessionAnalysis> lastSessions)
+        private void DrawDonutChart(List<Core.Models.SessionAnalysis?> lastSessions)
         {
             DonutCanvas.Children.Clear();
-
-            var grouped = lastSessions
-                .GroupBy(s => s.Status switch
-                {
-                    "Completed" => "Завершён",
-                    "InProgress" => "В процессе",
-                    "Failed" => "Ошибка",
-                    _ => "Неизвестно"
-                })
-                .Select(g => new { Status = g.Key, Count = g.Count() })
-                .ToList();
-
-            int total = grouped.Sum(g => g.Count);
+            int completed = lastSessions.Count(s => s != null && s.Status == "Completed");
+            int noAttempts = lastSessions.Count(s => s == null);
+            int others = lastSessions.Count - completed - noAttempts;
+            int total = lastSessions.Count;
             if (total == 0) return;
 
-            double size = 220;
-            double cx = 110;
-            double cy = 110;
-            double outerR = 80;
-            double innerR = 50;
-            double thickness = outerR - innerR; // 30
-
-            var colors = new Dictionary<string, Color>
-    {
-        { "Завершён", Color.FromRgb(16, 185, 129) },
-        { "В процессе", Color.FromRgb(245, 158, 11) },
-        { "Ошибка", Color.FromRgb(239, 68, 68) }
-    };
-
+            double canvasW = 300;
+            double canvasH = 220;
+            double cx = canvasW / 2;  // 150
+            double cy = 100;
+            double r = 75;
+            double thickness = 16;
+            var segments = new[] {
+                (completed, Color.FromRgb(16, 185, 129), "Сдали"),
+                (others, Color.FromRgb(245, 158, 11), "В процессе"),
+                (noAttempts, Color.FromRgb(156, 163, 175), "Нет попыток")
+            };
             double startAngle = -90;
 
-            foreach (var g in grouped)
+            foreach (var (count, color, name) in segments)
             {
-                double sweep = (double)g.Count / total * 360;
-                var color = colors.GetValueOrDefault(g.Status, Color.FromRgb(107, 114, 128));
-
-                // Рисуем сегмент тонкими линиями-штрихами
-                for (double a = 0; a < sweep; a += 0.3)
+                if (count == 0) continue;
+                double sweep = (double)count / total * 360;
+                var brush = new SolidColorBrush(color);
+                for (double a = 0; a < sweep; a += 0.4)
                 {
                     double rad = (startAngle + a) * Math.PI / 180;
-                    double x1 = cx + innerR * Math.Cos(rad);
-                    double y1 = cy + innerR * Math.Sin(rad);
-                    double x2 = cx + outerR * Math.Cos(rad);
-                    double y2 = cy + outerR * Math.Sin(rad);
-
-                    var line = new Line
+                    DonutCanvas.Children.Add(new Line
                     {
-                        X1 = x1,
-                        Y1 = y1,
-                        X2 = x2,
-                        Y2 = y2,
-                        Stroke = new SolidColorBrush(color),
+                        X1 = cx + (r - thickness) * Math.Cos(rad),
+                        Y1 = cy + (r - thickness) * Math.Sin(rad),
+                        X2 = cx + r * Math.Cos(rad),
+                        Y2 = cy + r * Math.Sin(rad),
+                        Stroke = brush,
                         StrokeThickness = 2.5
-                    };
-                    DonutCanvas.Children.Add(line);
+                    });
                 }
-
                 startAngle += sweep;
             }
 
-            // Белый круг в центре (чтобы получился бублик)
-            var centerHole = new Ellipse
-            {
-                Width = innerR * 2,
-                Height = innerR * 2,
-                Fill = Brushes.White
-            };
-            Canvas.SetLeft(centerHole, cx - innerR);
-            Canvas.SetTop(centerHole, cy - innerR);
-            DonutCanvas.Children.Add(centerHole);
+            var hole = new Ellipse { Width = (r - thickness) * 2, Height = (r - thickness) * 2, Fill = Brushes.White };
+            Canvas.SetLeft(hole, cx - (r - thickness)); Canvas.SetTop(hole, cy - (r - thickness));
+            DonutCanvas.Children.Add(hole);
 
-            // Центральный текст
             var txt = new TextBlock
             {
                 Text = total.ToString(),
-                FontSize = 24,
+                FontSize = 28,
                 FontFamily = new FontFamily("Inter"),
                 FontWeight = FontWeights.Bold,
                 Foreground = (Brush)FindResource("DarkTextBrush")
             };
-            Canvas.SetLeft(txt, cx - 15);
-            Canvas.SetTop(txt, cy - 15);
+            Canvas.SetLeft(txt, cx - 18); Canvas.SetTop(txt, cy - 16);
             DonutCanvas.Children.Add(txt);
-
             var sub = new TextBlock
             {
-                Text = "ВСЕГО",
-                FontSize = 9,
+                Text = "Всего",
+                FontSize = FontSize = (double)FindResource("AppFontSizeH4"),
                 FontFamily = new FontFamily("Inter"),
                 Foreground = (Brush)FindResource("SecondaryTextBrush")
             };
-            Canvas.SetLeft(sub, cx - 12);
-            Canvas.SetTop(sub, cy + 12);
+            Canvas.SetLeft(sub, cx - 14); Canvas.SetTop(sub, cy + 14);
             DonutCanvas.Children.Add(sub);
 
-            // Легенда
-            double legendY = cy + outerR + 30;
-            double legendX = cx - 60;
-            foreach (var g in grouped)
+            // Легенда с процентами
+            int visibleSegments = 0;
+            if (completed > 0) visibleSegments++;
+            if (others > 0) visibleSegments++;
+            if (noAttempts > 0) visibleSegments++;
+
+            double legendStartY = cy + r + 10;
+            double availableBottom = DonutCanvas.Height - legendStartY;
+            double legendBlockHeight = visibleSegments * 20;
+            double legendTopOffset = legendStartY + (availableBottom - legendBlockHeight) / 2;
+
+            int idx = 0;
+            foreach (var (count, color, name) in segments)
             {
-                var dotColor = colors.GetValueOrDefault(g.Status, Color.FromRgb(107, 114, 128));
-                var dot = new Ellipse { Width = 8, Height = 8, Fill = new SolidColorBrush(dotColor) };
-                Canvas.SetLeft(dot, legendX);
-                Canvas.SetTop(dot, legendY);
+                if (count == 0) continue;
+                double pct = (double)count / total * 100;
+                double y = legendTopOffset + idx * 20;
+
+                var dot = new Ellipse { Width = 8, Height = 8, Fill = new SolidColorBrush(color) };
+                Canvas.SetLeft(dot, cx - 60); Canvas.SetTop(dot, y + 4);
                 DonutCanvas.Children.Add(dot);
 
                 var label = new TextBlock
                 {
-                    Text = $"{g.Status} ({g.Count})",
-                    FontSize = 10,
+                    Text = $"{name}: {count} ({pct:F0}%)",
+                    FontSize = (double)FindResource("AppFontSizeH4"),
                     FontFamily = new FontFamily("Inter"),
                     Foreground = (Brush)FindResource("SecondaryTextBrush")
                 };
-                Canvas.SetLeft(label, legendX + 14);
-                Canvas.SetTop(label, legendY - 2);
+                Canvas.SetLeft(label, cx - 46); Canvas.SetTop(label, y);
                 DonutCanvas.Children.Add(label);
-
-                legendY += 18;
-            }
-        }
-
-        private void DrawTopTrainees(List<dynamic> tableData)
-        {
-            TopPanel.Children.Clear();
-            var top5 = tableData.OrderByDescending(t => {
-                string? s = t.LastPercent?.ToString()?.Replace("%", "");
-                double.TryParse(s, out double v);
-                return v;
-            }).Take(5);
-
-            foreach (var t in top5)
-            {
-                string? s = t.LastPercent?.ToString()?.Replace("%", "");
-                double.TryParse(s, out double pct);
-                var row = new Grid { Margin = new Thickness(0, 3, 0, 3) };
-                row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(120) });
-                row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-
-                var nameBlock = new TextBlock { Text = t.TraineeName, FontSize = 12, FontFamily = new FontFamily("Inter"), Foreground = (Brush)FindResource("DarkTextBrush"), VerticalAlignment = VerticalAlignment.Center };
-                Grid.SetColumn(nameBlock, 0);
-                row.Children.Add(nameBlock);
-
-                var bar = new Border { Height = 20, Width = pct * 2.5, Background = (Brush)FindResource("PrimaryBrush"), CornerRadius = new CornerRadius(4), HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center };
-                Grid.SetColumn(bar, 1);
-                row.Children.Add(bar);
-
-                TopPanel.Children.Add(row);
+                idx++;
             }
         }
     }

@@ -1,0 +1,40 @@
+﻿<Window x:Class="SimbirSoftCodeAnalyzer.Views.PromptDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Настройка промпта" Width="550" Height="480"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="White" Icon="/Resources/Images/logo-simbirsoft.png"
+        WindowStyle="SingleBorderWindow">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Тип промпта:" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+        <ComboBox Grid.Row="1" x:Name="TypeCombo" Style="{StaticResource CustomComboBox}" Margin="0,0,0,16">
+            <ComboBoxItem Content="Извлечение требований" Tag="Extraction"/>
+            <ComboBoxItem Content="Проверка кода" Tag="Judgment"/>
+        </ComboBox>
+
+        <TextBlock Grid.Row="2" Text="Системный промпт:" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+        <TextBox Grid.Row="3" x:Name="SystemPromptBox" Style="{StaticResource ModernTextBoxStyle}"
+                 TextWrapping="Wrap" AcceptsReturn="True" Height="80" Margin="0,0,0,16"/>
+
+        <TextBlock Grid.Row="4" Text="Шаблон запроса:" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+        <TextBox Grid.Row="5" x:Name="UserPromptBox" Style="{StaticResource ModernTextBoxStyle}"
+                 TextWrapping="Wrap" AcceptsReturn="True" Height="80" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Сохранить" Style="{StaticResource PrimaryButton}" Click="Save_Click"
+                    Padding="20,8" Margin="0,0,10,0" FontSize="{DynamicResource AppFontSizeH4}"/>
+            <Button Content="Удалить" Style="{StaticResource DangerButton}" Click="Delete_Click"
+                    Padding="20,8" FontSize="{DynamicResource AppFontSizeH4}" x:Name="DeleteBtn" Visibility="Collapsed"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,220 @@
+﻿<UserControl x:Class="SimbirSoftCodeAnalyzer.Views.Pages.Mentor.ResultsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="950"
+             Background="Transparent">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок + выбор стажёра -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Результаты проверок" Style="{StaticResource H1Text}"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="Стажёр:" VerticalAlignment="Center" 
+                               FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                               Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="TraineeCombo" Style="{StaticResource CustomComboBox}" Width="220"
+                              SelectionChanged="TraineeCombo_SelectionChanged"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Подсказка -->
+            <TextBlock Grid.Row="0" x:Name="PlaceholderText"
+                       Text="Выберите стажёра, чтобы увидеть результаты"
+                       FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}" TextWrapping="Wrap"
+                       Visibility="Visible" Margin="0,40,0,0" HorizontalAlignment="Center"/>
+
+            <!-- KPI -->
+            <Grid Grid.Row="1" x:Name="KpiGrid" Margin="0,0,0,20" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource MetricCardBorder}" Margin="0,0,8,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/refresh_89350.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="AttemptsText" Text="—"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
+                                       Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Попыток" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource SuccessBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="LastPercentText" Text="—"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
+                                       Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Последний %" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource DangerBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/warning_89399.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="SyntaxFailText" Text="—"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
+                                       Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Синтаксис" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Style="{StaticResource MetricCardBorder}" Margin="8,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource WarningBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/clipboard_89387.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="ArchFailText" Text="—"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
+                                       Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Архитектура" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Сессии -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,0,0,20"
+                    x:Name="SessionsPanel" Visibility="Collapsed" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Сессии" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="SessionsGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  SelectionChanged="SessionsGrid_SelectionChanged" RowHeight="44"
+                                  MaxHeight="200">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Дата" Width="150" Binding="{Binding Date}"/>
+                                <DataGridTextColumn Header="%" Width="80" Binding="{Binding Percent}"/>
+                                <DataGridTextColumn Header="Статус" Width="120" Binding="{Binding Status}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Таблица вердиктов -->
+            <Border Grid.Row="3" Style="{StaticResource CardBorder}" 
+                    x:Name="VerdictsPanel" Visibility="Collapsed" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Вердикты" Style="{StaticResource H2Text}"/>
+                        <ComboBox Grid.Column="1" x:Name="VerdictTypeCombo" Style="{StaticResource CustomComboBox}" Width="150"
+                                  HorizontalAlignment="Right" SelectedIndex="0" SelectionChanged="VerdictTypeCombo_SelectionChanged">
+                            <ComboBoxItem Content="Все типы" Tag="all"/>
+                            <ComboBoxItem Content="Синтаксис" Tag="Синтаксис"/>
+                            <ComboBoxItem Content="Архитектура" Tag="Архитектура"/>
+                            <ComboBoxItem Content="Семантическая" Tag="Семантическая"/>
+                        </ComboBox>
+                    </Grid>
+
+                    <Border Grid.Row="1" Style="{StaticResource InputBorder}" Margin="0,0,0,12" Padding="10,8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Width="16" Height="16" Fill="{DynamicResource SecondaryTextBrush}" Margin="0,0,6,0">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/search_89415.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBox Grid.Column="1" x:Name="VerdictSearchBox" Style="{StaticResource InputBox}"
+                                     TextChanged="VerdictSearchBox_TextChanged"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="2" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="VerdictsGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  RowHeight="40" MaxHeight="300">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Тип" Width="100" Binding="{Binding AiModel}"/>
+                                <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Reason}"/>
+                                <DataGridTextColumn Header="Расположение" Width="150" Binding="{Binding CodeLocation}"/>
+                                <DataGridTemplateColumn Header="Категория" Width="110">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border CornerRadius="12" Padding="8,4" HorizontalAlignment="Center"
+                                                    Background="{Binding TypeBg}">
+                                                <TextBlock Text="{Binding TypeText}" FontSize="11" FontFamily="Inter"
+                                                           FontWeight="SemiBold" Foreground="{Binding TypeFg}"
+                                                           HorizontalAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

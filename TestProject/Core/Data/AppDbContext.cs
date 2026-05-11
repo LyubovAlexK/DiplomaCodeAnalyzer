@@ -213,6 +213,7 @@ namespace Core.Data
                 entity.Property(e => e.TargetNamespace).HasMaxLength(200);
                 entity.Property(e => e.ForbiddenDependency).HasMaxLength(200);
                 entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETDATE()");
+                entity.Property(e => e.IsActive).HasDefaultValue(true);
             });
 
             modelBuilder.Entity<RequirementMarker>(entity =>

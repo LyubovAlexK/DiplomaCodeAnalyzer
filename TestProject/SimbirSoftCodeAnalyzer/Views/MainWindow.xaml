@@ -141,7 +141,7 @@
 
                         <!-- История -->
                         <Button x:Name="BtnHistory" Click="MenuButton_Click" Tag="History"
-        Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
+                                Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Style="{StaticResource MenuIconStyle}">
                                     <Rectangle.OpacityMask>
@@ -149,6 +149,45 @@
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
                                 <TextBlock Text="Мой прогресс" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Результаты (наставник) -->
+                        <Button x:Name="BtnResults" Click="MenuButton_Click" Tag="Results"
+        Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Результаты" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Эталоны (наставник) -->
+                        <Button x:Name="BtnReferences" Click="MenuButton_Click" Tag="References"
+        Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/anchor_89316.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Эталоны" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Архитектурные правила (наставник) -->
+                        <Button x:Name="BtnArchRules" Click="MenuButton_Click" Tag="ArchRules"
+        Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/clipboard_89387.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Арх. правила" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 

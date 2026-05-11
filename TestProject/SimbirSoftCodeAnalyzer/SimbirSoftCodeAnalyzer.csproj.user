@@ -5,6 +5,9 @@
     <Compile Update="Views\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MarkerDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\Admin\AdminHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,13 +17,22 @@
     <Compile Update="Views\Pages\Admin\UsersPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\Mentor\ArchRulesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\Mentor\CheckManagementPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Pages\Mentor\MentorHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\Mentor\ResultsLearningPage.xaml.cs">
+    <Compile Update="Views\Pages\Mentor\ReferencesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Pages\Mentor\ResultsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Pages\Mentor\SpecificationsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Pages\SettingsPage.xaml.cs">
@@ -36,6 +48,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Pages\Trainee\TraineeHomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PromptDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RequirementDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

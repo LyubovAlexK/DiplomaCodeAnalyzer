@@ -17,10 +17,9 @@
             </Grid.RowDefinitions>
 
             <!-- Заголовок -->
-            <TextBlock Grid.Row="0" Text="Панель наставника"
-                       Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
+            <TextBlock Grid.Row="0" Text="Дашборд наставника" Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
 
-            <!-- Ярус 1: Карточки KPI -->
+            <!-- KPI -->
             <Grid Grid.Row="1" Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -30,201 +29,161 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Column="0" Style="{StaticResource MetricCardBorder}" Margin="0,0,8,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel HorizontalAlignment="Left">
-                            <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8">
-                                <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/users_89368.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/users_89368.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
                             <TextBlock x:Name="TotalTraineesText" Text="—"
-                                       FontSize="36" FontFamily="Inter" FontWeight="Bold"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
                                        Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Стажёров" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
                         </StackPanel>
-                        <TextBlock Grid.Row="2" Text="Всего стажёров"
-                                   FontSize="13" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
-                    </Grid>
+                    </StackPanel>
                 </Border>
 
                 <Border Grid.Column="1" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel HorizontalAlignment="Left">
-                            <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8">
-                                <Rectangle Width="20" Height="20" Fill="{DynamicResource SuccessBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/checked_89335.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource SuccessBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/checked_89335.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
                             <TextBlock x:Name="PassedText" Text="—"
-                                       FontSize="36" FontFamily="Inter" FontWeight="Bold"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
                                        Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Сдали" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
                         </StackPanel>
-                        <TextBlock Grid.Row="2" Text="Сдали"
-                                   FontSize="13" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
-                    </Grid>
+                    </StackPanel>
                 </Border>
 
                 <Border Grid.Column="2" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel HorizontalAlignment="Left">
-                            <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8">
-                                <Rectangle Width="20" Height="20" Fill="{DynamicResource WarningBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/clock_89391.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource WarningBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/clock_89391.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
                             <TextBlock x:Name="InProgressText" Text="—"
-                                       FontSize="36" FontFamily="Inter" FontWeight="Bold"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
                                        Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="В процессе" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
                         </StackPanel>
-                        <TextBlock Grid.Row="2" Text="В процессе"
-                                   FontSize="13" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
-                    </Grid>
+                    </StackPanel>
                 </Border>
 
                 <Border Grid.Column="3" Style="{StaticResource MetricCardBorder}" Margin="8,0,0,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel HorizontalAlignment="Left">
-                            <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8">
-                                <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
                             <TextBlock x:Name="AvgMatchText" Text="—"
-                                       FontSize="36" FontFamily="Inter" FontWeight="Bold"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
                                        Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Средний %" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
                         </StackPanel>
-                        <TextBlock Grid.Row="2" Text="Средний %"
-                                   FontSize="13" FontFamily="Inter" Foreground="{DynamicResource SecondaryTextBrush}"/>
-                    </Grid>
+                    </StackPanel>
                 </Border>
             </Grid>
 
-            <!-- Ярус 2: График + Кольцевая диаграмма -->
-            <Grid Grid.Row="2" Margin="0,0,0,20">
+            <!-- График прогресса -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,0,0,20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="280"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Прогресс стажёров" Style="{StaticResource H2Text}" Margin="0,0,0,5"/>
+                    <TextBlock Grid.Row="1" Text="% соответствия по попыткам" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                               Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,10"/>
+                    <!-- Плашка с итогами -->
+                    <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="12" Margin="0,0,0,10" x:Name="SummaryPanel" Visibility="Visible">
+                        <TextBlock x:Name="BestWorstText" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                            Foreground="{DynamicResource DarkTextBrush}" TextWrapping="Wrap" LineHeight="20"/>
+                    </Border>
+                    <Canvas Grid.Row="2" x:Name="MentorChartCanvas" Background="Transparent" ClipToBounds="True"/>
+                    <StackPanel Grid.Row="3" x:Name="LegendPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                </Grid>
+            </Border>
+
+            <!-- Таблица + Кольцевая диаграмма -->
+            <Grid Grid.Row="3" Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- График прогресса -->
-                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Margin="0,0,8,0">
+                <!-- Таблица стажёров -->
+                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,8,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="250"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Прогресс стажёров" Style="{StaticResource H2Text}"/>
-                        <TextBlock Grid.Row="1" Text="% соответствия по итерациям"
-                                   FontSize="13" FontFamily="Inter"
-                                   Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,10"/>
-                        <Canvas Grid.Row="2" x:Name="MentorChartCanvas"
-                                Background="Transparent" ClipToBounds="True"/>
-                        <StackPanel Grid.Row="3" x:Name="LegendPanel" Orientation="Horizontal"
-                                    HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <TextBlock Grid.Row="0" Text="Стажёры" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                        <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
+                            <DataGrid x:Name="TraineesGrid" Style="{StaticResource SmartDataGridStyle}"
+                                      AutoGenerateColumns="False" IsReadOnly="True" RowHeight="44"
+                                      MaxHeight="300"
+                                      HorizontalAlignment="Stretch"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Стажёр" Width="*" Binding="{Binding TraineeName}"/>
+                                    <DataGridTextColumn Header="Проект" Width="*" Binding="{Binding ProjectTitle}"/>
+                                    <DataGridTextColumn Header="Попыток" Width="70" Binding="{Binding Attempts}"/>
+                                    <DataGridTextColumn Header="Последний %" Width="90" Binding="{Binding LastPercent}"/>
+                                    <DataGridTemplateColumn Header="Статус" Width="100">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Border CornerRadius="12" Padding="8,4" HorizontalAlignment="Center"
+                                                        Background="{Binding StatusBg}">
+                                                    <TextBlock Text="{Binding StatusText}" FontSize="11" FontFamily="Inter"
+                                                               FontWeight="SemiBold" Foreground="{Binding StatusFg}"
+                                                               HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
                     </Grid>
                 </Border>
+
                 <!-- Кольцевая диаграмма -->
-                <Border Grid.Column="1" Style="{StaticResource CardBorder}" Margin="8,0,0,0">
+                <Border Grid.Column="1" Style="{StaticResource CardBorder}" Padding="16" Margin="8,0,0,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="220"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Статусы" 
-                   Style="{StaticResource H2Text}" 
-                   Margin="0,0,0,10"/>
-                        <Canvas Grid.Row="1" x:Name="DonutCanvas" 
-                Width="220" Height="220"
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Text="Статусы" Style="{StaticResource H2Text}" Margin="0,0,0,10"/>
+                        <Canvas Grid.Row="1" x:Name="DonutCanvas" Width="300" Height="220" HorizontalAlignment="Center"/>
                     </Grid>
                 </Border>
             </Grid>
-
-            <!-- Ярус 3: Таблица стажёров -->
-            <Border Grid.Row="3" Style="{StaticResource CardBorder}" Margin="0,0,0,20">
-                <StackPanel>
-                    <TextBlock Text="Сводка по стажёрам" Style="{StaticResource H2Text}" Margin="0,0,0,15"/>
-                    <Border Style="{StaticResource DataGridCardBorder}">
-                        <DataGrid x:Name="TraineesGrid"
-                                  Style="{StaticResource SmartDataGridStyle}"
-                                  AutoGenerateColumns="False" IsReadOnly="True"
-                                  SelectionMode="Single" RowHeight="44">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Стажёр" Width="140" Binding="{Binding TraineeName}"/>
-                                <DataGridTextColumn Header="Проект" Width="140" Binding="{Binding ProjectTitle}"/>
-                                <DataGridTextColumn Header="Попыток" Width="80" Binding="{Binding Attempts}"/>
-                                <DataGridTextColumn Header="Последний %" Width="100" Binding="{Binding LastPercent}"/>
-                                <DataGridTemplateColumn Header="Прогресс" Width="80">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Trend}" FontWeight="SemiBold"
-                                                       Foreground="{Binding TrendColor}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Статус" Width="100">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border CornerRadius="12" Padding="10,4" HorizontalAlignment="Center"
-                                                    Background="{Binding StatusBg}">
-                                                <TextBlock Text="{Binding Status}" FontSize="12" FontFamily="Inter"
-                                                           FontWeight="SemiBold" Foreground="{Binding StatusFg}"
-                                                           HorizontalAlignment="Center"/>
-                                            </Border>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Border>
-                </StackPanel>
-            </Border>
-
-            <!-- Ярус 4: Топ-5 стажёров -->
-            <Border Grid.Row="4" Style="{StaticResource CardBorder}">
-                <StackPanel>
-                    <TextBlock Text="Топ-5 стажёров" Style="{StaticResource H2Text}" Margin="0,0,0,15"/>
-                    <StackPanel x:Name="TopPanel"/>
-                </StackPanel>
-            </Border>
         </Grid>
     </ScrollViewer>
 </UserControl>

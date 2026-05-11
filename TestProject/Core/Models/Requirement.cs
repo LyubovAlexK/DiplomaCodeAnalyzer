@@ -36,6 +36,8 @@ namespace Core.Models
 
         public string? ForbiddenDependency { get; set; }
 
+        public bool? IsActive { get; set; }
+
     }   
 
 }

@@ -38,6 +38,9 @@ namespace SimbirSoftCodeAnalyzer.Views
             BtnHistory.Visibility = Visibility.Collapsed;
             BtnMyCode.Visibility = Visibility.Collapsed;
             BtnMyResults.Visibility = Visibility.Collapsed;
+            BtnResults.Visibility = Visibility.Collapsed;
+            BtnReferences.Visibility = Visibility.Collapsed;
+            BtnArchRules.Visibility = Visibility.Collapsed;
 
             switch (roleId)
             {
@@ -52,7 +55,9 @@ namespace SimbirSoftCodeAnalyzer.Views
                     BtnCheckManagement.Visibility = Visibility.Visible;
                     BtnSystemResources.Visibility = Visibility.Visible;
                     BtnSystemResources.Content = "Технические задания";
-                    BtnHistory.Visibility = Visibility.Visible;
+                    BtnResults.Visibility = Visibility.Visible;
+                    BtnReferences.Visibility = Visibility.Visible;
+                    BtnArchRules.Visibility = Visibility.Visible;
                     break;
                 case 3: // Стажёр
                     BtnHome.Content = "Главное меню";
@@ -105,12 +110,14 @@ namespace SimbirSoftCodeAnalyzer.Views
                 {
                     "Home" => null,
                     "Users" => new UsersPage(),
-                    "SystemResources" => new SystemResourcesPage(),
+                    "SystemResources" => new SpecificationsPage(),
                     "CheckManagement" => new CheckManagementPage(),
                     "History" => new HistoryPage(),
-                    "Results" => new ResultsLearningPage(),
                     "MyCode" => new MyCodePage(),
                     "MyResults" => new MyResultsPage(),
+                    "Results" => new ResultsPage(),
+                    "References" => new ReferencesPage(),
+                    "ArchRules" => new ArchRulesPage(),
                     "Settings" => new SettingsPage(),
                     _ => null
                 };
@@ -129,7 +136,7 @@ namespace SimbirSoftCodeAnalyzer.Views
 
         public void SetActiveButton(string tag)
         {
-            var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnCheckManagement, BtnHistory, BtnMyCode, BtnMyResults, BtnSettings };
+            var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnCheckManagement, BtnResults, BtnReferences, BtnArchRules, BtnHistory, BtnMyCode, BtnMyResults, BtnSettings };
 
             foreach (var btn in allButtons)
             {

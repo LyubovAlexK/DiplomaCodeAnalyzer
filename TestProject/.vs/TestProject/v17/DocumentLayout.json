@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "D:\\DITI\\Diploma_app\\TestProject\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\mentor\\referencespage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\mentor\\referencespage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\mentor\\referencespage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\mentor\\referencespage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|d:\\diti\\diploma_app\\testproject\\core\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|solutionrelative:core\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -11,60 +27,12 @@
       "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\trainee\\myresultspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\trainee\\myresultspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\trainee\\mycodepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\trainee\\mycodepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\trainee\\myresultspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\trainee\\myresultspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\trainee\\mycodepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\trainee\\mycodepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|d:\\diti\\diploma_app\\testproject\\core\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|solutionrelative:core\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|d:\\diti\\diploma_app\\testproject\\core\\models\\sessionanalysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{357A49B5-016B-45AD-9BBD-7BB4A6AAEAF9}|Core\\Core.csproj|solutionrelative:core\\models\\sessionanalysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\trainee\\historypage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\trainee\\historypage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\trainee\\historypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\trainee\\historypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\trainee\\traineehomepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\trainee\\traineehomepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|d:\\diti\\diploma_app\\testproject\\simbirsoftcodeanalyzer\\views\\pages\\trainee\\traineehomepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{E368E0F6-FD13-4DBE-8926-B9D466C8FDE8}|SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj|solutionrelative:simbirsoftcodeanalyzer\\views\\pages\\trainee\\traineehomepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|d:\\diti\\diploma_app\\testproject\\analyzers\\services\\graphbuilderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4DE88646-EDCB-4F5E-890F-E9322C1F45E3}|Analyzers\\Analyzers.csproj|solutionrelative:analyzers\\services\\graphbuilderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,11 +42,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 2,
               "Title": "Styles.xaml",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Resources\\Styles\\Styles.xaml",
               "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Resources\\Styles\\Styles.xaml",
@@ -91,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 7,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\App.xaml",
               "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\App.xaml",
@@ -104,7 +72,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 6,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\App.xaml.cs",
               "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\App.xaml.cs",
@@ -113,18 +81,17 @@
               "ViewState": "AgIAACwAAAAAAAAAAAAowEAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-03T17:49:41.821Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\MainWindow.xaml.cs",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\MainWindow.xaml.cs",
               "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\MainWindow.xaml.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAhwCsAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAswLoAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-03T17:18:07.335Z",
               "IsPinned": true,
@@ -132,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\MainWindow.xaml",
               "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\MainWindow.xaml",
@@ -145,13 +112,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Core\\Data\\AppDbContext.cs",
               "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Data\\AppDbContext.cs",
               "RelativeToolTip": "Core\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAANkAAAAAAAAAAAApwP4AAABcAAAAAAAAAA==",
+              "ViewState": "AgIAAJgAAAAAAAAAAAApwNAAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-11T10:03:28.375Z",
               "IsPinned": true,
@@ -159,133 +126,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SessionAnalysis.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\SessionAnalysis.cs",
-              "RelativeDocumentMoniker": "Core\\Models\\SessionAnalysis.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Core\\Models\\SessionAnalysis.cs",
-              "RelativeToolTip": "Core\\Models\\SessionAnalysis.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAIwBUAAAAzAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ReferencesPage.xaml.cs",
+              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Mentor\\ReferencesPage.xaml.cs",
+              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Mentor\\ReferencesPage.xaml.cs",
+              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Mentor\\ReferencesPage.xaml.cs",
+              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Mentor\\ReferencesPage.xaml.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAowLAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-11T10:03:04.329Z",
+              "WhenOpened": "2026-05-11T18:23:13.208Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "HistoryPage.xaml.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\HistoryPage.xaml.cs",
-              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\HistoryPage.xaml.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\HistoryPage.xaml.cs",
-              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\HistoryPage.xaml.cs",
-              "ViewState": "AgIAAMUAAAAAAAAAAAApwNUAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-11T09:41:44.61Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "HistoryPage.xaml",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\HistoryPage.xaml",
-              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\HistoryPage.xaml",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\HistoryPage.xaml",
-              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\HistoryPage.xaml",
+              "DocumentIndex": 0,
+              "Title": "ReferencesPage.xaml",
+              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Mentor\\ReferencesPage.xaml",
+              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Mentor\\ReferencesPage.xaml",
+              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Mentor\\ReferencesPage.xaml",
+              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Mentor\\ReferencesPage.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-05-11T09:41:32.451Z",
+              "WhenOpened": "2026-05-11T18:23:07.144Z",
               "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MyCodePage.xaml",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyCodePage.xaml",
-              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyCodePage.xaml",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyCodePage.xaml",
-              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyCodePage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-05-11T08:18:32.629Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MyCodePage.xaml.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyCodePage.xaml.cs",
-              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyCodePage.xaml.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyCodePage.xaml.cs",
-              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyCodePage.xaml.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAhwF4AAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-10T19:53:39.725Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MyResultsPage.xaml.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyResultsPage.xaml.cs",
-              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyResultsPage.xaml.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyResultsPage.xaml.cs",
-              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyResultsPage.xaml.cs",
-              "ViewState": "AgIAACsBAAAAAAAAAAAQwD8BAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-10T19:34:28.984Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MyResultsPage.xaml",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyResultsPage.xaml",
-              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyResultsPage.xaml",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyResultsPage.xaml",
-              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\MyResultsPage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-05-10T19:34:27.362Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TraineeHomePage.xaml.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\TraineeHomePage.xaml.cs",
-              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\TraineeHomePage.xaml.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\TraineeHomePage.xaml.cs",
-              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\TraineeHomePage.xaml.cs",
-              "ViewState": "AgIAALsBAAAAAAAAAAAQwNoBAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-10T19:00:22.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "TraineeHomePage.xaml",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\TraineeHomePage.xaml",
-              "RelativeDocumentMoniker": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\TraineeHomePage.xaml",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\TraineeHomePage.xaml",
-              "RelativeToolTip": "SimbirSoftCodeAnalyzer\\Views\\Pages\\Trainee\\TraineeHomePage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-05-10T18:59:44.352Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "GraphBuilderService.cs",
-              "DocumentMoniker": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\GraphBuilderService.cs",
-              "RelativeDocumentMoniker": "Analyzers\\Services\\GraphBuilderService.cs",
-              "ToolTip": "D:\\DITI\\Diploma_app\\TestProject\\Analyzers\\Services\\GraphBuilderService.cs",
-              "RelativeToolTip": "Analyzers\\Services\\GraphBuilderService.cs",
-              "ViewState": "AgIAAIEAAAAAAAAAAAAowJIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-08T17:00:20.572Z",
-              "EditorCaption": ""
             }
           ]
         }
