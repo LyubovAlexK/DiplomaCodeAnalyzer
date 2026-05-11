@@ -124,7 +124,8 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;component/views/pages/mentor/specificationspage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;V1.0.0.0;component/views/pages/mentor/specificationspage." +
+                    "xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Views\Pages\Mentor\SpecificationsPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

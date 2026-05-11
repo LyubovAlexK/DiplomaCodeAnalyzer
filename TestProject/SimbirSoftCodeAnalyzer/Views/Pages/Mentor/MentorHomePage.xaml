@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
 
             <!-- Заголовок -->
-            <TextBlock Grid.Row="0" Text="Дашборд наставника" Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
+            <TextBlock Grid.Row="0" Text="Главное меню наставника" Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
 
             <!-- KPI -->
             <Grid Grid.Row="1" Margin="0,0,0,20">
@@ -28,7 +28,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Style="{StaticResource MetricCardBorder}" Margin="0,0,8,0">
+                <Border Grid.Column="0" Style="{StaticResource MetricCardBorder}" Margin="0,0,8,0"
+                        Cursor="Hand" MouseLeftButtonDown="KpiCard_Click" Tag="Results">
                     <StackPanel Orientation="Horizontal">
                         <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
                             <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">
@@ -47,7 +48,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Column="1" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
+                <Border Grid.Column="1" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0"
+                        Cursor="Hand" MouseLeftButtonDown="KpiCard_Click" Tag="Results">
                     <StackPanel Orientation="Horizontal">
                         <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
                             <Rectangle Width="20" Height="20" Fill="{DynamicResource SuccessBrush}">
@@ -66,7 +68,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Column="2" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
+                <Border Grid.Column="2" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0"
+                        Cursor="Hand" MouseLeftButtonDown="KpiCard_Click" Tag="Results">
                     <StackPanel Orientation="Horizontal">
                         <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
                             <Rectangle Width="20" Height="20" Fill="{DynamicResource WarningBrush}">
@@ -85,7 +88,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Column="3" Style="{StaticResource MetricCardBorder}" Margin="8,0,0,0">
+                <Border Grid.Column="3" Style="{StaticResource MetricCardBorder}" Margin="8,0,0,0"
+                        Cursor="Hand" MouseLeftButtonDown="KpiCard_Click" Tag="Results">
                     <StackPanel Orientation="Horizontal">
                         <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
                             <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">

@@ -317,5 +317,25 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                 idx++;
             }
         }
+        private void KpiCard_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.Tag is string tag)
+            {
+                var mainWindow = Window.GetWindow(this) as MainWindow;
+                if (mainWindow == null) return;
+
+                UserControl? page = tag switch
+                {
+                    "Results" => new ResultsPage(),
+                    _ => null
+                };
+
+                if (page != null)
+                {
+                    mainWindow.ContentArea.Content = page;
+                    mainWindow.SetActiveButton(tag);
+                }
+            }
+        }
     }
 }

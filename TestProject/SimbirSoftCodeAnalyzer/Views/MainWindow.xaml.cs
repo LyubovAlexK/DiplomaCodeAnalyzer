@@ -34,7 +34,6 @@ namespace SimbirSoftCodeAnalyzer.Views
 
             BtnUsers.Visibility = Visibility.Collapsed;
             BtnSystemResources.Visibility = Visibility.Collapsed;
-            BtnCheckManagement.Visibility = Visibility.Collapsed;
             BtnHistory.Visibility = Visibility.Collapsed;
             BtnMyCode.Visibility = Visibility.Collapsed;
             BtnMyResults.Visibility = Visibility.Collapsed;
@@ -52,7 +51,6 @@ namespace SimbirSoftCodeAnalyzer.Views
                     break;
                 case 2: // Наставник
                     BtnHome.Content = "Главное меню";
-                    BtnCheckManagement.Visibility = Visibility.Visible;
                     BtnSystemResources.Visibility = Visibility.Visible;
                     BtnSystemResources.Content = "Технические задания";
                     BtnResults.Visibility = Visibility.Visible;
@@ -136,7 +134,7 @@ namespace SimbirSoftCodeAnalyzer.Views
 
         public void SetActiveButton(string tag)
         {
-            var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnCheckManagement, BtnResults, BtnReferences, BtnArchRules, BtnHistory, BtnMyCode, BtnMyResults, BtnSettings };
+            var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnResults, BtnReferences, BtnArchRules, BtnHistory, BtnMyCode, BtnMyResults, BtnSettings };
 
             foreach (var btn in allButtons)
             {

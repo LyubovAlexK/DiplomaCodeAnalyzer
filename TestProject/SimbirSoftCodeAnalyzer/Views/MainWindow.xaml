@@ -50,7 +50,7 @@
                     <!-- Пункты меню -->
                     <StackPanel x:Name="MenuPanel" Grid.Row="1" Margin="12,0">
 
-                        <!-- Dashboard -->
+                        <!-- Главное меню -->
                         <Button x:Name="BtnHome"
                                 Click="MenuButton_Click"
                                 Tag="Home"
@@ -61,7 +61,7 @@
                                         <ImageBrush ImageSource="/Resources/Images/icons/home_89292.png"/>
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
-                                <TextBlock Text="Dashboard" VerticalAlignment="Center"/>
+                                <TextBlock Text="Главное меню" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -81,22 +81,6 @@
                             </StackPanel>
                         </Button>
 
-                        <!-- Проверки -->
-                        <Button x:Name="BtnCheckManagement"
-                                Click="MenuButton_Click"
-                                Tag="CheckManagement"
-                                Style="{StaticResource SidebarItemButton}"
-                                Visibility="Collapsed">
-                            <StackPanel Orientation="Horizontal">
-                                <Rectangle Style="{StaticResource MenuIconStyle}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/clipboard_89387.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                                <TextBlock Text="Проверки" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Button>
-
                         <!-- Технические задания -->
                         <Button x:Name="BtnSystemResources"
                                 Click="MenuButton_Click"
@@ -106,10 +90,11 @@
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Style="{StaticResource MenuIconStyle}">
                                     <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/file_89266.png"/>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/textlines_89351.png"/>
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
-                                <TextBlock Text="Технические задания" VerticalAlignment="Center"/>
+                                <TextBlock Text="Технические задания" VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis" MaxWidth="180"/>
                             </StackPanel>
                         </Button>
 
