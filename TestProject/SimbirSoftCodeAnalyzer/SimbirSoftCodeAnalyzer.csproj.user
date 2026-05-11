@@ -8,6 +8,9 @@
     <Compile Update="Views\MarkerDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MetricDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\Admin\AdminHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -54,6 +57,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\RequirementDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TokenDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UserDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -23,10 +23,10 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="0,0,8,0">
                 <TextBlock Text="Тип требования:" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
-                <ComboBox x:Name="TypeCombo" Style="{StaticResource CustomComboBox}">
-                    <ComboBoxItem Content="Функциональное" Tag="Functional"/>
-                    <ComboBoxItem Content="Архитектурное" Tag="Architectural"/>
-                    <ComboBoxItem Content="Метрика" Tag="Metric"/>
+                <ComboBox Grid.Row="3" x:Name="TypeCombo" Style="{StaticResource CustomComboBox}" Margin="0,0,0,12">
+                    <ComboBoxItem Content="Синтаксис" Tag="Roslyn"/>
+                    <ComboBoxItem Content="Архитектура" Tag="NetArchTest"/>
+                    <ComboBoxItem Content="Семантическая" Tag="AI"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="8,0,0,0">

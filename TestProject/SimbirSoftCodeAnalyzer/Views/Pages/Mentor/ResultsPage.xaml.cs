@@ -29,7 +29,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
 
                 TraineeCombo.Items.Clear();
                 foreach (var t in trainees)
-                    TraineeCombo.Items.Add(new ComboBoxItem { Content = t.FullName, Tag = t.UserId });
+                    TraineeCombo.Items.Add(new ComboBoxItem { Content = $"{t.LastName} {t.FirstName}".Trim(), Tag = t.UserId });
 
                 if (trainees.Any())
                 {

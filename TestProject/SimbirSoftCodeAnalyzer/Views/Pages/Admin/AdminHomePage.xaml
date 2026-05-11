@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="900"
+             d:DesignHeight="650" d:DesignWidth="950"
              Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid Margin="24" Background="Transparent">
@@ -12,226 +12,49 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Заголовок -->
-            <TextBlock Grid.Row="0" Text="Панель администратора"
-                       Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
+            <TextBlock Grid.Row="0" Text="Добро пожаловать, Администратор" Style="{StaticResource H1Text}" Margin="0,0,0,12"/>
+            <TextBlock Grid.Row="1" Text="SimbirSoft Анализатор кода — система автоматизированной проверки кода стажёров." 
+                       Style="{StaticResource H3Text}" Margin="0,0,0,24"/>
 
-            <!-- Ярус 1: Карточки KPI -->
-            <Grid Grid.Row="1" Margin="0,0,0,20">
+            <!-- Карточки: Статистика + Последние действия -->
+            <Grid Grid.Row="2" Margin="0,0,0,24">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Всего пользователей -->
-                <Border Grid.Column="0" Style="{StaticResource MetricCardBorder}" Margin="0,0,8,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Width="40" Height="40" 
-                                    Background="{DynamicResource GlobalBackgroundBrush}" 
-                                    CornerRadius="8">
-                                <Rectangle Width="20" Height="20" 
-                                           Fill="{DynamicResource PrimaryBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/users_89368.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
-                            <TextBlock x:Name="TotalUsersText" Text="0"
-                                       FontSize="36" FontFamily="Inter" FontWeight="Bold"
-                                       Foreground="{DynamicResource DarkTextBrush}"/>
-                            <TextBlock x:Name="UsersTrendText" Text="—"
-                                       FontSize="14" FontFamily="Inter" FontWeight="SemiBold"
-                                       VerticalAlignment="Bottom" Margin="8,0,0,8"/>
-                        </StackPanel>
-                        <TextBlock Grid.Row="2" Text="Всего пользователей"
-                                   FontSize="13" FontFamily="Inter"
-                                   Foreground="{DynamicResource SecondaryTextBrush}"/>
-                    </Grid>
+                <!-- Статистика -->
+                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="20" Margin="0,0,8,0">
+                    <StackPanel>
+                        <TextBlock Text="Статистика" Style="{StaticResource H2Text}" Margin="0,0,0,16"/>
+                        <TextBlock x:Name="UsersCountText" Text="Пользователей: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="SpecsCountText" Text="ТЗ: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="ProjectsCountText" Text="Проектов: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="SessionsCountText" Text="Сессий: —" Style="{StaticResource H3Text}"/>
+                    </StackPanel>
                 </Border>
 
-                <!-- Всего ТЗ -->
-                <Border Grid.Column="1" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Width="40" Height="40" 
-                                Background="{DynamicResource GlobalBackgroundBrush}" 
-                                CornerRadius="8">
-                                <Rectangle Width="20" Height="20" 
-                                       Fill="{DynamicResource PrimaryBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/file_89266.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
-                            <TextBlock x:Name="TotalSpecsText" Text="0"
-                                       FontSize="36" FontFamily="Inter" FontWeight="Bold"
-                                       Foreground="{DynamicResource DarkTextBrush}"/>
-                            <TextBlock x:Name="SpecsTrendText" Text="—"
-                                       FontSize="14" FontFamily="Inter" FontWeight="SemiBold"
-                                       VerticalAlignment="Bottom" Margin="8,0,0,8"/>
-                        </StackPanel>
-                        <TextBlock Grid.Row="2" Text="Всего ТЗ"
-                                   FontSize="13" FontFamily="Inter"
-                                   Foreground="{DynamicResource SecondaryTextBrush}"/>
-                    </Grid>
-                </Border>
-
-                <!-- Активных проектов -->
-                <Border Grid.Column="2" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Width="40" Height="40" 
-                                Background="{DynamicResource GlobalBackgroundBrush}" 
-                                CornerRadius="8">
-                                <Rectangle Width="20" Height="20" 
-                                       Fill="{DynamicResource PrimaryBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/folder_89347.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
-                            <TextBlock x:Name="ActiveProjectsText" Text="0"
-                                       FontSize="36" FontFamily="Inter" FontWeight="Bold"
-                                       Foreground="{DynamicResource DarkTextBrush}"/>
-                            <TextBlock x:Name="ProjectsTrendText" Text="—"
-                                       FontSize="14" FontFamily="Inter" FontWeight="SemiBold"
-                                       VerticalAlignment="Bottom" Margin="8,0,0,8"/>
-                        </StackPanel>
-                        <TextBlock Grid.Row="2" Text="Активных проектов"
-                                   FontSize="13" FontFamily="Inter"
-                                   Foreground="{DynamicResource SecondaryTextBrush}"/>
-                    </Grid>
-                </Border>
-
-                <!-- Сессий за месяц -->
-                <Border Grid.Column="3" Style="{StaticResource MetricCardBorder}" Margin="8,0,0,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Width="40" Height="40" 
-                                Background="{DynamicResource GlobalBackgroundBrush}" 
-                                CornerRadius="8">
-                                <Rectangle Width="20" Height="20" 
-                                       Fill="{DynamicResource PrimaryBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
-                            <TextBlock x:Name="SessionsMonthText" Text="0"
-                                       FontSize="36" FontFamily="Inter" FontWeight="Bold"
-                                       Foreground="{DynamicResource DarkTextBrush}"/>
-                            <TextBlock x:Name="SessionsTrendText" Text="—"
-                                       FontSize="14" FontFamily="Inter" FontWeight="SemiBold"
-                                       VerticalAlignment="Bottom" Margin="8,0,0,8"/>
-                        </StackPanel>
-                        <TextBlock Grid.Row="2" Text="Сессий за месяц"
-                                   FontSize="13" FontFamily="Inter"
-                                   Foreground="{DynamicResource SecondaryTextBrush}"/>
-                    </Grid>
+                <!-- Последние действия -->
+                <Border Grid.Column="1" Style="{StaticResource CardBorder}" Padding="20" Margin="8,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Последние действия" Style="{StaticResource H2Text}" Margin="0,0,0,16"/>
+                        <StackPanel x:Name="RecentActionsPanel"/>
+                    </StackPanel>
                 </Border>
             </Grid>
 
-            <!-- Ярус 2: График активности -->
-            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,0,0,20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="280"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Активность по месяцам"
-                       Style="{StaticResource H2Text}"/>
-                        <ComboBox Grid.Column="1" 
-                      x:Name="PeriodCombo"
-                      Style="{StaticResource CustomComboBox}"
-                      Width="130"
-                      SelectedIndex="0"
-                      SelectionChanged="PeriodCombo_SelectionChanged">
-                            <ComboBoxItem Content="6 месяцев" Tag="6"/>
-                            <ComboBoxItem Content="12 месяцев" Tag="12"/>
-                        </ComboBox>
-                    </Grid>
-
-                    <TextBlock Grid.Row="1" Text="Количество сессий анализа"
-                   FontSize="13" FontFamily="Inter"
-                   Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,10"/>
-
-                    <!-- Область графика -->
-                    <Canvas Grid.Row="2" x:Name="ChartCanvas"
-                Background="Transparent"
-                MouseMove="ChartCanvas_MouseMove"
-                MouseLeave="ChartCanvas_MouseLeave"
-                ClipToBounds="True">
-                        <!-- Сетка, оси, линии рисуются в коде -->
-                    </Canvas>
-
-                    <!-- Tooltip -->
-                    <Border x:Name="ChartTooltip"
-                Grid.Row="2"
-                Background="#1E293B"
-                CornerRadius="8"
-                Padding="12,8"
-                Visibility="Collapsed"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                IsHitTestVisible="False">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="12" ShadowDepth="3" Opacity="0.3" Color="Black"/>
-                        </Border.Effect>
-                        <StackPanel>
-                            <TextBlock x:Name="TooltipMonth"
-                           FontSize="11" FontFamily="Inter"
-                           Foreground="#94A3B8"/>
-                            <TextBlock x:Name="TooltipValue"
-                           FontSize="18" FontFamily="Inter" FontWeight="Bold"
-                           Foreground="White"/>
-                            <TextBlock x:Name="TooltipLabel"
-                           FontSize="11" FontFamily="Inter"
-                           Foreground="#94A3B8"
-                           Text="сессий"/>
-                        </StackPanel>
-                    </Border>
-                </Grid>
+            <!-- Инструкция -->
+            <Border Grid.Row="3" Style="{StaticResource CardBorder}" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="Для начала работы:" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <TextBlock Text="1. Загрузите словарь русских слов" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+                    <TextBlock Text="2. Загрузите технические задания" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+                    <TextBlock Text="3. Создайте пользователей (наставников, стажёров)" Style="{StaticResource H4Text}"/>
+                </StackPanel>
             </Border>
         </Grid>
     </ScrollViewer>

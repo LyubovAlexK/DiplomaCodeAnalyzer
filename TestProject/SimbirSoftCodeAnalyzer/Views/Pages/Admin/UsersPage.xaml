@@ -4,32 +4,89 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="20" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+             d:DesignHeight="650" d:DesignWidth="950"
+             Background="Transparent">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="👥 Пользователи"
-                   Style="{StaticResource H1Text}" Margin="0,0,0,10"/>
+            <!-- Заголовок + кнопки -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Пользователи" Style="{StaticResource H1Text}"/>
+                <Button Grid.Column="1" Content="Добавить" Style="{StaticResource PrimaryButton}"
+                        Click="AddUserButton_Click" Margin="0,0,10,0" Padding="15,8"
+                        FontSize="{DynamicResource AppFontSizeH4}"/>
+                <Button Grid.Column="2" Content="Обновить" Style="{StaticResource OutlineButton}"
+                        Click="RefreshButton_Click" Padding="15,8"
+                        FontSize="{DynamicResource AppFontSizeH4}"/>
+            </Grid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
-            <Button Content="🔄 Обновить"
-                    Style="{StaticResource OutlineButton}"
-                    Click="RefreshButton_Click"
-                    Margin="0,0,10,0"/>
-        </StackPanel>
-
-        <Border Grid.Row="2" Style="{StaticResource DataGridCardBorder}">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <DataGrid x:Name="UsersGrid"
-                          Style="{StaticResource CustomDataGridStyle}"
-                          AutoGenerateColumns="True"
-                          IsReadOnly="True"
-                          SelectionMode="Single"/>
-            </ScrollViewer>
-        </Border>
-    </Grid>
+            <!-- Таблица пользователей -->
+            <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="UsersGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  RowHeight="44" MaxHeight="500" HorizontalAlignment="Stretch">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Логин" Width="*" Binding="{Binding Login}"/>
+                                <DataGridTextColumn Header="ФИО" Width="2*" Binding="{Binding FullName}"/>
+                                <DataGridTextColumn Header="Роль" Width="*" Binding="{Binding RoleName}"/>
+                                <DataGridTemplateColumn Header="Статус" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border CornerRadius="12" Padding="8,4" HorizontalAlignment="Center"
+                                                    Background="{Binding StatusBg}">
+                                                <TextBlock Text="{Binding StatusText}" FontSize="11" FontFamily="Inter"
+                                                           FontWeight="SemiBold" Foreground="{Binding StatusFg}"
+                                                           HorizontalAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Действия" Width="80">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Button Width="30" Height="30" Style="{StaticResource IconButtonStyle}"
+                                                        FontSize="14" Click="EditUserButton_Click">
+                                                    <Rectangle Width="16" Height="16" Fill="{DynamicResource PrimaryBrush}">
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/Resources/Images/icons/textlines_89351.png"/>
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
+                                                </Button>
+                                                <Button Width="30" Height="30" Style="{StaticResource IconButtonStyle}"
+                                                        FontSize="14" Click="DeleteUserButton_Click" Margin="5,0,0,0">
+                                                    <Rectangle Width="16" Height="16" Fill="{DynamicResource DangerBrush}">
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/Resources/Images/icons/trash_89366.png"/>
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <TextBlock Grid.Row="1" Text="Кнопка редактирования — изменить пользователя. Кнопка удаления — деактивировать."
+                               Style="{StaticResource H4Text}" Margin="0,4,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

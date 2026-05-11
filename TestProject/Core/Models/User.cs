@@ -14,17 +14,12 @@ namespace Core.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Login { get; set; } = string.Empty;
+        [Required][MaxLength(50)] public string Login { get; set; } = string.Empty;
+        [Required][MaxLength(255)] public string PasswordHash { get; set; } = string.Empty;
 
-        [Required]
-        [MaxLength(255)]
-        public string PasswordHash { get; set; } = string.Empty;
-
-        [Required]
-        [MaxLength(150)]
-        public string FullName { get; set; } = string.Empty;
+        [MaxLength(50)] public string? LastName { get; set; }
+        [MaxLength(50)] public string? FirstName { get; set; }
+        [MaxLength(50)] public string? MiddleName { get; set; }
 
         public int RoleId { get; set; }
         public int? DepartmentId { get; set; }

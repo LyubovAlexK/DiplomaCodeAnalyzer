@@ -102,13 +102,19 @@ namespace SimbirSoftCodeAnalyzer.Views
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
+            var roleId = App.CurrentUser?.RoleId;
             if (sender is Button button && button.Tag is string tag)
             {
                 UserControl? page = tag switch
                 {
                     "Home" => null,
                     "Users" => new UsersPage(),
-                    "SystemResources" => new SpecificationsPage(),
+                    "SystemResources" => roleId switch
+                    {
+                        1 => new SystemResourcesPage(),   // Админ → Системные ресурсы
+                        2 => new SpecificationsPage(),    // Наставник → ТЗ и требования
+                        _ => new SystemResourcesPage()
+                    },
                     "CheckManagement" => new CheckManagementPage(),
                     "History" => new HistoryPage(),
                     "MyCode" => new MyCodePage(),

@@ -4,158 +4,166 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="950"
+             Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Margin="20" Background="Transparent">
-            <StackPanel>
-                <TextBlock Text="⚙ Системные ресурсы"
-                           Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
+        <Grid Margin="24" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-                <!-- Загрузка ТЗ -->
-                <Border Style="{StaticResource CardBorder}" Margin="0,0,0,20">
-                    <StackPanel>
-                        <TextBlock Text="📄 Загрузка технического задания"
-                                   Style="{StaticResource H2Text}" Margin="0,0,0,10"/>
+            <TextBlock Grid.Row="0" Text="Системные ресурсы" Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
 
-                        <Grid Margin="0,0,0,15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="TzPathTextBox"
-                                     Text="Файл не выбран"
-                                     IsReadOnly="True"
-                                     Background="#F6F8F9"
-                                     FontSize="14" FontFamily="Inter"
-                                     Padding="12,10"
-                                     BorderBrush="{DynamicResource BorderBrush}"
-                                     BorderThickness="1"/>
-                            <Button Grid.Column="1" Content="📁 Выбрать ТЗ"
-                                    Style="{StaticResource OutlineButton}"
-                                    Click="BrowseTzButton_Click"
-                                    Margin="10,0,0,0"/>
-                        </Grid>
-
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
-                            <TextBlock Text="Метод анализа:" VerticalAlignment="Center" Margin="0,0,10,0"
-                                       FontSize="14" FontFamily="Inter"/>
-                            <ComboBox x:Name="MethodComboBox"
-                                      Style="{StaticResource CustomComboBox}"
-                                      Width="200">
-                                <ComboBoxItem Content="🔍 Локальный (Catalyst)" Tag="local" IsSelected="True"/>
-                                <ComboBoxItem Content="🤖 GigaChat AI" Tag="ai"/>
-                            </ComboBox>
-                        </StackPanel>
-
-                        <Button x:Name="AnalyzeButton"
-                                Content="🚀 Анализировать ТЗ"
-                                Style="{StaticResource PrimaryButton}"
-                                Click="AnalyzeButton_Click"
-                                HorizontalAlignment="Left"/>
-
-                        <ProgressBar x:Name="TzProgressBar"
-                                     Style="{StaticResource ModernProgressBar}"
-                                     IsIndeterminate="True"
-                                     Visibility="Collapsed"
-                                     Margin="0,10,0,0"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Результаты анализа ТЗ -->
-                <Border x:Name="ResultCard" 
-                        Style="{StaticResource CardBorder}"
-                        Visibility="Collapsed"
-                        Margin="0,0,0,20">
-                    <StackPanel>
-                        <TextBlock x:Name="ResultTitle"
-                                   Style="{StaticResource H2Text}" Margin="0,0,0,5"/>
-                        <TextBlock x:Name="ResultType"
-                                   FontSize="14" FontFamily="Inter"
-                                   Foreground="{DynamicResource SecondaryTextBrush}"
-                                   Margin="0,0,0,10"/>
-                        <TextBlock x:Name="ResultCount"
-                                   FontSize="16" FontFamily="Inter" FontWeight="Bold"
-                                   Foreground="{DynamicResource PrimaryBrush}"
-                                   Margin="0,0,0,10"/>
-
-                        <Border Style="{StaticResource DataGridCardBorder}">
-                            <ScrollViewer MaxHeight="300"
-                                          HorizontalScrollBarVisibility="Auto"
-                                          VerticalScrollBarVisibility="Auto">
-                                <DataGrid x:Name="RequirementsGrid"
-                                          Style="{StaticResource CustomDataGridStyle}"
-                                          AutoGenerateColumns="True"
-                                          IsReadOnly="True"/>
-                            </ScrollViewer>
-                        </Border>
-                    </StackPanel>
-                </Border>
-
-                <!-- Загрузка эталонного проекта -->
-                <Border Style="{StaticResource CardBorder}" Margin="0,0,0,20">
-                    <StackPanel>
-                        <TextBlock Text="🏗 Эталонный проект"
-                                   Style="{StaticResource H2Text}" Margin="0,0,0,10"/>
-
-                        <TextBlock Text="Выберите ТЗ" FontSize="14" FontFamily="Inter"
-                                   Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,0,5"/>
-                        <ComboBox x:Name="SpecComboBox"
-                                  Style="{StaticResource CustomComboBox}"
-                                  Margin="0,0,0,15"/>
-
-                        <Grid Margin="0,0,0,15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="RefPathTextBox"
-                                     Text="Папка не выбрана"
-                                     IsReadOnly="True"
-                                     Background="#F6F8F9"
-                                     FontSize="14" FontFamily="Inter"
-                                     Padding="12,10"
-                                     BorderBrush="{DynamicResource BorderBrush}"
-                                     BorderThickness="1"/>
-                            <Button Grid.Column="1" Content="📁 Выбрать проект"
-                                    Style="{StaticResource OutlineButton}"
-                                    Click="BrowseRefButton_Click"
-                                    Margin="10,0,0,0"/>
-                        </Grid>
-
-                        <Button x:Name="AnalyzeRefButton"
-                                Content="🚀 Анализировать эталон"
-                                Style="{StaticResource PrimaryButton}"
-                                Click="AnalyzeRefButton_Click"
-                                HorizontalAlignment="Left"/>
-
-                        <ProgressBar x:Name="RefProgressBar"
-                                     Style="{StaticResource ModernProgressBar}"
-                                     IsIndeterminate="True"
-                                     Visibility="Collapsed"
-                                     Margin="0,10,0,0"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Результат анализа эталона -->
-                <Border x:Name="RefResultPanel"
-                        Style="{StaticResource CardBorder}"
-                        Visibility="Collapsed">
-                    <StackPanel>
-                        <TextBlock x:Name="RefResultTitle"
-                                   FontSize="18"
-                                   FontFamily="Inter"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource DarkTextBrush}"
-                                   Margin="0,0,0,10"/>
-                        <TextBlock x:Name="RefResultText"
-                                   FontSize="14"
-                                   FontFamily="Inter"
-                                   Foreground="{DynamicResource SecondaryTextBrush}"
-                                   TextWrapping="Wrap"
-                                   LineHeight="22"/>
-                    </StackPanel>
-                </Border>
+            <!-- Вкладки -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,20">
+                <RadioButton x:Name="TabMetrics" Content="Метрики" GroupName="Tabs" IsChecked="True"
+                             Checked="Tab_Checked" Margin="0,0,16,0"
+                             FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                             Foreground="{DynamicResource DarkTextBrush}"/>
+                <RadioButton x:Name="TabMarkers" Content="Маркеры" GroupName="Tabs"
+                             Checked="Tab_Checked" Margin="0,0,16,0"
+                             FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                             Foreground="{DynamicResource DarkTextBrush}"/>
+                <RadioButton x:Name="TabTokens" Content="Токены" GroupName="Tabs"
+                             Checked="Tab_Checked" Margin="0,0,16,0"
+                             FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                             Foreground="{DynamicResource DarkTextBrush}"/>
+                <RadioButton x:Name="TabPrompts" Content="Промпты" GroupName="Tabs"
+                             Checked="Tab_Checked"
+                             FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                             Foreground="{DynamicResource DarkTextBrush}"/>
             </StackPanel>
+
+            <!-- Панель Метрики -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="16" x:Name="PanelMetrics">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Метрики по умолчанию" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="MetricsGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" RowHeight="44">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding MetricName}"/>
+                                <DataGridTextColumn Header="Тип" Width="*" Binding="{Binding MetricType}"/>
+                                <DataGridTextColumn Header="Порог" Width="*" Binding="{Binding DefaultThreshold}"/>
+                                <DataGridTemplateColumn Header="Активно" Width="70">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsActive}" HorizontalAlignment="Center"
+                                                      Checked="MetricCheckBox_Changed" Unchecked="MetricCheckBox_Changed"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <Button Grid.Row="2" Content="Добавить метрику" Style="{StaticResource OutlineButton}"
+                            Click="AddMetricButton_Click" Margin="0,12,0,0" HorizontalAlignment="Left"
+                            Padding="12,8" FontSize="{DynamicResource AppFontSizeH4}"/>
+                </Grid>
+            </Border>
+
+            <!-- Панель Маркеры -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="16" x:Name="PanelMarkers" Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Маркеры по умолчанию" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="MarkersGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" RowHeight="44" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фраза" Width="*" Binding="{Binding Phrase}"/>
+                                <DataGridTextColumn Header="Тип" Width="*" Binding="{Binding RequirementType}"/>
+                                <DataGridTemplateColumn Header="Активно" Width="70">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsActive}" HorizontalAlignment="Center"
+                                                      Checked="MarkerCheckBox_Changed" Unchecked="MarkerCheckBox_Changed"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <Button Grid.Row="2" Content="Добавить маркер" Style="{StaticResource OutlineButton}"
+                            Click="AddMarkerButton_Click" Margin="0,12,0,0" HorizontalAlignment="Left"
+                            Padding="12,8" FontSize="{DynamicResource AppFontSizeH4}"/>
+                </Grid>
+            </Border>
+
+            <!-- Панель Токены -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="16" x:Name="PanelTokens" Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Токены" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="TokensGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" RowHeight="44">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Значение" Width="*" Binding="{Binding TokenValue}"/>
+                                <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Description}"/>
+                                <DataGridTemplateColumn Header="Активно" Width="70">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsActive}" HorizontalAlignment="Center"
+                                                      Checked="TokenCheckBox_Changed" Unchecked="TokenCheckBox_Changed"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <Button Grid.Row="2" Content="Добавить токен" Style="{StaticResource OutlineButton}"
+                            Click="AddTokenButton_Click" Margin="0,12,0,0" HorizontalAlignment="Left"
+                            Padding="12,8" FontSize="{DynamicResource AppFontSizeH4}"/>
+                </Grid>
+            </Border>
+
+            <!-- Панель Промпты -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="16" x:Name="PanelPrompts" Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Промпты по умолчанию" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="PromptsGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" RowHeight="44">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Тип" Width="*" Binding="{Binding PromptType}"/>
+                                <DataGridTextColumn Header="Системный промпт" Width="2*" Binding="{Binding SystemPrompt}"/>
+                                <DataGridTemplateColumn Header="Активно" Width="70">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsActive}" HorizontalAlignment="Center"
+                                                      Checked="PromptCheckBox_Changed" Unchecked="PromptCheckBox_Changed"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <Button Grid.Row="2" Content="Добавить промпт" Style="{StaticResource OutlineButton}"
+                            Click="AddPromptButton_Click" Margin="0,12,0,0" HorizontalAlignment="Left"
+                            Padding="12,8" FontSize="{DynamicResource AppFontSizeH4}"/>
+                </Grid>
+            </Border>
         </Grid>
     </ScrollViewer>
 </UserControl>

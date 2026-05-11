@@ -41,13 +41,15 @@ namespace Core.Services
             return user;
         }
 
-        public async Task<User> CreateAsync(string login, string password, string fullName, int roleId, int? departmentId = null)
+        public async Task<User> CreateAsync(string login, string password, string lastName, string firstName, string? middleName, int roleId, int? departmentId = null)
         {
             var user = new User
             {
                 Login = login,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(password),
-                FullName = fullName,
+                LastName = lastName,
+                FirstName = firstName,
+                MiddleName = middleName,
                 RoleId = roleId,
                 DepartmentId = departmentId,
                 IsActive = true

@@ -360,7 +360,8 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 var user = await db.Users.FindAsync(myId);
                 var project = await db.Projects.FindAsync(projectId);
 
-                var pdf = ReportService.GenerateSessionReport(session, verdicts, user?.FullName ?? "", project?.Title ?? "");
+                var traineeName = user != null ? $"{user.LastName} {user.FirstName}".Trim() : "";
+                var pdf = ReportService.GenerateSessionReport(session, verdicts, traineeName, project?.Title ?? "");
 
                 var dialog = new Microsoft.Win32.SaveFileDialog
                 {

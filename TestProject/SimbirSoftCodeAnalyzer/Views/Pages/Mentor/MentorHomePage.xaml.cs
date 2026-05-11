@@ -52,10 +52,20 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                 foreach (var ts in traineeSessions)
                     lastSessions.Add(ts.Sessions.LastOrDefault());
                 var best = traineeSessions
-                    .Select(ts => new { Name = ts.Trainee.FullName, Max = ts.Sessions.Any() ? ts.Sessions.Max(s => s.OverallMatchPercent ?? 0) : 0, Count = ts.Sessions.Count })
+                    .Select(ts => new 
+                    { 
+                        Name = $"{ts.Trainee.LastName} {ts.Trainee.FirstName}".Trim(),
+                        Max = ts.Sessions.Any() ? ts.Sessions.Max(s => s.OverallMatchPercent ?? 0) : 0, 
+                        Count = ts.Sessions.Count 
+                    })
                     .OrderByDescending(x => x.Max).FirstOrDefault();
+
                 var worst = traineeSessions
-                    .Select(ts => new { Name = ts.Trainee.FullName, Max = ts.Sessions.Any() ? ts.Sessions.Max(s => s.OverallMatchPercent ?? 0) : 0 })
+                    .Select(ts => new 
+                    { 
+                        Name = $"{ts.Trainee.LastName} {ts.Trainee.FirstName}".Trim(),
+                        Max = ts.Sessions.Any() ? ts.Sessions.Max(s => s.OverallMatchPercent ?? 0) : 0 
+                    })
                     .OrderBy(x => x.Max).FirstOrDefault();
 
                 BestWorstText.Text = $"Лучший: {best?.Name} ({best?.Max:F0}%, {best?.Count} попыток)\n" +
@@ -84,7 +94,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
 
                     return new
                     {
-                        TraineeName = t.FullName,
+                        TraineeName = $"{t.LastName} {t.FirstName}".Trim(),
                         ProjectTitle = proj?.Title ?? "—",
                         Attempts = sessions.Count,
                         LastPercent = last != null ? $"{last.OverallMatchPercent:F0}%" : "—",
@@ -147,7 +157,8 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
             {
                 var sessions = (List<Core.Models.SessionAnalysis>)ts.Sessions;
                 if (!sessions.Any()) continue;
-                var name = ((Core.Models.User)ts.Trainee).FullName;
+                var trainee = (Core.Models.User)ts.Trainee;
+                var name = $"{trainee.LastName} {trainee.FirstName}".Trim();
                 var color = LineColors[colorIdx % LineColors.Length];
                 var brush = new SolidColorBrush(color);
 

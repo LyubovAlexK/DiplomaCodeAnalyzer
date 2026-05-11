@@ -278,7 +278,9 @@ namespace Core.Data
                 entity.Property(e => e.UserId).ValueGeneratedOnAdd();
                 entity.Property(e => e.Login).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.PasswordHash).IsRequired().HasMaxLength(255);
-                entity.Property(e => e.FullName).IsRequired().HasMaxLength(150);
+                entity.Property(e => e.LastName).HasMaxLength(50);
+                entity.Property(e => e.FirstName).HasMaxLength(50);
+                entity.Property(e => e.MiddleName).HasMaxLength(50);
                 entity.Property(e => e.RoleId).IsRequired();
                 entity.Property(e => e.DepartmentId).IsRequired(false);
                 entity.Property(e => e.IsActive).HasDefaultValue(true);

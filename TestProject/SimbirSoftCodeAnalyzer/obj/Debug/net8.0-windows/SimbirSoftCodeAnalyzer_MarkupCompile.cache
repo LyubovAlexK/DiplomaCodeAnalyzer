@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\App.xaml
-20-1725912441
+23345306973
 2-142697542
-44-659190857
+47931388470
 319-1880955585
-Resources\Styles\Styles.xaml;Views\LoginWindow.xaml;Views\MainWindow.xaml;Views\MarkerDialog.xaml;Views\Pages\Admin\AdminHomePage.xaml;Views\Pages\Admin\SystemResourcesPage.xaml;Views\Pages\Admin\UsersPage.xaml;Views\Pages\Mentor\ArchRulesPage.xaml;Views\Pages\Mentor\CheckManagementPage.xaml;Views\Pages\Mentor\MentorHomePage.xaml;Views\Pages\Mentor\ReferencesPage.xaml;Views\Pages\Mentor\ResultsPage.xaml;Views\Pages\Mentor\SpecificationsPage.xaml;Views\Pages\SettingsPage.xaml;Views\Pages\Trainee\HistoryPage.xaml;Views\Pages\Trainee\MyCodePage.xaml;Views\Pages\Trainee\MyResultsPage.xaml;Views\Pages\Trainee\TraineeHomePage.xaml;Views\PromptDialog.xaml;Views\RequirementDialog.xaml;
+Resources\Styles\Styles.xaml;Views\LoginWindow.xaml;Views\MainWindow.xaml;Views\MarkerDialog.xaml;Views\MetricDialog.xaml;Views\Pages\Admin\AdminHomePage.xaml;Views\Pages\Admin\SystemResourcesPage.xaml;Views\Pages\Admin\UsersPage.xaml;Views\Pages\Mentor\ArchRulesPage.xaml;Views\Pages\Mentor\CheckManagementPage.xaml;Views\Pages\Mentor\MentorHomePage.xaml;Views\Pages\Mentor\ReferencesPage.xaml;Views\Pages\Mentor\ResultsPage.xaml;Views\Pages\Mentor\SpecificationsPage.xaml;Views\Pages\SettingsPage.xaml;Views\Pages\Trainee\HistoryPage.xaml;Views\Pages\Trainee\MyCodePage.xaml;Views\Pages\Trainee\MyResultsPage.xaml;Views\Pages\Trainee\TraineeHomePage.xaml;Views\PromptDialog.xaml;Views\RequirementDialog.xaml;Views\TokenDialog.xaml;Views\UserDialog.xaml;
 
 False
 
