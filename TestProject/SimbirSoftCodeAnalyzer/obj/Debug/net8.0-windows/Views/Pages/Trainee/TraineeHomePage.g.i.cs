@@ -164,7 +164,8 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;component/views/pages/trainee/traineehomepage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;V1.0.0.0;component/views/pages/trainee/traineehomepage.xa" +
+                    "ml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Views\Pages\Trainee\TraineeHomePage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

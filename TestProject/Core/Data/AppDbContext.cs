@@ -252,6 +252,7 @@ namespace Core.Data
                 entity.Property(e => e.IsAiAvailable).HasDefaultValue(false);
                 entity.Property(e => e.IsArchived).HasDefaultValue(false);
                 entity.Property(e => e.ArchivedDate).IsRequired(false);
+                entity.Property(e => e.ReferenceMatchPercent).HasColumnType("decimal(5,2)");
             });
 
             modelBuilder.Entity<ProjectSpecification>(entity =>

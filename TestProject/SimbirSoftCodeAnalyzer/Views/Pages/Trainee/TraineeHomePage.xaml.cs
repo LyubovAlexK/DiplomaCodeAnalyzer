@@ -54,9 +54,15 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 _cachedSessions = sessions;
 
                 // Заполняем комбобокс проектов для графика
-                ProjectChartCombo.Items.Clear();
-                foreach (var proj in projects)
+                var projectsWithSessions = projects.Where(p => sessions.Any(s => s.ProjectId == p.ProjectId)).ToList();
+                foreach (var proj in projectsWithSessions)
                     ProjectChartCombo.Items.Add(new ComboBoxItem { Content = proj.Title, Tag = proj.ProjectId });
+
+                if (projectsWithSessions.Any())
+                {
+                    ProjectChartCombo.SelectedIndex = 0;
+                    _selectedProjectId = projectsWithSessions.First().ProjectId;
+                }
 
                 if (projects.Any())
                 {

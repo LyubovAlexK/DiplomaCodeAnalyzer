@@ -187,6 +187,7 @@
     <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
     <PackageReference Include="PdfPig" Version="0.1.14" />
     <PackageReference Include="PragmaticSegmenterNet" Version="1.0.5" />
+    <PackageReference Include="QuestPDF" Version="2026.5.0" />
     <PackageReference Include="SymSpell" Version="6.7.3" />
     <PackageReference Include="System.Reflection.MetadataLoadContext" Version="10.0.7" />
   </ItemGroup>

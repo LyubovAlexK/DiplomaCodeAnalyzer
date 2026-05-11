@@ -18,6 +18,7 @@ namespace SimbirSoftCodeAnalyzer
 
         public static User? CurrentUser { get; set; }
 
+
         protected override void OnStartup(StartupEventArgs e)
         {
 
@@ -33,7 +34,7 @@ namespace SimbirSoftCodeAnalyzer
 
         private static void ConfigureServices(ServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContextFactory<AppDbContext>(options =>
                 options.UseSqlServer(@"Server=DESKTOP-3HK6G3K\SQLEXPRESS;Database=AnalyseSystem;Trusted_Connection=True;TrustServerCertificate=True;"));
 
             services.AddScoped<DictionaryService>();
@@ -55,6 +56,11 @@ namespace SimbirSoftCodeAnalyzer
 
         public static T GetService<T>() where T : class
         {
+            if (typeof(T) == typeof(AppDbContext))
+            {
+                var factory = ((App)Current)._serviceProvider.GetRequiredService<IDbContextFactory<AppDbContext>>();
+                return (T)(object)factory.CreateDbContext();
+            }
             return ((App)Current)._serviceProvider.GetRequiredService<T>();
         }
 

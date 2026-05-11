@@ -5,6 +5,7 @@
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.options\10.0.3\buildTransitive\net8.0\Microsoft.Extensions.Options.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.options\10.0.3\buildTransitive\net8.0\Microsoft.Extensions.Options.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\10.0.3\buildTransitive\net8.0\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\10.0.3\buildTransitive\net8.0\Microsoft.Extensions.Logging.Abstractions.targets')" />
     <Import Project="$(NuGetPackageRoot)system.clientmodel\1.10.0\buildTransitive\net8.0\System.ClientModel.targets" Condition="Exists('$(NuGetPackageRoot)system.clientmodel\1.10.0\buildTransitive\net8.0\System.ClientModel.targets')" />
+    <Import Project="$(NuGetPackageRoot)questpdf\2026.5.0\buildTransitive\QuestPDF.targets" Condition="Exists('$(NuGetPackageRoot)questpdf\2026.5.0\buildTransitive\QuestPDF.targets')" />
     <Import Project="$(NuGetPackageRoot)openai\2.10.0\buildTransitive\netstandard2.0\OpenAI.targets" Condition="Exists('$(NuGetPackageRoot)openai\2.10.0\buildTransitive\netstandard2.0\OpenAI.targets')" />
   </ImportGroup>
 </Project>

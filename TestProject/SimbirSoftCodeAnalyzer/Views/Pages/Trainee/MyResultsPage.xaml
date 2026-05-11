@@ -6,139 +6,159 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="950"
              Background="Transparent">
-    <Grid Margin="24" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Заголовок + выбор проекта -->
-        <Grid Grid.Row="0" Margin="0,0,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Мои результаты" Style="{StaticResource H1Text}"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <TextBlock Text="Проект:" VerticalAlignment="Center" 
-                           FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                           Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,10,0"/>
-                <ComboBox x:Name="ProjectFilterCombo" Style="{StaticResource CustomComboBox}" Width="220"
-                          SelectionChanged="ProjectFilterCombo_SelectionChanged"/>
-            </StackPanel>
-        </Grid>
-
-        <!-- Подсказка -->
-        <TextBlock Grid.Row="0" x:Name="PlaceholderText"
-                   Text="Выберите проект, чтобы увидеть результаты проверки"
-                   FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                   Foreground="{DynamicResource SecondaryTextBrush}" TextWrapping="Wrap"
-                   Visibility="Visible" Margin="0,40,0,0" HorizontalAlignment="Center"/>
-
-        <!-- Ярус 1: KPI-карточки -->
-        <Grid Grid.Row="1" x:Name="KpiGrid" Margin="0,0,0,20" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Border Grid.Column="0" Style="{StaticResource MetricCardBorder}" Margin="0,0,8,0">
-                <StackPanel>
-                    <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,0,10">
-                        <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">
-                            <Rectangle.OpacityMask>
-                                <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </Border>
-                    <TextBlock x:Name="MatchPercentText" Text="—"
-                               FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
-                               Foreground="{DynamicResource DarkTextBrush}"/>
-                    <TextBlock Text="Соответствие" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                               Foreground="{DynamicResource SecondaryTextBrush}"/>
-                </StackPanel>
-            </Border>
-
-            <Border Grid.Column="1" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
-                <StackPanel>
-                    <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,0,10">
-                        <Rectangle Width="20" Height="20" Fill="{DynamicResource DangerBrush}">
-                            <Rectangle.OpacityMask>
-                                <ImageBrush ImageSource="/Resources/Images/icons/warning_89399.png"/>
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </Border>
-                    <TextBlock x:Name="RoslynFailText" Text="—"
-                               FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
-                               Foreground="{DynamicResource DarkTextBrush}"/>
-                    <TextBlock Text="Синтаксис" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                               Foreground="{DynamicResource SecondaryTextBrush}"/>
-                </StackPanel>
-            </Border>
-
-            <Border Grid.Column="2" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
-                <StackPanel>
-                    <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,0,10">
-                        <Rectangle Width="20" Height="20" Fill="{DynamicResource WarningBrush}">
-                            <Rectangle.OpacityMask>
-                                <ImageBrush ImageSource="/Resources/Images/icons/clipboard_89387.png"/>
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </Border>
-                    <TextBlock x:Name="ArchFailText" Text="—"
-                               FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
-                               Foreground="{DynamicResource DarkTextBrush}"/>
-                    <TextBlock Text="Архитектура" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                               Foreground="{DynamicResource SecondaryTextBrush}"/>
-                </StackPanel>
-            </Border>
-
-            <Border Grid.Column="3" Style="{StaticResource MetricCardBorder}" Margin="8,0,0,0">
-                <StackPanel>
-                    <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,0,10">
-                        <Rectangle Width="20" Height="20" Fill="{DynamicResource InfoBrush}">
-                            <Rectangle.OpacityMask>
-                                <ImageBrush ImageSource="/Resources/Images/icons/testtube_89409.png"/>
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </Border>
-                    <TextBlock x:Name="AiFailText" Text="—"
-                               FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
-                               Foreground="{DynamicResource DarkTextBrush}"/>
-                    <TextBlock Text="AI Judge" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                               Foreground="{DynamicResource SecondaryTextBrush}"/>
-                </StackPanel>
-            </Border>
-        </Grid>
-
-        <!-- Ярус 2: Gauge + Таблица -->
-        <Grid Grid.Row="2" x:Name="GaugeTableGrid" Visibility="Collapsed" Margin="0,0,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- Gauge-виджет -->
-            <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="20" Margin="0,0,8,0" MinWidth="220">
-                <StackPanel HorizontalAlignment="Center">
-                    <Canvas x:Name="GaugeCanvas" Width="120" Height="110" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="GaugePercentText" Text="73%"
-                               FontSize="40" FontFamily="Inter" FontWeight="Bold"
-                               Foreground="{DynamicResource DarkTextBrush}" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Соответствие требованиям"
+            <!-- Заголовок + выбор проекта -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Мои результаты" Style="{StaticResource H1Text}"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="Проект:" VerticalAlignment="Center" 
                                FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                               Foreground="{DynamicResource SecondaryTextBrush}" HorizontalAlignment="Center"/>
+                               Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="ProjectFilterCombo" Style="{StaticResource CustomComboBox}" Width="220"
+                              SelectionChanged="ProjectFilterCombo_SelectionChanged"/>
                 </StackPanel>
+            </Grid>
+
+            <!-- Подсказка -->
+            <TextBlock Grid.Row="0" x:Name="PlaceholderText"
+                       Text="Выберите проект, чтобы увидеть результаты проверки"
+                       FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}" TextWrapping="Wrap"
+                       Visibility="Visible" Margin="0,40,0,0" HorizontalAlignment="Center"/>
+
+            <!-- Статус готовности + Кнопки -->
+            <Border Grid.Row="1" x:Name="StatusPanel" Visibility="Collapsed" 
+        Style="{StaticResource CardBorder}" Margin="0,0,0,15" Padding="16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Статус -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Ellipse x:Name="StatusDot" Width="12" Height="12" Margin="0,0,10,0"/>
+                        <TextBlock x:Name="StatusText" Text="Загрузка..." Style="{StaticResource H3Text}"
+                       FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Кнопки -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="SendToMentorBtn" Content="Отправить наставнику" 
+                    Style="{StaticResource PrimaryButton}"
+                    Click="SendToMentor_Click" Margin="0,0,10,0" Padding="16,10"
+                    FontSize="{DynamicResource AppFontSizeH4}"/>
+                        <Button Content="Экспорт в PDF" Style="{StaticResource OutlineButton}"
+                    Click="ExportPdf_Click" Padding="16,10"
+                    FontSize="{DynamicResource AppFontSizeH4}"/>
+                    </StackPanel>
+                </Grid>
             </Border>
+
+            <!-- KPI -->
+            <Grid Grid.Row="2" x:Name="KpiGrid" Margin="0,0,0,20" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource MetricCardBorder}" Margin="0,0,8,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource PrimaryBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/stats_89319.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="MatchPercentText" Text="—"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
+                                       Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Соответствие" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource DangerBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/warning_89399.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="RoslynFailText" Text="—"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
+                                       Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Синтаксис" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource MetricCardBorder}" Margin="4,0,4,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource WarningBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/clipboard_89387.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="ArchFailText" Text="—"
+                                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
+                                       Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Архитектура" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Style="{StaticResource MetricCardBorder}" Margin="8,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" Background="{DynamicResource GlobalBackgroundBrush}" CornerRadius="8" Margin="0,0,12,0">
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource InfoBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="/Resources/Images/icons/anchor_89316.png"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="RefMatchText" Text="—"
+                       FontSize="{DynamicResource AppFontSizeBig}" FontFamily="Inter" FontWeight="Bold"
+                       Foreground="{DynamicResource DarkTextBrush}"/>
+                            <TextBlock Text="Соотв. эталону" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
 
             <!-- Таблица вердиктов -->
-            <Border Grid.Column="1" Style="{StaticResource CardBorder}" x:Name="VerdictsPanel" Padding="16">
+            <Border Grid.Row="3" Style="{StaticResource CardBorder}" 
+                    x:Name="VerdictsPanel" Visibility="Collapsed" Padding="16">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -149,22 +169,15 @@
                     <Grid Grid.Row="0" Margin="0,0,0,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox x:Name="VerdictTypeCombo" Style="{StaticResource CustomComboBox}" Width="130" Margin="0,0,8,0"
-                                  SelectedIndex="0" SelectionChanged="VerdictTypeCombo_SelectionChanged">
+                        <TextBlock Text="Нарушения" Style="{StaticResource H2Text}"/>
+                        <ComboBox Grid.Column="1" x:Name="VerdictTypeCombo" Style="{StaticResource CustomComboBox}" Width="150"
+                                  HorizontalAlignment="Right" SelectedIndex="0" SelectionChanged="VerdictTypeCombo_SelectionChanged">
                             <ComboBoxItem Content="Все типы" Tag="all"/>
                             <ComboBoxItem Content="Синтаксис" Tag="Синтаксис"/>
                             <ComboBoxItem Content="Архитектура" Tag="Архитектура"/>
-                            <ComboBoxItem Content="AI Judge" Tag="AI Judge"/>
-                            <ComboBoxItem Content="Граф" Tag="Граф"/>
-                        </ComboBox>
-                        <ComboBox x:Name="VerdictFilterCombo" Style="{StaticResource CustomComboBox}" Width="140"
-                                  SelectedIndex="0" SelectionChanged="VerdictFilterCombo_SelectionChanged">
-                            <ComboBoxItem Content="Все статусы" Tag="all"/>
-                            <ComboBoxItem Content="Только нарушения" Tag="failed"/>
-                            <ComboBoxItem Content="Только пройдено" Tag="passed"/>
+                            <ComboBoxItem Content="Семантика" Tag="Семантика"/>
                         </ComboBox>
                     </Grid>
 
@@ -187,19 +200,20 @@
                     <Border Grid.Row="2" Style="{StaticResource DataGridCardBorder}">
                         <DataGrid x:Name="VerdictsGrid" Style="{StaticResource SmartDataGridStyle}"
                                   AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
-                                  MouseDoubleClick="VerdictsGrid_MouseDoubleClick" RowHeight="40"
-                                  MaxHeight="300">
+                                  MouseDoubleClick="VerdictsGrid_MouseDoubleClick" RowHeight="40" MaxHeight="300"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Тип" Width="100" Binding="{Binding AiModel}"/>
                                 <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Reason}"/>
                                 <DataGridTextColumn Header="Расположение" Width="150" Binding="{Binding CodeLocation}"/>
-                                <DataGridTemplateColumn Header="Статус" Width="100">
+                                <DataGridTemplateColumn Header="Тип" Width="110">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border CornerRadius="12" Padding="8,4" HorizontalAlignment="Center"
-                                                    Background="{Binding PassedBg}">
-                                                <TextBlock Text="{Binding PassedText}" FontSize="11" FontFamily="Inter"
-                                                           FontWeight="SemiBold" Foreground="{Binding PassedFg}"
+                                                    Background="{Binding TypeBg}">
+                                                <TextBlock Text="{Binding TypeText}" FontSize="11" FontFamily="Inter"
+                                                           FontWeight="SemiBold" Foreground="{Binding TypeFg}"
                                                            HorizontalAlignment="Center"/>
                                             </Border>
                                         </DataTemplate>
@@ -210,30 +224,16 @@
                     </Border>
                 </Grid>
             </Border>
+
+            <!-- Сравнение с эталоном -->
+            <Border Grid.Row="4" Style="{StaticResource CardBorder}" Margin="0,10,0,0"
+                    x:Name="ReferencePanel" Visibility="Collapsed" Padding="16">
+                <StackPanel>
+                    <TextBlock Text="Сравнение с эталоном" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <TextBlock x:Name="ReferenceText" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                               Foreground="{DynamicResource DarkTextBrush}" TextWrapping="Wrap" LineHeight="22"/>
+                </StackPanel>
+            </Border>
         </Grid>
-
-        <!-- Ярус 3: Сравнение с эталоном -->
-        <Border Grid.Row="3" Style="{StaticResource CardBorder}" Margin="0,0,0,15"
-                x:Name="ReferencePanel" Visibility="Collapsed" Padding="16">
-            <StackPanel>
-                <TextBlock Text="Сравнение с эталоном" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
-                <TextBlock x:Name="ReferenceText" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                           Foreground="{DynamicResource DarkTextBrush}" TextWrapping="Wrap" LineHeight="22"/>
-            </StackPanel>
-        </Border>
-
-        <!-- Ярус 4: Кнопки -->
-        <Border Grid.Row="4" x:Name="BottomPanel" Visibility="Collapsed" Margin="0,10,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button Content="Отправить наставнику" Style="{StaticResource PrimaryButton}"
-                        Click="SendToMentor_Click" Margin="0,0,10,0"/>
-                <Button Grid.Column="1" Content="Экспорт в PDF" Style="{StaticResource OutlineButton}"
-                        Click="ExportPdf_Click" HorizontalAlignment="Right"/>
-            </Grid>
-        </Border>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

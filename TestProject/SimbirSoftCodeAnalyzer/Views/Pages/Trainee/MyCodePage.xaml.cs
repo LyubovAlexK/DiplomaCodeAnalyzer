@@ -1,7 +1,8 @@
 ﻿using Analyzers.Services;
 using Core.Data;
+using System.IO;
+using AI.Extractors;
 using Core.Models;
-using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ using FontFamily = System.Windows.Media.FontFamily;
 using Paragraph = System.Windows.Documents.Paragraph;
 using Run = System.Windows.Documents.Run;
 using Style = System.Windows.Style;
+using Path = System.IO.Path;
 
 namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
 {
@@ -67,6 +69,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             {
                 _selectedPath = dialog.FolderName;
                 PathTextBox.Text = _selectedPath;
+                System.Diagnostics.Debug.WriteLine($"Выбран путь: {_selectedPath}");  // ← ДОБАВИТЬ
             }
         }
 
@@ -91,18 +94,37 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             var roslynAnalyzer = App.GetService<RoslynSyntaxAnalyzer>();
             var roslynResultService = App.GetService<RoslynResultService>();
             var myId = App.CurrentUser?.UserId ?? 0;
-
-            StageText.Text = "Анализ кода...";
-            AnalysisProgress.Value = 0;
-            await Task.Delay(300);
-
-            var result = await roslynAnalyzer.AnalyzeProjectAsync(_selectedPath!);
-            AnalysisProgress.Value = 50;
+            const string apiKey = "MDE5ZGQ0NmEtYzcxYi03ZDY2LThhYTAtNDZmOTZhMTY5ZGFiOmVjMTA0ZDYxLTcyMTEtNGQ2Yi04OTQxLTAyNTczNTYxNDBkNQ==";
 
             var selectedProject = ProjectCombo.SelectedItem as ComboBoxItem;
             int projectId = (int)(selectedProject?.Tag ?? 1);
             var project = await db.Projects.FindAsync(projectId);
             int specId = project?.SpecificationId ?? 4;
+
+            // Сохраняем путь в проекте
+            if (project != null && !string.IsNullOrEmpty(_selectedPath))
+            {
+                project.RepoUrl = _selectedPath;
+                project.UpdatedAt = DateTime.Now;
+                await db.SaveChangesAsync();
+            }
+
+            // 1. Проверка на пустой проект
+            StageText.Text = "Проверка проекта...";
+            AnalysisProgress.Value = 0;
+
+            var validator = App.GetService<ProjectValidator>();
+            var emptyCheck = validator.CheckIfEmpty(_selectedPath!);
+            if (emptyCheck.IsEmpty)
+            {
+                MessageBox.Show(emptyCheck.Reason, "Проект пустой", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // 2. Создание сессии
+            StageText.Text = "Создание сессии...";
+            AnalysisProgress.Value = 5;
+            await Task.Delay(200);
 
             var session = new SessionAnalysis
             {
@@ -111,22 +133,127 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 SpecificationId = specId,
                 StartTime = DateTime.Now,
                 Status = "InProgress",
-                IsAiAvailable = false,
+                IsAiAvailable = true,
                 IsArchived = false
             };
             db.SessionAnalysis.Add(session);
             await db.SaveChangesAsync();
+
+            // 3. Roslyn-анализ
+            StageText.Text = "Анализ синтаксиса (Roslyn)...";
+            AnalysisProgress.Value = 15;
+            await Task.Delay(200);
+
+            var result = await roslynAnalyzer.AnalyzeProjectAsync(_selectedPath!);
             await roslynResultService.SaveResultsAsync(session.SessionId, result);
-            session.EndTime = DateTime.Now; session.Status = "Completed";
-            session.OverallMatchPercent = result.TotalMethods > 0
-                ? 100 - (decimal)result.MethodsExceedingComplexity / result.TotalMethods * 100 : 100;
+            AnalysisProgress.Value = 35;
+
+            // 4. NetArchTest
+            StageText.Text = "Проверка архитектуры (NetArchTest)...";
+            AnalysisProgress.Value = 40;
+            await Task.Delay(200);
+
+            try
+            {
+                string dllPath = Path.Combine(_selectedPath!, @"bin\Debug\net8.0", Path.GetFileName(_selectedPath!) + ".dll");
+                if (File.Exists(dllPath))
+                {
+                    var archAnalyzer = App.GetService<ArchitectureAnalyzer>();
+                    var rules = archAnalyzer.LoadRules(db, projectId);
+                    if (rules.Any())
+                    {
+                        var archViolations = archAnalyzer.Analyze(dllPath, rules);
+                        await roslynResultService.SaveNetArchResultsAsync(session.SessionId, archViolations);
+                    }
+                }
+            }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"NetArchTest: {ex.Message}"); }
+            AnalysisProgress.Value = 55;
+
+            // 5. AI Judge
+            StageText.Text = "Семантический анализ (AI Judge)...";
+            AnalysisProgress.Value = 60;
+            await Task.Delay(200);
+
+            try
+            {
+                var dictService = App.GetService<Core.Services.DictionaryService>();
+                var gigaExtractor = new AI.Extractors.GigaChatExtractor(apiKey, dictService);
+                var token = await gigaExtractor.GetAccessTokenAsync();
+                var aiJudge = new AISemanticJudge(db, token);
+
+                var allCode = string.Join("\n", Directory.GetFiles(_selectedPath!, "*.cs", SearchOption.AllDirectories)
+                    .Where(f => !f.Contains("\\bin\\") && !f.Contains("\\obj\\"))
+                    .Select(f => File.ReadAllText(f)));
+
+                if (allCode.Length > 0)
+                    await aiJudge.JudgeAsync(session.SessionId, specId, allCode);
+            }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"AI Judge: {ex.Message}"); }
+            AnalysisProgress.Value = 80;
+
+            // 6. Сравнение с эталоном
+            StageText.Text = "Сравнение с эталоном...";
+            AnalysisProgress.Value = 85;
+            await Task.Delay(200);
+
+            try
+            {
+                var referenceService = App.GetService<ReferenceService>();
+                var reference = await db.ReferenceProjects
+                    .FirstOrDefaultAsync(r => r.SpecificationId == specId && r.IsActive == true);
+
+                if (reference != null)
+                {
+                    var refResult = await referenceService.CompareWithReference(reference.ReferenceId, result);
+                    foreach (var v in refResult)
+                    {
+                        db.AuditVerdicts.Add(new AuditVerdict
+                        {
+                            SessionId = session.SessionId,
+                            RequirementId = null,
+                            IsPassed = false,
+                            Reason = v,
+                            AiModel = "Reference",
+                            Confidence = 0.9m
+                        });
+                    }
+
+                    int totalChecks = 4;
+                    int failedChecks = Math.Min(refResult.Count, totalChecks);
+                    session.ReferenceMatchPercent = Math.Max(0, (decimal)(totalChecks - failedChecks) / totalChecks * 100);
+                }
+
+                // Roslyn-процент (синтаксис)
+                session.OverallMatchPercent = result.TotalMethods > 0
+                    ? 100 - (decimal)result.MethodsExceedingComplexity / result.TotalMethods * 100 : 100;
+
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Эталон: {ex.Message}"); }
+            AnalysisProgress.Value = 95;
+
+            // 7. Завершение
+            session.EndTime = DateTime.Now;
+            session.Status = "Completed";
             await db.SaveChangesAsync();
+
             AnalysisProgress.Value = 100;
+            StageText.Text = "Анализ завершён!";
+            await Task.Delay(500);
+
+            // 8. Граф
             await BuildGraphAsync(_selectedPath!);
-            // Показать панели графа и информации
+
+            // Показать панели
             GraphBorder.Visibility = Visibility.Visible;
             InfoPanel.Visibility = Visibility.Visible;
             HintText.Visibility = Visibility.Collapsed;
+
+            MessageBox.Show($"Проверка завершена!\nСоответствие синтаксису: {session.OverallMatchPercent:F0}%\n" +
+                $"Нарушений Roslyn: {result.MethodsExceedingComplexity}\n" +
+                $"Соответствие эталону: {session.ReferenceMatchPercent:F0}%",
+                "Результат", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private async Task BuildGraphAsync(string projectPath)
@@ -194,6 +321,11 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                     if (method.CyclomaticComplexity > 10)
                         node.HasViolation = true;
                 }
+            }
+
+            foreach (var node in _nodes.Where(n => n.HasViolation))
+            {
+                RedrawNode(node);
             }
         }
 
@@ -410,16 +542,10 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
         private void UpdateInfoPanel(GraphNodeVisual? node)
         {
             InfoContent.Children.Clear();
+
             if (node == null)
             {
-                PlaceholderText.Visibility = Visibility.Visible;    
-                InfoContent.Children.Add(new TextBlock
-                {
-                    Text = "Выберите класс на графе",
-                    FontSize = (double)FindResource("AppFontSizeH4"),
-                    FontFamily = new FontFamily("Inter"),
-                    Foreground = (Brush)FindResource("SecondaryTextBrush")
-                });
+                PlaceholderText.Visibility = Visibility.Visible;
                 return;
             }
 
@@ -485,7 +611,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             });
         }
 
-        private void OpenCodeWindow_Click(object sender, RoutedEventArgs e)
+        private async void OpenCodeWindow_Click(object sender, RoutedEventArgs e)
         {
             if (sender is not Button btn || btn.Tag is not GraphNodeVisual node ||
                 string.IsNullOrEmpty(node.FilePath) || !File.Exists(node.FilePath)) return;
@@ -533,8 +659,9 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             };
             Grid.SetRow(line, 2); grid.Children.Add(line);
 
-            // Код с выделением жирным
+            // Код с выделением жирным класса и красным — нарушений
             var code = File.ReadAllText(node.FilePath);
+
             var codeBox = new RichTextBox
             {
                 FontFamily = new FontFamily("Courier New"),
@@ -548,25 +675,68 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 Margin = new Thickness(24, 0, 24, 20)
             };
 
-            // Выделяем имя класса жирным
             var doc = new FlowDocument();
             var para = new Paragraph();
+
+            // Получаем вердикты для этого класса
+            var verdicts = new List<AuditVerdict>();
+            try
+            {
+                var db = App.GetService<AppDbContext>();
+                var myId = App.CurrentUser?.UserId ?? 0;
+                var lastSession = await db.SessionAnalysis
+                    .Where(s => s.TraineeId == myId)
+                    .OrderByDescending(s => s.StartTime)
+                    .FirstOrDefaultAsync();
+                if (lastSession != null)
+                {
+                    verdicts = await db.AuditVerdicts
+                        .Where(v => v.SessionId == lastSession.SessionId && !v.IsPassed)
+                        .ToListAsync();
+                }
+            }
+            catch { }
+
             var lines = code.Split('\n');
             foreach (var codeLine in lines)
             {
+                bool isViolationLine = false;
+                foreach (var v in verdicts)
+                {
+                    if (!string.IsNullOrEmpty(v.CodeLocation) &&
+                        !string.IsNullOrEmpty(codeLine) &&
+                        v.CodeLocation.Contains(':') &&
+                        codeLine.Contains(v.CodeLocation.Split(':').LastOrDefault() ?? ""))
+                    {
+                        isViolationLine = true;
+                        break;
+                    }
+                }
+
                 if (codeLine.Contains("class " + node.Name))
                 {
                     int idx = codeLine.IndexOf("class " + node.Name);
-                    if (idx >= 0)
+                    para.Inlines.Add(new Run(codeLine[..idx]) { FontFamily = new FontFamily("Courier New") });
+                    para.Inlines.Add(new Run(codeLine[idx..(idx + 6 + node.Name.Length)])
                     {
-                        para.Inlines.Add(new Run(codeLine[..idx]) { FontFamily = new FontFamily("Courier New") });
-                        para.Inlines.Add(new Run(codeLine[idx..(idx + 6 + node.Name.Length)]) { FontWeight = FontWeights.Bold, FontFamily = new FontFamily("Courier New") });
-                        para.Inlines.Add(new Run(codeLine[(idx + 6 + node.Name.Length)..] + "\n") { FontFamily = new FontFamily("Courier New") });
-                    }
-                    else
+                        FontWeight = FontWeights.Bold,
+                        FontFamily = new FontFamily("Courier New"),
+                        Foreground = isViolationLine ? (Brush)FindResource("DangerBrush") : (Brush)FindResource("DarkTextBrush")
+                    });
+                    para.Inlines.Add(new Run(codeLine[(idx + 6 + node.Name.Length)..] + "\n")
                     {
-                        para.Inlines.Add(new Run(codeLine + "\n") { FontFamily = new FontFamily("Courier New") });
-                    }
+                        FontFamily = new FontFamily("Courier New"),
+                        Foreground = isViolationLine ? (Brush)FindResource("DangerBrush") : Brushes.Black
+                    });
+                }
+                else if (isViolationLine)
+                {
+                    para.Inlines.Add(new Run(codeLine + "\n")
+                    {
+                        FontFamily = new FontFamily("Courier New"),
+                        Foreground = (Brush)FindResource("DangerBrush"),
+                        FontWeight = FontWeights.Bold
+                    });
                 }
                 else
                 {
@@ -691,6 +861,57 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
         {
             HelpPopup.IsOpen = !HelpPopup.IsOpen;
             HelpPopup.PlacementTarget = HelpButton;
+        }
+        public async Task HighlightClassAsync(string className, string projectPath)
+        {
+            System.Diagnostics.Debug.WriteLine($"HighlightClassAsync: className={className}, projectPath={projectPath}");
+            System.Diagnostics.Debug.WriteLine($"Directory.Exists: {Directory.Exists(projectPath)}");
+
+            GraphBorder.Visibility = Visibility.Visible;
+            InfoPanel.Visibility = Visibility.Visible;
+            HintText.Visibility = Visibility.Collapsed;
+
+            if (_nodes.Count == 0 && !string.IsNullOrEmpty(projectPath) && Directory.Exists(projectPath))
+            {
+                System.Diagnostics.Debug.WriteLine("Строим граф...");
+                await BuildGraphAsync(projectPath);
+                System.Diagnostics.Debug.WriteLine($"Построено узлов: {_nodes.Count}");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"Граф не построен: nodes={_nodes.Count}, path={projectPath}, exists={Directory.Exists(projectPath)}");
+            }
+
+            var node = _nodes.FirstOrDefault(n =>
+                n.Name.Equals(className, StringComparison.OrdinalIgnoreCase) ||
+                n.FullName.EndsWith("." + className, StringComparison.OrdinalIgnoreCase));
+
+            if (node != null)
+            {
+                node.HasViolation = true;
+                RedrawNode(node);
+                SelectNode(node);
+                ScrollToNode(node);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"Узел не найден: {className}. Доступные: {string.Join(", ", _nodes.Select(n => n.Name))}");
+            }
+        }
+
+        private void ScrollToNode(GraphNodeVisual node)
+        {
+            var scrollViewer = GraphCanvas.Parent as ScrollViewer;
+            if (scrollViewer == null) return;
+
+            GraphCanvas.UpdateLayout();
+            scrollViewer.UpdateLayout();
+
+            double targetX = Math.Max(0, node.X - scrollViewer.ViewportWidth / 2);
+            double targetY = Math.Max(0, node.Y - scrollViewer.ViewportHeight / 2);
+
+            scrollViewer.ScrollToHorizontalOffset(targetX);
+            scrollViewer.ScrollToVerticalOffset(targetY);
         }
     }
 

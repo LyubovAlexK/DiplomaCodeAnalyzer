@@ -148,7 +148,7 @@
                                         <ImageBrush ImageSource="/Resources/Images/icons/clock_89391.png"/>
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
-                                <TextBlock Text="История" VerticalAlignment="Center"/>
+                                <TextBlock Text="Мой прогресс" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 

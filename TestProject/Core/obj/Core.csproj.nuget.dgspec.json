@@ -76,6 +76,10 @@
             "PdfPig": {
               "target": "Package",
               "version": "[0.1.14, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2026.5.0, )"
             }
           },
           "imports": [

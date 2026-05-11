@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pQU8aF3FLB4=",
+  "dgSpecHash": "Yvm/zSWFjGg=",
   "success": true,
   "projectFilePath": "D:\\DITI\\Diploma_app\\TestProject\\TestProject\\TestProject.csproj",
   "expectedPackageFiles": [
@@ -87,6 +87,7 @@
     "C:\\Users\\Люба\\.nuget\\packages\\openai\\2.10.0\\openai.2.10.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\pdfpig\\0.1.14\\pdfpig.0.1.14.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\pragmaticsegmenternet\\1.0.5\\pragmaticsegmenternet.1.0.5.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\questpdf\\2026.5.0\\questpdf.2026.5.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\symspell\\6.7.3\\symspell.6.7.3.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.clientmodel\\1.10.0\\system.clientmodel.1.10.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",

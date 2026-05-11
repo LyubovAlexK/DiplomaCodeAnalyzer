@@ -245,6 +245,14 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
+    <!-- Стиль для блока кода -->
+    <Style x:Key="CodeTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Courier New"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="{DynamicResource DarkTextBrush}"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+    </Style>
+
     <Style x:Key="H1Text" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource AppFontSizeH1}"/>
         <Setter Property="FontFamily" Value="Inter"/>
@@ -618,7 +626,7 @@
                     <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush}"/>
                     <Setter Property="FontWeight" Value="SemiBold"/>
                     <Setter Property="FontFamily" Value="Inter"/>
-                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="FontSize" Value="{DynamicResource AppFontSizeH4}"/>
                     <Setter Property="Padding" Value="16,10"/>
                     <Setter Property="BorderThickness" Value="0,0,0,1"/>
                     <Setter Property="BorderBrush" Value="#E8ECF0"/>
@@ -637,7 +645,7 @@
                     <Setter Property="Background" Value="White"/>
                     <Setter Property="Foreground" Value="{DynamicResource DarkTextBrush}"/>
                     <Setter Property="FontFamily" Value="Inter"/>
-                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="FontSize" Value="{DynamicResource AppFontSizeH4}"/>
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{DynamicResource AccentPaleBrush}"/>

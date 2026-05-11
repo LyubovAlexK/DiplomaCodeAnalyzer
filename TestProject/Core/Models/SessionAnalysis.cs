@@ -20,5 +20,6 @@ namespace Core.Models
         public bool? IsAiAvailable { get; set; }
         public bool? IsArchived { get; set; }
         public DateTime? ArchivedDate { get; set; }
+        public decimal? ReferenceMatchPercent { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YFVmLT4kKDE=",
+  "dgSpecHash": "skDxjo/RF6o=",
   "success": true,
   "projectFilePath": "D:\\DITI\\Diploma_app\\TestProject\\SimbirSoftCodeAnalyzer\\SimbirSoftCodeAnalyzer.csproj",
   "expectedPackageFiles": [
@@ -104,6 +104,7 @@
     "C:\\Users\\Люба\\.nuget\\packages\\oxyplot.wpf.shared\\2.2.0\\oxyplot.wpf.shared.2.2.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\pdfpig\\0.1.14\\pdfpig.0.1.14.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\pragmaticsegmenternet\\1.0.5\\pragmaticsegmenternet.1.0.5.nupkg.sha512",
+    "C:\\Users\\Люба\\.nuget\\packages\\questpdf\\2026.5.0\\questpdf.2026.5.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\quickgraphcore\\1.0.0\\quickgraphcore.1.0.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\skiasharp\\3.119.0\\skiasharp.3.119.0.nupkg.sha512",
     "C:\\Users\\Люба\\.nuget\\packages\\skiasharp.harfbuzz\\3.119.0\\skiasharp.harfbuzz.3.119.0.nupkg.sha512",
