@@ -76,7 +76,7 @@ namespace SimbirSoftCodeAnalyzer.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;component/views/metricdialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;V1.0.0.0;component/views/metricdialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\MetricDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

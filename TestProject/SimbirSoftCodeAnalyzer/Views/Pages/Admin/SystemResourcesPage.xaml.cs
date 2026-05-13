@@ -15,7 +15,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Admin
             InitializeComponent();
             Loaded += async (s, e) => await LoadAllDataAsync();
         }
-        private const int SYSTEM_SPEC_ID = 2028;
+        private const int SYSTEM_SPEC_ID = 2050;
 
         private async System.Threading.Tasks.Task LoadAllDataAsync()
         {

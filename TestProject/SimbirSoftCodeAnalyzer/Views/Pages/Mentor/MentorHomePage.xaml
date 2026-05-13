@@ -126,8 +126,20 @@
                         <TextBlock x:Name="BestWorstText" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
                             Foreground="{DynamicResource DarkTextBrush}" TextWrapping="Wrap" LineHeight="20"/>
                     </Border>
-                    <Canvas Grid.Row="2" x:Name="MentorChartCanvas" Background="Transparent" ClipToBounds="True"/>
-                    <StackPanel Grid.Row="3" x:Name="LegendPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    <Border Grid.Row="2" x:Name="BarTooltip" Background="#1E293B" CornerRadius="6" Padding="10,6"
+                            Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="BarTooltipAttempt" FontSize="12" FontFamily="Inter" Foreground="#94A3B8"/>
+                            <TextBlock x:Name="BarTooltipValue" FontSize="12" FontFamily="Inter" FontWeight="Bold"
+                                    Foreground="White" Margin="8,0,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"
+                                Background="Transparent">
+                        <Canvas x:Name="MentorChartCanvas" Background="Transparent" ClipToBounds="True"
+                                    MouseWheel="MentorChartCanvas_MouseWheel"/>
+                    </ScrollViewer>
+                    <WrapPanel Grid.Row="3" x:Name="LegendPanel" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                 </Grid>
             </Border>
 
@@ -188,6 +200,9 @@
                     </Grid>
                 </Border>
             </Grid>
+            <Button Grid.Row="4" Content="Сводный отчёт" Style="{StaticResource OutlineButton}"
+                Click="ExportAllPdf_Click" HorizontalAlignment="Right" Padding="15,8"
+                FontSize="{DynamicResource AppFontSizeH4}"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

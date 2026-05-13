@@ -54,7 +54,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+
                     <TextBlock Grid.Row="0" Text="Список эталонов" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
                     <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
                         <DataGrid x:Name="ReferencesGrid" Style="{StaticResource SmartDataGridStyle}"
@@ -73,7 +75,7 @@
                     <Button Grid.Row="2" Content="Удалить эталон" Style="{StaticResource DangerButton}"
                             Click="DeleteRefButton_Click" HorizontalAlignment="Right" Margin="0,12,0,0"
                             Padding="15,8" FontSize="{DynamicResource AppFontSizeH4}"/>
-                    <TextBlock Grid.Row="2" Text="Двойной клик по строке — настройка правил сравнения"
+                    <TextBlock Grid.Row="3" Text="Двойной клик по строке — настройка правил сравнения"
                             Style="{StaticResource H4Text}" Margin="0,4,0,0"/>
                 </Grid>
             </Border>

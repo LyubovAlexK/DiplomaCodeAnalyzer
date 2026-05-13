@@ -33,23 +33,34 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Admin
                 SessionsCountText.Text = $"Сессий: {sessionsCount}";
 
                 // Последние действия
+                RecentActionsPanel.Children.Clear();
+
+                // Последние ТЗ
                 var recentSpecs = await db.Specifications
                     .Where(s => s.IsActive == true)
                     .OrderByDescending(s => s.CreatedAt)
                     .Take(3)
                     .ToListAsync();
 
+                var userIds = recentSpecs.Select(s => s.CreatedBy).Distinct().ToList();
+                var users = await db.Users.Where(u => userIds.Contains(u.UserId)).ToListAsync();
+
+                foreach (var s in recentSpecs)
+                {
+                    var user = users.FirstOrDefault(u => u.UserId == s.CreatedBy);
+                    string userName = user != null ? $"{user.LastName} {user.FirstName}" : "Система";
+                    AddActionItem($"{s.CreatedAt:dd.MM.yyyy HH:mm} — {userName} загрузил ТЗ «{s.Title}»");
+                }
+
+                // Последние пользователи
                 var recentUsers = await db.Users
                     .Where(u => u.IsActive == true)
                     .OrderByDescending(u => u.CreatedAt)
                     .Take(3)
                     .ToListAsync();
 
-                RecentActionsPanel.Children.Clear();
-                foreach (var s in recentSpecs)
-                    AddActionItem($"{s.CreatedAt:dd.MM} — Загружено ТЗ «{s.Title}»");
                 foreach (var u in recentUsers)
-                    AddActionItem($"{u.CreatedAt:dd.MM} — Создан пользователь «{u.Login}»");
+                    AddActionItem($"{u.CreatedAt:dd.MM.yyyy HH:mm} — Создан пользователь «{u.Login}» ({u.LastName} {u.FirstName})");
             }
             catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Ошибка: {ex.Message}"); }
         }
@@ -60,7 +71,8 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Admin
             {
                 Text = text,
                 Style = (Style)FindResource("H4Text"),
-                Margin = new Thickness(0, 0, 0, 6)
+                Margin = new Thickness(0, 0, 0, 6),
+                TextWrapping = TextWrapping.Wrap
             });
         }
     }

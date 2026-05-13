@@ -17,7 +17,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
     {
         private string? _selectedFilePath;
         private int _selectedSpecId;
-        private const string GIGACHAT_AUTH_KEY = "MDE5ZGQ0NmEtYzcxYi03ZDY2LThhYTAtNDZmOTZhMTY5ZGFiOmVjMTA0ZDYxLTcyMTEtNGQ2Yi04OTQxLTAyNTczNTYxNDBkNQ==";
+        private const string GIGACHAT_AUTH_KEY = "MDE5ZTIyNmQtM2M5My03N2U4LTgzZTMtYjg5NDYxOWZiNmYwOjVkZWFiYzQ0LTMzNGEtNGY4OC1iODg4LWEwZWRjN2Q3MjZjMw==";
 
         public SpecificationsPage()
         {
@@ -79,7 +79,8 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
 
                 var factory = new ExtractorFactory(dictService, isOnline ? GIGACHAT_AUTH_KEY : null);
                 var extractor = factory.Create(isOnline);
-                await extractor.ExtractAsync(_selectedFilePath, specId);
+                var specification = await extractor.ExtractAsync(_selectedFilePath, specId);
+                await specService.SaveAsync(specification);
 
                 MessageBox.Show("ТЗ успешно проанализировано", "Готово");
                 await LoadSpecsAsync();

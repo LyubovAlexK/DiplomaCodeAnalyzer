@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Core.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Core.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
 {
     public partial class MentorHomePage : UserControl
     {
-        private static readonly Color[] LineColors = {
-            Color.FromRgb(37, 99, 235), Color.FromRgb(16, 185, 129), Color.FromRgb(239, 68, 68),
-            Color.FromRgb(245, 158, 11), Color.FromRgb(139, 92, 246), Color.FromRgb(6, 182, 212)
+        private static readonly System.Windows.Media.Color[] LineColors = {
+            System.Windows.Media.Color.FromRgb(37, 99, 235), System.Windows.Media.Color.FromRgb(16, 185, 129), System.Windows.Media.Color.FromRgb(239, 68, 68),
+            System.Windows.Media.Color.FromRgb(245, 158, 11), System.Windows.Media.Color.FromRgb(139, 92, 246), System.Windows.Media.Color.FromRgb(6, 182, 212)
         };
         private dynamic? _traineeSessions;
         public MentorHomePage()
@@ -31,6 +34,18 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
             };
         }
 
+        private double _mentorZoom = 1.0;
+
+        private void MentorChartCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                e.Handled = true;
+                _mentorZoom += e.Delta > 0 ? 0.1 : -0.1;
+                _mentorZoom = Math.Max(0.3, Math.Min(3.0, _mentorZoom));
+                MentorChartCanvas.LayoutTransform = new ScaleTransform(_mentorZoom, _mentorZoom);
+            }
+        }
         private async System.Threading.Tasks.Task LoadDataAsync()
         {
             try
@@ -198,18 +213,29 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                 {
                     var lastPt = pts.Last();
                     var lastPct = sessions.Last().OverallMatchPercent ?? 0;
-                    string shortName = name.Length > 12 ? name[..12] + "…" : name;
-                    var valLabel = new TextBlock
+
+                    // Невидимая область для наведения
+                    var hitArea = new Rectangle
                     {
-                        Text = $"{shortName}",
-                        FontSize = (double)FindResource("AppFontSizeH4"),
-                        FontFamily = new FontFamily("Inter"),
-                        FontWeight = FontWeights.SemiBold,
-                        Foreground = (Brush)FindResource("DarkTextBrush")
+                        Width = 20,
+                        Height = 20,
+                        Fill = Brushes.Transparent,
+                        Cursor = Cursors.Hand
                     };
-                    Canvas.SetLeft(valLabel, Math.Min(lastPt.X + 5, canvasW - 120));
-                    Canvas.SetTop(valLabel, lastPt.Y + 2);
-                    MentorChartCanvas.Children.Add(valLabel);
+                    Canvas.SetLeft(hitArea, lastPt.X - 10);
+                    Canvas.SetTop(hitArea, lastPt.Y - 10);
+                    MentorChartCanvas.Children.Add(hitArea);
+
+                    hitArea.MouseEnter += (s, e) =>
+                    {
+                        BarTooltip.Visibility = Visibility.Visible;
+                        BarTooltipAttempt.Text = name;
+                        BarTooltipValue.Text = $"{lastPct:F0}%";
+                        var pos = hitArea.TransformToAncestor(MentorChartCanvas).Transform(new Point(0, 0));
+                        Canvas.SetLeft(BarTooltip, pos.X + 15);
+                        Canvas.SetTop(BarTooltip, pos.Y - 30);
+                    };
+                    hitArea.MouseLeave += (s, e) => BarTooltip.Visibility = Visibility.Collapsed;
                 }
 
                 // Легенда
@@ -243,9 +269,9 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
             double r = 75;
             double thickness = 16;
             var segments = new[] {
-                (completed, Color.FromRgb(16, 185, 129), "Сдали"),
-                (others, Color.FromRgb(245, 158, 11), "В процессе"),
-                (noAttempts, Color.FromRgb(156, 163, 175), "Нет попыток")
+                (completed, System.Windows.Media.Color.FromRgb(16, 185, 129), "Сдали"),
+                (others, System.Windows.Media.Color.FromRgb(245, 158, 11), "В процессе"),
+                (noAttempts, System.Windows.Media.Color.FromRgb(156, 163, 175), "Нет попыток")
             };
             double startAngle = -90;
 
@@ -301,9 +327,10 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
             if (noAttempts > 0) visibleSegments++;
 
             double legendStartY = cy + r + 10;
-            double availableBottom = DonutCanvas.Height - legendStartY;
+            double availableBottom = canvasH - legendStartY;
             double legendBlockHeight = visibleSegments * 20;
             double legendTopOffset = legendStartY + (availableBottom - legendBlockHeight) / 2;
+            double legendX = 30;
 
             int idx = 0;
             foreach (var (count, color, name) in segments)
@@ -313,7 +340,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                 double y = legendTopOffset + idx * 20;
 
                 var dot = new Ellipse { Width = 8, Height = 8, Fill = new SolidColorBrush(color) };
-                Canvas.SetLeft(dot, cx - 60); Canvas.SetTop(dot, y + 4);
+                Canvas.SetLeft(dot, legendX); Canvas.SetTop(dot, y + 4);
                 DonutCanvas.Children.Add(dot);
 
                 var label = new TextBlock
@@ -321,9 +348,11 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                     Text = $"{name}: {count} ({pct:F0}%)",
                     FontSize = (double)FindResource("AppFontSizeH4"),
                     FontFamily = new FontFamily("Inter"),
-                    Foreground = (Brush)FindResource("SecondaryTextBrush")
+                    Foreground = (Brush)FindResource("SecondaryTextBrush"),
+                    TextTrimming = TextTrimming.CharacterEllipsis,
+                    MaxWidth = canvasW - legendX - 20
                 };
-                Canvas.SetLeft(label, cx - 46); Canvas.SetTop(label, y);
+                Canvas.SetLeft(label, legendX + 14); Canvas.SetTop(label, y);
                 DonutCanvas.Children.Add(label);
                 idx++;
             }
@@ -347,6 +376,60 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                     mainWindow.SetActiveButton(tag);
                 }
             }
+        }
+        private async void ExportAllPdf_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                QuestPDF.Settings.License = LicenseType.Community;
+
+                var db = App.GetService<AppDbContext>();
+                var trainees = await db.Users.Where(u => u.RoleId == 3 && u.IsActive == true).ToListAsync();
+                var allSessions = await db.SessionAnalysis.Where(s => s.IsArchived != true).ToListAsync();
+
+                var dialog = new SaveFileDialog
+                {
+                    Filter = "PDF файлы (*.pdf)|*.pdf",
+                    FileName = $"Сводка_стажёров_{DateTime.Now:yyyyMMdd}.pdf"
+                };
+
+                if (dialog.ShowDialog() != true) return;
+
+                Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(30);
+                        page.DefaultTextStyle(x => x.FontSize(12).FontFamily("Inter"));
+
+                        page.Header().Text("Сводный отчёт по стажёрам")
+                            .FontSize(20).Bold().AlignCenter();
+
+                        page.Content().Column(col =>
+                        {
+                            col.Item().Text($"Дата: {DateTime.Now:dd.MM.yyyy}").FontSize(10);
+                            col.Item().Text("");
+
+                            foreach (var t in trainees)
+                            {
+                                var sessions = allSessions.Where(s => s.TraineeId == t.UserId).OrderByDescending(s => s.StartTime).ToList();
+                                var last = sessions.FirstOrDefault();
+                                var name = $"{t.LastName} {t.FirstName}".Trim();
+
+                                col.Item().Text($"Стажёр: {name}").Bold();
+                                col.Item().Text($"  Попыток: {sessions.Count}");
+                                col.Item().Text($"  Последний результат: {last?.OverallMatchPercent:F0}%");
+                                col.Item().Text($"  Статус: {last?.Status ?? "—"}");
+                                col.Item().Text("");
+                            }
+                        });
+                    });
+                }).GeneratePdf(dialog.FileName);
+
+                MessageBox.Show("Сводный отчёт сохранён!", "Готово");
+            }
+            catch (Exception ex) { MessageBox.Show($"Ошибка: {ex.Message}"); }
         }
     }
 }

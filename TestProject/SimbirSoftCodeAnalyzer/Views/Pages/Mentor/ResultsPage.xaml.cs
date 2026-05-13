@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.IO;
+using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 using Core.Data;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 
 namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
 {
@@ -84,9 +86,12 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                 SyntaxFailText.Text = roslynFail.ToString();
                 ArchFailText.Text = archFail.ToString();
 
-                // Таблица сессий с русским статусом
+                var projectIds = _sessions.Select(s => s.ProjectId).Distinct().ToList();
+                var projects = await db.Projects.Where(p => projectIds.Contains(p.ProjectId)).ToListAsync();
+
                 SessionsGrid.ItemsSource = _sessions.Select(s =>
                 {
+                    var project = projects.FirstOrDefault(p => p.ProjectId == s.ProjectId);
                     string statusText = s.Status switch
                     {
                         "Completed" => "Завершена",
@@ -95,6 +100,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                     };
                     return new
                     {
+                        Project = project?.Title ?? "—",
                         Date = s.StartTime?.ToString("dd.MM.yyyy HH:mm") ?? "—",
                         Percent = $"{s.OverallMatchPercent:F0}%",
                         Status = statusText,
@@ -190,6 +196,79 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
 
         private void VerdictTypeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) => ApplyVerdictFilter();
         private void VerdictSearchBox_TextChanged(object sender, TextChangedEventArgs e) => ApplyVerdictFilter();
+
+        private async void ExportPdf_Click(object sender, RoutedEventArgs e)
+        {
+            if (TraineeCombo.SelectedItem is not ComboBoxItem item || item.Tag is not int traineeId)
+            {
+                MessageBox.Show("Выберите стажёра");
+                return;
+            }
+
+            if (SessionsGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите сессию для экспорта");
+                return;
+            }
+
+            dynamic row = SessionsGrid.SelectedItem;
+            int sessionId = row.SessionId;
+
+            try
+            {
+                QuestPDF.Settings.License = LicenseType.Community;
+
+                var db = App.GetService<AppDbContext>();
+                var session = await db.SessionAnalysis.FindAsync(sessionId);
+                var verdicts = await db.AuditVerdicts.Where(v => v.SessionId == sessionId).ToListAsync();
+                var trainee = await db.Users.FindAsync(traineeId);
+                var project = await db.Projects.FindAsync(session?.ProjectId);
+
+                var traineeName = trainee != null ? $"{trainee.LastName} {trainee.FirstName}".Trim() : "";
+
+                var dialog = new SaveFileDialog
+                {
+                    Filter = "PDF файлы (*.pdf)|*.pdf",
+                    FileName = $"Отчёт_{traineeName}_{DateTime.Now:yyyyMMdd}.pdf"
+                };
+
+                if (dialog.ShowDialog() != true) return;
+
+                Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(30);
+                        page.DefaultTextStyle(x => x.FontSize(12).FontFamily("Inter"));
+
+                        page.Header().Text($"Отчёт по проверке")
+                            .FontSize(20).Bold().AlignCenter();
+
+                        page.Content().Column(col =>
+                        {
+                            col.Item().Text($"Стажёр: {traineeName}").Bold();
+                            col.Item().Text($"Проект: {project?.Title ?? "—"}");
+                            col.Item().Text($"Дата: {session?.StartTime:dd.MM.yyyy HH:mm}");
+                            col.Item().Text($"Соответствие: {session?.OverallMatchPercent:F0}%");
+                            col.Item().Text("");
+
+                            col.Item().Text("Нарушения:").Bold();
+                            foreach (var v in verdicts)
+                            {
+                                col.Item().Text($"[{v.AiModel}] {v.Reason} — {v.CodeLocation ?? "—"}");
+                            }
+                        });
+                    });
+                }).GeneratePdf(dialog.FileName);
+
+                MessageBox.Show("Отчёт сохранён!", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
+        }
     }
 
     public class VerdictRow

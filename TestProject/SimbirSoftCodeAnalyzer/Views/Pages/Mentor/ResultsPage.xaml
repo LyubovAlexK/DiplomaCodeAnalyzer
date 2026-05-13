@@ -29,6 +29,9 @@
                                Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,10,0"/>
                     <ComboBox x:Name="TraineeCombo" Style="{StaticResource CustomComboBox}" Width="220"
                               SelectionChanged="TraineeCombo_SelectionChanged"/>
+                    <Button Content="Экспорт в PDF" Style="{StaticResource OutlineButton}"
+                                Click="ExportPdf_Click" Padding="15,8"
+                                FontSize="{DynamicResource AppFontSizeH4}" Margin="15,0,0,0"/>
                 </StackPanel>
             </Grid>
 
@@ -140,6 +143,7 @@
                                   SelectionChanged="SessionsGrid_SelectionChanged" RowHeight="44"
                                   MaxHeight="200">
                             <DataGrid.Columns>
+                                <DataGridTextColumn Header="Проект" Width="150" Binding="{Binding Project}"/>
                                 <DataGridTextColumn Header="Дата" Width="150" Binding="{Binding Date}"/>
                                 <DataGridTextColumn Header="%" Width="80" Binding="{Binding Percent}"/>
                                 <DataGridTextColumn Header="Статус" Width="120" Binding="{Binding Status}"/>

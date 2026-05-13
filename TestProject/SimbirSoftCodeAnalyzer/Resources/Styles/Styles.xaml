@@ -266,6 +266,7 @@
         <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{DynamicResource DarkTextBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="H3Text" TargetType="TextBlock">
@@ -273,6 +274,7 @@
         <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Foreground" Value="{DynamicResource DarkTextBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="H4Text" TargetType="TextBlock">
@@ -280,6 +282,7 @@
         <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="SidebarTitleText" TargetType="TextBlock">

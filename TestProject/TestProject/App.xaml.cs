@@ -21,7 +21,7 @@ public partial class App : Application
     private string tzPath = @"..\..\..\..\TechBuild\moviedatabase.docx";
     private string projectPath = @"D:\DITI\CsharpProjectTest\MovieDatabase\IFN664 Assignment";
     private string dllPath = @"D:\DITI\CsharpProjectTest\MovieDatabase\IFN664 Assignment\bin\Debug\netcoreapp3.1\IFN664 Assignment.dll";
-    private string apiKey = "MDE5ZGQ0NmEtYzcxYi03ZDY2LThhYTAtNDZmOTZhMTY5ZGFiOmVjMTA0ZDYxLTcyMTEtNGQ2Yi04OTQxLTAyNTczNTYxNDBkNQ==";
+    private string apiKey = "MDE5ZTIyNmQtM2M5My03N2U4LTgzZTMtYjg5NDYxOWZiNmYwOjVkZWFiYzQ0LTMzNGEtNGY4OC1iODg4LWEwZWRjN2Q3MjZjMw==";
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -41,6 +41,8 @@ public partial class App : Application
         Console.WriteLine("═══════════════════════════════════════");
         Console.WriteLine("  ЭТАП 1: АНАЛИЗ ТЗ (МОДУЛЬ 3)");
         Console.WriteLine("═══════════════════════════════════════\n");
+        var hash = BCrypt.Net.BCrypt.HashPassword("123456");
+        Console.WriteLine(hash);
 
         int specificationId;
 

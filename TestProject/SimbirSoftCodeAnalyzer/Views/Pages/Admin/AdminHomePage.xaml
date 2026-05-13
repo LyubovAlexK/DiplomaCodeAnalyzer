@@ -8,54 +8,56 @@
              Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid Margin="24" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <Grid Margin="24" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <!-- Заголовок -->
-            <TextBlock Grid.Row="0" Text="Добро пожаловать, Администратор" Style="{StaticResource H1Text}" Margin="0,0,0,12"/>
-            <TextBlock Grid.Row="1" Text="SimbirSoft Анализатор кода — система автоматизированной проверки кода стажёров." 
-                       Style="{StaticResource H3Text}" Margin="0,0,0,24"/>
+                <!-- Заголовок -->
+                <TextBlock Grid.Row="0" Text="Добро пожаловать, Администратор" Style="{StaticResource H1Text}" Margin="0,0,0,12"/>
+                <TextBlock Grid.Row="1" Text="SimbirSoft Анализатор кода — система автоматизированной проверки кода стажёров." 
+               Style="{StaticResource H3Text}" Margin="0,0,0,24"/>
 
-            <!-- Карточки: Статистика + Последние действия -->
-            <Grid Grid.Row="2" Margin="0,0,0,24">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <!-- Статистика + Инструкция -->
+                <Grid Grid.Row="2" Margin="0,0,0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Статистика -->
-                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="20" Margin="0,0,8,0">
-                    <StackPanel>
-                        <TextBlock Text="Статистика" Style="{StaticResource H2Text}" Margin="0,0,0,16"/>
-                        <TextBlock x:Name="UsersCountText" Text="Пользователей: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
-                        <TextBlock x:Name="SpecsCountText" Text="ТЗ: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
-                        <TextBlock x:Name="ProjectsCountText" Text="Проектов: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
-                        <TextBlock x:Name="SessionsCountText" Text="Сессий: —" Style="{StaticResource H3Text}"/>
-                    </StackPanel>
-                </Border>
+                    <!-- Статистика -->
+                    <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="20" Margin="0,0,8,0">
+                        <StackPanel>
+                            <TextBlock Text="Статистика" Style="{StaticResource H2Text}" Margin="0,0,0,16"/>
+                            <TextBlock x:Name="UsersCountText" Text="Пользователей: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="SpecsCountText" Text="ТЗ: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="ProjectsCountText" Text="Проектов: —" Style="{StaticResource H3Text}" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="SessionsCountText" Text="Сессий: —" Style="{StaticResource H3Text}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Инструкция -->
+                    <Border Grid.Column="1" Style="{StaticResource CardBorder}" Padding="20" Margin="8,0,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Для начала работы:" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                            <TextBlock Text="1. Создайте пользователей (наставников и стажёров)" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+                            <TextBlock Text="2. Добавьте токены доступа (GigaChat)" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+                            <TextBlock Text="3. Настройте метрики качества по умолчанию" Style="{StaticResource H4Text}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
 
                 <!-- Последние действия -->
-                <Border Grid.Column="1" Style="{StaticResource CardBorder}" Padding="20" Margin="8,0,0,0">
+                <Border Grid.Row="3" Style="{StaticResource CardBorder}" Padding="20">
                     <StackPanel>
                         <TextBlock Text="Последние действия" Style="{StaticResource H2Text}" Margin="0,0,0,16"/>
                         <StackPanel x:Name="RecentActionsPanel"/>
                     </StackPanel>
                 </Border>
             </Grid>
-
-            <!-- Инструкция -->
-            <Border Grid.Row="3" Style="{StaticResource CardBorder}" Padding="20">
-                <StackPanel>
-                    <TextBlock Text="Для начала работы:" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
-                    <TextBlock Text="1. Загрузите словарь русских слов" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
-                    <TextBlock Text="2. Загрузите технические задания" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
-                    <TextBlock Text="3. Создайте пользователей (наставников, стажёров)" Style="{StaticResource H4Text}"/>
-                </StackPanel>
-            </Border>
         </Grid>
     </ScrollViewer>
 </UserControl>

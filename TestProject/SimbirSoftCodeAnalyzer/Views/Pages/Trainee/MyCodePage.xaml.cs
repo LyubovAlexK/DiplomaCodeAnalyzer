@@ -1,11 +1,11 @@
-﻿using Analyzers.Services;
+﻿using AI.Extractors;
+using Analyzers.Services;
 using Core.Data;
-using System.IO;
-using AI.Extractors;
 using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,14 +15,15 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Border = System.Windows.Controls.Border;
 using Color = System.Windows.Media.Color;
 using FontFamily = System.Windows.Media.FontFamily;
 using Paragraph = System.Windows.Documents.Paragraph;
+using Path = System.IO.Path;
 using Run = System.Windows.Documents.Run;
 using Style = System.Windows.Style;
-using Path = System.IO.Path;
 
 namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
 {
@@ -69,7 +70,6 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             {
                 _selectedPath = dialog.FolderName;
                 PathTextBox.Text = _selectedPath;
-                System.Diagnostics.Debug.WriteLine($"Выбран путь: {_selectedPath}");  // ← ДОБАВИТЬ
             }
         }
 
@@ -94,7 +94,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             var roslynAnalyzer = App.GetService<RoslynSyntaxAnalyzer>();
             var roslynResultService = App.GetService<RoslynResultService>();
             var myId = App.CurrentUser?.UserId ?? 0;
-            const string apiKey = "MDE5ZGQ0NmEtYzcxYi03ZDY2LThhYTAtNDZmOTZhMTY5ZGFiOmVjMTA0ZDYxLTcyMTEtNGQ2Yi04OTQxLTAyNTczNTYxNDBkNQ==";
+            const string apiKey = "MDE5ZTIyNmQtM2M5My03N2U4LTgzZTMtYjg5NDYxOWZiNmYwOjVkZWFiYzQ0LTMzNGEtNGY4OC1iODg4LWEwZWRjN2Q3MjZjMw==";
 
             var selectedProject = ProjectCombo.SelectedItem as ComboBoxItem;
             int projectId = (int)(selectedProject?.Tag ?? 1);
@@ -623,6 +623,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 Height = 600,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Owner = Window.GetWindow(this),
+                Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/logo-simbirsoft.png")),
                 Background = Brushes.White
             };
 

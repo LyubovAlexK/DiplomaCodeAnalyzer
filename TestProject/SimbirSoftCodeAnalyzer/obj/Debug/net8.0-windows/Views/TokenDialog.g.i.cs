@@ -68,7 +68,7 @@ namespace SimbirSoftCodeAnalyzer.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;component/views/tokendialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SimbirSoftCodeAnalyzer;V1.0.0.0;component/views/tokendialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\TokenDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
