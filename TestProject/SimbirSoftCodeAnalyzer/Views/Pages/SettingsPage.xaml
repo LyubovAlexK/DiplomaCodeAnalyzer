@@ -2,11 +2,57 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SimbirSoftCodeAnalyzer.Views.Pages"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="650" d:DesignWidth="950"
+             Background="Transparent">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Настройки" Style="{StaticResource H1Text}" Margin="0,0,0,24"/>
+
+            <!-- Тема -->
+            <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="24" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock Text="Тема оформления" Style="{StaticResource H2Text}" Margin="0,0,0,16"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton x:Name="LightThemeRadio" Content="Светлая" GroupName="Theme"
+                             IsChecked="True" Checked="ThemeRadio_Checked"
+                             FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                             Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,24,0"/>
+                        <RadioButton x:Name="DarkThemeRadio" Content="Тёмная" GroupName="Theme"
+                                     Checked="ThemeRadio_Checked"
+                                     FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                     Foreground="{DynamicResource DarkTextBrush}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Размер -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="24">
+                <StackPanel>
+                    <TextBlock Text="Размер интерфейса" Style="{StaticResource H2Text}" Margin="0,0,0,16"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton x:Name="SmallSizeRadio" Content="Малый" GroupName="Size"
+                                     Checked="SizeRadio_Checked"
+                                     FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                     Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,24,0"/>
+                        <RadioButton x:Name="MediumSizeRadio" Content="Средний" GroupName="Size"
+                                     IsChecked="True" Checked="SizeRadio_Checked"
+                                     FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                     Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,24,0"/>
+                        <RadioButton x:Name="LargeSizeRadio" Content="Крупный" GroupName="Size"
+                                     Checked="SizeRadio_Checked"
+                                     FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                                     Foreground="{DynamicResource DarkTextBrush}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

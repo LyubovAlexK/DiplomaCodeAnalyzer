@@ -26,6 +26,7 @@ namespace SimbirSoftCodeAnalyzer.Views
         {
             SetupMenuForRole();
             ShowHomePage();
+            UpdateSidebarBackground();
         }
 
         private void SetupMenuForRole()
@@ -99,7 +100,11 @@ namespace SimbirSoftCodeAnalyzer.Views
             ContentArea.Content = page;
             SetActiveButton("Home");
         }
-
+        public void UpdateSidebarBackground()
+        {
+            var bgColor = (Color)Application.Current.Resources["CardBackgroundColor"];
+            SidebarPanel.Background = new SolidColorBrush(bgColor);
+        }
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             var roleId = App.CurrentUser?.RoleId;

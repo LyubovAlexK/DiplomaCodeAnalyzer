@@ -167,7 +167,6 @@ public class GigaChatExtractor : IRequirementExtractor
         var aiMessage = choices[0].GetProperty("message").GetProperty("content").GetString();
         Console.WriteLine($"Длина ответа модели: {aiMessage?.Length ?? 0} символов");
 
-        // ДИАГНОСТИКА: показываем начало и конец ответа
         Console.WriteLine("=== НАЧАЛО ОТВЕТА ===");
         Console.WriteLine(aiMessage?[..Math.Min(300, aiMessage.Length)] ?? "null");
         Console.WriteLine("=== КОНЕЦ ОТВЕТА ===");

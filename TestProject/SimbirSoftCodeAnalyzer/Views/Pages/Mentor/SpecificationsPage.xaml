@@ -21,9 +21,9 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="ТЗ и требования" Style="{StaticResource H1Text}"/>
-                <Button x:Name="HelpButton" Content="?" Width="28" Height="28"
-            Style="{StaticResource IconButtonStyle}" FontSize="14"
-            Click="HelpButton_Click"/>
+                <Button x:Name="HelpButton" Content="?" Width="28" Height="28" HorizontalAlignment="Right"
+                        Style="{StaticResource IconButtonStyle}" FontSize="14"
+                        Click="HelpButton_Click"/>
             </Grid>
 
             <Popup x:Name="HelpPopup" 
@@ -76,9 +76,21 @@
                                          FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
                                          Foreground="{DynamicResource DarkTextBrush}"/>
                     </StackPanel>
-                    <Button Content="Запустить анализ" Style="{StaticResource PrimaryButton}"
+                    <Button x:Name="AnalyzeTzButton" Content="Запустить анализ" Style="{StaticResource PrimaryButton}"
                                 Click="AnalyzeTzButton_Click" HorizontalAlignment="Left" Padding="20,10"
                                 FontSize="{DynamicResource AppFontSizeH4}"/>
+                    <!-- Прогресс анализа ТЗ -->
+                    <Border x:Name="AnalysisProgressBorder" Visibility="Collapsed" 
+                                    Style="{StaticResource CardBorder}" Margin="0,12,0,0" Padding="16">
+                        <StackPanel>
+                            <TextBlock x:Name="AnalysisStatusText" Text="Подготовка..."
+                                   Style="{StaticResource H4Text}"
+                                   Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,8"/>
+                            <ProgressBar x:Name="AnalysisProgressBar" Height="6" 
+                                         IsIndeterminate="True"
+                                         Style="{StaticResource ModernProgressBar}"/>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </Border>
 

@@ -1,4 +1,3 @@
-D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\AI.dll
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\LatoFont\Lato-Black.ttf
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\LatoFont\Lato-BlackItalic.ttf
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\LatoFont\Lato-Bold.ttf
@@ -20,6 +19,7 @@ D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\LatoFont\Lato-ThinIt
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\LatoFont\OFL.txt
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\AI.deps.json
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\AI.runtimeconfig.json
+D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\AI.dll
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\AI.pdb
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\Core.dll
 D:\DITI\Diploma_app\TestProject\AI\bin\Debug\net8.0-windows\Core.pdb

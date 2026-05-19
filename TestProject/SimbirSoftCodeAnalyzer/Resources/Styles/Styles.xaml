@@ -4,98 +4,123 @@
                     xmlns:local="clr-namespace:SimbirSoftCodeAnalyzer.Managers">
 
     <!-- ========================================== -->
-    <!--              ЦВЕТА (COLORS)                -->
+    <!--           ЦВЕТА (COLORS)                    -->
     <!-- ========================================== -->
 
-    <!-- Основная гамма (из твоей палитры Gradients.app) -->
-    <Color x:Key="PrimaryLightColor">#b4e7fb</Color>
-    <Color x:Key="PrimaryLighterColor">#c0e7fb</Color>
-    <Color x:Key="PrimarySoftColor">#a1dffb</Color>
-    <Color x:Key="PrimaryMutedColor">#96cbfb</Color>
-    <Color x:Key="PrimaryMediumColor">#88cafb</Color>
+    <!-- Primary Blue -->
+    <Color x:Key="PrimaryLightColor">#166CFB</Color>
+    <!-- Blue 100 -->
+    <Color x:Key="PrimaryColor">#134BC5</Color>
+    <!-- Blue 200 -->
+    <Color x:Key="PrimaryDarkColor">#08398A</Color>
+    <!-- Blue 300 -->
+    <Color x:Key="PrimaryDeepColor">#041733</Color>
+    <!-- Blue 400 -->
 
-    <Color x:Key="PrimaryColor">#5e9cfa</Color>
-    <Color x:Key="PrimaryDarkColor">#6dabfb</Color>
-    <Color x:Key="PrimaryDarkerColor">#75b8fb</Color>
-    <Color x:Key="PrimaryDeepColor">#84bbfb</Color>
+    <SolidColorBrush x:Key="Gray100Brush" Color="{DynamicResource Gray100}"/>
 
-    <!-- Дополнительные цвета (подобраны для контраста) -->
-    <Color x:Key="DarkTextColor">#1a2a3a</Color>
-    <!-- Тёмно-синий для основного текста -->
-    <Color x:Key="SecondaryTextColor">#5a6e7c</Color>
-    <!-- Спокойный серо-синий -->
-    <Color x:Key="BorderColor">#CBD5E1</Color>
-    <!-- Чуть темнее основного для границ -->
-    <Color x:Key="HoverColor">#4a8ad5</Color>
-    <!-- Эффект наведения -->
-    <Color x:Key="GlobalBackgroundColor">#eef7fd</Color>
-    <!-- Очень светлый фон для всего окна -->
-    <Color x:Key="CardBackgroundColor">#ffffff</Color>
-    <!-- Белый для карточек -->
-    <Color x:Key="PanelBackgroundColor">#d4edfc</Color>
-    <!-- Светло-голубой для панелей -->
-    <Color x:Key="HeaderBackgroundColor">#c0e7fb</Color>
-    <Color x:Key="SidebarBackgroundColor">#75b8fb</Color>
-    <!-- Насыщенный голубой для сайдбара -->
-    <Color x:Key="SidebarTextColor">#ffffff</Color>
-    <Color x:Key="SidebarHoverColor">#5e9cfa</Color>
-    <Color x:Key="SidebarActiveColor">#4a8ad5</Color>
-    <!-- Самый тёмный для активного пункта -->
+    <!-- Accent Yellow -->
+    <Color x:Key="AccentLightColor">#FCE385</Color>
+    <!-- Yellow 100 -->
+    <Color x:Key="AccentColor">#F4BE44</Color>
+    <!-- Yellow 200 -->
+    <Color x:Key="AccentDarkColor">#F19236</Color>
+    <!-- Yellow 300 -->
 
-    <!-- Статусы (универсальные цвета) -->
-    <Color x:Key="SuccessColor">#2ecc71</Color>
-    <Color x:Key="SuccessBgColor">#d5f5e3</Color>
-    <Color x:Key="WarningColor">#f1c40f</Color>
-    <Color x:Key="WarningBgColor">#fef9e7</Color>
-    <Color x:Key="DangerColor">#e74c3c</Color>
-    <Color x:Key="DangerBgColor">#fadbd8</Color>
-    <Color x:Key="InfoColor">#3498db</Color>
-    <Color x:Key="InfoBgColor">#d6eaf8</Color>
-    <Color x:Key="NeutralColor">#95a5a6</Color>
-    <Color x:Key="NeutralBgColor">#ecf0f1</Color>
+    <!-- Accent Red -->
+    <Color x:Key="DangerLightColor">#FF3838</Color>
+    <!-- Red 000 -->
+    <Color x:Key="DangerColor">#DE1841</Color>
+    <!-- Red 100 -->
+    <Color x:Key="DangerDarkColor">#CA1238</Color>
+    <!-- Red 200 -->
 
+    <!-- Gray Scale -->
+    <Color x:Key="Gray100">#F7F7F9</Color>
+    <Color x:Key="Gray200">#B8BABF</Color>
+    <Color x:Key="Gray500">#595A5B</Color>
+    <Color x:Key="Gray600">#333437</Color>
+    <Color x:Key="Gray700">#252628</Color>
+    <Color x:Key="Gray800">#202123</Color>
+    <Color x:Key="Black900">#17181A</Color>
+    <Color x:Key="Black1000">#0F1010</Color>
+
+    <!-- Semantic Colors -->
+    <Color x:Key="SuccessColor">#10B981</Color>
+    <Color x:Key="SuccessBgColor">#D1FAE5</Color>
+    <Color x:Key="WarningColor">#F19236</Color>
+    <!-- Yellow 300 -->
+    <Color x:Key="WarningBgColor">#FEF9C3</Color>
+    <Color x:Key="DangerBgColor">#FEE2E2</Color>
+
+    <!-- Text & Background -->
+    <Color x:Key="DarkTextColor">#0F1010</Color>
+    <!-- Black 1000 -->
+    <Color x:Key="SecondaryTextColor">#595A5B</Color>
+    <!-- Gray 500 -->
+    <Color x:Key="GlobalBackgroundColor">#F7F7F9</Color>
+    <!-- Gray 100 -->
+    <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="BorderColor">#E5E7EB</Color>
+    <Color x:Key="HoverColor">#EEF2FF</Color>
+
+    <!-- Sidebar -->
+    <Color x:Key="SidebarBackgroundColor">#0F1010</Color>
+    <!-- Black 1000 -->
+    <Color x:Key="SidebarTextColor">#FFFFFF</Color>
+    <Color x:Key="SidebarHoverColor">#252628</Color>
+    <!-- Gray 700 -->
+    <Color x:Key="SidebarActiveColor">#134BC5</Color>
+    <!-- Blue 200 -->
 
     <!-- ========================================== -->
     <!--                КИСТИ (BRUSHES)             -->
     <!-- ========================================== -->
 
-    <!-- Основные -->
+    <!-- Primary -->
     <SolidColorBrush x:Key="PrimaryLightBrush" Color="{DynamicResource PrimaryLightColor}"/>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{DynamicResource PrimaryColor}"/>
     <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{DynamicResource PrimaryDarkColor}"/>
-    <SolidColorBrush x:Key="AccentLightBrush" Color="{DynamicResource PrimaryDeepColor}"/>
-    <SolidColorBrush x:Key="AccentPaleBrush" Color="{DynamicResource PrimaryMediumColor}"/>
-    <SolidColorBrush x:Key="PrimarySoftBrush" Color="{DynamicResource PrimarySoftColor}"/>
+    <SolidColorBrush x:Key="PrimaryDeepBrush" Color="{DynamicResource PrimaryDeepColor}"/>
 
-    <!-- Текст и границы -->
+    <!-- Accent -->
+    <SolidColorBrush x:Key="AccentLightBrush" Color="{DynamicResource AccentLightColor}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="AccentDarkBrush" Color="{DynamicResource AccentDarkColor}"/>
+
+    <!-- Danger -->
+    <SolidColorBrush x:Key="DangerLightBrush" Color="{DynamicResource DangerLightColor}"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{DynamicResource DangerColor}"/>
+    <SolidColorBrush x:Key="DangerDarkBrush" Color="{DynamicResource DangerDarkColor}"/>
+
+    <!-- Text -->
     <SolidColorBrush x:Key="DarkTextBrush" Color="{DynamicResource DarkTextColor}"/>
     <SolidColorBrush x:Key="SecondaryTextBrush" Color="{DynamicResource SecondaryTextColor}"/>
+
+    <!-- Backgrounds -->
+    <SolidColorBrush x:Key="GlobalBackgroundBrush" Color="{DynamicResource GlobalBackgroundColor}"/>
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="{DynamicResource CardBackgroundColor}"/>
     <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource BorderColor}"/>
     <SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource HoverColor}"/>
 
-    <!-- Фоны -->
-    <SolidColorBrush x:Key="GlobalBackgroundBrush" Color="{DynamicResource GlobalBackgroundColor}"/>
-    <SolidColorBrush x:Key="CardBackgroundBrush" Color="{DynamicResource CardBackgroundColor}"/>
-    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{DynamicResource PanelBackgroundColor}"/>
-    <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="{DynamicResource HeaderBackgroundColor}"/>
-
-    <!-- Сайдбар -->
+    <!-- Sidebar -->
     <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="{DynamicResource SidebarBackgroundColor}"/>
     <SolidColorBrush x:Key="SidebarTextBrush" Color="{DynamicResource SidebarTextColor}"/>
     <SolidColorBrush x:Key="SidebarHoverBrush" Color="{DynamicResource SidebarHoverColor}"/>
     <SolidColorBrush x:Key="SidebarActiveBrush" Color="{DynamicResource SidebarActiveColor}"/>
 
-    <!-- Статусы -->
+    <!-- Semantic -->
     <SolidColorBrush x:Key="SuccessBrush" Color="{DynamicResource SuccessColor}"/>
     <SolidColorBrush x:Key="SuccessBgBrush" Color="{DynamicResource SuccessBgColor}"/>
     <SolidColorBrush x:Key="WarningBrush" Color="{DynamicResource WarningColor}"/>
     <SolidColorBrush x:Key="WarningBgBrush" Color="{DynamicResource WarningBgColor}"/>
-    <SolidColorBrush x:Key="DangerBrush" Color="{DynamicResource DangerColor}"/>
     <SolidColorBrush x:Key="DangerBgBrush" Color="{DynamicResource DangerBgColor}"/>
-    <SolidColorBrush x:Key="InfoBrush" Color="{DynamicResource InfoColor}"/>
-    <SolidColorBrush x:Key="InfoBgBrush" Color="{DynamicResource InfoBgColor}"/>
-    <SolidColorBrush x:Key="NeutralBrush" Color="{DynamicResource NeutralColor}"/>
-    <SolidColorBrush x:Key="NeutralBgBrush" Color="{DynamicResource NeutralBgColor}"/>
+
+    <!-- Legacy compatibility -->
+    <SolidColorBrush x:Key="AccentPaleBrush" Color="#EEF2FF"/>
+    <SolidColorBrush x:Key="PrimarySoftBrush" Color="#166CFB"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="{DynamicResource PrimaryLightColor}"/>
+    <SolidColorBrush x:Key="InfoBgBrush" Color="#DBEAFE"/>
 
     <!-- ========================================== -->
     <!--            РАЗМЕРЫ (SCALES)                -->

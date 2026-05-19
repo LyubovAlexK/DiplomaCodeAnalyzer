@@ -16,5 +16,5 @@ D:\DITI\Diploma_app\TestProject\SimbirSoftCodeAnalyzer\App.xaml
 319-1880955585
 Resources\Styles\Styles.xaml;Views\LoginWindow.xaml;Views\MainWindow.xaml;Views\MarkerDialog.xaml;Views\MetricDialog.xaml;Views\Pages\Admin\AdminHomePage.xaml;Views\Pages\Admin\SystemResourcesPage.xaml;Views\Pages\Admin\UsersPage.xaml;Views\Pages\Mentor\ArchRulesPage.xaml;Views\Pages\Mentor\CheckManagementPage.xaml;Views\Pages\Mentor\MentorHomePage.xaml;Views\Pages\Mentor\ReferencesPage.xaml;Views\Pages\Mentor\ResultsPage.xaml;Views\Pages\Mentor\SpecificationsPage.xaml;Views\Pages\SettingsPage.xaml;Views\Pages\Trainee\HistoryPage.xaml;Views\Pages\Trainee\MyCodePage.xaml;Views\Pages\Trainee\MyResultsPage.xaml;Views\Pages\Trainee\TraineeHomePage.xaml;Views\PromptDialog.xaml;Views\RequirementDialog.xaml;Views\TokenDialog.xaml;Views\UserDialog.xaml;
 
-False
+True
 

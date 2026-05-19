@@ -1,4 +1,3 @@
-D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Analyzers.dll
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\LatoFont\Lato-Black.ttf
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\LatoFont\Lato-BlackItalic.ttf
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\LatoFont\Lato-Bold.ttf
@@ -20,6 +19,7 @@ D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\LatoFont\Lato
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\LatoFont\OFL.txt
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Analyzers.deps.json
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Analyzers.runtimeconfig.json
+D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Analyzers.dll
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Analyzers.pdb
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Core.dll
 D:\DITI\Diploma_app\TestProject\Analyzers\bin\Debug\net8.0-windows\Core.pdb

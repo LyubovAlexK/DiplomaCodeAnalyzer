@@ -7,6 +7,7 @@ using Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SimbirSoftCodeAnalyzer.Managers;
 using SimbirSoftCodeAnalyzer.Views;
 using System.Windows;
 
@@ -30,6 +31,9 @@ namespace SimbirSoftCodeAnalyzer
 
             var loginWindow = new LoginWindow();
             loginWindow.Show();
+
+            ThemeManager.InitializeTheme();
+            SizeManager.InitializeSize();
         }
 
         private static void ConfigureServices(ServiceCollection services)

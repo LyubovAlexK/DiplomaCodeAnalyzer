@@ -107,6 +107,7 @@
                 </Grid>
 
                 <!-- Всплывающая панель с подсказками -->
+
                 <Popup x:Name="HelpPopup" 
        Placement="Bottom"
        StaysOpen="False"
@@ -152,39 +153,59 @@
                 </ScrollViewer>
 
                 <!-- Легенда -->
-                <StackPanel Grid.Row="3" Orientation="Horizontal"
-            HorizontalAlignment="Center" Margin="0,12,0,0">
+                <WrapPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,12,0,0">
                     <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                        <Ellipse Width="10" Height="10" Fill="#8B5CF6" Margin="0,0,5,0"/>
-                        <TextBlock Text="UI" Style="{StaticResource H4Text}"
-                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentDarkBrush}" Margin="0,0,5,0"/>
+                        <TextBlock Text="Интерфейс (UI)" Style="{StaticResource H4Text}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                        <Ellipse Width="10" Height="10" Fill="#2563EB" Margin="0,0,5,0"/>
-                        <TextBlock Text="Бизнес" Style="{StaticResource H4Text}"
-                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        <Ellipse Width="10" Height="10" Fill="{DynamicResource PrimaryBrush}" Margin="0,0,5,0"/>
+                        <TextBlock Text="Бизнес-логика" Style="{StaticResource H4Text}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                        <Ellipse Width="10" Height="10" Fill="#10B981" Margin="0,0,5,0"/>
-                        <TextBlock Text="Данные" Style="{StaticResource H4Text}"
-                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        <Ellipse Width="10" Height="10" Fill="{DynamicResource SuccessBrush}" Margin="0,0,5,0"/>
+                        <TextBlock Text="Доступ к данным" Style="{StaticResource H4Text}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                        <Ellipse Width="10" Height="10" Fill="#F59E0B" Margin="0,0,5,0"/>
-                        <TextBlock Text="Модели" Style="{StaticResource H4Text}"
-                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentBrush}" Margin="0,0,5,0"/>
+                        <TextBlock Text="Модели данных" Style="{StaticResource H4Text}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                        <Line X1="0" Y1="5" X2="16" Y2="5" Stroke="#9CA3AF" StrokeThickness="1" Margin="0,0,5,0"/>
-                        <TextBlock Text="Связь" Style="{StaticResource H4Text}"
-                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        <Ellipse Width="10" Height="10" Fill="{DynamicResource PrimaryLightBrush}" Margin="0,0,5,0"/>
+                        <TextBlock Text="Абстракции" Style="{StaticResource H4Text}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                        <Line X1="0" Y1="5" X2="16" Y2="5" Stroke="{DynamicResource SecondaryTextBrush}" StrokeThickness="1" Margin="0,0,5,0"/>
+                        <TextBlock Text="Связь" Style="{StaticResource H4Text}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="10" Height="10" Fill="#DC2626" Margin="0,0,5,0"/>
-                        <TextBlock Text="Нарушение" Style="{StaticResource H4Text}"
-                   Foreground="{DynamicResource SecondaryTextBrush}"/>
+                        <Ellipse Width="10" Height="10" Fill="{DynamicResource DangerBrush}" Margin="0,0,5,0"/>
+                        <TextBlock Text="Нарушение" Style="{StaticResource H4Text}"/>
                     </StackPanel>
-                </StackPanel>
+                </WrapPanel>
+                <Popup x:Name="CodeHelpPopup" 
+       Placement="Bottom"
+       StaysOpen="False"
+       AllowsTransparency="True">
+                    <Border Background="White" 
+            CornerRadius="10" 
+            Padding="16"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="1"
+            MaxWidth="350">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="12" ShadowDepth="3" Opacity="0.15" Color="Black"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock x:Name="HelpTitleText" FontSize="{DynamicResource AppFontSizeH3}" FontFamily="Inter" 
+                       FontWeight="Bold" Foreground="{DynamicResource DarkTextBrush}" 
+                       Margin="0,0,0,8"/>
+                            <TextBlock x:Name="HelpDescText" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                       Foreground="{DynamicResource SecondaryTextBrush}" TextWrapping="Wrap" 
+                       LineHeight="20"/>
+                        </StackPanel>
+                    </Border>
+                </Popup>
             </Grid>
         </Border>
 
@@ -192,7 +213,6 @@
         <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource CardBorder}" Margin="8,0,0,0" x:Name="InfoPanel" Visibility="Collapsed">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel>
-                    <TextBlock Text="Информация" Style="{StaticResource H2Text}" Margin="0,0,0,15"/>
                     <TextBlock  x:Name="PlaceholderText" Text="Нажмите на класс, чтобы начать..." Style="{StaticResource H4Text}" Margin="0,0,0,15" TextWrapping="Wrap"/>
                     <StackPanel x:Name="InfoContent"/>
                 </StackPanel>

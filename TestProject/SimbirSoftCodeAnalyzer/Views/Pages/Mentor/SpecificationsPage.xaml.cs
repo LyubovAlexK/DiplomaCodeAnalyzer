@@ -17,7 +17,21 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
     {
         private string? _selectedFilePath;
         private int _selectedSpecId;
-        private const string GIGACHAT_AUTH_KEY = "MDE5ZTIyNmQtM2M5My03N2U4LTgzZTMtYjg5NDYxOWZiNmYwOjVkZWFiYzQ0LTMzNGEtNGY4OC1iODg4LWEwZWRjN2Q3MjZjMw==";
+        private async Task<string> GetActiveGigaChatKeyAsync()
+        {
+            var db = App.GetService<AppDbContext>();
+            var token = await db.AccessTokens
+                .FirstOrDefaultAsync(t => t.Description == "GigaChat" && t.IsActive == true);
+
+            if (token == null)
+            {
+                MessageBox.Show("Не найден активный токен GigaChat. Добавьте токен в разделе «Системные ресурсы» (Администратор).",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                throw new InvalidOperationException("Токен GigaChat не найден");
+            }
+
+            return token.TokenValue;
+        }
 
         public SpecificationsPage()
         {
@@ -60,6 +74,12 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
         private async void AnalyzeTzButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(_selectedFilePath)) { MessageBox.Show("Выберите файл ТЗ"); return; }
+
+            // Показать прогресс
+            AnalysisProgressBorder.Visibility = Visibility.Visible;
+            AnalysisStatusText.Text = "Анализ текста...";
+            AnalyzeTzButton.IsEnabled = false;
+
             try
             {
                 var db = App.GetService<AppDbContext>();
@@ -67,6 +87,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                 var specService = App.GetService<SpecificationService>();
                 bool isOnline = AiRadio.IsChecked == true;
 
+                AnalysisStatusText.Text = "Сохранение ТЗ...";
                 var spec = new ProjectSpecification
                 {
                     Title = System.IO.Path.GetFileNameWithoutExtension(_selectedFilePath),
@@ -77,15 +98,49 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
                 };
                 int specId = await specService.SaveAsync(spec);
 
-                var factory = new ExtractorFactory(dictService, isOnline ? GIGACHAT_AUTH_KEY : null);
-                var extractor = factory.Create(isOnline);
-                var specification = await extractor.ExtractAsync(_selectedFilePath, specId);
-                await specService.SaveAsync(specification);
+                AnalysisStatusText.Text = isOnline ? "Отправка запроса в GigaChat..." : "Локальный анализ...";
 
-                MessageBox.Show("ТЗ успешно проанализировано", "Готово");
+                string authKey = null;
+                if (isOnline)
+                {
+                    var token = await db.AccessTokens
+                        .FirstOrDefaultAsync(t => t.Description == "GigaChat" && t.IsActive == true);
+
+                    if (token == null)
+                    {
+                        MessageBox.Show("Не найден активный токен GigaChat. Добавьте токен в разделе «Системные ресурсы» (Администратор).",
+                            "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                    authKey = token.TokenValue;
+                }
+
+                var factory = new ExtractorFactory(dictService, authKey);
+                var extractor = factory.Create(isOnline);
+                var result = await extractor.ExtractAsync(_selectedFilePath, specId);
+
+                AnalysisStatusText.Text = "Сохранение требований...";
+                if (result.Requirements.Any())
+                {
+                    foreach (var req in result.Requirements)
+                    {
+                        req.SpecificationId = specId;
+                        req.CreatedAt = DateTime.Now;
+                        req.IsActive = true;
+                    }
+                    db.Requirements.AddRange(result.Requirements);
+                    await db.SaveChangesAsync();
+                }
+
+                MessageBox.Show($"Анализ завершён. Найдено требований: {result.Requirements.Count}", "Готово");
                 await LoadSpecsAsync();
             }
             catch (Exception ex) { MessageBox.Show($"Ошибка: {ex.Message}"); }
+            finally
+            {
+                AnalysisProgressBorder.Visibility = Visibility.Collapsed;
+                AnalyzeTzButton.IsEnabled = true;
+            }
         }
 
         private async void SpecsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

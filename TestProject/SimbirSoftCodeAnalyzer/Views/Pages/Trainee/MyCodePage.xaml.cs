@@ -3,18 +3,17 @@ using Analyzers.Services;
 using Core.Data;
 using Core.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Border = System.Windows.Controls.Border;
@@ -44,6 +43,22 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
         {
             InitializeComponent();
             Loaded += async (s, e) => await LoadProjectsAsync();
+
+        }
+
+        private async Task<string> GetActiveGigaChatKeyAsync(AppDbContext db)
+        {
+            var token = await db.AccessTokens
+                .FirstOrDefaultAsync(t => t.Description == "GigaChat" && t.IsActive == true);
+
+            if (token == null)
+            {
+                MessageBox.Show("Не найден активный токен GigaChat. Добавьте токен в разделе «Системные ресурсы» (Администратор).",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                throw new InvalidOperationException("Токен GigaChat не найден");
+            }
+
+            return token.TokenValue;
         }
 
         private async Task LoadProjectsAsync()
@@ -72,7 +87,20 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 PathTextBox.Text = _selectedPath;
             }
         }
-
+        private async Task SafeSave(AppDbContext db, string blockName)
+        {
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show($"Ошибка БД [{blockName}]: {msg}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+        }
         private async void RunButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(_selectedPath))
@@ -82,10 +110,18 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             }
             HintText.Visibility = Visibility.Collapsed;
             ProgressBorder.Visibility = Visibility.Visible;
-            try { await RunAnalysisAsync(); }
-            catch (Exception ex) { MessageBox.Show($"Ошибка: {ex.Message}"); }
-            finally { ProgressBorder.Visibility = Visibility.Collapsed; }
-            
+            try
+            {
+                await RunAnalysisAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}\n\nInner: {ex.InnerException?.Message}", "Ошибка анализа");
+            }
+            finally
+            {
+                ProgressBorder.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async Task RunAnalysisAsync()
@@ -94,7 +130,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             var roslynAnalyzer = App.GetService<RoslynSyntaxAnalyzer>();
             var roslynResultService = App.GetService<RoslynResultService>();
             var myId = App.CurrentUser?.UserId ?? 0;
-            const string apiKey = "MDE5ZTIyNmQtM2M5My03N2U4LTgzZTMtYjg5NDYxOWZiNmYwOjVkZWFiYzQ0LTMzNGEtNGY4OC1iODg4LWEwZWRjN2Q3MjZjMw==";
+            string apiKey = await GetActiveGigaChatKeyAsync(db);
 
             var selectedProject = ProjectCombo.SelectedItem as ComboBoxItem;
             int projectId = (int)(selectedProject?.Tag ?? 1);
@@ -106,7 +142,21 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             {
                 project.RepoUrl = _selectedPath;
                 project.UpdatedAt = DateTime.Now;
-                await db.SaveChangesAsync();
+                try
+                {
+                    await SafeSave(db, "блок сохранения пути");
+                }
+                catch (Exception ex)
+                {
+                    var inner = ex.InnerException;
+                    while (inner != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"DB ERROR: {inner.Message}");
+                        inner = inner.InnerException;
+                    }
+                    MessageBox.Show($"Ошибка сохранения: {ex.InnerException?.Message ?? ex.Message}");
+                    return;
+                }
             }
 
             // 1. Проверка на пустой проект
@@ -137,7 +187,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 IsArchived = false
             };
             db.SessionAnalysis.Add(session);
-            await db.SaveChangesAsync();
+            await SafeSave(db, "блок создания сессии");
 
             // 3. Roslyn-анализ
             StageText.Text = "Анализ синтаксиса (Roslyn)...";
@@ -228,7 +278,21 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 session.OverallMatchPercent = result.TotalMethods > 0
                     ? 100 - (decimal)result.MethodsExceedingComplexity / result.TotalMethods * 100 : 100;
 
-                await db.SaveChangesAsync();
+                try
+                {
+                    await SafeSave(db, "блок 6");
+                }
+                catch (Exception ex)
+                {
+                    var inner = ex.InnerException;
+                    while (inner != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"DB ERROR (блок 6): {inner.Message}");
+                        inner = inner.InnerException;
+                    }
+                    MessageBox.Show($"Ошибка сохранения: {ex.InnerException?.Message ?? ex.Message}");
+                    return;
+                }
             }
             catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Эталон: {ex.Message}"); }
             AnalysisProgress.Value = 95;
@@ -236,7 +300,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             // 7. Завершение
             session.EndTime = DateTime.Now;
             session.Status = "Completed";
-            await db.SaveChangesAsync();
+            await SafeSave(db, "блок 7");
 
             AnalysisProgress.Value = 100;
             StageText.Text = "Анализ завершён!";
@@ -430,19 +494,19 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
 
             Color normalColor = node.Category switch
             {
-                "UI" => Color.FromRgb(139, 92, 246),
-                "Business" => Color.FromRgb(37, 99, 235),
-                "DataAccess" => Color.FromRgb(16, 185, 129),
-                "Data" => Color.FromRgb(245, 158, 11),
-                "Interface" => Color.FromRgb(6, 182, 212),
-                _ => Color.FromRgb(107, 114, 128)
+                "UI" => ((SolidColorBrush)FindResource("AccentDarkBrush")).Color,
+                "Business" => ((SolidColorBrush)FindResource("PrimaryBrush")).Color,
+                "DataAccess" => ((SolidColorBrush)FindResource("SuccessBrush")).Color,
+                "Data" => ((SolidColorBrush)FindResource("AccentBrush")).Color,
+                "Interface" => ((SolidColorBrush)FindResource("PrimaryLightBrush")).Color,
+                _ => ((SolidColorBrush)FindResource("SecondaryTextBrush")).Color
             };
 
-            Color color = node.IsSelected ? Color.FromRgb(245, 158, 11) :
-                          node.HasViolation ? Color.FromRgb(220, 38, 38) : normalColor;
+            Color color = node.IsSelected ? ((SolidColorBrush)FindResource("AccentDarkBrush")).Color :
+                          node.HasViolation ? ((SolidColorBrush)FindResource("DangerBrush")).Color : normalColor;
 
             Color glowColor = node.IsSelected ? Colors.Gold :
-                              node.HasViolation ? Colors.Red : normalColor;
+                              node.HasViolation ? ((SolidColorBrush)FindResource("DangerBrush")).Color : normalColor;
 
             var dot = new Ellipse
             {
@@ -562,13 +626,6 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 Margin = new Thickness(0, 0, 0, 12)
             });
 
-            // Информация
-            AddInfoLine($"Тип: {node.Kind}");
-            AddInfoLine($"Категория: {GetCategoryName(node.Category)}");
-            AddInfoLine($"Методов: {node.MethodCount}");
-            AddInfoLine($"Сложность: {node.Complexity:F1} (цикломатическая)");
-            AddInfoLine($"Нарушений: {(node.HasViolation ? "Есть" : "Нет")}");
-
             // Разделитель
             InfoContent.Children.Add(new Border
             {
@@ -595,7 +652,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             "Business" => "Бизнес-логика",
             "DataAccess" => "Доступ к данным",
             "Data" => "Модель данных",
-            "Interface" => "Интерфейс",
+            "Interface" => "Абстракции",
             _ => "Прочее"
         };
 
@@ -644,12 +701,64 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             };
             Grid.SetRow(titleBlock, 0); grid.Children.Add(titleBlock);
 
+            // Popup для подсказок (в этом окне)
+            var helpPopup = new Popup
+            {
+                Placement = PlacementMode.Bottom,
+                StaysOpen = false,
+                AllowsTransparency = true
+            };
+            var popupBorder = new Border
+            {
+                Background = Brushes.White,
+                CornerRadius = new CornerRadius(10),
+                Padding = new Thickness(16),
+                BorderBrush = (Brush)FindResource("BorderBrush"),
+                BorderThickness = new Thickness(1),
+                MaxWidth = 350
+            };
+            popupBorder.Effect = new DropShadowEffect { BlurRadius = 12, ShadowDepth = 3, Opacity = 0.15, Color = Colors.Black };
+            var popupStack = new StackPanel();
+            var helpTitle = new TextBlock
+            {
+                FontSize = (double)FindResource("AppFontSizeH3"),
+                FontFamily = new FontFamily("Inter"),
+                FontWeight = FontWeights.Bold,
+                Foreground = (Brush)FindResource("DarkTextBrush"),
+                Margin = new Thickness(0, 0, 0, 8)
+            };
+            var helpDesc = new TextBlock
+            {
+                FontSize = (double)FindResource("AppFontSizeH4"),
+                FontFamily = new FontFamily("Inter"),
+                Foreground = (Brush)FindResource("SecondaryTextBrush"),
+                TextWrapping = TextWrapping.Wrap,
+                LineHeight = 20
+            };
+            popupStack.Children.Add(helpTitle);
+            popupStack.Children.Add(helpDesc);
+            popupBorder.Child = popupStack;
+            helpPopup.Child = popupBorder;
+            grid.Children.Add(helpPopup);
+
             var infoStack = new StackPanel { Margin = new Thickness(24, 8, 24, 0) };
             infoStack.Children.Add(CreateInfoText($"Тип: {node.Kind}"));
             infoStack.Children.Add(CreateInfoText($"Категория: {GetCategoryName(node.Category)}"));
-            infoStack.Children.Add(CreateInfoText($"Методов: {node.MethodCount}"));
-            infoStack.Children.Add(CreateInfoText($"Сложность: {node.Complexity:F1} (цикломатическая)"));
-            infoStack.Children.Add(CreateInfoText($"Нарушений: {(node.HasViolation ? "Есть" : "Нет")}"));
+
+            // Методов
+            var methodsRow = CreateHelpRowLocal("Методов: ", node.MethodCount.ToString(),
+                "Количество методов в классе",
+                "• 1–10 — норма\n• 11–25 — много\n• > 25 — критично\n\nРекомендация: при > 20 методов рассмотрите разделение класса.",
+                helpPopup, helpTitle, helpDesc);
+            infoStack.Children.Add(methodsRow);
+
+            // Сложность
+            var complexityRow = CreateHelpRowLocal("Сложность: ", $"{node.Complexity:F1} (цикломатическая)",
+                "Цикломатическая сложность",
+                "Мера количества независимых путей через код.\n\nПороги:\n• 1–10 — норма\n• 11–20 — повышенная\n• > 20 — высокая\n\nРекомендация: разбейте сложные методы на несколько простых.",
+                helpPopup, helpTitle, helpDesc);
+            infoStack.Children.Add(complexityRow);
+
             Grid.SetRow(infoStack, 1); grid.Children.Add(infoStack);
 
             var line = new Border
@@ -660,9 +769,8 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             };
             Grid.SetRow(line, 2); grid.Children.Add(line);
 
-            // Код с выделением жирным класса и красным — нарушений
+            // Код
             var code = File.ReadAllText(node.FilePath);
-
             var codeBox = new RichTextBox
             {
                 FontFamily = new FontFamily("Courier New"),
@@ -679,7 +787,6 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             var doc = new FlowDocument();
             var para = new Paragraph();
 
-            // Получаем вердикты для этого класса
             var verdicts = new List<AuditVerdict>();
             try
             {
@@ -750,6 +857,153 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
             Grid.SetRow(codeBox, 3); grid.Children.Add(codeBox);
             codeWindow.Content = grid;
             codeWindow.Show();
+        }
+
+        private StackPanel CreateHelpRowLocal(string label, string value, string title, string description,
+            Popup popup, TextBlock titleBlock, TextBlock descBlock)
+        {
+            var row = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 0, 6) };
+
+            var textBlock = new TextBlock
+            {
+                FontSize = (double)FindResource("AppFontSizeH4"),
+                FontFamily = new FontFamily("Inter"),
+                Foreground = (Brush)FindResource("DarkTextBrush"),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            textBlock.Inlines.Add(new Run(label));
+            textBlock.Inlines.Add(new Run(value) { FontWeight = FontWeights.SemiBold });
+            row.Children.Add(textBlock);
+
+            var helpBtn = new Button
+            {
+                Content = "?",
+                Width = 20,
+                Height = 20,
+                FontSize = 12,
+                FontFamily = new FontFamily("Inter"),
+                FontWeight = FontWeights.Bold,
+                Background = (Brush)FindResource("CardBackgroundBrush"),
+                Foreground = (Brush)FindResource("PrimaryBrush"),
+                BorderThickness = new Thickness(0),
+                Cursor = Cursors.Hand,
+                Margin = new Thickness(6, 0, 0, 0),
+                Padding = new Thickness(0),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            helpBtn.Click += (s, ev) =>
+            {
+                titleBlock.Text = title;
+                descBlock.Text = description;
+                popup.PlacementTarget = helpBtn;
+                popup.IsOpen = true;
+            };
+            row.Children.Add(helpBtn);
+
+            return row;
+        }
+        private void ComplexityHelp_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "Цикломатическая сложность — мера количества независимых путей через исходный код.\n\n" +
+                "Пороги:\n" +
+                "• 1–10 — норма (зелёный)\n" +
+                "• 11–20 — повышенная (жёлтый)\n" +
+                "• > 20 — высокая (красный)\n\n" +
+                "Рекомендация: разбейте сложные методы на несколько более простых.",
+                "Цикломатическая сложность",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
+        private StackPanel CreateHelpRow(string label, string value, string title, string description)
+        {
+            var row = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 0, 6) };
+
+            // Текст строки
+            var textBlock = new TextBlock
+            {
+                FontSize = (double)FindResource("AppFontSizeH4"),
+                FontFamily = new FontFamily("Inter"),
+                Foreground = (Brush)FindResource("DarkTextBrush"),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            textBlock.Inlines.Add(new Run(label));
+            textBlock.Inlines.Add(new Run(value) { FontWeight = FontWeights.SemiBold });
+            row.Children.Add(textBlock);
+
+            // Кнопка "?"
+            var helpBtn = new Button
+            {
+                Content = "?",
+                Width = 20,
+                Height = 20,
+                FontSize = 12,
+                FontFamily = new FontFamily("Inter"),
+                FontWeight = FontWeights.Bold,
+                Background = (Brush)FindResource("CardBackgroundBrush"),
+                Foreground = (Brush)FindResource("PrimaryBrush"),
+                BorderThickness = new Thickness(0),
+                Cursor = Cursors.Hand,
+                Margin = new Thickness(6, 0, 0, 0),
+                Padding = new Thickness(0),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Tag = new HelpInfo { Title = title, Description = description }
+            };
+            helpBtn.Click += HelpButtonInfo_Click;
+            row.Children.Add(helpBtn);
+
+            return row;
+        }
+
+        private class HelpInfo
+        {
+            public string Title { get; set; } = "";
+            public string Description { get; set; } = "";
+        }
+
+        private void HelpButtonInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is HelpInfo info)
+            {
+                HelpTitleText.Text = info.Title;
+                HelpDescText.Text = info.Description;
+                CodeHelpPopup.IsOpen = true;
+                CodeHelpPopup.PlacementTarget = btn;
+            }
+        }
+
+        private void HelpButton_Popup_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag != null)
+            {
+                dynamic tag = btn.Tag;
+                HelpTitleText.Text = tag.Title;
+                HelpDescText.Text = tag.Text;
+                CodeHelpPopup.PlacementTarget = btn;
+                CodeHelpPopup.IsOpen = true;
+            }
+        }
+        private void MethodsHelp_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "Количество методов в классе.\n\n" +
+                "Рекомендация: если методов больше 20, рассмотрите разделение класса на несколько.",
+                "Количество методов",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void ViolationsHelp_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "Наличие нарушений в классе, найденных анализаторами:\n" +
+                "• Cинтаксические метрики (сложность, строки, вложенность)\n" +
+                "• Архитектурные зависимости\n" +
+                "• Cемантическое несоответствие ТЗ\n\n" +
+                "Красный узел на графе = есть нарушения.",
+                "Нарушения",
+                MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private TextBlock CreateInfoText(string text)

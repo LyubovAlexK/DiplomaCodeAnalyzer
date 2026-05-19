@@ -13,7 +13,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Заголовок + выбор стажёра -->
@@ -30,8 +31,8 @@
                     <ComboBox x:Name="TraineeCombo" Style="{StaticResource CustomComboBox}" Width="220"
                               SelectionChanged="TraineeCombo_SelectionChanged"/>
                     <Button Content="Экспорт в PDF" Style="{StaticResource OutlineButton}"
-                                Click="ExportPdf_Click" Padding="15,8"
-                                FontSize="{DynamicResource AppFontSizeH4}" Margin="15,0,0,0"/>
+                            Click="ExportPdf_Click" Padding="15,8"
+                            FontSize="{DynamicResource AppFontSizeH4}" Margin="15,0,0,0"/>
                 </StackPanel>
             </Grid>
 
@@ -128,13 +129,13 @@
                 </Border>
             </Grid>
 
-            <!-- Сессии -->
+            <!-- Сессии выбранного стажёра -->
             <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,0,0,20"
                     x:Name="SessionsPanel" Visibility="Collapsed" Padding="16">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="Сессии" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
                     <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
@@ -153,14 +154,14 @@
                 </Grid>
             </Border>
 
-            <!-- Таблица вердиктов -->
+            <!-- Вердикты -->
             <Border Grid.Row="3" Style="{StaticResource CardBorder}" 
                     x:Name="VerdictsPanel" Visibility="Collapsed" Padding="16">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Margin="0,0,0,12">
@@ -217,6 +218,52 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
+                </Grid>
+            </Border>
+
+            <!-- Сводка по всем стажёрам -->
+            <Border Grid.Row="4" Style="{StaticResource CardBorder}" Margin="0,10,0,0"
+                    x:Name="SummaryPanel" Visibility="Collapsed" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Сводка по стажёрам" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="SummaryGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  RowHeight="44" MaxHeight="300"
+                                  HorizontalAlignment="Stretch"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Стажёр" Width="*" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Проект" Width="*" Binding="{Binding Project}"/>
+                                <DataGridTextColumn Header="Попыток" Width="70" Binding="{Binding Attempts}"/>
+                                <DataGridTextColumn Header="Средний %" Width="80" Binding="{Binding AvgPercent}"/>
+                                <DataGridTextColumn Header="Последний %" Width="80" Binding="{Binding LastPercent}"/>
+                                <DataGridTextColumn Header="Синтаксис" Width="70" Binding="{Binding SyntaxFails}"/>
+                                <DataGridTextColumn Header="Архитектура" Width="80" Binding="{Binding ArchFails}"/>
+                                <DataGridTemplateColumn Header="Статус" Width="90">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border CornerRadius="12" Padding="8,4" HorizontalAlignment="Center"
+                                                    Background="{Binding StatusBg}">
+                                                <TextBlock Text="{Binding StatusText}" FontSize="11" FontFamily="Inter"
+                                                           FontWeight="SemiBold" Foreground="{Binding StatusFg}"
+                                                           HorizontalAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <Button Grid.Row="2" Content="Сводный отчёт (PDF)" Style="{StaticResource OutlineButton}"
+                            Click="ExportSummaryPdf_Click" HorizontalAlignment="Right" Margin="0,12,0,0"
+                            Padding="15,8" FontSize="{DynamicResource AppFontSizeH4}"/>
                 </Grid>
             </Border>
         </Grid>

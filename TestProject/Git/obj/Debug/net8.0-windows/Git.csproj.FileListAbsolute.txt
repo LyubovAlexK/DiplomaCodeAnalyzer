@@ -1,6 +1,6 @@
-D:\DITI\Diploma_app\TestProject\Git\bin\Debug\net8.0-windows\Git.dll
 D:\DITI\Diploma_app\TestProject\Git\bin\Debug\net8.0-windows\Git.deps.json
 D:\DITI\Diploma_app\TestProject\Git\bin\Debug\net8.0-windows\Git.runtimeconfig.json
+D:\DITI\Diploma_app\TestProject\Git\bin\Debug\net8.0-windows\Git.dll
 D:\DITI\Diploma_app\TestProject\Git\bin\Debug\net8.0-windows\Git.pdb
 D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.csproj.AssemblyReference.cache
 D:\DITI\Diploma_app\TestProject\Git\obj\Debug\net8.0-windows\Git.GeneratedMSBuildEditorConfig.editorconfig

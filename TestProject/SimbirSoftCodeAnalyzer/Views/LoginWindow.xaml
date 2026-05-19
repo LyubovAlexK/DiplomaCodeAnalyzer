@@ -5,39 +5,20 @@
         Title="SimbirSoft Анализатор кода"
         MinHeight="700" MinWidth="1000"
         Height="700" Width="1000"
+        Background="{StaticResource GlobalBackgroundBrush}"
         WindowStartupLocation="CenterScreen" Icon="/Resources/Images/logo-simbirsoft.png">
 
     <Grid>
-        <MediaElement x:Name="BackgroundVideo"
-              Source="Resources/Images/login-background.mp4"
-              LoadedBehavior="Manual"
-              UnloadedBehavior="Stop"
-              Stretch="Fill"
-              IsMuted="True"
-              IsHitTestVisible="False"
-              Focusable="False"
-              ScrubbingEnabled="True"
-              Loaded="BackgroundVideo_Loaded"
-              MediaEnded="BackgroundVideo_MediaEnded">
-            <MediaElement.LayoutTransform>
-                <RotateTransform Angle="90"/>
-            </MediaElement.LayoutTransform>
-        </MediaElement>
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
             <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
-                <Image Source="/Resources/Images/logo-simbirsoft.png"
-                       Width="70"
-                       Height="70"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,12"/>  
                 <TextBlock Text="SimbirSoft"
-                           Style="{StaticResource H2Text}"
+                           Style="{StaticResource MainText}"
                            Foreground="{DynamicResource DarkTextBrush}"
                            HorizontalAlignment="Center"/>
                 <TextBlock Text="Анализатор кода"
-                           Style="{StaticResource H2Text}"
+                           Style="{StaticResource MainText}"
                            Foreground="{DynamicResource DarkTextBrush}"
                            HorizontalAlignment="Center"/>   
             </StackPanel>

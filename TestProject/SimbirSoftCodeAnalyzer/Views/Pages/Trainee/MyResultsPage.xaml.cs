@@ -181,6 +181,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                     var refResult = await refService.CompareWithReference(reference.ReferenceId, roslynResult);
                     ReferenceText.Text = $"Соответствие эталону: {lastSession.ReferenceMatchPercent:F0}%\n" +
                         $"Расхождений: {refResult.Count}";
+                    DrawComparisonChart(pct, (double)(lastSession.ReferenceMatchPercent ?? 0));
                 }
                 else
                 {
@@ -192,7 +193,125 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Trainee
                 System.Diagnostics.Debug.WriteLine($"Ошибка: {ex.Message}");
             }
         }
+        private void DrawComparisonChart(double tzPercent, double refPercent)
+        {
+            ComparisonCanvas.Children.Clear();
 
+            double canvasW = ComparisonCanvas.ActualWidth > 0 ? ComparisonCanvas.ActualWidth : 500;
+            double canvasH = 220;
+            double pad = 50;
+            double chartW = canvasW - pad * 2;
+            double chartH = canvasH - pad - 20;
+
+            // Сетка
+            for (int i = 0; i <= 4; i++)
+            {
+                double y = pad + (chartH / 4) * i;
+                ComparisonCanvas.Children.Add(new Line
+                {
+                    X1 = pad,
+                    Y1 = y,
+                    X2 = canvasW - pad,
+                    Y2 = y,
+                    Stroke = (Brush)FindResource("BorderBrush"),
+                    StrokeThickness = 0.5,
+                    StrokeDashArray = new DoubleCollection(new[] { 4.0, 4.0 })
+                });
+                var lbl = new TextBlock
+                {
+                    Text = $"{100 - i * 25}%",
+                    FontSize = (double)FindResource("AppFontSizeH4"),
+                    FontFamily = new FontFamily("Inter"),
+                    Foreground = (Brush)FindResource("SecondaryTextBrush")
+                };
+                Canvas.SetLeft(lbl, 5); Canvas.SetTop(lbl, y - 10);
+                ComparisonCanvas.Children.Add(lbl);
+            }
+
+            // Точки для двух линий
+            double leftX = pad + 20;
+            double rightX = canvasW - pad - 20;
+            double midY = pad + chartH;
+            double tzY = pad + chartH - tzPercent / 100.0 * chartH;
+            double refY = pad + chartH - refPercent / 100.0 * chartH;
+
+            // Линия ТЗ (синяя) — от левого края до правого
+            var tzLine = new Line
+            {
+                X1 = leftX,
+                Y1 = midY,
+                X2 = rightX,
+                Y2 = tzY,
+                Stroke = (Brush)FindResource("PrimaryBrush"),
+                StrokeThickness = 2.5
+            };
+            ComparisonCanvas.Children.Add(tzLine);
+
+            // Линия Эталона (зелёная)
+            var refLine = new Line
+            {
+                X1 = leftX,
+                Y1 = midY,
+                X2 = rightX,
+                Y2 = refY,
+                Stroke = (Brush)FindResource("SuccessBrush"),
+                StrokeThickness = 2.5
+            };
+            ComparisonCanvas.Children.Add(refLine);
+
+            // Точка ТЗ
+            var tzDot = new Ellipse
+            {
+                Width = 8,
+                Height = 8,
+                Fill = Brushes.White,
+                Stroke = (Brush)FindResource("PrimaryBrush"),
+                StrokeThickness = 2.5
+            };
+            Canvas.SetLeft(tzDot, rightX - 4);
+            Canvas.SetTop(tzDot, tzY - 4);
+            ComparisonCanvas.Children.Add(tzDot);
+
+            // Подпись ТЗ
+            var tzLabel = new TextBlock
+            {
+                Text = $"{tzPercent:F0}%",
+                FontSize = (double)FindResource("AppFontSizeH4"),
+                FontFamily = new FontFamily("Inter"),
+                FontWeight = FontWeights.Bold,
+                Foreground = (Brush)FindResource("PrimaryBrush")
+            };
+            Canvas.SetLeft(tzLabel, rightX + 8);
+            Canvas.SetTop(tzLabel, tzY - 12);
+            ComparisonCanvas.Children.Add(tzLabel);
+
+            // Точка Эталона
+            var refDot = new Ellipse
+            {
+                Width = 8,
+                Height = 8,
+                Fill = Brushes.White,
+                Stroke = (Brush)FindResource("SuccessBrush"),
+                StrokeThickness = 2.5
+            };
+            Canvas.SetLeft(refDot, rightX - 4);
+            Canvas.SetTop(refDot, refY - 4);
+            ComparisonCanvas.Children.Add(refDot);
+
+            // Подпись Эталона
+            var refLabel = new TextBlock
+            {
+                Text = $"{refPercent:F0}%",
+                FontSize = (double)FindResource("AppFontSizeH4"),
+                FontFamily = new FontFamily("Inter"),
+                FontWeight = FontWeights.Bold,
+                Foreground = (Brush)FindResource("SuccessBrush")
+            };
+            Canvas.SetLeft(refLabel, rightX + 8);
+            Canvas.SetTop(refLabel, refY - 12);
+            ComparisonCanvas.Children.Add(refLabel);
+
+        }
         private void UpdateSendStatus(double percent)
         {
             if (percent >= 80)

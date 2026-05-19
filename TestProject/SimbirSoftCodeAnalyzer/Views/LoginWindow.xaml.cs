@@ -61,21 +61,5 @@ namespace SimbirSoftCodeAnalyzer.Views
                     vm.Password = PasswordBox.Password;
             }
         }
-        //Зацикливание видео
-        private void BackgroundVideo_Loaded(object sender, RoutedEventArgs e)
-        {
-            BackgroundVideo.Opacity = 0;
-            BackgroundVideo.MediaOpened += (s, args) =>
-            {
-                BackgroundVideo.Opacity = 1;
-            };
-            BackgroundVideo.Play();
-        }
-
-        private void BackgroundVideo_MediaEnded(object sender, RoutedEventArgs e)
-        {
-            BackgroundVideo.Position = TimeSpan.FromMilliseconds(1);
-            BackgroundVideo.Play();
-        }
     }
 }

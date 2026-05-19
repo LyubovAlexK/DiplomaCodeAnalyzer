@@ -225,14 +225,40 @@
                 </Grid>
             </Border>
 
-            <!-- Сравнение с эталоном -->
+            <!-- Сравнение с эталоном + График -->
             <Border Grid.Row="4" Style="{StaticResource CardBorder}" Margin="0,10,0,0"
-                    x:Name="ReferencePanel" Visibility="Collapsed" Padding="16">
-                <StackPanel>
-                    <TextBlock Text="Сравнение с эталоном" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
-                    <TextBlock x:Name="ReferenceText" FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
-                               Foreground="{DynamicResource DarkTextBrush}" TextWrapping="Wrap" LineHeight="22"/>
-                </StackPanel>
+        x:Name="ReferencePanel" Visibility="Collapsed" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="220"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Сравнение с эталоном" Style="{StaticResource H2Text}" Margin="0,0,0,4"/>
+                    <TextBlock Grid.Row="1" x:Name="ReferenceText" 
+                   FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
+                   Foreground="{DynamicResource DarkTextBrush}" TextWrapping="Wrap" LineHeight="22"
+                   Margin="0,0,0,10"/>
+
+                    <!-- График с двумя линиями -->
+                    <Canvas Grid.Row="2" x:Name="ComparisonCanvas" Background="Transparent" ClipToBounds="True"/>
+
+                    <!-- Легенда -->
+                    <WrapPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,8,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <Rectangle Width="12" Height="3" Fill="{DynamicResource PrimaryBrush}" 
+                           RadiusX="2" RadiusY="2" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBlock Text="Соответствие ТЗ" Style="{StaticResource H4Text}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="12" Height="3" Fill="{DynamicResource SuccessBrush}" 
+                           RadiusX="2" RadiusY="2" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBlock Text="Соответствие эталону" Style="{StaticResource H4Text}"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </Grid>
             </Border>
         </Grid>
     </ScrollViewer>
