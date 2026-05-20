@@ -23,7 +23,7 @@ namespace SimbirSoftCodeAnalyzer.Views
 
             if (promptId > 0)
             {
-                Title = "Редактирование промпта";
+                Title = "Редактирование запроса";
                 DeleteBtn.Visibility = Visibility.Visible;
             }
         }
@@ -50,7 +50,7 @@ namespace SimbirSoftCodeAnalyzer.Views
 
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Удалить промпт?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Удалить запрос?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 var db = App.GetService<AppDbContext>();
                 var prompt = await db.PromptTemplates.FindAsync(_promptId);

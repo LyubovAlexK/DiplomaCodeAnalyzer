@@ -223,7 +223,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Mentor
         private async void PromptsButton_Click(object sender, RoutedEventArgs e)
         {
             var promptDialog = new PromptDialog(_selectedSpecId, 0, "Extraction", "", "");
-            if (promptDialog.ShowDialog() == true) MessageBox.Show("Промпт сохранён", "Готово");
+            if (promptDialog.ShowDialog() == true) MessageBox.Show("Запрос сохранён", "Готово");
         }
         private async void DeleteRequirement_Click(object sender, RoutedEventArgs e)
         {

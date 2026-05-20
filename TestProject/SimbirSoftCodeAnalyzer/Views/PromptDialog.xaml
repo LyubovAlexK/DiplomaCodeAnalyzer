@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SimbirSoftCodeAnalyzer.Views.PromptDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Настройка промпта" Width="550" Height="500"
+        Title="Настройка запроса" Width="550" Height="500"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Background="White" Icon="/Resources/Images/logo-simbirsoft.png"
         WindowStyle="SingleBorderWindow">
@@ -16,13 +16,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Тип промпта:" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+        <TextBlock Grid.Row="0" Text="Тип запроса:" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
         <ComboBox Grid.Row="1" x:Name="TypeCombo" Style="{StaticResource CustomComboBox}" Margin="0,0,0,16">
             <ComboBoxItem Content="Извлечение требований" Tag="Extraction"/>
             <ComboBoxItem Content="Проверка кода" Tag="Judgment"/>
         </ComboBox>
 
-        <TextBlock Grid.Row="2" Text="Системный промпт:" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
+        <TextBlock Grid.Row="2" Text="Системный запрос:" Style="{StaticResource H4Text}" Margin="0,0,0,6"/>
         <TextBox Grid.Row="3" x:Name="SystemPromptBox" Style="{StaticResource ModernTextBoxStyle}"
                  TextWrapping="Wrap" AcceptsReturn="True" Height="80" Margin="0,0,0,16"/>
 

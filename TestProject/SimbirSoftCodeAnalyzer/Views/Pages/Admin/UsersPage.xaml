@@ -69,10 +69,18 @@
                                                     </Rectangle>
                                                 </Button>
                                                 <Button Width="30" Height="30" Style="{StaticResource IconButtonStyle}"
+                                                        FontSize="14" Click="DeletePermanentlyButton_Click" Margin="5,0,0,0">
+                                                    <Rectangle Width="16" Height="16" Fill="#DC2626">
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/Resources/Images/icons/trash_89366.png"/>
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
+                                                </Button>
+                                                <Button Width="30" Height="30" Style="{StaticResource IconButtonStyle}"
                                                         FontSize="14" Click="DeleteUserButton_Click" Margin="5,0,0,0">
                                                     <Rectangle Width="16" Height="16" Fill="{DynamicResource DangerBrush}">
                                                         <Rectangle.OpacityMask>
-                                                            <ImageBrush ImageSource="/Resources/Images/icons/trash_89366.png"/>
+                                                            <ImageBrush ImageSource="/Resources/Images/icons/removeuser_89401.png"/>
                                                         </Rectangle.OpacityMask>
                                                     </Rectangle>
                                                 </Button>

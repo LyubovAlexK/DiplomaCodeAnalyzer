@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="SimbirSoftCodeAnalyzer.Views.Pages.Mentor.ProjectsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="950"
+             Background="Transparent">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Управление проектами" Style="{StaticResource H1Text}" Margin="0,0,0,20"/>
+
+            <!-- Форма добавления проекта -->
+            <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,20" Padding="16">
+                <StackPanel>
+                    <TextBlock Text="Новый проект" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Название:" VerticalAlignment="Center" FontSize="{DynamicResource AppFontSizeH4}" 
+                                   FontFamily="Inter" Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,10,0" Width="80"/>
+                        <TextBox Grid.Column="1" x:Name="ProjectTitleBox" Style="{StaticResource ModernTextBoxStyle}"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Описание:" VerticalAlignment="Center" FontSize="{DynamicResource AppFontSizeH4}" 
+                                   FontFamily="Inter" Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,10,0" Width="80"/>
+                        <TextBox Grid.Column="1" x:Name="ProjectDescBox" Style="{StaticResource ModernTextBoxStyle}"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Стажёр:" VerticalAlignment="Center" FontSize="{DynamicResource AppFontSizeH4}" 
+                                   FontFamily="Inter" Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,10,0" Width="80"/>
+                        <ComboBox Grid.Column="1" x:Name="TraineeCombo" Style="{StaticResource CustomComboBox}"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="ТЗ:" VerticalAlignment="Center" FontSize="{DynamicResource AppFontSizeH4}" 
+                                   FontFamily="Inter" Foreground="{DynamicResource DarkTextBrush}" Margin="0,0,10,0" Width="80"/>
+                        <ComboBox Grid.Column="1" x:Name="SpecCombo" Style="{StaticResource CustomComboBox}"/>
+                    </Grid>
+
+                    <Button Content="Добавить проект" Style="{StaticResource PrimaryButton}"
+                            Click="AddProjectButton_Click" HorizontalAlignment="Left" Padding="20,10"
+                            FontSize="{DynamicResource AppFontSizeH4}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Список проектов -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Список проектов" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
+                        <DataGrid x:Name="ProjectsGrid" Style="{StaticResource SmartDataGridStyle}"
+                                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  RowHeight="44" MaxHeight="400" HorizontalAlignment="Stretch">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Title}"/>
+                                <DataGridTextColumn Header="Стажёр" Width="*" Binding="{Binding TraineeName}"/>
+                                <DataGridTextColumn Header="ТЗ" Width="*" Binding="{Binding SpecTitle}"/>
+                                <DataGridTemplateColumn Header="Статус" Width="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border CornerRadius="12" Padding="8,4" HorizontalAlignment="Center"
+                                                    Background="{Binding StatusBg}">
+                                                <TextBlock Text="{Binding StatusText}" FontSize="11" FontFamily="Inter"
+                                                           FontWeight="SemiBold" Foreground="{Binding StatusFg}"
+                                                           HorizontalAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="80">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Button Width="30" Height="30" Style="{StaticResource IconButtonStyle}"
+                                                        Click="ArchiveProjectButton_Click" FontSize="14">
+                                                    <Rectangle Width="16" Height="16" Fill="{DynamicResource DangerBrush}">
+                                                        <Rectangle.OpacityMask>
+                                                            <ImageBrush ImageSource="/Resources/Images/icons/trash_89366.png"/>
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <TextBlock Grid.Row="2" Text="Кнопка удаления — архивировать проект"
+                               Style="{StaticResource H4Text}" Margin="0,4,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

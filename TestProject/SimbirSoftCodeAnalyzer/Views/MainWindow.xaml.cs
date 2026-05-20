@@ -41,6 +41,7 @@ namespace SimbirSoftCodeAnalyzer.Views
             BtnResults.Visibility = Visibility.Collapsed;
             BtnReferences.Visibility = Visibility.Collapsed;
             BtnArchRules.Visibility = Visibility.Collapsed;
+            BtnProjects.Visibility = Visibility.Collapsed;
 
             switch (roleId)
             {
@@ -57,6 +58,7 @@ namespace SimbirSoftCodeAnalyzer.Views
                     BtnResults.Visibility = Visibility.Visible;
                     BtnReferences.Visibility = Visibility.Visible;
                     BtnArchRules.Visibility = Visibility.Visible;
+                    BtnProjects.Visibility = Visibility.Visible;
                     break;
                 case 3: // Стажёр
                     BtnHome.Content = "Главное меню";
@@ -127,6 +129,7 @@ namespace SimbirSoftCodeAnalyzer.Views
                     "Results" => new ResultsPage(),
                     "References" => new ReferencesPage(),
                     "ArchRules" => new ArchRulesPage(),
+                    "Projects" => new ProjectsPage(),
                     "Settings" => new SettingsPage(),
                     _ => null
                 };
@@ -145,7 +148,7 @@ namespace SimbirSoftCodeAnalyzer.Views
 
         public void SetActiveButton(string tag)
         {
-            var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnResults, BtnReferences, BtnArchRules, BtnHistory, BtnMyCode, BtnMyResults, BtnSettings };
+            var allButtons = new[] { BtnHome, BtnUsers, BtnSystemResources, BtnResults, BtnReferences, BtnArchRules, BtnHistory, BtnMyCode, BtnMyResults, BtnProjects, BtnSettings };
 
             foreach (var btn in allButtons)
             {

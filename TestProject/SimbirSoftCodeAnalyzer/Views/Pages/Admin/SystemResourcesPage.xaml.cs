@@ -145,7 +145,7 @@ namespace SimbirSoftCodeAnalyzer.Views.Pages.Admin
             if (dialog.ShowDialog() == true) await LoadAllDataAsync();
         }
 
-        // Промпты
+        // Запросы
         private async void PromptCheckBox_Changed(object sender, RoutedEventArgs e)
         {
             if (sender is CheckBox cb && cb.DataContext is PromptRow row)

@@ -30,7 +30,7 @@
                              Checked="Tab_Checked" Margin="0,0,16,0"
                              FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
                              Foreground="{DynamicResource DarkTextBrush}"/>
-                <RadioButton x:Name="TabPrompts" Content="Промпты" GroupName="Tabs"
+                <RadioButton x:Name="TabPrompts" Content="Запросы" GroupName="Tabs"
                              Checked="Tab_Checked"
                              FontSize="{DynamicResource AppFontSizeH4}" FontFamily="Inter"
                              Foreground="{DynamicResource DarkTextBrush}"/>
@@ -133,7 +133,7 @@
                 </Grid>
             </Border>
 
-            <!-- Панель Промпты -->
+            <!-- Панель Запросы -->
             <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="16" x:Name="PanelPrompts" Visibility="Collapsed">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -141,13 +141,13 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Промпты по умолчанию" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
+                    <TextBlock Grid.Row="0" Text="Запросы по умолчанию" Style="{StaticResource H2Text}" Margin="0,0,0,12"/>
                     <Border Grid.Row="1" Style="{StaticResource DataGridCardBorder}">
                         <DataGrid x:Name="PromptsGrid" Style="{StaticResource SmartDataGridStyle}"
                                   AutoGenerateColumns="False" IsReadOnly="True" RowHeight="44">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Тип" Width="*" Binding="{Binding PromptType}"/>
-                                <DataGridTextColumn Header="Системный промпт" Width="2*" Binding="{Binding SystemPrompt}"/>
+                                <DataGridTextColumn Header="Системный запрос" Width="2*" Binding="{Binding SystemPrompt}"/>
                                 <DataGridTemplateColumn Header="Активно" Width="70">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -159,7 +159,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
-                    <Button Grid.Row="2" Content="Добавить промпт" Style="{StaticResource OutlineButton}"
+                    <Button Grid.Row="2" Content="Добавить запрос" Style="{StaticResource OutlineButton}"
                             Click="AddPromptButton_Click" Margin="0,12,0,0" HorizontalAlignment="Left"
                             Padding="12,8" FontSize="{DynamicResource AppFontSizeH4}"/>
                 </Grid>

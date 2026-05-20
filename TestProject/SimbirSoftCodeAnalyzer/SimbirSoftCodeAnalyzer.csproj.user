@@ -29,6 +29,9 @@
     <Compile Update="Views\Pages\Mentor\MentorHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\Mentor\ProjectsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\Mentor\ReferencesPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

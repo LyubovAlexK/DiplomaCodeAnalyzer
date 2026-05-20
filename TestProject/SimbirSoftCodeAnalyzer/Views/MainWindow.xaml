@@ -150,6 +150,19 @@
                             </StackPanel>
                         </Button>
 
+                        <!-- Проекты (наставник) -->
+                        <Button x:Name="BtnProjects" Click="MenuButton_Click" Tag="Projects"
+                            Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Style="{StaticResource MenuIconStyle}">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush ImageSource="/Resources/Images/icons/textlines_89351.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <TextBlock Text="Проекты" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
                         <!-- Эталоны (наставник) -->
                         <Button x:Name="BtnReferences" Click="MenuButton_Click" Tag="References"
         Style="{StaticResource SidebarItemButton}" Visibility="Collapsed">

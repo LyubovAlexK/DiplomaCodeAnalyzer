@@ -44,9 +44,9 @@
                        Style="{StaticResource H4Text}" Margin="0,0,0,4" TextWrapping="Wrap" MaxWidth="300"/>
                         <TextBlock Text="Примеры: «система должна», «просмотр списка», «необходимо реализовать»." 
                        Style="{StaticResource H4Text}" Margin="0,0,0,10" TextWrapping="Wrap" MaxWidth="300"/>
-                        <TextBlock Text="Промпты — инструкции для ИИ (GigaChat), как именно извлекать требования или проверять код." 
+                        <TextBlock Text="Запросы — инструкции для ИИ (GigaChat), как именно извлекать требования или проверять код." 
                        Style="{StaticResource H4Text}" Margin="0,0,0,4" TextWrapping="Wrap" MaxWidth="300"/>
-                        <TextBlock Text="Меняйте промпты, если хотите улучшить качество анализа." 
+                        <TextBlock Text="Меняйте запросы, если хотите улучшить качество анализа." 
                        Style="{StaticResource H4Text}" TextWrapping="Wrap" MaxWidth="300"/>
                     </StackPanel>
                 </Border>
@@ -201,7 +201,7 @@
                         <Button Content="Маркеры требований" Style="{StaticResource OutlineButton}"
                                     FontSize="{DynamicResource AppFontSizeH4}" Padding="12,8" Margin="0,0,10,0"
                                     Click="MarkersButton_Click"/>
-                        <Button Content="Настройка промптов" Style="{StaticResource OutlineButton}"
+                        <Button Content="Настройка запросов" Style="{StaticResource OutlineButton}"
                                     FontSize="{DynamicResource AppFontSizeH4}" Padding="12,8"
                                     Click="PromptsButton_Click"/>
                     </StackPanel>
